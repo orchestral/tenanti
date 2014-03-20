@@ -1,14 +1,25 @@
 {
-	"name": "stackie/tenanti",
-	"description": "Tenant based DB Schema Manager for Laravel",
+	"name": "orchestra/tenanti",
+	"description": "Tenant based Database Schema Manager for Laravel",
 	"authors": [
 		{
 			"name": "Mior Muhammad Zaki",
-			"email": "crynobone@gmail.com"
+			"email": "crynobone@gmail.com",
+			"homepage": "https://github.com/crynobone"
 		}
 	],
+	"autoload": {
+		"psr-4": {
+			"Orchestra\\Tenanti\\": "src/Tenanti"
+		}
+	},
 	"require": {
+		"php": ">=5.3.3",
 		"illuminate/support": "4.1.*"
+	},
+	"require-dev": {
+		"mockery/mockery": "0.9.*",
+		"illuminate/database": "4.1.*"
 	},
 	"license": "MIT",
 	"minimum-stability": "dev"
