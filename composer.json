@@ -1,0 +1,15 @@
+{
+	"name": "stackie/tenanti",
+	"description": "Tenant based DB Schema Manager for Laravel",
+	"authors": [
+		{
+			"name": "Mior Muhammad Zaki",
+			"email": "crynobone@gmail.com"
+		}
+	],
+	"require": {
+		"illuminate/support": "4.1.*"
+	},
+	"license": "MIT",
+	"minimum-stability": "dev"
+}
