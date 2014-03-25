@@ -1,6 +1,7 @@
 {
 	"name": "orchestra/tenanti",
 	"description": "Tenant based Database Schema Manager for Laravel",
+	"license": "MIT",
 	"authors": [
 		{
 			"name": "Mior Muhammad Zaki",
@@ -21,6 +22,10 @@
 		"mockery/mockery": "0.9.*",
 		"illuminate/database": "4.1.*"
 	},
-	"license": "MIT",
+	"extra": {
+		"branch-alias": {
+			"dev-master": "2.1-dev"
+		}
+	},
 	"minimum-stability": "dev"
 }
