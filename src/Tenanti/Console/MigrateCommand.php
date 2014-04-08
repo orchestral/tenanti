@@ -1,9 +1,10 @@
 <?php namespace Orchestra\Tenanti\Console;
 
 use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputOption;
 use Orchestra\Tenanti\Migrator;
 
-class TenantCommand extends Command
+class MigrateCommand extends Command
 {
     /**
      * The console command name.
@@ -45,6 +46,30 @@ class TenantCommand extends Command
      */
     public function fire()
     {
+        $name = $this->argument('name');
 
+        $this->migrator->up($name);
+    }
+
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return [
+            ['name', InputArgument::REQUIRED, 'Migration Name.'],
+        ];
+    }
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return [];
     }
 }
