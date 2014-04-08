@@ -5,6 +5,11 @@ use Orchestra\Tenanti\TenantiServiceProvider;
 
 class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * Test \Orchestra\Tenanti\TenantiServiceProvider is deferred.
+     *
+     * @test
+     */
     public function testIsDeferred()
     {
         $stub = new TenantiServiceProvider(null);
