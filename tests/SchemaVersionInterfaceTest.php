@@ -12,13 +12,13 @@ class SchemaVersionInterfaceTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSchemaVersionKeyMethod()
     {
-        $stub = new SchemaVersionStub;
+        $stub = new SchemaVersionInterfaceStub;
 
         $this->assertEquals('schema_version', $stub->getSchemaVersionKey());
     }
 }
 
-class SchemaVersionStub implements SchemaVersionInterface
+class SchemaVersionInterfaceStub implements SchemaVersionInterface
 {
     public function getSchemaVersionKey()
     {

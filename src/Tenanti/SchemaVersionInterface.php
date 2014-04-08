@@ -3,7 +3,7 @@
 interface SchemaVersionInterface
 {
     /**
-     * Get schema version name.
+     * Get schema version name key.
      *
      * @return string
      */
