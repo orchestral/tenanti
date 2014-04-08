@@ -12,7 +12,7 @@
 >
 
     <testsuites>
-        <testsuite name="Stackie\Tenanti Test Suite">
+        <testsuite name="Orchestra\Tenanti Test Suite">
             <directory suffix="Test.php">./tests/</directory>
         </testsuite>
     </testsuites>
@@ -26,7 +26,7 @@
     </logging>
 
     <filter>
-        <whitelist addUncoveredFilesFromWhitelist="false">
+        <whitelist addUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src/</directory>
         </whitelist>
     </filter>
