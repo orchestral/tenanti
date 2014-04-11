@@ -55,7 +55,7 @@ class CreateMigrationCommand extends Command
         $replacement = [
             'class' => Str::studly($name),
             'table' => $table,
-            'field' => 'db_version',
+            'field' => $this->option('field'),
         ];
 
         $stub = Str::replace($stub, $replacement, '{{', '}}');
