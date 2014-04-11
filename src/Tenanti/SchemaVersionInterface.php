@@ -8,4 +8,11 @@ interface SchemaVersionInterface
      * @return string
      */
     public function getSchemaVersionKey();
+
+    /**
+     * Get schema version name value.
+     *
+     * @return integer
+     */
+    public function getSchemaVersionValue();
 }

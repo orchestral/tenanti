@@ -24,4 +24,9 @@ class SchemaVersionInterfaceStub implements SchemaVersionInterface
     {
         return 'schema_version';
     }
+
+    public function getSchemaVersionValue()
+    {
+        return 1;
+    }
 }

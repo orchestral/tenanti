@@ -5,12 +5,12 @@ trait SchemaVersionTrait
     /**
      * Get schema version name value.
      *
-     * @return string
+     * @return integer
      */
     public function getSchemaVersionValue()
     {
         $key = $this->getSchemaVersionKey();
 
-        return $this->getAttribute($key);
+        return (int) $this->getAttribute($key);
     }
 }
