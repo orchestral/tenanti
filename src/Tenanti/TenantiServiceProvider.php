@@ -9,7 +9,7 @@ class TenantiServiceProvider extends ServiceProvider
      *
      * @var boolean
      */
-    protected $defer = true;
+    protected $defer = false;
 
     /**
      * Register the service provider.
