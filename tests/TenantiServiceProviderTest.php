@@ -15,4 +15,29 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
         $stub = new TenantiServiceProvider(null);
         $this->assertTrue($stub->isDeferred());
     }
+
+    /**
+     * Test \Orchestra\Tenanti\TenantiServiceProvider::register() method.
+     *
+     * @test
+     */
+    public function testRegisterMethod()
+    {
+        $stub = new TenantiServiceProvider(null);
+        $this->assertNull($stub->register());
+    }
+
+    /**
+     * Test \Orchestra\Tenanti\TenantiServiceProvider::boot() method.
+     *
+     * @test
+     */
+    public function testBootMethod()
+    {
+        $stub = m::mock('\Orchestra\Tenanti\TenantiServiceProvider[package]', [null]);
+        $stub->shouldReceive('package')->once()
+                ->with('orchestra/tenanti', 'orchestra/tenanti', realpath(__DIR__.'/../src/'))->andReturnNull();
+
+        $this->assertNull($stub->boot());
+    }
 }

@@ -48,7 +48,11 @@ class MigrateCommand extends Command
     {
         $name = $this->argument('name');
 
-        $this->migrator->up($name);
+        $outputs = $this->migrator->run($name);
+
+        foreach ($outputs as $output) {
+
+        }
     }
 
     /**
@@ -61,15 +65,5 @@ class MigrateCommand extends Command
         return [
             ['name', InputArgument::REQUIRED, 'Migration Name.'],
         ];
-    }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [];
     }
 }
