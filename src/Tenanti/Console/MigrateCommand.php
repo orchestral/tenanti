@@ -63,7 +63,7 @@ class MigrateCommand extends Command
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'Migration Name.'],
+            ['name', InputArgument::REQUIRED, 'Migration Name'],
         ];
     }
 }
