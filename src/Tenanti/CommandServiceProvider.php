@@ -18,12 +18,12 @@ class CommandServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app['orchestra.commands.tenanti.migrate'] = $this->app->share(function () {
-            return new Console\MigrateCommand;
+        $this->app->bindShared('orchestra.commands.tenanti.migrate', function () {
+            return new Console\MigrateCommand(new Migrator);
         });
 
-        $this->app['orchestra.commands.tenanti.create-migration'] = $this->app->share(function () {
-            return new Console\CreateMigrationCommand;
+        $this->app->bindShared('orchestra.commands.tenanti.create-migration', function ($app) {
+            return new Console\CreateMigrationCommand($app['files']);
         });
 
         $this->commands('orchestra.commands.tenanti.migrate', 'orchestra.commands.tenanti.create-migration');
