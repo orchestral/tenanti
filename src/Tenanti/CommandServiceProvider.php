@@ -18,15 +18,15 @@ class CommandServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bindShared('orchestra.commands.tenanti.migrate', function () {
-            return new Console\MigrateCommand(new Migrator);
+        $this->app->bindShared('orchestra.commands.tenanti.migrate', function ($app) {
+            return new Console\MigrateCommand(new Migrator($app['config']));
         });
 
-        $this->app->bindShared('orchestra.commands.tenanti.create-migration', function ($app) {
-            return new Console\CreateMigrationCommand($app['files']);
+        $this->app->bindShared('orchestra.commands.tenanti.setup', function ($app) {
+            return new Console\SetupCommand($app['files']);
         });
 
-        $this->commands('orchestra.commands.tenanti.migrate', 'orchestra.commands.tenanti.create-migration');
+        $this->commands('orchestra.commands.tenanti.migrate', 'orchestra.commands.tenanti.setup');
     }
 
     /**
@@ -38,7 +38,7 @@ class CommandServiceProvider extends ServiceProvider
     {
         return [
             'orchestra.commands.tenanti.migrate',
-            'orchestra.commands.tenanti.create-migration',
+            'orchestra.commands.tenanti.setup',
         ];
     }
 }

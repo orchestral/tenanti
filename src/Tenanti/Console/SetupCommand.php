@@ -3,14 +3,14 @@
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
-class CreateMigrationCommand extends Command
+class SetupCommand extends Command
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'tenanti:migrate-create';
+    protected $name = 'tenanti:setup';
 
     /**
      * The console command description.
