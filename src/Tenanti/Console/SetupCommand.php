@@ -2,6 +2,8 @@
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class SetupCommand extends Command
 {
