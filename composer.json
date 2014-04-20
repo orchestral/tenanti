@@ -16,12 +16,12 @@
 	},
 	"require": {
 		"php": ">=5.4.0",
-		"illuminate/filesystem": "4.1.*",
-		"orchestra/support": "2.1.*"
+		"illuminate/filesystem": "4.2.*",
+		"orchestra/support": "2.2.*"
 	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
-		"illuminate/database": "4.1.*"
+		"illuminate/database": "4.2.*"
 	},
 	"extra": {
 		"branch-alias": {
