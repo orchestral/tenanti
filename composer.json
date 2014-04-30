@@ -20,7 +20,8 @@
 		"orchestra/support": "2.1.*"
 	},
 	"require-dev": {
-		"mockery/mockery": "0.9.*",
+        "mockery/mockery": "0.9.*",
+        "illuminate/config": "4.1.*",
 		"illuminate/database": "4.1.*"
 	},
 	"extra": {
