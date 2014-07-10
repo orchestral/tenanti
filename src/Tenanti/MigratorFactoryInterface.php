@@ -50,4 +50,11 @@ interface MigratorFactoryInterface
      * @return mixed
      */
     public function getModelName();
+
+    /**
+     * Get table prefix.
+     *
+     * @return string
+     */
+    public function getTablePrefix();
 }

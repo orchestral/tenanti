@@ -165,9 +165,10 @@ class MigratorFactory implements MigratorFactoryInterface
      */
     protected function resolveTableName(Model $entity)
     {
-        $id = $entity->getKey();
+        $id    = $entity->getKey();
+        $table = $this->getTablePrefix().'_migrations';
 
-        return Str::replace(array_get($this->config, 'migration'), array('id' => $id));
+        return Str::replace($table, array('id' => $id));
     }
 
     /**
@@ -188,5 +189,15 @@ class MigratorFactory implements MigratorFactoryInterface
     public function getModelName()
     {
         return array_get($this->config, 'model');
+    }
+
+    /**
+     * Get table prefix.
+     *
+     * @return string
+     */
+    public function getTablePrefix()
+    {
+        return implode('_', array($this->driver, '{id}'));
     }
 }
