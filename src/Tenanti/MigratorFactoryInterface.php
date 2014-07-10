@@ -36,4 +36,18 @@ interface MigratorFactoryInterface
      * @return void
      */
     public function runDown(Model $entity, $pretend = false);
+
+    /**
+     * Get migration path.
+     *
+     * @return mixed
+     */
+    public function getMigrationPath();
+
+    /**
+     * Get model name.
+     *
+     * @return mixed
+     */
+    public function getModelName();
 }

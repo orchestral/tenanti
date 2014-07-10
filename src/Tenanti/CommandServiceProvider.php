@@ -54,8 +54,6 @@ class CommandServiceProvider extends ServiceProvider
     protected function registerMigrateCommand()
     {
         $this->app->bindShared('orchestra.tenanti.command', function ($app) {
-            $packagePath = $app['path.base'].'/vendor';
-
             return new MigrateCommand($app['orchestra.tenanti']);
         });
     }
@@ -112,13 +110,9 @@ class CommandServiceProvider extends ServiceProvider
      * Register the "install" migration command.
      *
      * @return void
-     * /
+     */
     protected function registerMakeCommand()
     {
-        $this->app->bindShared('migration.creator', function ($app) {
-            return new MigrationCreator($app['files']);
-        });
-
         $this->app->bindShared('orchestra.tenanti.command.make', function ($app) {
             // Once we have the migration creator registered, we will create the command
             // and inject the creator. The creator is responsible for the actual file
@@ -127,10 +121,9 @@ class CommandServiceProvider extends ServiceProvider
 
             $packagePath = $app['path.base'].'/vendor';
 
-            return new MigrateMakeCommand($creator, $packagePath);
+            return new MigrateMakeCommand($app['orchestra.tenanti'], $creator);
         });
     }
-     * */
 
     /**
      * Get the services provided by the provider.

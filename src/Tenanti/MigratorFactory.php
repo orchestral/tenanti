@@ -115,7 +115,7 @@ class MigratorFactory implements MigratorFactoryInterface
     {
         $table = $this->resolveTableName($entity);
 
-        $this->resolveMigrator($table)->rollback(array_get($this->config, 'path'), $pretend);
+        $this->resolveMigrator($table)->rollback($this->getMigrationPath(), $pretend);
     }
 
     /**
@@ -126,7 +126,8 @@ class MigratorFactory implements MigratorFactoryInterface
      */
     protected function resolveModel()
     {
-        $model = $this->app->make($name = array_get($this->config, 'model'));
+        $name  = $this->getModelName();
+        $model = $this->app->make($name);
 
         if (! $model instanceof Model) {
             throw new InvalidArgumentException("Model [{$name}] should be an instance of Eloquent.");
@@ -157,7 +158,7 @@ class MigratorFactory implements MigratorFactoryInterface
     }
 
     /**
-     * Resolve table name.
+     * Get table name.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
      * @return string
@@ -167,5 +168,25 @@ class MigratorFactory implements MigratorFactoryInterface
         $id = $entity->getKey();
 
         return Str::replace(array_get($this->config, 'migration'), array('id' => $id));
+    }
+
+    /**
+     * Get migration path.
+     *
+     * @return mixed
+     */
+    public function getMigrationPath()
+    {
+        return array_get($this->config, 'path');
+    }
+
+    /**
+     * Get model name.
+     *
+     * @return mixed
+     */
+    public function getModelName()
+    {
+        return array_get($this->config, 'model');
     }
 }

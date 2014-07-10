@@ -1,7 +1,6 @@
 <?php namespace Orchestra\Tenanti\Console;
 
 use Illuminate\Console\ConfirmableTrait;
-use Orchestra\Tenanti\TenantiManager;
 
 class MigrateCommand extends BaseCommand
 {

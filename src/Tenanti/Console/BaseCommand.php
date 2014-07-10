@@ -24,6 +24,7 @@ abstract class BaseCommand extends Command
 
         parent::__construct();
     }
+
     /**
      * Get the console command arguments.
      *
@@ -32,7 +33,7 @@ abstract class BaseCommand extends Command
     protected function getArguments()
     {
         return array(
-            array('name', InputArgument::REQUIRED, 'Tenant Driver Name.'),
+            array('driver', InputArgument::REQUIRED, 'Tenant driver name.'),
         );
     }
 
