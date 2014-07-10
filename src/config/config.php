@@ -5,8 +5,9 @@ return [
 
     'drivers' => [
         'user' => [
-            'model'   => 'User',
-            'path'    => app_path().'/database/tenant/users',
+            'model'     => 'User',
+            'migration' => 'user_migrations',
+            'path'      => app_path().'/database/tenant/users',
         ],
     ],
 ];
