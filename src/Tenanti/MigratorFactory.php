@@ -99,10 +99,9 @@ class MigratorFactory implements MigratorFactoryInterface
      */
     public function runUp(Model $entity, $pretend = false)
     {
-        $table    = $this->resolveTableName($entity);
-        $migrator = $this->resolveMigrator($table);
+        $table = $this->resolveTableName($entity);
 
-        $migrator->run(array_get($this->config, 'path'), $pretend);
+        $this->resolveMigrator($table)->run(array_get($this->config, 'path'), $pretend);
     }
 
     /**
@@ -114,12 +113,9 @@ class MigratorFactory implements MigratorFactoryInterface
      */
     public function runDown(Model $entity, $pretend = false)
     {
-        $id    = $entity->getKey();
-        $table = Str::replace(array_get($this->config, 'migration'), array('id' => $id));
+        $table = $this->resolveTableName($entity);
 
-        $migrator = $this->resolveMigrator($table);
-
-        $migrator->rollback(array_get($this->config, 'path'), $pretend);
+        $this->resolveMigrator($table)->rollback(array_get($this->config, 'path'), $pretend);
     }
 
     /**
