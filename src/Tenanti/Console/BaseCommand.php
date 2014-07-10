@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Tenanti\Console;
 
 use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 abstract class BaseCommand extends Command
@@ -22,6 +23,17 @@ abstract class BaseCommand extends Command
         $this->tenant = $tenant;
 
         parent::__construct();
+    }
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return array(
+            array('name', InputArgument::REQUIRED, 'Tenant Driver Name.'),
+        );
     }
 
     /**

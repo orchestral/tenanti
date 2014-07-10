@@ -28,10 +28,6 @@ class MigrateCommand extends BaseCommand
      */
     public function fire()
     {
-        if ( ! $this->confirmToProceed()) {
-            return;
-        }
-
         $pretend = $this->option('pretend');
         $driver  = $this->argument('driver');
 
