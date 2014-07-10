@@ -37,9 +37,9 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
     public function testBootMethod()
     {
         $stub = m::mock('\Orchestra\Tenanti\TenantiServiceProvider[package]', [null]);
+        $path = realpath(__DIR__ . '/../src/');
 
-        $stub->shouldReceive('package')->once()
-                ->with('orchestra/tenanti', 'orchestra/tenanti', realpath(__DIR__.'/../src/'))->andReturnNull();
+        $stub->shouldReceive('package')->once()->with('orchestra/tenanti', 'orchestra/tenanti', $path)->andReturnNull();
 
         $this->assertNull($stub->boot());
     }
