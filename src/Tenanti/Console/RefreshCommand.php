@@ -36,18 +36,18 @@ class RefreshCommand extends BaseCommand
         $force    = $this->option('force');
 
         $this->call("tenanti:reset", array(
-            $driver,
+            'driver'     => $driver,
             '--database' => $database,
-            '--force' => $force,
+            '--force'    => $force,
         ));
 
         // The refresh command is essentially just a brief aggregate of a few other of
         // the migration commands and just provides a convenient wrapper to execute
         // them in succession. We'll also see if we need to re-seed the database.
         $this->call("tenanti:migrate", array(
-            $driver,
+            'driver'     => $driver,
             '--database' => $database,
-            '--force' => $force,
+            '--force'    => $force,
         ));
     }
 }

@@ -52,7 +52,7 @@ class MigrateCommand extends BaseCommand
     protected function prepareDatabase($driver, $database)
     {
         $this->call("tenanti:install", array(
-            $driver,
+            'driver'     => $driver,
             '--database' => $database,
         ));
     }
