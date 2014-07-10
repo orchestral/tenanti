@@ -2,7 +2,7 @@
 
 use Illuminate\Console\ConfirmableTrait;
 
-class RollbackCommand
+class RollbackCommand extends BaseCommand
 {
     use ConfirmableTrait;
 
