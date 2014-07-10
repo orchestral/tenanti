@@ -3,7 +3,7 @@
 use Illuminate\Console\ConfirmableTrait;
 use Symfony\Component\Console\Input\InputOption;
 
-class MigrateCommand extends BaseCommand
+class RefreshCommand extends BaseCommand
 {
     use ConfirmableTrait;
 
@@ -12,14 +12,14 @@ class MigrateCommand extends BaseCommand
      *
      * @var string
      */
-    protected $name = 'tenanti:migrate';
+    protected $name = 'tenanti:refresh';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Run the database migrations';
+    protected $description = 'Reset and re-run all migrations';
 
     /**
      * Execute the console command.
@@ -28,35 +28,28 @@ class MigrateCommand extends BaseCommand
      */
     public function fire()
     {
-        if (! $this->confirmToProceed()) {
+        if ( ! $this->confirmToProceed()) {
             return;
         }
 
-        $driver  = $this->argument('driver');
-        $pretend = $this->option('pretend');
-
-        $this->prepareDatabase($driver);
-
-        $migrator = $this->tenant->driver($driver);
-
-        $migrator->run($pretend);
-    }
-
-    /**
-     * Prepare the migration database for running.
-     *
-     * @param  string   $driver
-     * @return void
-     */
-    protected function prepareDatabase($driver)
-    {
+        $driver   = $this->argument('driver');
         $database = $this->option('database');
+        $force    = $this->option('force');
 
-        $this->call("tenanti:install", array(
+        $this->call("tenanti:reset", array(
             $driver,
             '--database' => $database,
+            '--force' => $force,
         ));
 
+        // The refresh command is essentially just a brief aggregate of a few other of
+        // the migration commands and just provides a convenient wrapper to execute
+        // them in succession. We'll also see if we need to re-seed the database.
+        $this->call("tenanti:migrate", array(
+            $driver,
+            '--database' => $database,
+            '--force' => $force,
+        ));
     }
 
     /**
@@ -66,9 +59,9 @@ class MigrateCommand extends BaseCommand
      */
     protected function getOptions()
     {
-        return array_merge(array(
+        return array(
             array('database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.'),
             array('force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production.'),
-        ), parent::getOptions());
+        );
     }
 }

@@ -126,7 +126,10 @@ class MigratorFactory implements MigratorFactoryInterface
         $repository = $this->resolveMigrator($table)->getRepository();
 
         $repository->setSource($database);
-        $repository->createRepository();
+
+        if ($repository->repositoryExists()) {
+            $repository->createRepository();
+        }
     }
 
     /**

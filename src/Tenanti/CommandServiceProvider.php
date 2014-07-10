@@ -24,7 +24,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $commands = array('Migrate', 'Install', 'Make'); //, 'Rollback', 'Reset', 'Refresh', 'Install'); //, 'Make'];
+        $commands = array('Migrate', 'Install', 'Refresh', 'Make'); //, 'Rollback', 'Reset', 'Refresh', 'Install'); //, 'Make'];
 
         // We'll simply spin through the list of commands that are migration related
         // and register each one of them with an application container. They will
@@ -39,10 +39,10 @@ class CommandServiceProvider extends ServiceProvider
         $this->commands(
             'orchestra.commands.tenanti',
             'orchestra.commands.tenanti.make',
-            'orchestra.commands.tenanti.install'//,
+            'orchestra.commands.tenanti.install',
             //'orchestra.commands.tenanti.rollback',
             //'orchestra.commands.tenanti.reset',
-            //'orchestra.commands.tenanti.refresh'
+            'orchestra.commands.tenanti.refresh'
         );
     }
 
@@ -90,7 +90,7 @@ class CommandServiceProvider extends ServiceProvider
     protected function registerRefreshCommand()
     {
         $this->app->bindShared('orchestra.tenanti.command.refresh', function ($app) {
-            return new RefreshCommand;
+            return new RefreshCommand($app['orchestra.tenanti']);
         });
     }
 
@@ -134,7 +134,7 @@ class CommandServiceProvider extends ServiceProvider
             'orchestra.commands.tenanti',
             //'orchestra.commands.tenanti.rollback',
             //'orchestra.commands.tenanti.reset',
-            //'orchestra.commands.tenanti.refresh',
+            'orchestra.commands.tenanti.refresh',
             'orchestra.commands.tenanti.install',
             'orchestra.commands.tenanti.make',
         );
