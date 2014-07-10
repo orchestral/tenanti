@@ -3,6 +3,7 @@
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Orchestra\Tenanti\TenantiManager;
 
 abstract class BaseCommand extends Command
 {
