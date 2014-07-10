@@ -51,17 +51,4 @@ class RefreshCommand extends BaseCommand
             '--force' => $force,
         ));
     }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return array(
-            array('database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.'),
-            array('force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production.'),
-        );
-    }
 }

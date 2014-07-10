@@ -46,11 +46,11 @@ class MigratorFactory implements MigratorFactoryInterface
     );
 
     /**
-     * Set tenant configuration.
+     * Construct a new migration manager.
      *
      * @param  \Illuminate\Container\Container  $app
+     * @param  string                           $driver
      * @param  array                            $config
-     * @return MigratorFactory
      */
     public function __construct(Container $app, $driver, array $config = array())
     {
@@ -68,11 +68,10 @@ class MigratorFactory implements MigratorFactoryInterface
     public function install($database)
     {
         $model = $this->resolveModel();
-        $me    = $this;
 
-        $model->newQuery()->chunk(100, function ($entities) use ($me, $database) {
+        $model->newQuery()->chunk(100, function ($entities) use ($database) {
             foreach ($entities as $entity) {
-                $me->runInstall($entity, $database);
+                $this->runInstall($entity, $database);
             }
         });
     }
@@ -80,17 +79,17 @@ class MigratorFactory implements MigratorFactoryInterface
     /**
      * Run migrations.
      *
-     * @param  bool     $pretend
+     * @param  string|null  $database
+     * @param  bool         $pretend
      * @return void
      */
-    public function run($pretend = false)
+    public function run($database, $pretend = false)
     {
         $model = $this->resolveModel();
-        $me    = $this;
 
-        $model->newQuery()->chunk(100, function ($entities) use ($me, $pretend) {
+        $model->newQuery()->chunk(100, function ($entities) use ($database, $pretend) {
             foreach ($entities as $entity) {
-                $me->runUp($entity, $pretend);
+                $this->runUp($entity, $database, $pretend);
             }
         });
     }
@@ -98,16 +97,35 @@ class MigratorFactory implements MigratorFactoryInterface
     /**
      * Rollback migrations.
      *
+     * @param  string|null  $database
+     * @param  bool         $pretend
      * @return void
      */
-    public function rollback($pretend = false)
+    public function rollback($database, $pretend = false)
     {
         $model = $this->resolveModel();
-        $me    = $this;
 
-        $model->newQuery()->chunk(100, function ($entities) use ($me, $pretend) {
+        $model->newQuery()->chunk(100, function ($entities) use ($database, $pretend) {
             foreach ($entities as $entity) {
-                $me->runDown($entity, $pretend);
+                $this->runDown($entity, $database, $pretend);
+            }
+        });
+    }
+
+    /**
+     * Reset migrations.
+     *
+     * @param  string|null  $database
+     * @param  bool         $pretend
+     * @return void
+     */
+    public function reset($database, $pretend = false)
+    {
+        $model = $this->resolveModel();
+
+        $model->newQuery()->chunk(100, function ($entities) use ($database, $pretend) {
+            foreach ($entities as $entity) {
+                $this->runReset($entity, $database, $pretend);
             }
         });
     }
@@ -136,28 +154,58 @@ class MigratorFactory implements MigratorFactoryInterface
      * Run migration up on a single entity.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  string|null                          $database
      * @param  bool                                 $pretend
      * @return void
      */
-    public function runUp(Model $entity, $pretend = false)
+    public function runUp(Model $entity, $database, $pretend = false)
     {
-        $table = $this->resolveTableName($entity);
+        $table    = $this->resolveTableName($entity);
+        $migrator = $this->resolveMigrator($table);
 
-        $this->resolveMigrator($table)->run($this->getMigrationPath(), $pretend);
+        $migrator->setConnection($database);
+        $migrator->run($this->getMigrationPath(), $pretend);
     }
 
     /**
      * Run migration down on a single entity.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  string|null                          $database
      * @param  bool                                 $pretend
      * @return void
      */
-    public function runDown(Model $entity, $pretend = false)
+    public function runDown(Model $entity, $database, $pretend = false)
     {
         $table = $this->resolveTableName($entity);
+        $migrator = $this->resolveMigrator($table);
 
-        $this->resolveMigrator($table)->rollback($this->getMigrationPath(), $pretend);
+        $migrator->setConnection($database);
+        $migrator->rollback($pretend);
+    }
+
+    /**
+     * Run migration reset on a single entity.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  string|null                          $database
+     * @param  bool                                 $pretend
+     * @return void
+     */
+    public function runReset(Model $entity, $database, $pretend = false)
+    {
+        $table = $this->resolveTableName($entity);
+        $migrator = $this->resolveMigrator($table);
+
+        $migrator->setConnection($database);
+
+        while (true) {
+            $count = $migrator->rollback($pretend);
+
+            if ($count == 0) {
+                break;
+            }
+        }
     }
 
     /**

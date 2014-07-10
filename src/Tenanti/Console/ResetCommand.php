@@ -3,7 +3,7 @@
 use Illuminate\Console\ConfirmableTrait;
 use Symfony\Component\Console\Input\InputOption;
 
-class MigrateCommand extends BaseCommand
+class ResetCommand extends BaseCommand
 {
     use ConfirmableTrait;
 
@@ -12,14 +12,14 @@ class MigrateCommand extends BaseCommand
      *
      * @var string
      */
-    protected $name = 'tenanti:migrate';
+    protected $name = 'tenanti:reset';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Run the database migrations';
+    protected $description = 'Rollback all database migrations';
 
     /**
      * Execute the console command.
@@ -36,25 +36,8 @@ class MigrateCommand extends BaseCommand
         $database = $this->option('database');
         $pretend  = $this->option('pretend');
 
-        $this->prepareDatabase($driver, $database);
-
         $migrator = $this->tenant->driver($driver);
 
-        $migrator->run($database, $pretend);
-    }
-
-    /**
-     * Prepare the migration database for running.
-     *
-     * @param  string       $driver
-     * @param  string|null  $database
-     * @return void
-     */
-    protected function prepareDatabase($driver, $database)
-    {
-        $this->call("tenanti:install", array(
-            $driver,
-            '--database' => $database,
-        ));
+        $migrator->reset($database, $pretend);
     }
 }

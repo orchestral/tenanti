@@ -15,17 +15,29 @@ interface MigratorFactoryInterface
     /**
      * Run migrations.
      *
-     * @param  bool $pretend
+     * @param  string|null  $database
+     * @param  bool         $pretend
      * @return void
      */
-    public function run($pretend = false);
+    public function run($database, $pretend = false);
 
     /**
      * Rollback migrations.
      *
+     * @param  string|null  $database
+     * @param  bool         $pretend
      * @return void
      */
-    public function rollback($pretend = false);
+    public function rollback($database, $pretend = false);
+
+    /**
+     * Reset migrations.
+     *
+     * @param  string|null  $database
+     * @param  bool         $pretend
+     * @return void
+     */
+    public function reset($database, $pretend = false);
 
     /**
      * Run migration up on a single entity.
@@ -40,19 +52,31 @@ interface MigratorFactoryInterface
      * Run migration up on a single entity.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  string|null                          $database
      * @param  bool                                 $pretend
      * @return void
      */
-    public function runUp(Model $entity, $pretend = false);
+    public function runUp(Model $entity, $database, $pretend = false);
 
     /**
      * Run migration down on a single entity.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  string|null                          $database
      * @param  bool                                 $pretend
      * @return void
      */
-    public function runDown(Model $entity, $pretend = false);
+    public function runDown(Model $entity, $database, $pretend = false);
+
+    /**
+     * Run migration down on a single entity.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  string|null                          $database
+     * @param  bool                                 $pretend
+     * @return void
+     */
+    public function runReset(Model $entity, $database, $pretend = false);
 
     /**
      * Get migration path.
