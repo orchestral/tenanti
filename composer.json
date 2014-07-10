@@ -22,7 +22,8 @@
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
 		"illuminate/config": "4.2.*",
-		"illuminate/database": "4.2.*"
+		"illuminate/database": "4.2.*",
+		"indatus/dispatcher": "~1.3"
 	},
 	"extra": {
 		"branch-alias": {
