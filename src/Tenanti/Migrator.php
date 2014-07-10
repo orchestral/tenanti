@@ -43,7 +43,7 @@ class Migrator extends \Illuminate\Database\Migrations\Migrator
             return $this->pretendToRun($migration, 'up');
         }
 
-        $migration->up($this->entity);
+        $migration->up($this->entity->getKey(), $this->entity);
 
         // Once we have run a migrations class, we will log that it was run in this
         // repository so that we don't try to run it next time we do a migration
@@ -73,7 +73,7 @@ class Migrator extends \Illuminate\Database\Migrations\Migrator
             return $this->pretendToRun($instance, 'down');
         }
 
-        $instance->down($this->entity);
+        $instance->down($this->entity->getKey(), $this->entity);
 
         // Once we have successfully run the migration "down" we will remove it from
         // the migration repository so it will be considered to have not been run
