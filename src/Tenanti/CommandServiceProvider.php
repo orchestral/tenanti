@@ -1,7 +1,6 @@
 <?php namespace Orchestra\Tenanti;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Migrations\MigrationCreator;
 use Orchestra\Tenanti\Console\ResetCommand;
 use Orchestra\Tenanti\Console\RefreshCommand;
 use Orchestra\Tenanti\Console\InstallCommand;
@@ -9,7 +8,7 @@ use Orchestra\Tenanti\Console\MigrateCommand;
 use Orchestra\Tenanti\Console\RollbackCommand;
 use Orchestra\Tenanti\Console\MigrateMakeCommand;
 
-class MigrationServiceProvider extends ServiceProvider
+class CommandServiceProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -25,7 +24,7 @@ class MigrationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $commands = ['Migrate', 'Rollback', 'Reset', 'Refresh', 'Install']; //, 'Make'];
+        $commands = array('Migrate'); //, 'Rollback', 'Reset', 'Refresh', 'Install'); //, 'Make'];
 
         // We'll simply spin through the list of commands that are migration related
         // and register each one of them with an application container. They will
@@ -57,7 +56,7 @@ class MigrationServiceProvider extends ServiceProvider
         $this->app->bindShared('orchestra.tenanti.command', function ($app) {
             $packagePath = $app['path.base'].'/vendor';
 
-            return new MigrateCommand($app['migrator'], $packagePath);
+            return new MigrateCommand($app['orchestra.tenanti']);
         });
     }
 
@@ -69,7 +68,7 @@ class MigrationServiceProvider extends ServiceProvider
     protected function registerRollbackCommand()
     {
         $this->app->bindShared('orchestra.tenanti.command.rollback', function ($app) {
-            return new RollbackCommand($app['migrator']);
+            return new RollbackCommand($app['orchestra.tenanti']);
         });
     }
 
@@ -140,16 +139,13 @@ class MigrationServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [
-            'migrator',
-            'migration.repository',
-            'migration.creator',
+        return array(
             'orchestra.tenanti.command',
             'orchestra.tenanti.command.rollback',
             'orchestra.tenanti.command.reset',
             'orchestra.tenanti.command.refresh',
             'orchestra.tenanti.command.install',
             'orchestra.tenanti.command.make',
-        ];
+        );
     }
 }
