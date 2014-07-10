@@ -42,7 +42,7 @@ class MigratorFactory implements MigratorFactoryInterface
      */
     protected $resolver = array(
         'repository' => 'Illuminate\Database\Migrations\DatabaseMigrationRepository',
-        'migrator'   => 'Illuminate\Database\Migrations\Migrator',
+        'migrator'   => 'Orchestra\Tenanti\Migrator',
     );
 
     /**
@@ -164,6 +164,7 @@ class MigratorFactory implements MigratorFactoryInterface
         $migrator = $this->resolveMigrator($table);
 
         $migrator->setConnection($database);
+        $migrator->setEntity($entity);
         $migrator->run($this->getMigrationPath(), $pretend);
     }
 
@@ -181,6 +182,7 @@ class MigratorFactory implements MigratorFactoryInterface
         $migrator = $this->resolveMigrator($table);
 
         $migrator->setConnection($database);
+        $migrator->setEntity($entity);
         $migrator->rollback($pretend);
     }
 
@@ -198,6 +200,7 @@ class MigratorFactory implements MigratorFactoryInterface
         $migrator = $this->resolveMigrator($table);
 
         $migrator->setConnection($database);
+        $migrator->setEntity($entity);
 
         while (true) {
             $count = $migrator->rollback($pretend);
