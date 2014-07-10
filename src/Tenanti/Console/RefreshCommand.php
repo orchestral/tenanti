@@ -1,7 +1,6 @@
 <?php namespace Orchestra\Tenanti\Console;
 
 use Illuminate\Console\ConfirmableTrait;
-use Symfony\Component\Console\Input\InputOption;
 
 class RefreshCommand extends BaseCommand
 {
