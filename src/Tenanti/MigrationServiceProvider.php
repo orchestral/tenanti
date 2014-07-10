@@ -1,9 +1,7 @@
 <?php namespace Orchestra\Tenanti;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Database\Migrations\MigrationCreator;
-use Illuminate\Database\Migrations\DatabaseMigrationRepository;
 use Orchestra\Tenanti\Console\ResetCommand;
 use Orchestra\Tenanti\Console\RefreshCommand;
 use Orchestra\Tenanti\Console\InstallCommand;
@@ -27,55 +25,7 @@ class MigrationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerRepository();
-
-        // Once we have registered the migrator instance we will go ahead and register
-        // all of the migration related commands that are used by the "Artisan" CLI
-        // so that they may be easily accessed for registering with the consoles.
-        $this->registerMigrator();
-
-        $this->registerCommands();
-    }
-
-    /**
-     * Register the migration repository service.
-     *
-     * @return void
-     */
-    protected function registerRepository()
-    {
-        $this->app->bindShared('migration.repository', function ($app) {
-            $table = $app['config']['database.migrations'];
-
-            return new DatabaseMigrationRepository($app['db'], $table);
-        });
-    }
-
-    /**
-     * Register the migrator service.
-     *
-     * @return void
-     */
-    protected function registerMigrator()
-    {
-        // The migrator is responsible for actually running and rollback the migration
-        // files in the application. We'll pass in our database connection resolver
-        // so the migrator can resolve any of these connections when it needs to.
-        $this->app->bindShared('migrator', function ($app) {
-            $repository = $app['migration.repository'];
-
-            return new Migrator($repository, $app['db'], $app['files']);
-        });
-    }
-
-    /**
-     * Register all of the migration commands.
-     *
-     * @return void
-     */
-    protected function registerCommands()
-    {
-        $commands = ['Migrate', 'Rollback', 'Reset', 'Refresh', 'Install', 'Make'];
+        $commands = ['Migrate', 'Rollback', 'Reset', 'Refresh', 'Install']; //, 'Make'];
 
         // We'll simply spin through the list of commands that are migration related
         // and register each one of them with an application container. They will
@@ -163,7 +113,7 @@ class MigrationServiceProvider extends ServiceProvider
      * Register the "install" migration command.
      *
      * @return void
-     */
+     * /
     protected function registerMakeCommand()
     {
         $this->app->bindShared('migration.creator', function ($app) {
@@ -181,6 +131,7 @@ class MigrationServiceProvider extends ServiceProvider
             return new MigrateMakeCommand($creator, $packagePath);
         });
     }
+     * */
 
     /**
      * Get the services provided by the provider.

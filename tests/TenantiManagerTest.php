@@ -23,18 +23,18 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
     {
         $app = new Container;
         $app['config'] = $config = m::mock('\Illuminate\Config\Repository');
-        $app['orchestra.tenanti.migrator'] = $migrator = m::mock('\Orchestra\Tenanti\Migrator');
+
+        $app->bind('Orchestra\Tenanti\MigratorFactoryInterface', 'Orchestra\Tenanti\MigratorFactory');
 
         $option = array('model' => 'User');
 
         $config->shouldReceive('get')->once()->with('orchestra/tenanti::drivers.user')->andReturn($option);
-        $migrator->shouldReceive('setTenant')->once()->with('user', $option)->andReturnSelf();
 
         $stub = new TenantiManager($app);
 
         $resolver = $stub->driver('user');
 
-        $this->assertEquals($migrator, $resolver);
+        $this->assertInstanceOf('\Orchestra\Tenanti\MigratorFactoryInterface', $resolver);
     }
 
     /**

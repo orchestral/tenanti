@@ -24,9 +24,17 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegisterMethod()
     {
-        $stub = new TenantiServiceProvider(null);
+        $app  = m::mock('\Illuminate\Container\Container[bindShared]');
+
+        $app->shouldReceive('bindShared')->once()->with('orchestra.tenanti', m::type('Closure'))
+            ->andReturnUsing(function ($n, $c) use ($app) {
+                $app[$n] = $c($app);
+            });
+
+        $stub = new TenantiServiceProvider($app);
 
         $this->assertNull($stub->register());
+        $this->assertInstanceOf('\Orchestra\Tenanti\TenantiManager', $app['orchestra.tenanti']);
     }
 
     /**

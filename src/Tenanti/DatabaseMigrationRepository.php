@@ -1,5 +1,7 @@
 <?php namespace Orchestra\Tenanti;
 
+use Illuminate\Database\Schema\Blueprint;
+
 class DatabaseMigrationRepository extends \Illuminate\Database\Migrations\DatabaseMigrationRepository
 {
     /**

@@ -1,13 +1,14 @@
 <?php
 
-return [
-    'migrations' => 'tenant_migrations',
+return array(
 
-    'drivers' => [
-        'user' => [
+    'chunck'  => 1000,
+
+    'drivers' => array(
+        'user' => array(
             'model'     => 'User',
-            'migration' => 'user_migrations',
+            'migration' => 'user_{id}_migrations',
             'path'      => app_path().'/database/tenant/users',
-        ],
-    ],
-];
+        ),
+    ),
+);

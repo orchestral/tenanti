@@ -6,6 +6,13 @@ use Illuminate\Support\Manager;
 class TenantiManager extends Manager
 {
     /**
+     * Migration factory resolver.
+     *
+     * @var string
+     */
+    protected $resolver = 'Orchestra\Tenanti\MigratorFactoryInterface';
+
+    /**
      * Create a new driver instance.
      *
      * @param  string  $driver
@@ -20,7 +27,7 @@ class TenantiManager extends Manager
             throw new InvalidArgumentException("Driver [$driver] not supported.");
         }
 
-        return $this->app['orchestra.tenanti.migrator']->setTenant($driver, $config);
+        return $this->app->make($this->resolver, array($this->app, $driver, $config));
     }
 
     /**
