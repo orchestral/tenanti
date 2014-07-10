@@ -3,7 +3,6 @@
 use InvalidArgumentException;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Migrations\Migrator;
 use Orchestra\Support\Str;
 
 class MigratorFactory implements MigratorFactoryInterface
@@ -36,6 +35,11 @@ class MigratorFactory implements MigratorFactoryInterface
      */
     protected $migrator = array();
 
+    /**
+     * Resolver list.
+     *
+     * @var array
+     */
     protected $resolver = array(
         'repository' => 'Illuminate\Database\Migrations\DatabaseMigrationRepository',
         'migrator'   => 'Illuminate\Database\Migrations\Migrator',
@@ -53,6 +57,24 @@ class MigratorFactory implements MigratorFactoryInterface
         $this->app    = $app;
         $this->driver = $driver;
         $this->config = $config;
+    }
+
+    /**
+     * Install migrations.
+     *
+     * @param  string|null  $database
+     * @return void
+     */
+    public function install($database)
+    {
+        $model = $this->resolveModel();
+        $me    = $this;
+
+        $model->newQuery()->chunk(100, function ($entities) use ($me, $database) {
+            foreach ($entities as $entity) {
+                $me->runInstall($entity, $database);
+            }
+        });
     }
 
     /**
@@ -88,6 +110,23 @@ class MigratorFactory implements MigratorFactoryInterface
                 $me->runDown($entity, $pretend);
             }
         });
+    }
+
+    /**
+     * Run migration up on a single entity.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  string|null                          $database
+     * @return void
+     */
+    public function runInstall(Model $entity, $database)
+    {
+        $table = $this->resolveTableName($entity);
+
+        $repository = $this->resolveMigrator($table)->getRepository();
+
+        $repository->setSource($database);
+        $repository->createRepository();
     }
 
     /**

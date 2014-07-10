@@ -5,6 +5,14 @@ use Illuminate\Database\Eloquent\Model;
 interface MigratorFactoryInterface
 {
     /**
+     * Install migrations.
+     *
+     * @param  string|null  $database
+     * @return void
+     */
+    public function install($database);
+
+    /**
      * Run migrations.
      *
      * @param  bool $pretend
@@ -18,6 +26,15 @@ interface MigratorFactoryInterface
      * @return void
      */
     public function rollback($pretend = false);
+
+    /**
+     * Run migration up on a single entity.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  string|null                          $database
+     * @return void
+     */
+    public function runInstall(Model $entity, $database);
 
     /**
      * Run migration up on a single entity.

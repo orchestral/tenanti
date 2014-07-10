@@ -24,7 +24,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $commands = array('Migrate', 'Make'); //, 'Rollback', 'Reset', 'Refresh', 'Install'); //, 'Make'];
+        $commands = array('Migrate', 'Install', 'Make'); //, 'Rollback', 'Reset', 'Refresh', 'Install'); //, 'Make'];
 
         // We'll simply spin through the list of commands that are migration related
         // and register each one of them with an application container. They will
@@ -38,11 +38,11 @@ class CommandServiceProvider extends ServiceProvider
         // when the Artisan application actually starts up and is getting used.
         $this->commands(
             'orchestra.commands.tenanti',
-            'orchestra.commands.tenanti.make'//,
-        //'orchestra.tenant.command.install',
-        //'orchestra.tenant.command.rollback',
-        //'orchestra.tenant.command.reset',
-        //'orchestra.tenant.command.refresh'
+            'orchestra.commands.tenanti.make',
+            'orchestra.commands.tenanti.install'//,
+            //'orchestra.commands.tenanti.rollback',
+            //'orchestra.commands.tenanti.reset',
+            //'orchestra.commands.tenanti.refresh'
         );
     }
 
@@ -54,8 +54,8 @@ class CommandServiceProvider extends ServiceProvider
     protected function registerMigrateCommand()
     {
         $this->app->bindShared('orchestra.commands.tenanti', function ($app) {
-                return new MigrateCommand($app['orchestra.tenanti']);
-            });
+            return new MigrateCommand($app['orchestra.tenanti']);
+        });
     }
 
     /**
@@ -66,8 +66,8 @@ class CommandServiceProvider extends ServiceProvider
     protected function registerRollbackCommand()
     {
         $this->app->bindShared('orchestra.tenanti.command.rollback', function ($app) {
-                return new RollbackCommand($app['orchestra.tenanti']);
-            });
+            return new RollbackCommand($app['orchestra.tenanti']);
+        });
     }
 
     /**
@@ -78,8 +78,8 @@ class CommandServiceProvider extends ServiceProvider
     protected function registerResetCommand()
     {
         $this->app->bindShared('orchestra.tenanti.command.reset', function ($app) {
-                return new ResetCommand($app['migrator']);
-            });
+            return new ResetCommand($app['migrator']);
+        });
     }
 
     /**
@@ -90,8 +90,8 @@ class CommandServiceProvider extends ServiceProvider
     protected function registerRefreshCommand()
     {
         $this->app->bindShared('orchestra.tenanti.command.refresh', function ($app) {
-                return new RefreshCommand;
-            });
+            return new RefreshCommand;
+        });
     }
 
     /**
@@ -102,8 +102,8 @@ class CommandServiceProvider extends ServiceProvider
     protected function registerInstallCommand()
     {
         $this->app->bindShared('orchestra.tenanti.command.install', function ($app) {
-                return new InstallCommand($app['migration.repository']);
-            });
+            return new InstallCommand($app['orchestra.tenanti']);
+        });
     }
 
     /**
@@ -114,13 +114,13 @@ class CommandServiceProvider extends ServiceProvider
     protected function registerMakeCommand()
     {
         $this->app->bindShared('orchestra.commands.tenanti.make', function ($app) {
-                // Once we have the migration creator registered, we will create the command
-                // and inject the creator. The creator is responsible for the actual file
-                // creation of the migrations, and may be extended by these developers.
-                $creator = $app['migration.creator'];
+            // Once we have the migration creator registered, we will create the command
+            // and inject the creator. The creator is responsible for the actual file
+            // creation of the migrations, and may be extended by these developers.
+            $creator = $app['migration.creator'];
 
-                return new MigrateMakeCommand($app['orchestra.tenanti'], $creator);
-            });
+            return new MigrateMakeCommand($app['orchestra.tenanti'], $creator);
+        });
     }
 
     /**
@@ -132,10 +132,10 @@ class CommandServiceProvider extends ServiceProvider
     {
         return array(
             'orchestra.commands.tenanti',
-            //'orchestra.tenanti.command.rollback',
-            //'orchestra.tenanti.command.reset',
-            //'orchestra.tenanti.command.refresh',
-            //'orchestra.tenanti.command.install',
+            //'orchestra.commands.tenanti.rollback',
+            //'orchestra.commands.tenanti.reset',
+            //'orchestra.commands.tenanti.refresh',
+            'orchestra.commands.tenanti.install',
             'orchestra.commands.tenanti.make',
         );
     }
