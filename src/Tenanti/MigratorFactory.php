@@ -140,7 +140,7 @@ class MigratorFactory implements MigratorFactoryInterface
     {
         $table = $this->resolveTableName($entity);
 
-        $this->resolveMigrator($table)->run(array_get($this->config, 'path'), $pretend);
+        $this->resolveMigrator($table)->run($this->getMigrationPath(), $pretend);
     }
 
     /**
