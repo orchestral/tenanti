@@ -1,12 +1,12 @@
 <?php
 
 return [
+    'migrations' => 'tenant_migrations',
 
     'drivers' => [
         'user' => [
             'model'   => 'User',
-            'version' => 1,
-            'path'    => app_path().'/database/tenant/users/',
+            'path'    => app_path().'/database/tenant/users',
         ],
     ],
 ];
