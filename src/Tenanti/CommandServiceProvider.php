@@ -65,7 +65,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerRollbackCommand()
     {
-        $this->app->bindShared('orchestra.tenanti.command.rollback', function ($app) {
+        $this->app->bindShared('orchestra.commands.tenanti.rollback', function ($app) {
             return new RollbackCommand($app['orchestra.tenanti']);
         });
     }
@@ -77,7 +77,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerResetCommand()
     {
-        $this->app->bindShared('orchestra.tenanti.command.reset', function ($app) {
+        $this->app->bindShared('orchestra.commands.tenanti.reset', function ($app) {
             return new ResetCommand($app['orchestra.tenanti']);
         });
     }
@@ -89,7 +89,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerRefreshCommand()
     {
-        $this->app->bindShared('orchestra.tenanti.command.refresh', function ($app) {
+        $this->app->bindShared('orchestra.commands.tenanti.refresh', function ($app) {
             return new RefreshCommand($app['orchestra.tenanti']);
         });
     }
@@ -101,7 +101,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerInstallCommand()
     {
-        $this->app->bindShared('orchestra.tenanti.command.install', function ($app) {
+        $this->app->bindShared('orchestra.commands.tenanti.install', function ($app) {
             return new InstallCommand($app['orchestra.tenanti']);
         });
     }
