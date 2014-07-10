@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Tenanti\Console;
 
 use Illuminate\Database\Migrations\MigrationCreator;
+use Orchestra\Support\Str;
 use Orchestra\Tenanti\TenantiManager;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -54,11 +55,17 @@ class MigrateMakeCommand extends BaseCommand
         $driver = $this->input->getArgument('driver');
         $name   = $this->input->getArgument('name');
         $create = $this->input->getOption('create');
+        $table  = $this->input->getOption('table');
+
+        if (! $table && is_string($create)) {
+            $table = $create;
+        }
+
 
         // Now we are ready to write the migration out to disk. Once we've written
         // the migration out, we will dump-autoload for the entire framework to
         // make sure that the migrations are registered by the class loaders.
-        $this->writeMigration($driver, $name, $create);
+        $this->writeMigration($driver, $name, $table, $create);
 
         $this->call('dump-autoload');
     }
@@ -68,15 +75,16 @@ class MigrateMakeCommand extends BaseCommand
      *
      * @param  string  $driver
      * @param  string  $name
+     * @param  string  $table
      * @param  bool    $create
      * @return string
      */
-    protected function writeMigration($driver, $name, $create)
+    protected function writeMigration($driver, $name, $table, $create)
     {
         $migrator = $this->tenant->driver($driver);
 
         $path  = $migrator->getMigrationPath();
-        $table = $migrator->getTablePrefix();
+        $table = Str::replace($migrator->getTablePrefix()."_{$table}", array('id' => '{$id}'));
 
         $file = pathinfo($this->creator->create($name, $path, $table, $create), PATHINFO_FILENAME);
 
@@ -105,7 +113,7 @@ class MigrateMakeCommand extends BaseCommand
     {
         return array(
             array('create', null, InputOption::VALUE_NONE, 'The table to be created.'),
-            array('table', null, InputOption::VALUE_NONE, 'The table to migrate.'),
+            array('table', null, InputOption::VALUE_OPTIONAL, 'The table to migrate.'),
         );
     }
 }
