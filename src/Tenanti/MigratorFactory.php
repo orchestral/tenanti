@@ -145,7 +145,7 @@ class MigratorFactory implements MigratorFactoryInterface
 
         $repository->setSource($database);
 
-        if ($repository->repositoryExists()) {
+        if (! $repository->repositoryExists()) {
             $repository->createRepository();
         }
     }
