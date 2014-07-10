@@ -112,7 +112,7 @@ class MigrateMakeCommand extends BaseCommand
     protected function getOptions()
     {
         return array(
-            array('create', null, InputOption::VALUE_NONE, 'The table to be created.'),
+            array('create', null, InputOption::VALUE_OPTIONAL, 'The table to be created.'),
             array('table', null, InputOption::VALUE_OPTIONAL, 'The table to migrate.'),
         );
     }
