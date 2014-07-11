@@ -30,7 +30,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
 
         $this->app->shouldReceive('make')->once()->with('User')->andReturn($model);
 
-        $this->assertEquals($model, $this->resolveModel());
+        $this->assertEquals($model, $this->getModel());
     }
 
     /**
@@ -48,7 +48,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
 
         $this->app->shouldReceive('make')->once()->with('User')->andReturnNull();
 
-        $this->resolveModel();
+        $this->getModel();
     }
 
     /**

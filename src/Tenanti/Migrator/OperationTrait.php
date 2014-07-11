@@ -50,7 +50,7 @@ trait OperationTrait
      * @return \Illuminate\Database\Eloquent\Model
      * @throws \InvalidArgumentException
      */
-    protected function resolveModel()
+    public function getModel()
     {
         $name  = $this->getModelName();
         $model = $this->app->make($name);

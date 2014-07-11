@@ -38,7 +38,7 @@ class Factory implements FactoryInterface
      */
     public function install($database)
     {
-        $model = $this->resolveModel();
+        $model = $this->getModel();
 
         $model->newQuery()->chunk($this->chunk, function ($entities) use ($database) {
             foreach ($entities as $entity) {
@@ -56,7 +56,7 @@ class Factory implements FactoryInterface
      */
     public function run($database, $pretend = false)
     {
-        $model = $this->resolveModel();
+        $model = $this->getModel();
 
         $model->newQuery()->chunk($this->chunk, function ($entities) use ($database, $pretend) {
             foreach ($entities as $entity) {
@@ -74,7 +74,7 @@ class Factory implements FactoryInterface
      */
     public function rollback($database, $pretend = false)
     {
-        $model = $this->resolveModel();
+        $model = $this->getModel();
 
         $model->newQuery()->chunk($this->chunk, function ($entities) use ($database, $pretend) {
             foreach ($entities as $entity) {
@@ -92,7 +92,7 @@ class Factory implements FactoryInterface
      */
     public function reset($database, $pretend = false)
     {
-        $model = $this->resolveModel();
+        $model = $this->getModel();
 
         $model->newQuery()->chunk($this->chunk, function ($entities) use ($database, $pretend) {
             foreach ($entities as $entity) {

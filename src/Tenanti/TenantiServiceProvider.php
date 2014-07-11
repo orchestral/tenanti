@@ -21,6 +21,8 @@ class TenantiServiceProvider extends ServiceProvider
         $this->app->bindShared('orchestra.tenanti', function ($app) {
             return new TenantiManager($app);
         });
+
+        $this->app->alias('orchestra.tenanti', 'Orchestra\Tenanti\TenantiManager');
     }
 
     /**
