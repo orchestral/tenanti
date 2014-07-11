@@ -112,8 +112,6 @@ Now that we have setup the configuration, let add an observer to our `User` clas
 ```php
 <?php
 
-use ;
-
 User::observe(new UserObserver);
 ```
 
