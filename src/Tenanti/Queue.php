@@ -1,17 +1,11 @@
 <?php namespace Orchestra\Tenanti;
 
 use Illuminate\Queue\Jobs\Job;
+use Illuminate\Support\Facades\App;
 use Orchestra\Tenanti\Migrator\FactoryInterface;
 
 class Queue
 {
-    protected $tenant;
-
-    public function __construct(TenantiManager $tenant)
-    {
-        $this->tenant = $tenant;
-    }
-
     /**
      * Run queue on creating a model.
      *
@@ -30,7 +24,10 @@ class Queue
             return ;
         }
 
+        $migrator->runInstall($entity, $database);
         $migrator->runUp($entity, $database);
+
+        $job->delete();
     }
 
     /**
@@ -52,6 +49,8 @@ class Queue
         }
 
         $migrator->runReset($entity, $database);
+
+        $job->delete();
     }
 
     /**
@@ -64,7 +63,7 @@ class Queue
     {
         $driver = array_get($data, 'driver');
 
-        return $this->tenant->driver($driver);
+        return App::make('orchestra.tenanti')->driver($driver);
     }
 
     /**

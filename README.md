@@ -112,7 +112,21 @@ Now that we have setup the configuration, let add an observer to our `User` clas
 ```php
 <?php
 
-use Orchestra\Tenanti\Observer;
+use ;
 
-User::observe(new Observer('user'));
+User::observe(new UserObserver);
+```
+
+and your `UserObserver` class should consist of the following:
+
+```php
+<?php
+
+class UserObserver extends \Orchestra\Tenanti\Observer
+{
+	public function getDriverName()
+	{
+		return 'user';
+	}
+}
 ```

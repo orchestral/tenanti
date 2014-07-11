@@ -3,24 +3,12 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Queue;
 
-class Observer
+abstract class Observer
 {
     /**
-     * Driver name.
-     *
-     * @var string
+     * Get driver name.
      */
-    protected $driver;
-
-    /**
-     * Construct a new observer object.
-     *
-     * @param string    $driver
-     */
-    public function __construct($driver)
-    {
-        $this->driver = $driver;
-    }
+    abstract public function getDriverName();
 
     /**
      * Run on created observer.
@@ -31,8 +19,8 @@ class Observer
     public function created(Model $entity)
     {
         Queue::push('Orchestra\Tenanti\Queue@create', array(
-            'driver' => $this->driver,
-            'id' => $entity->getKey(),
+            'driver' => $this->getDriverName(),
+            'id'     => $entity->getKey(),
         ));
 
         return true;
@@ -47,8 +35,8 @@ class Observer
     public function deleted(Model $entity)
     {
         Queue::push('Orchestra\Tenanti\Queue@delete', array(
-            'driver' => $this->driver,
-            'id' => $entity->getKey(),
+            'driver' => $this->getDriverName(),
+            'id'     => $entity->getKey(),
         ));
 
         return true;

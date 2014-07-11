@@ -36,4 +36,14 @@ class TenantiServiceProvider extends ServiceProvider
 
         $this->package('orchestra/tenanti', 'orchestra/tenanti', $path);
     }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return array('orchestra.tenanti');
+    }
 }
