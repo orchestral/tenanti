@@ -35,6 +35,21 @@ You could also simplify the above code by using the following command:
 composer require "orchestra/tenanti=2.2.*"
 ```
 
+### Setup
+
+Next add the following service provider in `app/config/app.php`.
+
+```php
+'providers' => array(
+
+	// ...
+	'Orchestra\Tenanti\TenantiServiceProvider',
+	'Orchestra\Tenanti\CommandServiceProvider',
+),
+```
+
+> The command utility is enabled via Orchestra\Tenanti\CommandServiceProvider.
+
 ## Usage
 
 ### Configuration
