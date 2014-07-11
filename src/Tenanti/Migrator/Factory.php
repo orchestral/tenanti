@@ -139,7 +139,7 @@ class Factory implements FactoryInterface
      */
     public function runInstall(Model $entity, $database)
     {
-        $table = $this->resolveTableName($entity);
+        $table = $this->resolveMigrationTableName($entity);
 
         $repository = $this->resolveMigrator($table)->getRepository();
 
@@ -160,7 +160,7 @@ class Factory implements FactoryInterface
      */
     public function runUp(Model $entity, $database, $pretend = false)
     {
-        $table    = $this->resolveTableName($entity);
+        $table    = $this->resolveMigrationTableName($entity);
         $migrator = $this->resolveMigrator($table);
 
         $migrator->setConnection($database);
@@ -178,7 +178,7 @@ class Factory implements FactoryInterface
      */
     public function runDown(Model $entity, $database, $pretend = false)
     {
-        $table = $this->resolveTableName($entity);
+        $table = $this->resolveMigrationTableName($entity);
         $migrator = $this->resolveMigrator($table);
 
         $migrator->setConnection($database);
@@ -196,7 +196,7 @@ class Factory implements FactoryInterface
      */
     public function runReset(Model $entity, $database, $pretend = false)
     {
-        $table = $this->resolveTableName($entity);
+        $table = $this->resolveMigrationTableName($entity);
         $migrator = $this->resolveMigrator($table);
 
         $migrator->setConnection($database);
@@ -256,7 +256,7 @@ class Factory implements FactoryInterface
      * @param  \Illuminate\Database\Eloquent\Model  $entity
      * @return string
      */
-    protected function resolveTableName(Model $entity)
+    protected function resolveMigrationTableName(Model $entity)
     {
         $id    = $entity->getKey();
         $table = $this->getTablePrefix().'_migrations';
