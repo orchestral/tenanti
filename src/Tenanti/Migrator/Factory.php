@@ -8,17 +8,26 @@ class Factory implements FactoryInterface
     use OperationTrait;
 
     /**
+     * Chunk value.
+     *
+     * @var int
+     */
+    protected $chunk = 100;
+
+    /**
      * Construct a new migration manager.
      *
      * @param  \Illuminate\Container\Container  $app
      * @param  string                           $driver
      * @param  array                            $config
+     * @param  int                              $chunk
      */
-    public function __construct(Container $app, $driver, array $config = array())
+    public function __construct(Container $app, $driver, array $config = array(), $chunk = 100)
     {
         $this->app    = $app;
         $this->driver = $driver;
         $this->config = $config;
+        $this->chunk  = $chunk;
     }
 
     /**
@@ -31,11 +40,11 @@ class Factory implements FactoryInterface
     {
         $model = $this->resolveModel();
 
-        $model->newQuery()->chunk(100, function ($entities) use ($database) {
-                foreach ($entities as $entity) {
-                    $this->runInstall($entity, $database);
-                }
-            });
+        $model->newQuery()->chunk($this->chunk, function ($entities) use ($database) {
+            foreach ($entities as $entity) {
+                $this->runInstall($entity, $database);
+            }
+        });
     }
 
     /**
@@ -49,11 +58,11 @@ class Factory implements FactoryInterface
     {
         $model = $this->resolveModel();
 
-        $model->newQuery()->chunk(100, function ($entities) use ($database, $pretend) {
-                foreach ($entities as $entity) {
-                    $this->runUp($entity, $database, $pretend);
-                }
-            });
+        $model->newQuery()->chunk($this->chunk, function ($entities) use ($database, $pretend) {
+            foreach ($entities as $entity) {
+                $this->runUp($entity, $database, $pretend);
+            }
+        });
     }
 
     /**
@@ -67,11 +76,11 @@ class Factory implements FactoryInterface
     {
         $model = $this->resolveModel();
 
-        $model->newQuery()->chunk(100, function ($entities) use ($database, $pretend) {
-                foreach ($entities as $entity) {
-                    $this->runDown($entity, $database, $pretend);
-                }
-            });
+        $model->newQuery()->chunk($this->chunk, function ($entities) use ($database, $pretend) {
+            foreach ($entities as $entity) {
+                $this->runDown($entity, $database, $pretend);
+            }
+        });
     }
 
     /**
@@ -85,11 +94,11 @@ class Factory implements FactoryInterface
     {
         $model = $this->resolveModel();
 
-        $model->newQuery()->chunk(100, function ($entities) use ($database, $pretend) {
-                foreach ($entities as $entity) {
-                    $this->runReset($entity, $database, $pretend);
-                }
-            });
+        $model->newQuery()->chunk($this->chunk, function ($entities) use ($database, $pretend) {
+            foreach ($entities as $entity) {
+                $this->runReset($entity, $database, $pretend);
+            }
+        });
     }
 
     /**

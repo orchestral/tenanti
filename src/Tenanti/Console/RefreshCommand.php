@@ -27,7 +27,7 @@ class RefreshCommand extends BaseCommand
      */
     public function fire()
     {
-        if ( ! $this->confirmToProceed()) {
+        if (! $this->confirmToProceed()) {
             return;
         }
 
