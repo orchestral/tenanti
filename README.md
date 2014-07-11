@@ -81,11 +81,13 @@ ClassLoader::addDirectories(array(
 ##### composer.json
 
 ```json
+{
 	"autoload": {
 		"classmap": [
 			"app/database/tenant/users"
 		]
 	}
+}
 ```
 
 ### Setup Model Observer
