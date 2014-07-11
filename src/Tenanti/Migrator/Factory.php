@@ -93,12 +93,8 @@ class Factory implements FactoryInterface
         $migrator->setConnection($database);
         $migrator->setEntity($entity);
 
-        while (true) {
+        do {
             $count = $migrator->rollback($pretend);
-
-            if ($count == 0) {
-                break;
-            }
-        }
+        } while ($count > 0);
     }
 }
