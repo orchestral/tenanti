@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Tenanti\Console;
 
 use Illuminate\Database\Migrations\MigrationCreator;
+use Illuminate\Filesystem\Filesystem;
 use Orchestra\Support\Str;
 use Orchestra\Tenanti\TenantiManager;
 use Symfony\Component\Console\Input\InputArgument;
@@ -30,14 +31,23 @@ class MigrateMakeCommand extends BaseCommand
     protected $creator;
 
     /**
+     * Filesystem instance.
+     * 
+     * @var \Illuminate\Filesystem\Filesystem
+     */
+    protected $files;
+
+    /**
      * Create a make migration command instance.
      *
      * @param  \Orchestra\Tenanti\TenantiManager                $tenant
      * @param  \Illuminate\Database\Migrations\MigrationCreator $creator
+     * @param  \Illuminate\Filesystem\Filesystem                $files
      */
-    public function __construct(TenantiManager $tenant, MigrationCreator $creator)
+    public function __construct(TenantiManager $tenant, MigrationCreator $creator, Filesystem $files)
     {
         $this->creator = $creator;
+        $this->files   = $files;
 
         parent::__construct($tenant);
     }
@@ -84,6 +94,11 @@ class MigrateMakeCommand extends BaseCommand
         $migrator = $this->tenant->driver($driver);
 
         $path  = $migrator->getMigrationPath();
+
+        if (! $this->files->isDirectory($path)) {
+            $this->files->makeDirectory($path, 0755, true);
+        }
+
         $table = Str::replace($migrator->getTablePrefix()."_{$table}", array('id' => '{$id}'));
 
         $file = pathinfo($this->creator->create($name, $path, $table, $create), PATHINFO_FILENAME);
