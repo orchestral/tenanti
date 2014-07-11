@@ -26,7 +26,7 @@
     </logging>
 
     <filter>
-        <whitelist addUncoveredFilesFromWhitelist="true">
+        <whitelist addUncoveredFilesFromWhitelist="false">
             <directory suffix=".php">src/Tenanti</directory>
         </whitelist>
     </filter>
