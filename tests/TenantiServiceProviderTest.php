@@ -51,4 +51,16 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNull($stub->boot());
     }
+
+    /**
+     * Test \Orchestra\Tenanti\TenantiServiceProvider::provides() method.
+     *
+     * @test
+     */
+    public function testProvidesMethod()
+    {
+        $stub = new TenantiServiceProvider(null);
+
+        $this->assertContains('orchestra.tenanti', $stub->provides());
+    }
 }
