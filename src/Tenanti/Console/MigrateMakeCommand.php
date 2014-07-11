@@ -88,6 +88,7 @@ class MigrateMakeCommand extends BaseCommand
             $files->makeDirectory($path, 0755, true);
         }
 
+        $name  = implode('_', array($driver, 'tenant', $name));
         $table = Str::replace($migrator->getTablePrefix()."_{$table}", array('id' => '{$id}'));
 
         $file = pathinfo($this->creator->create($name, $path, $table, $create), PATHINFO_FILENAME);
