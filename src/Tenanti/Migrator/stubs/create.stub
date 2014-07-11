@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
+class {{class}} extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @param  string|int                           $id
+     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @return void
+     */
+    public function up($id, Model $model)
+    {
+        Schema::create("{{table}}", function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @param  string|int                           $id
+     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @return void
+     */
+    public function down($id, Model $model)
+    {
+        Schema::drop("{{table}}");
+    }
+}

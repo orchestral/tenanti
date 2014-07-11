@@ -1,8 +1,8 @@
 <?php namespace Orchestra\Tenanti\Console;
 
-use Illuminate\Database\Migrations\MigrationCreator;
 use Illuminate\Filesystem\Filesystem;
 use Orchestra\Support\Str;
+use Orchestra\Tenanti\Migrator\Creator;
 use Orchestra\Tenanti\TenantiManager;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -24,15 +24,13 @@ class MigrateMakeCommand extends BaseCommand
     protected $description = 'Create a new migration file';
 
     /**
-     * The migration creator instance.
-     *
-     * @var \Illuminate\Database\Migrations\MigrationCreator
+     * @var \Orchestra\Tenanti\Migrator\Creator
      */
     protected $creator;
 
     /**
      * Filesystem instance.
-     * 
+     *
      * @var \Illuminate\Filesystem\Filesystem
      */
     protected $files;
@@ -40,11 +38,11 @@ class MigrateMakeCommand extends BaseCommand
     /**
      * Create a make migration command instance.
      *
-     * @param  \Orchestra\Tenanti\TenantiManager                $tenant
-     * @param  \Illuminate\Database\Migrations\MigrationCreator $creator
-     * @param  \Illuminate\Filesystem\Filesystem                $files
+     * @param  \Orchestra\Tenanti\TenantiManager    $tenant
+     * @param  \Orchestra\Tenanti\Migrator\Creator  $creator
+     * @param  \Illuminate\Filesystem\Filesystem    $files
      */
-    public function __construct(TenantiManager $tenant, MigrationCreator $creator, Filesystem $files)
+    public function __construct(TenantiManager $tenant, Creator $creator, Filesystem $files)
     {
         $this->creator = $creator;
         $this->files   = $files;
