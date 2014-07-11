@@ -42,7 +42,7 @@ composer require "orchestra/tenanti=2.2.*"
 First, let's export the configuration to your application configuration folder to customize the option:
 
 ```
-$ php artisan config:publish orchestra/tenanti
+php artisan config:publish orchestra/tenanti
 ```
 
 ### Setup Model Observer
