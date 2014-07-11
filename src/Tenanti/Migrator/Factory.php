@@ -1,9 +1,7 @@
 <?php namespace Orchestra\Tenanti\Migrator;
 
-use InvalidArgumentException;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
-use Orchestra\Support\Str;
 
 class Factory implements FactoryInterface
 {

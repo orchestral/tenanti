@@ -2,6 +2,7 @@
 
 use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Model;
+use Orchestra\Support\Str;
 
 trait OperationTrait
 {
