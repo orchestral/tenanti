@@ -7,6 +7,7 @@ use Orchestra\Tenanti\Console\InstallCommand;
 use Orchestra\Tenanti\Console\MigrateCommand;
 use Orchestra\Tenanti\Console\RollbackCommand;
 use Orchestra\Tenanti\Console\MigrateMakeCommand;
+use Orchestra\Tenanti\Migrator\Creator;
 
 class CommandServiceProvider extends ServiceProvider
 {
@@ -113,13 +114,15 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerMakeCommand()
     {
+        $this->app->bindShared('orchestra.tenanti.creator', function ($app) {
+            return new Creator($app['files']);
+        });
+
         $this->app->bindShared('orchestra.commands.tenanti.make', function ($app) {
             // Once we have the migration creator registered, we will create the command
             // and inject the creator. The creator is responsible for the actual file
             // creation of the migrations, and may be extended by these developers.
-            $creator = $app['migration.creator'];
-
-            return new MigrateMakeCommand($app['orchestra.tenanti'], $creator);
+            return new MigrateMakeCommand($app['orchestra.tenanti'], $app['orchestra.tenanti.creator']);
         });
     }
 

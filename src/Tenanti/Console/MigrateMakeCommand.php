@@ -29,23 +29,14 @@ class MigrateMakeCommand extends BaseCommand
     protected $creator;
 
     /**
-     * Filesystem instance.
-     *
-     * @var \Illuminate\Filesystem\Filesystem
-     */
-    protected $files;
-
-    /**
      * Create a make migration command instance.
      *
      * @param  \Orchestra\Tenanti\TenantiManager    $tenant
      * @param  \Orchestra\Tenanti\Migrator\Creator  $creator
-     * @param  \Illuminate\Filesystem\Filesystem    $files
      */
-    public function __construct(TenantiManager $tenant, Creator $creator, Filesystem $files)
+    public function __construct(TenantiManager $tenant, Creator $creator)
     {
         $this->creator = $creator;
-        $this->files   = $files;
 
         parent::__construct($tenant);
     }
@@ -90,11 +81,11 @@ class MigrateMakeCommand extends BaseCommand
     protected function writeMigration($driver, $name, $table, $create)
     {
         $migrator = $this->tenant->driver($driver);
+        $files    = $this->creator->getFilesystem();
+        $path     = $migrator->getMigrationPath();
 
-        $path  = $migrator->getMigrationPath();
-
-        if (! $this->files->isDirectory($path)) {
-            $this->files->makeDirectory($path, 0755, true);
+        if (! $files->isDirectory($path)) {
+            $files->makeDirectory($path, 0755, true);
         }
 
         $table = Str::replace($migrator->getTablePrefix()."_{$table}", array('id' => '{$id}'));
