@@ -1,4 +1,4 @@
-<?php namespace Orchestra\Tenanti;
+<?php namespace Orchestra\Tenanti\Migrator;
 
 use Illuminate\Database\Eloquent\Model;
 

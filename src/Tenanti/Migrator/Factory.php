@@ -1,11 +1,11 @@
-<?php namespace Orchestra\Tenanti;
+<?php namespace Orchestra\Tenanti\Migrator;
 
 use InvalidArgumentException;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 use Orchestra\Support\Str;
 
-class MigratorFactory implements MigratorFactoryInterface
+class Factory implements FactoryInterface
 {
     /**
      * Application instance.
@@ -42,7 +42,7 @@ class MigratorFactory implements MigratorFactoryInterface
      */
     protected $resolver = array(
         'repository' => 'Illuminate\Database\Migrations\DatabaseMigrationRepository',
-        'migrator'   => 'Orchestra\Tenanti\Migrator',
+        'migrator'   => 'Orchestra\Tenanti\Migrator\Migrator',
     );
 
     /**
@@ -233,7 +233,7 @@ class MigratorFactory implements MigratorFactoryInterface
      * Resolve migrator.
      *
      * @param  string   $table
-     * @return \Illuminate\Database\Migrations\Migrator
+     * @return \Orchestra\Tenanti\Migrator\Migrator
      */
     protected function resolveMigrator($table)
     {

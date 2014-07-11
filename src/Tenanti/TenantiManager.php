@@ -10,7 +10,7 @@ class TenantiManager extends Manager
      *
      * @var string
      */
-    protected $resolver = 'Orchestra\Tenanti\MigratorFactory';
+    protected $resolver = 'Orchestra\Tenanti\Migrator\Factory';
 
     /**
      * Create a new driver instance.
