@@ -15,8 +15,7 @@ class {{class}} extends Migration
      */
     public function up($id, Model $model)
     {
-        Schema::table("{{table}}", function(Blueprint $table)
-        {
+        Schema::table("{{table}}", function (Blueprint $table) {
 
         });
     }
@@ -30,8 +29,7 @@ class {{class}} extends Migration
      */
     public function down($id, Model $model)
     {
-        Schema::table("{{table}}", function(Blueprint $table)
-        {
+        Schema::table("{{table}}", function (Blueprint $table) {
 
         });
     }
