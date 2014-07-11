@@ -62,7 +62,31 @@ return array(
 );
 ```
 
-You can customize, or add new driver in the configuration.
+You can customize, or add new driver in the configuration. It is important to note that `model` configuration only work with `Eloquent` instance.
+
+#### Setup migration autoload
+
+For each driver, you should also consider adding the migration path into autoload. To do this you can either edit `app/start/global.php` or `composer.json`.
+
+##### global.php
+
+```php
+<?php
+
+ClassLoader::addDirectories(array(
+	app_path().'/database/tenant/users',
+));
+```
+
+##### composer.json
+
+```json
+	"autoload": {
+		"classmap": [
+			"app/database/tenant/users"
+		]
+	}
+```
 
 ### Setup Model Observer
 
