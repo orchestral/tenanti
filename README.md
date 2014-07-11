@@ -44,6 +44,25 @@ First, let's export the configuration to your application configuration folder t
 ```
 php artisan config:publish orchestra/tenanti
 ```
+Now when you browse to `app/config/packages/orchestra/tenanti/config.php` you should be welcome with the following config:
+
+```php
+<?php
+
+return array(
+
+	// ...
+	
+	'drivers' => array(
+        'user' => array(
+            'model' => 'User',
+            'path'  => app_path().'/database/tenant/users',
+        ),
+    ),
+);
+```
+
+You can customize, or add new driver in the configuration.
 
 ### Setup Model Observer
 
