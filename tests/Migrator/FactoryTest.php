@@ -22,20 +22,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testRunInstallMethod()
     {
-        $app = $this->getAppContainer();
+        $app    = $this->getAppContainer();
         $driver = 'user';
         $config = array();
 
-        $schema = m::mock('\Illuminate\Database\Schema\Builder');
-
-        $schema->shouldReceive('hasTable')->once()->with('user_5_migrations')->andReturn(false)
+        $app['schema']->shouldReceive('hasTable')->once()->with('user_5_migrations')->andReturn(false)
             ->shouldReceive('create')->once()->with('user_5_migrations', m::type('Closure'))->andReturnNull();
 
-        $app['db']->shouldReceive('connection')->twice()->with('primary')->andReturnSelf()
-            ->shouldReceive('getSchemaBuilder')->twice()->andReturn($schema);
-
-        $stub = new Factory($app, $driver, $config);
-
+        $stub  = new Factory($app, $driver, $config);
         $model = $this->getMockModel();
 
         $this->assertNull($stub->runInstall($model, 'primary'));
@@ -61,6 +55,10 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $app = new Container;
         $app['db'] = m::mock('\Illuminate\Database\ConnectionResolverInterface');
         $app['files'] = m::mock('\Illuminate\Filesystem\Filesystem');
+        $app['schema'] = m::mock('\Illuminate\Database\Schema\Builder');
+
+        $app['db']->shouldReceive('connection')->with('primary')->andReturnSelf()
+            ->shouldReceive('getSchemaBuilder')->andReturn($app['schema']);
 
         return $app;
     }
