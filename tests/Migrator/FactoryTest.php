@@ -144,6 +144,91 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test Orchestra\Tenanti\Migrator\Factory::runUp()
+     * method.
+     *
+     * @test
+     */
+    public function testRunUpMethod()
+    {
+        $app    = $this->getAppContainer();
+        $driver = 'user';
+        $config = array(
+            'path' => '/var/app/migrations',
+        );
+
+        $stub  = m::mock('\Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', array($app, $driver, $config))
+                    ->shouldAllowMockingProtectedMethods();
+        $model = $this->getMockModel();
+
+        $migrator = m::mock('\Orchestra\Tenanti\Migrator\Migrator');
+
+        $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
+        $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
+            ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
+            ->shouldReceive('run')->once()->with('/var/app/migrations', false)->andReturnNull();
+
+        $this->assertNull($stub->runUp($model, 'primary'));
+    }
+
+    /**
+     * Test Orchestra\Tenanti\Migrator\Factory::runDown()
+     * method.
+     *
+     * @test
+     */
+    public function testRunDownMethod()
+    {
+        $app    = $this->getAppContainer();
+        $driver = 'user';
+        $config = array(
+            'path' => '/var/app/migrations',
+        );
+
+        $stub  = m::mock('\Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', array($app, $driver, $config))
+            ->shouldAllowMockingProtectedMethods();
+        $model = $this->getMockModel();
+
+        $migrator = m::mock('\Orchestra\Tenanti\Migrator\Migrator');
+
+        $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
+        $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
+            ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
+            ->shouldReceive('rollback')->once()->with(false)->andReturnNull();
+
+        $this->assertNull($stub->runDown($model, 'primary'));
+    }
+
+    /**
+     * Test Orchestra\Tenanti\Migrator\Factory::runReset()
+     * method.
+     *
+     * @test
+     */
+    public function testRunResetMethod()
+    {
+        $app    = $this->getAppContainer();
+        $driver = 'user';
+        $config = array(
+            'path' => '/var/app/migrations',
+        );
+
+        $stub  = m::mock('\Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', array($app, $driver, $config))
+            ->shouldAllowMockingProtectedMethods();
+        $model = $this->getMockModel();
+
+        $migrator = m::mock('\Orchestra\Tenanti\Migrator\Migrator');
+
+        $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
+        $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
+            ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
+            ->shouldReceive('rollback')->once()->with(false)->andReturn(5)
+            ->shouldReceive('rollback')->once()->with(false)->andReturn(0);
+
+        $this->assertNull($stub->runReset($model, 'primary'));
+    }
+
+    /**
      * @return \Mockery\MockInterface
      */
     protected function getMockModel()
