@@ -7,6 +7,8 @@ abstract class Observer
 {
     /**
      * Get driver name.
+     *
+     * @return string
      */
     abstract public function getDriverName();
 
@@ -18,7 +20,7 @@ abstract class Observer
      */
     public function created(Model $entity)
     {
-        Queue::push('Orchestra\Tenanti\Queue@create', array(
+        Queue::push('Orchestra\Tenanti\Migrator\Queue@create', array(
             'driver' => $this->getDriverName(),
             'id'     => $entity->getKey(),
         ));
@@ -34,7 +36,7 @@ abstract class Observer
      */
     public function deleted(Model $entity)
     {
-        Queue::push('Orchestra\Tenanti\Queue@delete', array(
+        Queue::push('Orchestra\Tenanti\Migrator\Queue@delete', array(
             'driver' => $this->getDriverName(),
             'id'     => $entity->getKey(),
         ));

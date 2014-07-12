@@ -15,6 +15,114 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test Orchestra\Tenanti\Migrator\Factory::install() method.
+     *
+     * @test
+     */
+    public function testInstallMethod()
+    {
+        $app    = $this->getAppContainer();
+        $driver = 'user';
+        $config = array();
+
+        $stub  = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runInstall]', array($app, $driver, $config));
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $entities = array(
+            $entity = m::mock('\Illuminate\Database\Eloquent\Model'),
+        );
+
+        $stub->shouldReceive('getModel')->once()->andReturn($model)
+            ->shouldReceive('runInstall')->once()->with($entity, 'foo')->andReturnNull();
+        $model->shouldReceive('newQuery->chunk')->once()->with(100, m::type('Closure'))
+            ->andReturnUsing(function ($n, $c) use ($entities) {
+                $c($entities);
+            });
+
+        $this->assertNull($stub->install('foo'));
+    }
+
+    /**
+ * Test Orchestra\Tenanti\Migrator\Factory::run() method.
+ *
+ * @test
+ */
+    public function testRunMethod()
+    {
+        $app    = $this->getAppContainer();
+        $driver = 'user';
+        $config = array();
+
+        $stub  = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runUp]', array($app, $driver, $config));
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $entities = array(
+            $entity = m::mock('\Illuminate\Database\Eloquent\Model'),
+        );
+
+        $stub->shouldReceive('getModel')->once()->andReturn($model)
+            ->shouldReceive('runUp')->once()->with($entity, 'foo', false)->andReturnNull();
+        $model->shouldReceive('newQuery->chunk')->once()->with(100, m::type('Closure'))
+            ->andReturnUsing(function ($n, $c) use ($entities) {
+                    $c($entities);
+                });
+
+        $this->assertNull($stub->run('foo'));
+    }
+
+    /**
+     * Test Orchestra\Tenanti\Migrator\Factory::rollback() method.
+     *
+     * @test
+     */
+    public function testRollbackMethod()
+    {
+        $app    = $this->getAppContainer();
+        $driver = 'user';
+        $config = array();
+
+        $stub  = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runDown]', array($app, $driver, $config));
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $entities = array(
+            $entity = m::mock('\Illuminate\Database\Eloquent\Model'),
+        );
+
+        $stub->shouldReceive('getModel')->once()->andReturn($model)
+            ->shouldReceive('runDown')->once()->with($entity, 'foo', false)->andReturnNull();
+        $model->shouldReceive('newQuery->chunk')->once()->with(100, m::type('Closure'))
+            ->andReturnUsing(function ($n, $c) use ($entities) {
+                    $c($entities);
+                });
+
+        $this->assertNull($stub->rollback('foo'));
+    }
+
+    /**
+     * Test Orchestra\Tenanti\Migrator\Factory::reset() method.
+     *
+     * @test
+     */
+    public function testResetMethod()
+    {
+        $app    = $this->getAppContainer();
+        $driver = 'user';
+        $config = array();
+
+        $stub  = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runReset]', array($app, $driver, $config));
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $entities = array(
+            $entity = m::mock('\Illuminate\Database\Eloquent\Model'),
+        );
+
+        $stub->shouldReceive('getModel')->once()->andReturn($model)
+            ->shouldReceive('runReset')->once()->with($entity, 'foo', false)->andReturnNull();
+        $model->shouldReceive('newQuery->chunk')->once()->with(100, m::type('Closure'))
+            ->andReturnUsing(function ($n, $c) use ($entities) {
+                    $c($entities);
+                });
+
+        $this->assertNull($stub->reset('foo'));
+    }
+
+    /**
      * Test Orchestra\Tenanti\Migrator\Factory::runInstall()
      * method.
      *

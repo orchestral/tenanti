@@ -1,8 +1,7 @@
-<?php namespace Orchestra\Tenanti;
+<?php namespace Orchestra\Tenanti\Migrator;
 
 use Illuminate\Queue\Jobs\Job;
 use Illuminate\Support\Facades\App;
-use Orchestra\Tenanti\Migrator\FactoryInterface;
 
 class Queue
 {
