@@ -14,6 +14,7 @@ Tenanti allow you to manage multi-tenant data schema and migration manager for y
 Laravel  | Tenanti
 :--------|:---------
  4.2.x   | 2.2.x
+ 4.3.x   | 2.3.x@dev
 
 ## Installation
 
@@ -22,7 +23,7 @@ To install through composer, simply put the following in your `composer.json` fi
 ```json
 {
 	"require": {
-		"orchestra/tenanti": "2.2.*"
+		"orchestra/tenanti": "2.3.*"
 	}	
 }
 ```
@@ -34,7 +35,7 @@ And then run `composer install` to fetch the package.
 You could also simplify the above code by using the following command:
 
 ```
-composer require "orchestra/tenanti=2.2.*"
+composer require "orchestra/tenanti=2.3.*"
 ```
 
 ### Setup
