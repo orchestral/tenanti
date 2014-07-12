@@ -1,5 +1,7 @@
-Tenant DB Schema Manager for Laravel
+Multi-tenant Database Schema Manager for Laravel
 ==============
+
+Tenanti allow you to manage multi-tenant data schema and migration manager for your Laravel application.
 
 [![Latest Stable Version](https://poser.pugx.org/orchestra/tenanti/v/stable.png)](https://packagist.org/packages/orchestra/tenanti) 
 [![Total Downloads](https://poser.pugx.org/orchestra/tenanti/downloads.png)](https://packagist.org/packages/orchestra/tenanti) 
@@ -59,6 +61,7 @@ First, let's export the configuration to your application configuration folder t
 ```
 php artisan config:publish orchestra/tenanti
 ```
+
 Now when you browse to `app/config/packages/orchestra/tenanti/config.php` you should be welcome with the following config:
 
 ```php
@@ -128,3 +131,16 @@ class UserObserver extends \Orchestra\Tenanti\Observer
 	}
 }
 ```
+
+## Console Support
+
+Tenanti include additional command to help you run bulk migration when a new schema is created, the available command resemble the usage available from `php artisan migrate` namespace.
+
+Command                                    | Description
+:------------------------------------------|:---------------------
+ php artisan tenanti:install {driver}      | Setup migration table on each entry for a given driver.
+ php artisan tenanti:make {driver} {name}  | Make a new Schema generator for a given driver.
+ php artisan tenanti:migrate {driver}      | Run migration on each entry for a given driver.
+ php artisan tenanti:rollback {driver}     | Rollback migration on each entry for a given driver.
+ php artisan tenanti:reset {driver}        | Reset migration on each entry for a given driver.
+ php artisan tenanti:refresh {driver}      | Refresh migration (reset and migrate) on each entry for a given driver. 
