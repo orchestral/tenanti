@@ -2,6 +2,7 @@
 	"name": "orchestra/tenanti",
 	"description": "Tenant based Database Schema Manager for Laravel",
 	"license": "MIT",
+	"keywords": ["laravel", "orchestral", "orchestra-platform", "multi-tenant", "schema", "migration"],
 	"authors": [
 		{
 			"name": "Mior Muhammad Zaki",
