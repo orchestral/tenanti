@@ -92,7 +92,10 @@ trait OperationTrait
     protected function resolveMigrationTableName(Model $entity)
     {
         $id    = $entity->getKey();
-        $table = $this->getTablePrefix().'_migrations';
+
+        if (is_null($table = array_get($this->config, 'migration'))) {
+            $table = $this->getTablePrefix().'_migrations';
+        }
 
         return Str::replace($table, array('id' => $id));
     }
