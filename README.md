@@ -145,3 +145,49 @@ Command                                    | Description
  php artisan tenanti:rollback {driver}     | Rollback migration on each entry for a given driver.
  php artisan tenanti:reset {driver}        | Reset migration on each entry for a given driver.
  php artisan tenanti:refresh {driver}      | Refresh migration (reset and migrate) on each entry for a given driver. 
+
+## Multi Database Connection Setup
+
+Instead of using Tenanti with a single database connection, you could also setup a database connection for each tenant.
+
+### Configuration
+
+By introducing a `migration` config, you can now setup the migration table name to be `tenant_migrations` instead of `user_{id}_migrations`.
+
+```php
+<?php
+
+return array(
+
+	// ...
+	
+	'drivers' => array(
+        'user' => array(
+            'model'     => 'User',
+            'migration' => 'tenant_migrations',
+            'path'      => app_path().'/database/tenant/users',
+        ),
+    ),
+);
+```
+
+### Observer
+
+Adding an override method for `getConnectionName()` would allow you to force the migration to be executed on the desire connection.
+
+```php
+<?php
+
+class UserObserver extends \Orchestra\Tenanti\Observer
+{
+	public function getDriverName()
+	{
+		return 'user';
+	}
+	
+	public function getConnectionName()
+	{
+		return 'tenant_{id}';
+	}
+}
+```

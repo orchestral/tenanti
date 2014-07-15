@@ -35,6 +35,13 @@ trait OperationTrait
     protected $migrator = array();
 
     /**
+     * Cached entities data.
+     *
+     * @var array
+     */
+    protected $data = array();
+
+    /**
      * Resolver list.
      *
      * @var array
@@ -91,10 +98,11 @@ trait OperationTrait
      */
     protected function resolveMigrationTableName(Model $entity)
     {
-        $id    = $entity->getKey();
-        $table = $this->getTablePrefix().'_migrations';
+        if (is_null($table = array_get($this->config, 'migration'))) {
+            $table = $this->getTablePrefix().'_migrations';
+        }
 
-        return Str::replace($table, array('id' => $id));
+        return $this->bindWithKey($entity, $table);
     }
 
     /**
@@ -125,5 +133,26 @@ trait OperationTrait
     public function getTablePrefix()
     {
         return implode('_', array($this->driver, '{id}'));
+    }
+
+    /**
+     * Resolve table name.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  string                               $table
+     * @return string
+     */
+    protected function bindWithKey(Model $entity, $table)
+    {
+        $id = $entity->getKey();
+
+        if (! isset($this->data[$id])) {
+            $data = array_dot(array('entity' => $entity->toArray()));
+            $data['id'] = $id;
+
+            $this->data[$id] = $data;
+        }
+
+        return Str::replace($table, $this->data[$id]);
     }
 }
