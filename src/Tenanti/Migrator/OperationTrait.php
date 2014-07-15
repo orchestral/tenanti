@@ -139,11 +139,15 @@ trait OperationTrait
      * Resolve table name.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string                               $table
-     * @return string
+     * @param  string|null                          $name
+     * @return string|null
      */
-    protected function bindWithKey(Model $entity, $table)
+    protected function bindWithKey(Model $entity, $name)
     {
+        if (is_null($name)) {
+            return $name;
+        }
+
         $id = $entity->getKey();
 
         if (! isset($this->data[$id])) {
@@ -153,6 +157,6 @@ trait OperationTrait
             $this->data[$id] = $data;
         }
 
-        return Str::replace($table, $this->data[$id]);
+        return Str::replace($name, $this->data[$id]);
     }
 }
