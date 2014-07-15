@@ -168,6 +168,30 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test Orchestra\Tenanti\Migrator\Factory::runInstall()
+     * method when database connection name is not available.
+     *
+     * @test
+     */
+    public function testRunInstallMethodWithoutDatabaseConnectionName()
+    {
+        $app    = $this->getAppContainer();
+        $driver = 'user';
+        $config = array('migration' => 'migrations');
+
+        $app['schema']->shouldReceive('hasTable')->once()->with('migrations')->andReturn(false)
+            ->shouldReceive('create')->once()->with('migrations', m::type('Closure'))->andReturnNull();
+
+        $app['db']->shouldReceive('connection')->with(null)->andReturnSelf()
+            ->shouldReceive('getSchemaBuilder')->andReturn($app['schema']);
+
+        $stub  = new Factory($app, $driver, $config);
+        $model = $this->getMockModel();
+
+        $this->assertNull($stub->runInstall($model, null));
+    }
+
+    /**
      * Test Orchestra\Tenanti\Migrator\Factory::runUp()
      * method.
      *
