@@ -6,6 +6,16 @@ use Illuminate\Support\Facades\Queue;
 abstract class Observer
 {
     /**
+     * Get connection name.
+     *
+     * @return string|null
+     */
+    public function getConnectionName()
+    {
+        return null;
+    }
+
+    /**
      * Get driver name.
      *
      * @return string
@@ -21,8 +31,9 @@ abstract class Observer
     public function created(Model $entity)
     {
         Queue::push('Orchestra\Tenanti\Migrator\Queue@create', array(
-            'driver' => $this->getDriverName(),
-            'id'     => $entity->getKey(),
+            'database' => $this->getConnectionName(),
+            'driver'   => $this->getDriverName(),
+            'id'       => $entity->getKey(),
         ));
 
         return true;
@@ -37,8 +48,9 @@ abstract class Observer
     public function deleted(Model $entity)
     {
         Queue::push('Orchestra\Tenanti\Migrator\Queue@delete', array(
-            'driver' => $this->getDriverName(),
-            'id'     => $entity->getKey(),
+            'database' => $this->getConnectionName(),
+            'driver'   => $this->getDriverName(),
+            'id'       => $entity->getKey(),
         ));
 
         return true;
