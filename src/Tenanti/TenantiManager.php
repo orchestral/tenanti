@@ -22,12 +22,13 @@ class TenantiManager extends Manager
     protected function createDriver($driver)
     {
         $config = $this->app['config']->get("orchestra/tenanti::drivers.{$driver}");
+        $chunk  = $this->app['config']->get('orchestra/tenanti::chunk', 100);
 
         if (is_null($config)) {
             throw new InvalidArgumentException("Driver [$driver] not supported.");
         }
 
-        return $this->app->make($this->resolver, array($this->app, $driver, $config));
+        return $this->app->make($this->resolver, array($this->app, $driver, $config, $chunk));
     }
 
     /**
