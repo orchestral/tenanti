@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Tenanti\Migrator;
 
 use Illuminate\Queue\Jobs\Job;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 
 class Queue
@@ -14,7 +15,7 @@ class Queue
      */
     public function create(Job $job, array $data)
     {
-        $database = array_get($data, 'database');
+        $database = Arr::get($data, 'database');
         $migrator = $this->resolveMigrator($data);
         $entity   = $this->resolveModelEntity($migrator, $data);
 
@@ -38,7 +39,7 @@ class Queue
      */
     public function delete(Job $job, array $data)
     {
-        $database = array_get($data, 'database');
+        $database = Arr::get($data, 'database');
         $migrator = $this->resolveMigrator($data);
         $entity   = $this->resolveModelEntity($migrator, $data);
 
@@ -60,7 +61,7 @@ class Queue
      */
     protected function resolveMigrator(array $data)
     {
-        $driver = array_get($data, 'driver');
+        $driver = Arr::get($data, 'driver');
 
         return App::make('orchestra.tenanti')->driver($driver);
     }
@@ -74,7 +75,7 @@ class Queue
      */
     protected function resolveModelEntity(FactoryInterface $migrator, $data)
     {
-        $id = array_get($data, 'id');
+        $id = Arr::get($data, 'id');
 
         return $migrator->getModel()->newInstance()->find($id);
     }

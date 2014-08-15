@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Tenanti\Migrator;
 
+use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Model;
 use Orchestra\Support\Str;
@@ -81,8 +82,8 @@ trait OperationTrait
         $resolver = $this->resolver;
 
         if (! isset($this->migrator[$table])) {
-            $repository = $app->make(array_get($resolver, 'repository'), array($app['db'], $table));
-            $migrator   = $app->make(array_get($resolver, 'migrator'), array($repository, $app['db'], $app['files']));
+            $repository = $app->make(Arr::get($resolver, 'repository'), array($app['db'], $table));
+            $migrator   = $app->make(Arr::get($resolver, 'migrator'), array($repository, $app['db'], $app['files']));
 
             $this->migrator[$table] = $migrator;
         }
@@ -98,7 +99,7 @@ trait OperationTrait
      */
     protected function resolveMigrationTableName(Model $entity)
     {
-        if (is_null($table = array_get($this->config, 'migration'))) {
+        if (is_null($table = Arr::get($this->config, 'migration'))) {
             $table = $this->getTablePrefix().'_migrations';
         }
 
@@ -112,7 +113,7 @@ trait OperationTrait
      */
     public function getMigrationPath()
     {
-        return array_get($this->config, 'path');
+        return Arr::get($this->config, 'path');
     }
 
     /**
@@ -122,7 +123,7 @@ trait OperationTrait
      */
     public function getModelName()
     {
-        return array_get($this->config, 'model');
+        return Arr::get($this->config, 'model');
     }
 
     /**
@@ -151,7 +152,7 @@ trait OperationTrait
         $id = $entity->getKey();
 
         if (! isset($this->data[$id])) {
-            $data = array_dot(array('entity' => $entity->toArray()));
+            $data = Arr::dot(array('entity' => $entity->toArray()));
             $data['id'] = $id;
 
             $this->data[$id] = $data;
