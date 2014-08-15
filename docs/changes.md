@@ -5,6 +5,10 @@ title: Tenanti Change Log
 
 ## Version 2.2 {#v2-2}
 
+### v2.2.3@dev {#v2-2-3}
+
+* Utilize `Illuminate\Support\Arr`.
+
 ### v2.2.2 {#v2-2-2}
 
 * Fixes `Orchestra\Tenanti\Migrator\OperationTrait::bindWithKey()` to not convert the `$name` to empty string when given `NULL`.

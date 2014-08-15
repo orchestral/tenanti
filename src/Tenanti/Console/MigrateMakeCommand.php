@@ -1,6 +1,5 @@
 <?php namespace Orchestra\Tenanti\Console;
 
-use Illuminate\Filesystem\Filesystem;
 use Orchestra\Support\Str;
 use Orchestra\Tenanti\Migrator\Creator;
 use Orchestra\Tenanti\TenantiManager;
