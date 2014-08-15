@@ -1,8 +1,8 @@
 <?php namespace Orchestra\Tenanti\Migrator;
 
-use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use Orchestra\Support\Str;
 
 trait OperationTrait
