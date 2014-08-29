@@ -93,9 +93,23 @@ interface FactoryInterface
     public function getModelName();
 
     /**
+     * Get the notes for the last operation.
+     *
+     * @return array
+     */
+    public function getNotes();
+
+    /**
      * Get table prefix.
      *
      * @return string
      */
     public function getTablePrefix();
+
+    /**
+     * Flush notes.
+     *
+     * @return void
+     */
+    public function flushNotes();
 }
