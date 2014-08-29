@@ -38,5 +38,7 @@ class ResetCommand extends BaseCommand
         $migrator = $this->tenant->driver($driver);
 
         $migrator->reset($database, $pretend);
+
+        $this->writeMigrationOutput($migrator);
     }
 }

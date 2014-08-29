@@ -28,9 +28,11 @@ class InstallCommand extends BaseCommand
         $driver   = $this->argument('driver');
         $database = $this->option('database');
 
-        $this->tenant->driver($driver)->install($database);
+        $migrator = $this->tenant->driver($driver);
 
-        $this->info("Migration table created successfully.");
+        $migrator->install($database);
+
+        $this->writeMigrationOutput($migrator);
     }
 
     /**

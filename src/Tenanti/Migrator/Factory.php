@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Factory implements FactoryInterface
 {
-    use OperationTrait;
+    use NotableTrait, OperationTrait;
 
     /**
      * Chunk value.
@@ -119,6 +119,8 @@ class Factory implements FactoryInterface
 
         if (! $repository->repositoryExists()) {
             $repository->createRepository();
+
+            $this->note("<info>Migration table created for [{$entity->getTable()}:{$entity->getKey()}].</info>");
         }
     }
 

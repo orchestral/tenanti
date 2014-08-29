@@ -56,8 +56,9 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
         $stub->setEntity($model);
 
         $stub->shouldReceive('resolve')->once()->with($file)->andReturn($migration)
-            ->shouldReceive('note')->once()->with("<info>Migrated:</info> $file")->andReturnNull();
-        $model->shouldReceive('getKey')->once()->andReturn(10);
+            ->shouldReceive('note')->once()->with("<info>Migrated [foobar:10]:</info> $file")->andReturnNull();
+        $model->shouldReceive('getKey')->once()->andReturn(10)
+            ->shouldReceive('getTable')->once()->andReturn('foobar');
         $migration->shouldReceive('up')->once()->with(10, $model)->andReturnNull();
         $repository->shouldReceive('log')->once()->with($file, $batch)->andReturnNull();
 
@@ -117,8 +118,9 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
         $stub->setEntity($model);
 
         $stub->shouldReceive('resolve')->once()->with($file)->andReturn($instance)
-            ->shouldReceive('note')->once()->with("<info>Rolled back:</info> $file")->andReturnNull();
-        $model->shouldReceive('getKey')->once()->andReturn(10);
+            ->shouldReceive('note')->once()->with("<info>Rolled back [foobar:10]:</info> $file")->andReturnNull();
+        $model->shouldReceive('getKey')->once()->andReturn(10)
+            ->shouldReceive('getTable')->once()->andReturn('foobar');
         $instance->shouldReceive('down')->once()->with(10, $model)->andReturnNull();
         $repository->shouldReceive('delete')->once()->with($migration)->andReturnNull();
 
@@ -184,9 +186,10 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
                 ->andReturnUsing(function ($c)  {
                     $c();
 
-                    return [['query' => 'SELECT * FROM `foo`']];
+                    return [['query' => 'SELECT * FROM `foobar`']];
                 });
-        $model->shouldReceive('getKey')->once()->andReturn(15);
+        $model->shouldReceive('getKey')->twice()->andReturn(15)
+            ->shouldReceive('getTable')->once()->andReturn('foobar');
         $stub->shouldReceive('resolve')->once()->with($file)->andReturn($instance);
 
         $this->assertNull($stub->runUp($file, $batch, $pretend));

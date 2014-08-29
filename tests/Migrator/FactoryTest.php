@@ -284,6 +284,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $model = m::mock('\Illuminate\Database\Eloquent\Model');
 
         $model->shouldReceive('getKey')->andReturn(5)
+            ->shouldReceive('getTable')->andReturn('users')
             ->shouldReceive('toArray')->once()->andReturn(array('name' => 'Administrator', 'username' => 'foo'));
 
         return $model;

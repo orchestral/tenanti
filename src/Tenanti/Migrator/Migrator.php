@@ -43,14 +43,14 @@ class Migrator extends \Illuminate\Database\Migrations\Migrator
             return $this->pretendToRun($migration, 'up');
         }
 
-        $migration->up($this->entity->getKey(), $this->entity);
+        $migration->up($key = $this->entity->getKey(), $this->entity);
 
         // Once we have run a migrations class, we will log that it was run in this
         // repository so that we don't try to run it next time we do a migration
         // in the application. A migration repository keeps the migrate order.
         $this->repository->log($file, $batch);
 
-        $this->note("<info>Migrated:</info> $file");
+        $this->note("<info>Migrated [{$this->entity->getTable()}:{$key}]:</info> {$file}");
     }
 
     /**
@@ -73,14 +73,33 @@ class Migrator extends \Illuminate\Database\Migrations\Migrator
             return $this->pretendToRun($instance, 'down');
         }
 
-        $instance->down($this->entity->getKey(), $this->entity);
+        $instance->down($key = $this->entity->getKey(), $this->entity);
 
         // Once we have successfully run the migration "down" we will remove it from
         // the migration repository so it will be considered to have not been run
         // by the application then will be able to fire by any later operation.
         $this->repository->delete($migration);
 
-        $this->note("<info>Rolled back:</info> $file");
+        $this->note("<info>Rolled back [{$this->entity->getTable()}:{$key}]:</info> {$file}");
+    }
+
+    /**
+     * Pretend to run the migrations.
+     *
+     * @param  object  $migration
+     * @param  string  $method
+     * @return void
+     */
+    protected function pretendToRun($migration, $method)
+    {
+        $table = $this->entity->getTable();
+        $key = $this->entity->getKey();
+
+        foreach ($this->getQueries($migration, $method) as $query) {
+            $name = get_class($migration);
+
+            $this->note("<info>{$name} [{$table}:{$key}]:</info> {$query['query']}");
+        }
     }
 
     /**
