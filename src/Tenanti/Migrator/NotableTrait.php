@@ -1,6 +1,6 @@
 <?php namespace Orchestra\Tenanti\Migrator;
 
-use Illuminate\Database\Migrations\Migrator;
+use Illuminate\Database\Migrations\Migrator as BaseMigrator;
 
 trait NotableTrait
 {
@@ -17,7 +17,7 @@ trait NotableTrait
      * @param  \Illuminate\Database\Migrations\Migrator $migrator
      * @return void
      */
-    protected function mergeMigratorNotes(Migrator $migrator)
+    protected function mergeMigratorNotes(BaseMigrator $migrator)
     {
         $this->notes = $this->notes + $migrator->getNotes();
     }
