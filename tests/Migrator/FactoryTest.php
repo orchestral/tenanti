@@ -62,8 +62,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('runUp')->once()->with($entity, 'foo', false)->andReturnNull();
         $model->shouldReceive('newQuery->chunk')->once()->with(100, m::type('Closure'))
             ->andReturnUsing(function ($n, $c) use ($entities) {
-                    $c($entities);
-                });
+                $c($entities);
+            });
 
         $this->assertNull($stub->run('foo'));
     }
@@ -214,7 +214,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
-            ->shouldReceive('run')->once()->with('/var/app/migrations', false)->andReturnNull();
+            ->shouldReceive('run')->once()->with('/var/app/migrations', false)->andReturnNull()
+            ->shouldReceive('getNotes')->once()->andReturn([]);
 
         $this->assertNull($stub->runUp($model, 'primary'));
     }
@@ -242,7 +243,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
-            ->shouldReceive('rollback')->once()->with(false)->andReturnNull();
+            ->shouldReceive('rollback')->once()->with(false)->andReturnNull()
+            ->shouldReceive('getNotes')->once()->andReturn([]);
 
         $this->assertNull($stub->runDown($model, 'primary'));
     }
@@ -271,7 +273,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
             ->shouldReceive('rollback')->once()->with(false)->andReturn(5)
-            ->shouldReceive('rollback')->once()->with(false)->andReturn(0);
+            ->shouldReceive('rollback')->once()->with(false)->andReturn(0)
+            ->shouldReceive('getNotes')->once()->andReturn([]);
 
         $this->assertNull($stub->runReset($model, 'primary'));
     }
