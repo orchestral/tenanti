@@ -120,7 +120,7 @@ class Factory implements FactoryInterface
         if (! $repository->repositoryExists()) {
             $repository->createRepository();
 
-            $this->note("<info>Migration table created for [{$entity->getTable()}:{$entity->getKey()}].</info>");
+            $this->note("<info>Migration table {$table} created successfully.</info>");
         }
     }
 
