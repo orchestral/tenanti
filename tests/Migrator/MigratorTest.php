@@ -153,4 +153,42 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNull($stub->runDown($migration, $pretend));
     }
+
+    /**
+     * Test Orchestra\Tenanti\Migrator\Migrator::getQueries()
+     * method when pretending.
+     *
+     * @test
+     */
+    public function testGetQueriesMethodWhenPretending()
+    {
+        $repository = m::mock('\Illuminate\Database\Migrations\MigrationRepositoryInterface');
+        $resolver   = m::mock('\Illuminate\Database\ConnectionResolverInterface');
+        $files      = m::mock('\Illuminate\Filesystem\Filesystem');
+        $model      = m::mock('\Illuminate\Database\Eloquent\Model');
+        $instance  = m::mock('FooMigration');
+
+        $file    = 'foo_migration.php';
+        $batch   = 5;
+        $pretend = true;
+
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve]', array($repository, $resolver, $files))
+            ->makePartial()
+            ->shouldAllowMockingProtectedMethods();
+        $stub->setEntity($model);
+
+        $instance->shouldReceive('getConnection')->once()->andReturn('default')
+            ->shouldReceive('up')->once()->with(15, $model)->andReturnNull();
+        $resolver->shouldReceive('connection')->once()->with('default')->andReturnSelf()
+            ->shouldReceive('pretend')->once()->with(m::type('Closure'))
+                ->andReturnUsing(function ($c)  {
+                    $c();
+
+                    return [['query' => 'SELECT * FROM `foo`']];
+                });
+        $model->shouldReceive('getKey')->once()->andReturn(15);
+        $stub->shouldReceive('resolve')->once()->with($file)->andReturn($instance);
+
+        $this->assertNull($stub->runUp($file, $batch, $pretend));
+    }
 }

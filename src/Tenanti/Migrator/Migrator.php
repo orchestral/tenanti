@@ -82,4 +82,25 @@ class Migrator extends \Illuminate\Database\Migrations\Migrator
 
         $this->note("<info>Rolled back:</info> $file");
     }
+
+    /**
+     * Get all of the queries that would be run for a migration.
+     *
+     * @param  object  $migration
+     * @param  string  $method
+     * @return array
+     */
+    protected function getQueries($migration, $method)
+    {
+        $connection = $migration->getConnection();
+
+        // Now that we have the connections we can resolve it and pretend to run the
+        // queries against the database returning the array of raw SQL statements
+        // that would get fired against the database system for this migration.
+        $db = $this->resolveConnection($connection);
+
+        return $db->pretend(function() use ($migration, $method) {
+            call_user_func([$migration, $method], $this->entity->getKey(), $this->entity);
+        });
+    }
 }
