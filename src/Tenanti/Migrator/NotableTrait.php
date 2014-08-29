@@ -19,7 +19,7 @@ trait NotableTrait
      */
     protected function mergeMigratorNotes(BaseMigrator $migrator)
     {
-        $this->notes = $this->notes + $migrator->getNotes();
+        $this->notes = array_merge($this->notes, $migrator->getNotes());
     }
 
     /**
