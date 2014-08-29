@@ -7,6 +7,8 @@ title: Tenanti Change Log
 
 ### v2.2.3@dev {#v2-2-3}
 
+* Allow migration note to be available when running command.
+* Fixes `--pretend` command not passing entity key and entity instance.
 * Utilize `Illuminate\Support\Arr`.
 
 ### v2.2.2 {#v2-2-2}
