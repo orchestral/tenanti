@@ -118,7 +118,7 @@ class Migrator extends \Illuminate\Database\Migrations\Migrator
         // that would get fired against the database system for this migration.
         $db = $this->resolveConnection($connection);
 
-        return $db->pretend(function() use ($migration, $method) {
+        return $db->pretend(function () use ($migration, $method) {
             call_user_func([$migration, $method], $this->entity->getKey(), $this->entity);
         });
     }
