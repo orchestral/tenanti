@@ -26,21 +26,21 @@ trait OperationTrait
      *
      * @var array
      */
-    protected $config = array();
+    protected $config = [];
 
     /**
      * Cached migrators.
      *
      * @var array
      */
-    protected $migrator = array();
+    protected $migrator = [];
 
     /**
      * Cached entities data.
      *
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * Resolver list.

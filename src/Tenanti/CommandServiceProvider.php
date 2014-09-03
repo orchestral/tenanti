@@ -25,7 +25,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $commands = array('Migrate', 'Install', 'Rollback', 'Reset', 'Refresh', 'Make');
+        $commands = ['Migrate', 'Install', 'Rollback', 'Reset', 'Refresh', 'Make'];
 
         // We'll simply spin through the list of commands that are migration related
         // and register each one of them with an application container. They will
@@ -133,13 +133,13 @@ class CommandServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array(
+        return [
             'orchestra.commands.tenanti',
             'orchestra.commands.tenanti.rollback',
             'orchestra.commands.tenanti.reset',
             'orchestra.commands.tenanti.refresh',
             'orchestra.commands.tenanti.install',
             'orchestra.commands.tenanti.make',
-        );
+        ];
     }
 }

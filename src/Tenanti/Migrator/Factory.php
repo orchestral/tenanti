@@ -22,7 +22,7 @@ class Factory implements FactoryInterface
      * @param  array                            $config
      * @param  int                              $chunk
      */
-    public function __construct(Container $app, $driver, array $config = array(), $chunk = 100)
+    public function __construct(Container $app, $driver, array $config = [], $chunk = 100)
     {
         $this->app    = $app;
         $this->driver = $driver;

@@ -44,6 +44,6 @@ class TenantiServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array('orchestra.tenanti');
+        return ['orchestra.tenanti'];
     }
 }

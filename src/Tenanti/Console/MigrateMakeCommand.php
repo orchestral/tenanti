@@ -87,8 +87,8 @@ class MigrateMakeCommand extends BaseCommand
             $files->makeDirectory($path, 0755, true);
         }
 
-        $name  = implode('_', array($driver, 'tenant', $name));
-        $table = Str::replace($migrator->getTablePrefix()."_{$table}", array('id' => '{$id}'));
+        $name  = implode('_', [$driver, 'tenant', $name]);
+        $table = Str::replace($migrator->getTablePrefix()."_{$table}", ['id' => '{$id}']);
 
         $file = pathinfo($this->creator->create($name, $path, $table, $create), PATHINFO_FILENAME);
 
@@ -102,10 +102,10 @@ class MigrateMakeCommand extends BaseCommand
      */
     protected function getArguments()
     {
-        return array(
-            array('driver', InputArgument::REQUIRED, 'Tenant driver name.'),
-            array('name', InputArgument::REQUIRED, 'The name of the migration'),
-        );
+        return [
+            ['driver', InputArgument::REQUIRED, 'Tenant driver name.'],
+            ['name', InputArgument::REQUIRED, 'The name of the migration'],
+        ];
     }
 
     /**
@@ -115,9 +115,9 @@ class MigrateMakeCommand extends BaseCommand
      */
     protected function getOptions()
     {
-        return array(
-            array('create', null, InputOption::VALUE_OPTIONAL, 'The table to be created.'),
-            array('table', null, InputOption::VALUE_OPTIONAL, 'The table to migrate.'),
-        );
+        return [
+            ['create', null, InputOption::VALUE_OPTIONAL, 'The table to be created.'],
+            ['table', null, InputOption::VALUE_OPTIONAL, 'The table to migrate.'],
+        ];
     }
 }

@@ -30,11 +30,11 @@ abstract class Observer
      */
     public function created(Model $entity)
     {
-        Queue::push('Orchestra\Tenanti\Migrator\Queue@create', array(
+        Queue::push('Orchestra\Tenanti\Migrator\Queue@create', [
             'database' => $this->getConnectionName(),
             'driver'   => $this->getDriverName(),
             'id'       => $entity->getKey(),
-        ));
+        ]);
 
         return true;
     }
@@ -47,11 +47,11 @@ abstract class Observer
      */
     public function deleted(Model $entity)
     {
-        Queue::push('Orchestra\Tenanti\Migrator\Queue@delete', array(
+        Queue::push('Orchestra\Tenanti\Migrator\Queue@delete', [
             'database' => $this->getConnectionName(),
             'driver'   => $this->getDriverName(),
             'id'       => $entity->getKey(),
-        ));
+        ]);
 
         return true;
     }

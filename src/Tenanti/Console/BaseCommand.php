@@ -52,9 +52,9 @@ abstract class BaseCommand extends Command
      */
     protected function getArguments()
     {
-        return array(
-            array('driver', InputArgument::REQUIRED, 'Tenant driver name.'),
-        );
+        return [
+            ['driver', InputArgument::REQUIRED, 'Tenant driver name.'],
+        ];
     }
 
     /**
@@ -64,10 +64,10 @@ abstract class BaseCommand extends Command
      */
     protected function getOptions()
     {
-        return array(
-            array('pretend', null, InputOption::VALUE_NONE, 'Dump the SQL queries that would be run.'),
-            array('database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.'),
-            array('force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production.'),
-        );
+        return [
+            ['pretend', null, InputOption::VALUE_NONE, 'Dump the SQL queries that would be run.'],
+            ['database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.'],
+            ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production.'],
+        ];
     }
 }
