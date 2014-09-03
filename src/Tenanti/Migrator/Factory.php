@@ -1,6 +1,6 @@
 <?php namespace Orchestra\Tenanti\Migrator;
 
-use Illuminate\Container\Container;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 
 class Factory implements FactoryInterface
@@ -17,10 +17,10 @@ class Factory implements FactoryInterface
     /**
      * Construct a new migration manager.
      *
-     * @param  \Illuminate\Container\Container  $app
-     * @param  string                           $driver
-     * @param  array                            $config
-     * @param  int                              $chunk
+     * @param  \Illuminate\Contracts\Container\Container    $app
+     * @param  string                                       $driver
+     * @param  array                                        $config
+     * @param  int                                          $chunk
      */
     public function __construct(Container $app, $driver, array $config = [], $chunk = 100)
     {
