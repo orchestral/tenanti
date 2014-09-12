@@ -3,28 +3,28 @@ Multi-tenant Database Schema Manager for Laravel
 
 Tenanti allow you to manage multi-tenant data schema and migration manager for your Laravel application.
 
-[![Latest Stable Version](https://poser.pugx.org/orchestra/tenanti/v/stable.png)](https://packagist.org/packages/orchestra/tenanti) 
-[![Total Downloads](https://poser.pugx.org/orchestra/tenanti/downloads.png)](https://packagist.org/packages/orchestra/tenanti) 
-[![Build Status](https://travis-ci.org/orchestral/tenanti.svg?branch=master)](https://travis-ci.org/orchestral/tenanti) 
-[![Coverage Status](https://coveralls.io/repos/orchestral/tenanti/badge.png?branch=master)](https://coveralls.io/r/orchestral/tenanti?branch=master) 
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/orchestral/tenanti/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/orchestral/tenanti/) 
+[![Latest Stable Version](https://poser.pugx.org/orchestra/tenanti/v/stable.png)](https://packagist.org/packages/orchestra/tenanti)
+[![Total Downloads](https://poser.pugx.org/orchestra/tenanti/downloads.png)](https://packagist.org/packages/orchestra/tenanti)
+[![Build Status](https://travis-ci.org/orchestral/tenanti.svg?branch=master)](https://travis-ci.org/orchestral/tenanti)
+[![Coverage Status](https://coveralls.io/repos/orchestral/tenanti/badge.png?branch=master)](https://coveralls.io/r/orchestral/tenanti?branch=master)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/orchestral/tenanti/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/orchestral/tenanti/)
 
 ## Version Compatibility
 
 Laravel  | Tenanti
 :--------|:---------
  4.2.x   | 2.2.x
- 4.3.x   | 2.3.x@dev
+ 5.0.x   | 3.0.x@dev
 
 ## Installation
 
 To install through composer, simply put the following in your `composer.json` file:
- 
+
 ```json
 {
 	"require": {
-		"orchestra/tenanti": "2.3.*"
-	}	
+		"orchestra/tenanti": "3.0.*"
+	}
 }
 ```
 
@@ -35,7 +35,7 @@ And then run `composer install` to fetch the package.
 You could also simplify the above code by using the following command:
 
 ```
-composer require "orchestra/tenanti=2.3.*"
+composer require "orchestra/tenanti=3.0.*"
 ```
 
 ### Setup
@@ -71,7 +71,7 @@ Now when you browse to `app/config/packages/orchestra/tenanti/config.php` you sh
 return array(
 
 	// ...
-	
+
 	'drivers' => array(
         'user' => array(
             'model' => 'User',
@@ -144,7 +144,7 @@ Command                                    | Description
  php artisan tenanti:migrate {driver}      | Run migration on each entry for a given driver.
  php artisan tenanti:rollback {driver}     | Rollback migration on each entry for a given driver.
  php artisan tenanti:reset {driver}        | Reset migration on each entry for a given driver.
- php artisan tenanti:refresh {driver}      | Refresh migration (reset and migrate) on each entry for a given driver. 
+ php artisan tenanti:refresh {driver}      | Refresh migration (reset and migrate) on each entry for a given driver.
 
 ## Multi Database Connection Setup
 
@@ -160,7 +160,7 @@ By introducing a `migration` config, you can now setup the migration table name 
 return array(
 
 	// ...
-	
+
 	'drivers' => array(
         'user' => array(
             'model'     => 'User',
@@ -184,7 +184,7 @@ class UserObserver extends \Orchestra\Tenanti\Observer
 	{
 		return 'user';
 	}
-	
+
 	public function getConnectionName()
 	{
 		return 'tenant_{id}';
