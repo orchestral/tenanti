@@ -1,7 +1,7 @@
 <?php namespace Orchestra\Tenanti;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Queue;
+use Illuminate\Database\Eloquent\Model;
 
 abstract class Observer
 {

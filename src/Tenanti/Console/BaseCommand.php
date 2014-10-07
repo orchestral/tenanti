@@ -1,10 +1,10 @@
 <?php namespace Orchestra\Tenanti\Console;
 
 use Illuminate\Console\Command;
-use Orchestra\Tenanti\Migrator\FactoryInterface;
 use Orchestra\Tenanti\TenantiManager;
-use Symfony\Component\Console\Input\InputArgument;
+use Orchestra\Tenanti\Migrator\FactoryInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
 abstract class BaseCommand extends Command
 {

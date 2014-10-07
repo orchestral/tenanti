@@ -1,10 +1,10 @@
 <?php namespace Orchestra\Tenanti\Console;
 
 use Orchestra\Support\Str;
-use Orchestra\Tenanti\Migrator\Creator;
 use Orchestra\Tenanti\TenantiManager;
-use Symfony\Component\Console\Input\InputArgument;
+use Orchestra\Tenanti\Migrator\Creator;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
 class MigrateMakeCommand extends BaseCommand
 {
