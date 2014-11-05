@@ -47,10 +47,10 @@ trait OperationTrait
      *
      * @var array
      */
-    protected $resolver = array(
+    protected $resolver = [
         'repository' => 'Illuminate\Database\Migrations\DatabaseMigrationRepository',
         'migrator'   => 'Orchestra\Tenanti\Migrator\Migrator',
-    );
+    ];
 
     /**
      * Resolve model.
@@ -133,7 +133,7 @@ trait OperationTrait
      */
     public function getTablePrefix()
     {
-        return implode('_', array($this->driver, '{id}'));
+        return implode('_', [$this->driver, '{id}']);
     }
 
     /**
@@ -152,7 +152,7 @@ trait OperationTrait
         $id = $entity->getKey();
 
         if (! isset($this->data[$id])) {
-            $data = Arr::dot(array('entity' => $entity->toArray()));
+            $data = Arr::dot(['entity' => $entity->toArray()]);
             $data['id'] = $id;
 
             $this->data[$id] = $data;

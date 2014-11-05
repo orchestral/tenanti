@@ -18,7 +18,7 @@ class TenantiServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bindShared('orchestra.tenanti', function ($app) {
+        $this->app->singleton('orchestra.tenanti', function ($app) {
             return new TenantiManager($app);
         });
 

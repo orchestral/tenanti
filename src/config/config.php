@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |----------------------------------------------------------------------
@@ -24,10 +24,10 @@ return array(
     |
     */
 
-    'drivers' => array(
-        'user' => array(
+    'drivers' => [
+        'user' => [
             'model' => 'User',
             'path'  => app_path().'/database/tenant/users',
-        ),
-    ),
-);
+        ],
+    ],
+];

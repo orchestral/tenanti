@@ -54,7 +54,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerMigrateCommand()
     {
-        $this->app->bindShared('orchestra.commands.tenanti', function ($app) {
+        $this->app->singleton('orchestra.commands.tenanti', function ($app) {
             return new MigrateCommand($app['orchestra.tenanti']);
         });
     }
@@ -66,7 +66,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerRollbackCommand()
     {
-        $this->app->bindShared('orchestra.commands.tenanti.rollback', function ($app) {
+        $this->app->singleton('orchestra.commands.tenanti.rollback', function ($app) {
             return new RollbackCommand($app['orchestra.tenanti']);
         });
     }
@@ -78,7 +78,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerResetCommand()
     {
-        $this->app->bindShared('orchestra.commands.tenanti.reset', function ($app) {
+        $this->app->singleton('orchestra.commands.tenanti.reset', function ($app) {
             return new ResetCommand($app['orchestra.tenanti']);
         });
     }
@@ -90,7 +90,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerRefreshCommand()
     {
-        $this->app->bindShared('orchestra.commands.tenanti.refresh', function ($app) {
+        $this->app->singleton('orchestra.commands.tenanti.refresh', function ($app) {
             return new RefreshCommand($app['orchestra.tenanti']);
         });
     }
@@ -102,7 +102,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerInstallCommand()
     {
-        $this->app->bindShared('orchestra.commands.tenanti.install', function ($app) {
+        $this->app->singleton('orchestra.commands.tenanti.install', function ($app) {
             return new InstallCommand($app['orchestra.tenanti']);
         });
     }
@@ -114,11 +114,11 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerMakeCommand()
     {
-        $this->app->bindShared('orchestra.tenanti.creator', function ($app) {
+        $this->app->singleton('orchestra.tenanti.creator', function ($app) {
             return new Creator($app['files']);
         });
 
-        $this->app->bindShared('orchestra.commands.tenanti.make', function ($app) {
+        $this->app->singleton('orchestra.commands.tenanti.make', function ($app) {
             // Once we have the migration creator registered, we will create the command
             // and inject the creator. The creator is responsible for the actual file
             // creation of the migrations, and may be extended by these developers.
