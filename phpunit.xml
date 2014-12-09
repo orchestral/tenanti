@@ -27,7 +27,7 @@
 
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="false">
-            <directory suffix=".php">src/Tenanti</directory>
+            <directory suffix=".php">src/</directory>
         </whitelist>
     </filter>
 </phpunit>

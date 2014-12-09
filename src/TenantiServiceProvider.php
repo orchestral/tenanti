@@ -1,6 +1,6 @@
 <?php namespace Orchestra\Tenanti;
 
-use Illuminate\Support\ServiceProvider;
+use Orchestra\Support\Providers\ServiceProvider;
 
 class TenantiServiceProvider extends ServiceProvider
 {
@@ -32,9 +32,9 @@ class TenantiServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $path = realpath(__DIR__.'/../');
+        $path = realpath(__DIR__.'/../resources');
 
-        $this->package('orchestra/tenanti', 'orchestra/tenanti', $path);
+        $this->addConfigComponent('orchestra/tenanti', 'orchestra/tenanti', $path.'/config');
     }
 
     /**

@@ -25,6 +25,6 @@ class CreatorTest extends \PHPUnit_Framework_TestCase
 
         $stub = new Creator($files);
 
-        $this->assertContains('src/Tenanti/Migrator/stubs', $stub->getStubPath());
+        $this->assertContains('src/Migrator/stubs', $stub->getStubPath());
     }
 }
