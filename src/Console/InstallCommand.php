@@ -23,7 +23,7 @@ class InstallCommand extends BaseCommand
      *
      * @return void
      */
-    public function fire()
+    public function handle()
     {
         $driver   = $this->argument('driver');
         $database = $this->option('database');
