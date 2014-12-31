@@ -76,7 +76,7 @@ return array(
 	'drivers' => array(
         'user' => array(
             'model' => 'User',
-            'path'  => app_path().'/database/tenant/users',
+            'path'  => app_path('database/tenant/users'),
         ),
     ),
 );
@@ -86,17 +86,7 @@ You can customize, or add new driver in the configuration. It is important to no
 
 #### Setup migration autoload
 
-For each driver, you should also consider adding the migration path into autoload. To do this you can either edit `app/start/global.php` or `composer.json`.
-
-##### global.php
-
-```php
-<?php
-
-ClassLoader::addDirectories(array(
-	app_path().'/database/tenant/users',
-));
-```
+For each driver, you should also consider adding the migration path into autoload. To do this you can edit your `composer.json`.
 
 ##### composer.json
 
@@ -166,7 +156,7 @@ return array(
         'user' => array(
             'model'     => 'User',
             'migration' => 'tenant_migrations',
-            'path'      => app_path().'/database/tenant/users',
+            'path'      => app_path('database/tenant/users'),
         ),
     ),
 );
