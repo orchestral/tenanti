@@ -58,28 +58,18 @@ Next add the following service provider in `app/config/app.php`.
 
 ### Configuration
 
-First, let's export the configuration to your application configuration folder to customize the option:
-
-```
-php artisan config:publish orchestra/tenanti
-```
-
-Now when you browse to `app/config/packages/orchestra/tenanti/config.php` you should be welcome with the following config:
+Update your `App\Providers\ConfigServiceProvider` to include following options:
 
 ```php
-<?php
-
-return array(
-
-	// ...
-
-	'drivers' => array(
-        'user' => array(
-            'model' => 'User',
-            'path'  => app_path('database/tenant/users'),
-        ),
-    ),
-);
+	public function register()
+	{
+		config([
+			'orchestra/tenanti::drivers.user' => [
+				'model' => 'App\User',
+				'path'  => base_path('database/tenanti/user'),
+			],
+		]);
+	}
 ```
 
 You can customize, or add new driver in the configuration. It is important to note that `model` configuration only work with `Eloquent` instance.
@@ -94,7 +84,7 @@ For each driver, you should also consider adding the migration path into autoloa
 {
 	"autoload": {
 		"classmap": [
-			"app/database/tenant/users"
+			"database/tenant/users"
 		]
 	}
 }
@@ -146,20 +136,16 @@ Instead of using Tenanti with a single database connection, you could also setup
 By introducing a `migration` config, you can now setup the migration table name to be `tenant_migrations` instead of `user_{id}_migrations`.
 
 ```php
-<?php
-
-return array(
-
-	// ...
-
-	'drivers' => array(
-        'user' => array(
-            'model'     => 'User',
-            'migration' => 'tenant_migrations',
-            'path'      => app_path('database/tenant/users'),
-        ),
-    ),
-);
+    public function register()
+    {
+        config([
+            'orchestra/tenanti::drivers.user' => [
+                'model'     => 'App\User',
+                'migration' => 'tenant_migrations',
+                'path'      => base_path('database/tenanti/user'),
+            ],
+        ]);
+    }
 ```
 
 ### Observer
