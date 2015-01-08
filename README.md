@@ -44,12 +44,12 @@ composer require "orchestra/tenanti=3.0.*"
 Next add the following service provider in `app/config/app.php`.
 
 ```php
-'providers' => array(
+'providers' => [
 
 	// ...
 	'Orchestra\Tenanti\TenantiServiceProvider',
 	'Orchestra\Tenanti\CommandServiceProvider',
-),
+],
 ```
 
 > The command utility is enabled via Orchestra\Tenanti\CommandServiceProvider.
@@ -61,6 +61,12 @@ Next add the following service provider in `app/config/app.php`.
 Update your `App\Providers\ConfigServiceProvider` to include following options:
 
 ```php
+<?php namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+class ConfigServiceProvider extends ServiceProvider
+{
 	public function register()
 	{
 		config([
@@ -70,6 +76,7 @@ Update your `App\Providers\ConfigServiceProvider` to include following options:
 			],
 		]);
 	}
+}
 ```
 
 You can customize, or add new driver in the configuration. It is important to note that `model` configuration only work with `Eloquent` instance.
@@ -92,20 +99,31 @@ For each driver, you should also consider adding the migration path into autoloa
 
 ### Setup Model Observer
 
-Now that we have setup the configuration, let add an observer to our `User` class (preferly in `app/start/global.php`):
+Now that we have setup the configuration, let add an observer to our `User` class (preferly in `App\Providers\AppServiceProvider`):
 
 ```php
-<?php
+<?php namespace App\Providers;
 
-User::observe(new UserObserver);
+use App\User;
+use App\Observers\UserObserver;
+
+class AppServiceProvider extends ServiceProvider
+{
+	public function register()
+	{
+		User::observe(new UserObserver);
+	}
+}
 ```
 
-and your `UserObserver` class should consist of the following:
+and your `App\Observers\UserObserver` class should consist of the following:
 
 ```php
-<?php
+<?php namespace App\Observers;
 
-class UserObserver extends \Orchestra\Tenanti\Observer
+use Orchestra\Tenanti\Observer;
+
+class UserObserver extends Observer
 {
 	public function getDriverName()
 	{
@@ -136,6 +154,12 @@ Instead of using Tenanti with a single database connection, you could also setup
 By introducing a `migration` config, you can now setup the migration table name to be `tenant_migrations` instead of `user_{id}_migrations`.
 
 ```php
+<?php namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+class ConfigServiceProvider extends ServiceProvider
+{
     public function register()
     {
         config([
@@ -146,6 +170,7 @@ By introducing a `migration` config, you can now setup the migration table name 
             ],
         ]);
     }
+}
 ```
 
 ### Observer
@@ -153,9 +178,11 @@ By introducing a `migration` config, you can now setup the migration table name 
 Adding an override method for `getConnectionName()` would allow you to force the migration to be executed on the desire connection.
 
 ```php
-<?php
+<?php namespace App\Observers;
 
-class UserObserver extends \Orchestra\Tenanti\Observer
+use Orchestra\Tenanti\Observer;
+
+class UserObserver extends Observer
 {
 	public function getDriverName()
 	{
