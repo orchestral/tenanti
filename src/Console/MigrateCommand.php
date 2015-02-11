@@ -47,7 +47,7 @@ class MigrateCommand extends BaseCommand
     /**
      * Prepare the migration database for running.
      *
-     * @param  string       $driver
+     * @param  string  $driver
      * @param  string|null  $database
      * @return void
      */

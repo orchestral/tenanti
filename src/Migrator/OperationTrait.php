@@ -73,7 +73,7 @@ trait OperationTrait
     /**
      * Resolve migrator.
      *
-     * @param  string   $table
+     * @param  string  $table
      * @return \Orchestra\Tenanti\Migrator\Migrator
      */
     protected function resolveMigrator($table)
@@ -140,7 +140,7 @@ trait OperationTrait
      * Resolve table name.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string|null                          $name
+     * @param  string|null  $name
      * @return string|null
      */
     protected function bindWithKey(Model $entity, $name)

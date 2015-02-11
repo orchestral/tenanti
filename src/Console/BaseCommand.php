@@ -18,7 +18,7 @@ abstract class BaseCommand extends Command
     /**
      * Create a new migration command instance.
      *
-     * @param  \Orchestra\Tenanti\TenantiManager $tenant
+     * @param  \Orchestra\Tenanti\TenantiManager  $tenant
      */
     public function __construct(TenantiManager $tenant)
     {
@@ -30,7 +30,7 @@ abstract class BaseCommand extends Command
     /**
      * Write migration output.
      *
-     * @param  \Orchestra\Tenanti\Migrator\FactoryInterface $migrator
+     * @param  \Orchestra\Tenanti\Migrator\FactoryInterface  $migrator
      * @return void
      */
     protected function writeMigrationOutput(FactoryInterface $migrator)

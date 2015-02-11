@@ -17,10 +17,10 @@ class Factory implements FactoryInterface
     /**
      * Construct a new migration manager.
      *
-     * @param  \Illuminate\Contracts\Container\Container    $app
-     * @param  string                                       $driver
-     * @param  array                                        $config
-     * @param  int                                          $chunk
+     * @param  \Illuminate\Contracts\Container\Container  $app
+     * @param  string  $driver
+     * @param  array  $config
+     * @param  int  $chunk
      */
     public function __construct(Container $app, $driver, array $config = [], $chunk = 100)
     {
@@ -51,7 +51,7 @@ class Factory implements FactoryInterface
      * Run migrations.
      *
      * @param  string|null  $database
-     * @param  bool         $pretend
+     * @param  bool  $pretend
      * @return void
      */
     public function run($database, $pretend = false)
@@ -69,7 +69,7 @@ class Factory implements FactoryInterface
      * Rollback migrations.
      *
      * @param  string|null  $database
-     * @param  bool         $pretend
+     * @param  bool  $pretend
      * @return void
      */
     public function rollback($database, $pretend = false)
@@ -87,7 +87,7 @@ class Factory implements FactoryInterface
      * Reset migrations.
      *
      * @param  string|null  $database
-     * @param  bool         $pretend
+     * @param  bool  $pretend
      * @return void
      */
     public function reset($database, $pretend = false)
@@ -105,7 +105,7 @@ class Factory implements FactoryInterface
      * Run migration up on a single entity.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string|null                          $database
+     * @param  string|null  $database
      * @return void
      */
     public function runInstall(Model $entity, $database)
@@ -128,8 +128,8 @@ class Factory implements FactoryInterface
      * Run migration up on a single entity.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string|null                          $database
-     * @param  bool                                 $pretend
+     * @param  string|null  $database
+     * @param  bool  $pretend
      * @return void
      */
     public function runUp(Model $entity, $database, $pretend = false)
@@ -149,8 +149,8 @@ class Factory implements FactoryInterface
      * Run migration down on a single entity.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string|null                          $database
-     * @param  bool                                 $pretend
+     * @param  string|null  $database
+     * @param  bool  $pretend
      * @return void
      */
     public function runDown(Model $entity, $database, $pretend = false)
@@ -170,8 +170,8 @@ class Factory implements FactoryInterface
      * Run migration reset on a single entity.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string|null                          $database
-     * @param  bool                                 $pretend
+     * @param  string|null  $database
+     * @param  bool  $pretend
      * @return void
      */
     public function runReset(Model $entity, $database, $pretend = false)

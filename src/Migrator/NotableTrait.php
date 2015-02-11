@@ -14,7 +14,7 @@ trait NotableTrait
     /**
      * Merge migrator operation notes.
      *
-     * @param  \Illuminate\Database\Migrations\Migrator $migrator
+     * @param  \Illuminate\Database\Migrations\Migrator  $migrator
      * @return void
      */
     protected function mergeMigratorNotes(BaseMigrator $migrator)

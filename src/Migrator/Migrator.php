@@ -14,8 +14,8 @@ class Migrator extends \Illuminate\Database\Migrations\Migrator
     /**
      * Set entity for migration.
      *
-     * @param  \Illuminate\Database\Eloquent\Model $entity
-     * @return Migrator
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @return $this
      */
     public function setEntity(Model $entity)
     {

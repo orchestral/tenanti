@@ -7,7 +7,7 @@ class TenantiServiceProvider extends ServiceProvider
     /**
      * Indicates if loading of the provider is deferred.
      *
-     * @var boolean
+     * @var bool
      */
     protected $defer = true;
 

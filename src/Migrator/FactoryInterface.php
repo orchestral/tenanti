@@ -16,7 +16,7 @@ interface FactoryInterface
      * Run migrations.
      *
      * @param  string|null  $database
-     * @param  bool         $pretend
+     * @param  bool  $pretend
      * @return void
      */
     public function run($database, $pretend = false);
@@ -25,7 +25,7 @@ interface FactoryInterface
      * Rollback migrations.
      *
      * @param  string|null  $database
-     * @param  bool         $pretend
+     * @param  bool  $pretend
      * @return void
      */
     public function rollback($database, $pretend = false);
@@ -34,7 +34,7 @@ interface FactoryInterface
      * Reset migrations.
      *
      * @param  string|null  $database
-     * @param  bool         $pretend
+     * @param  bool  $pretend
      * @return void
      */
     public function reset($database, $pretend = false);
@@ -43,7 +43,7 @@ interface FactoryInterface
      * Run migration up on a single entity.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string|null                          $database
+     * @param  string|null  $database
      * @return void
      */
     public function runInstall(Model $entity, $database);
@@ -52,8 +52,8 @@ interface FactoryInterface
      * Run migration up on a single entity.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string|null                          $database
-     * @param  bool                                 $pretend
+     * @param  string|null  $database
+     * @param  bool  $pretend
      * @return void
      */
     public function runUp(Model $entity, $database, $pretend = false);
@@ -62,8 +62,8 @@ interface FactoryInterface
      * Run migration down on a single entity.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string|null                          $database
-     * @param  bool                                 $pretend
+     * @param  string|null  $database
+     * @param  bool  $pretend
      * @return void
      */
     public function runDown(Model $entity, $database, $pretend = false);
@@ -72,8 +72,8 @@ interface FactoryInterface
      * Run migration down on a single entity.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string|null                          $database
-     * @param  bool                                 $pretend
+     * @param  string|null  $database
+     * @param  bool  $pretend
      * @return void
      */
     public function runReset(Model $entity, $database, $pretend = false);

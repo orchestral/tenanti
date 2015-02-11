@@ -9,8 +9,8 @@ class Queue
     /**
      * Run queue on creating a model.
      *
-     * @param  \Illuminate\Queue\Jobs\Job   $job
-     * @param  array                        $data
+     * @param  \Illuminate\Queue\Jobs\Job  $job
+     * @param  array  $data
      * @return void
      */
     public function create(Job $job, array $data)
@@ -33,8 +33,8 @@ class Queue
     /**
      * Run queue on deleting a model.
      *
-     * @param  \Illuminate\Queue\Jobs\Job   $job
-     * @param  array                        $data
+     * @param  \Illuminate\Queue\Jobs\Job  $job
+     * @param  array  $data
      * @return void
      */
     public function delete(Job $job, array $data)
@@ -56,7 +56,7 @@ class Queue
     /**
      * Resolve migrator instance.
      *
-     * @param  array    $data
+     * @param  array  $data
      * @return \Orchestra\Tenanti\Migrator\FactoryInterface
      */
     protected function resolveMigrator(array $data)
@@ -69,8 +69,8 @@ class Queue
     /**
      * Resolve model entity.
      *
-     * @param  \Orchestra\Tenanti\Migrator\FactoryInterface $migrator
-     * @param  array                                        $data
+     * @param  \Orchestra\Tenanti\Migrator\FactoryInterface  $migrator
+     * @param  array  $data
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     protected function resolveModelEntity(FactoryInterface $migrator, $data)
