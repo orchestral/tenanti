@@ -17,16 +17,16 @@
 	},
 	"require": {
 		"php": ">=5.4.0",
-		"illuminate/filesystem": "5.0.*",
-		"orchestra/support-core": "3.0.*",
-		"orchestra/support-providers": "3.0.*"
+		"illuminate/filesystem": "5.1.*",
+		"orchestra/support-core": "3.1.*",
+		"orchestra/support-providers": "3.1.*"
 	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
-		"illuminate/config": "5.0.*",
-		"illuminate/console": "5.0.*",
-		"illuminate/database": "5.0.*",
-		"illuminate/queue": "5.0.*"
+		"illuminate/config": "5.1.*",
+		"illuminate/console": "5.1.*",
+		"illuminate/database": "5.1.*",
+		"illuminate/queue": "5.1.*"
 	},
 	"extra": {
 		"branch-alias": {
