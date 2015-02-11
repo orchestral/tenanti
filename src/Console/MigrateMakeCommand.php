@@ -30,7 +30,7 @@ class MigrateMakeCommand extends BaseCommand
     /**
      * Create a make migration command instance.
      *
-     * @param  \Orchestra\Tenanti\TenantiManager    $tenant
+     * @param  \Orchestra\Tenanti\TenantiManager  $tenant
      * @param  \Orchestra\Tenanti\Migrator\Creator  $creator
      */
     public function __construct(TenantiManager $tenant, Creator $creator)
@@ -58,7 +58,6 @@ class MigrateMakeCommand extends BaseCommand
         if (! $table && is_string($create)) {
             $table = $create;
         }
-
 
         // Now we are ready to write the migration out to disk. Once we've written
         // the migration out, we will dump-autoload for the entire framework to
