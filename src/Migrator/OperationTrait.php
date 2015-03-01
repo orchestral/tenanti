@@ -82,8 +82,8 @@ trait OperationTrait
         $resolver = $this->resolver;
 
         if (! isset($this->migrator[$table])) {
-            $repository = $app->make(Arr::get($resolver, 'repository'), array($app['db'], $table));
-            $migrator   = $app->make(Arr::get($resolver, 'migrator'), array($repository, $app['db'], $app['files']));
+            $repository = $app->make(Arr::get($resolver, 'repository'), [$app['db'], $table]);
+            $migrator   = $app->make(Arr::get($resolver, 'migrator'), [$repository, $app['db'], $app['files']]);
 
             $this->migrator[$table] = $migrator;
         }
