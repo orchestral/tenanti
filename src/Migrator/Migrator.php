@@ -15,6 +15,7 @@ class Migrator extends \Illuminate\Database\Migrations\Migrator
      * Set entity for migration.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
+     *
      * @return $this
      */
     public function setEntity(Model $entity)
@@ -30,6 +31,7 @@ class Migrator extends \Illuminate\Database\Migrations\Migrator
      * @param  string  $file
      * @param  int     $batch
      * @param  bool    $pretend
+     *
      * @return void
      */
     protected function runUp($file, $batch, $pretend)
@@ -58,6 +60,7 @@ class Migrator extends \Illuminate\Database\Migrations\Migrator
      *
      * @param  object  $migration
      * @param  bool    $pretend
+     *
      * @return void
      */
     protected function runDown($migration, $pretend)
@@ -88,12 +91,13 @@ class Migrator extends \Illuminate\Database\Migrations\Migrator
      *
      * @param  object  $migration
      * @param  string  $method
+     *
      * @return void
      */
     protected function pretendToRun($migration, $method)
     {
         $table = $this->entity->getTable();
-        $key = $this->entity->getKey();
+        $key   = $this->entity->getKey();
 
         foreach ($this->getQueries($migration, $method) as $query) {
             $name = get_class($migration);
@@ -107,6 +111,7 @@ class Migrator extends \Illuminate\Database\Migrations\Migrator
      *
      * @param  object  $migration
      * @param  string  $method
+     *
      * @return array
      */
     protected function getQueries($migration, $method)

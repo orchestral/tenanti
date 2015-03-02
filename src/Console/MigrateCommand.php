@@ -49,6 +49,7 @@ class MigrateCommand extends BaseCommand
      *
      * @param  string  $driver
      * @param  string|null  $database
+     *
      * @return void
      */
     protected function prepareDatabase($driver, $database)

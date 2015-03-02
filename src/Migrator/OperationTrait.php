@@ -56,6 +56,7 @@ trait OperationTrait
      * Resolve model.
      *
      * @return \Illuminate\Database\Eloquent\Model
+     *
      * @throws \InvalidArgumentException
      */
     public function getModel()
@@ -74,6 +75,7 @@ trait OperationTrait
      * Resolve migrator.
      *
      * @param  string  $table
+     *
      * @return \Orchestra\Tenanti\Migrator\Migrator
      */
     protected function resolveMigrator($table)
@@ -95,6 +97,7 @@ trait OperationTrait
      * Get table name.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
+     *
      * @return string
      */
     protected function resolveMigrationTableName(Model $entity)
@@ -141,6 +144,7 @@ trait OperationTrait
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
      * @param  string|null  $name
+     *
      * @return string|null
      */
     protected function bindWithKey(Model $entity, $name)
@@ -152,7 +156,7 @@ trait OperationTrait
         $id = $entity->getKey();
 
         if (! isset($this->data[$id])) {
-            $data = Arr::dot(['entity' => $entity->toArray()]);
+            $data       = Arr::dot(['entity' => $entity->toArray()]);
             $data['id'] = $id;
 
             $this->data[$id] = $data;
