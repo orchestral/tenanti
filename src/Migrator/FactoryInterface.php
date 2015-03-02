@@ -8,6 +8,7 @@ interface FactoryInterface
      * Install migrations.
      *
      * @param  string|null  $database
+     *
      * @return void
      */
     public function install($database);
@@ -17,6 +18,7 @@ interface FactoryInterface
      *
      * @param  string|null  $database
      * @param  bool  $pretend
+     *
      * @return void
      */
     public function run($database, $pretend = false);
@@ -26,6 +28,7 @@ interface FactoryInterface
      *
      * @param  string|null  $database
      * @param  bool  $pretend
+     *
      * @return void
      */
     public function rollback($database, $pretend = false);
@@ -35,6 +38,7 @@ interface FactoryInterface
      *
      * @param  string|null  $database
      * @param  bool  $pretend
+     *
      * @return void
      */
     public function reset($database, $pretend = false);
@@ -44,6 +48,7 @@ interface FactoryInterface
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
      * @param  string|null  $database
+     *
      * @return void
      */
     public function runInstall(Model $entity, $database);
@@ -54,6 +59,7 @@ interface FactoryInterface
      * @param  \Illuminate\Database\Eloquent\Model  $entity
      * @param  string|null  $database
      * @param  bool  $pretend
+     *
      * @return void
      */
     public function runUp(Model $entity, $database, $pretend = false);
@@ -64,6 +70,7 @@ interface FactoryInterface
      * @param  \Illuminate\Database\Eloquent\Model  $entity
      * @param  string|null  $database
      * @param  bool  $pretend
+     *
      * @return void
      */
     public function runDown(Model $entity, $database, $pretend = false);
@@ -74,6 +81,7 @@ interface FactoryInterface
      * @param  \Illuminate\Database\Eloquent\Model  $entity
      * @param  string|null  $database
      * @param  bool  $pretend
+     *
      * @return void
      */
     public function runReset(Model $entity, $database, $pretend = false);

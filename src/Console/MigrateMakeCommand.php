@@ -74,6 +74,7 @@ class MigrateMakeCommand extends BaseCommand
      * @param  string  $name
      * @param  string  $table
      * @param  bool    $create
+     *
      * @return string
      */
     protected function writeMigration($driver, $name, $table, $create)

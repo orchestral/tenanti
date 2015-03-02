@@ -16,7 +16,9 @@ class TenantiManager extends Manager
      * Create a new driver instance.
      *
      * @param  string  $driver
+     *
      * @return \Orchestra\Tenanti\Migrator\FactoryInterface
+     *
      * @throws \InvalidArgumentException
      */
     protected function createDriver($driver)

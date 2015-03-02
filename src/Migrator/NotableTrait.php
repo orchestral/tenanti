@@ -15,6 +15,7 @@ trait NotableTrait
      * Merge migrator operation notes.
      *
      * @param  \Illuminate\Database\Migrations\Migrator  $migrator
+     *
      * @return void
      */
     protected function mergeMigratorNotes(BaseMigrator $migrator)
@@ -26,6 +27,7 @@ trait NotableTrait
      * Raise a note event.
      *
      * @param  string  $message
+     *
      * @return void
      */
     protected function note($message)

@@ -31,6 +31,7 @@ abstract class BaseCommand extends Command
      * Write migration output.
      *
      * @param  \Orchestra\Tenanti\Migrator\FactoryInterface  $migrator
+     *
      * @return void
      */
     protected function writeMigrationOutput(FactoryInterface $migrator)

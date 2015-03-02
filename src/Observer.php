@@ -12,7 +12,7 @@ abstract class Observer
      */
     public function getConnectionName()
     {
-        return null;
+        return;
     }
 
     /**
@@ -26,6 +26,7 @@ abstract class Observer
      * Run on created observer.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
+     *
      * @return bool
      */
     public function created(Model $entity)
@@ -43,6 +44,7 @@ abstract class Observer
      * Run on deleted observer.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
+     *
      * @return bool
      */
     public function deleted(Model $entity)
