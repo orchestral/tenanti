@@ -45,7 +45,7 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
     public function testBootMethod()
     {
         $stub = m::mock('\Orchestra\Tenanti\TenantiServiceProvider[addConfigComponent]', [null]);
-        $path = realpath(__DIR__ . '/../resources/config');
+        $path = realpath(__DIR__.'/../resources/config');
 
         $stub->shouldReceive('addConfigComponent')->once()->with('orchestra/tenanti', 'orchestra/tenanti', $path)->andReturnNull();
 
