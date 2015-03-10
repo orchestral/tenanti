@@ -18,7 +18,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->app = new Container;
+        $this->app                      = new Container();
         $this->app['orchestra.tenanti'] = m::mock('\Orchestra\Tenanti\TenantiManager');
 
         Facade::clearResolvedInstances();
@@ -46,13 +46,13 @@ class QueueTest extends \PHPUnit_Framework_TestCase
         $tenanti  = $this->app['orchestra.tenanti'];
         $model    = m::mock('\Illuminate\Database\Eloquent\Model');
 
-        $stub = new Queue;
+        $stub = new Queue();
         $job  = m::mock('\Illuminate\Queue\Jobs\Job');
-        $data = array(
+        $data = [
             'database' => 'foo',
             'driver'   => 'user',
             'id'       => 5,
-        );
+        ];
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
         $migrator->shouldReceive('runInstall')->once()->with($model, 'foo')->andReturnNull()
@@ -77,13 +77,13 @@ class QueueTest extends \PHPUnit_Framework_TestCase
         $tenanti  = $this->app['orchestra.tenanti'];
         $model    = m::mock('\Illuminate\Database\Eloquent\Model');
 
-        $stub = new Queue;
+        $stub = new Queue();
         $job  = m::mock('\Illuminate\Queue\Jobs\Job');
-        $data = array(
+        $data = [
             'database' => 'foo',
             'driver'   => 'user',
             'id'       => 5,
-        );
+        ];
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
         $migrator->shouldReceive('getModel->newInstance->find')->with(5)->andReturnNUll();
@@ -105,13 +105,13 @@ class QueueTest extends \PHPUnit_Framework_TestCase
         $tenanti  = $this->app['orchestra.tenanti'];
         $model    = m::mock('\Illuminate\Database\Eloquent\Model');
 
-        $stub = new Queue;
+        $stub = new Queue();
         $job  = m::mock('\Illuminate\Queue\Jobs\Job');
-        $data = array(
+        $data = [
             'database' => 'foo',
             'driver'   => 'user',
             'id'       => 5,
-        );
+        ];
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
         $migrator->shouldReceive('runReset')->once()->with($model, 'foo')->andReturnNull()
@@ -135,13 +135,13 @@ class QueueTest extends \PHPUnit_Framework_TestCase
         $tenanti  = $this->app['orchestra.tenanti'];
         $model    = m::mock('\Illuminate\Database\Eloquent\Model');
 
-        $stub = new Queue;
+        $stub = new Queue();
         $job  = m::mock('\Illuminate\Queue\Jobs\Job');
-        $data = array(
+        $data = [
             'database' => 'foo',
             'driver'   => 'user',
             'id'       => 5,
-        );
+        ];
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
         $migrator->shouldReceive('getModel->newInstance->find')->with(5)->andReturnNUll();

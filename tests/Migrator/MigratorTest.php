@@ -23,9 +23,9 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
     public function testSetEntityMethod()
     {
         $repository = m::mock('\Illuminate\Database\Migrations\MigrationRepositoryInterface');
-        $resolver = m::mock('\Illuminate\Database\ConnectionResolverInterface');
-        $files = m::mock('\Illuminate\Filesystem\Filesystem');
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $resolver   = m::mock('\Illuminate\Database\ConnectionResolverInterface');
+        $files      = m::mock('\Illuminate\Filesystem\Filesystem');
+        $model      = m::mock('\Illuminate\Database\Eloquent\Model');
 
         $stub = new Migrator($repository, $resolver, $files);
 
@@ -50,7 +50,7 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
         $batch   = 5;
         $pretend = false;
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve,note]', array($repository, $resolver, $files))
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve,note]', [$repository, $resolver, $files])
                     ->makePartial()
                     ->shouldAllowMockingProtectedMethods();
         $stub->setEntity($model);
@@ -83,7 +83,7 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
         $batch   = 5;
         $pretend = true;
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve,pretendToRun]', array($repository, $resolver, $files))
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve,pretendToRun]', [$repository, $resolver, $files])
                     ->makePartial()
                     ->shouldAllowMockingProtectedMethods();
         $stub->setEntity($model);
@@ -110,9 +110,9 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
 
         $file      = 'foo_migration.php';
         $pretend   = false;
-        $migration = new Fluent(array('migration' => $file));
+        $migration = new Fluent(['migration' => $file]);
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve,note]', array($repository, $resolver, $files))
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve,note]', [$repository, $resolver, $files])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
         $stub->setEntity($model);
@@ -139,13 +139,13 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
         $resolver   = m::mock('\Illuminate\Database\ConnectionResolverInterface');
         $files      = m::mock('\Illuminate\Filesystem\Filesystem');
         $model      = m::mock('\Illuminate\Database\Eloquent\Model');
-        $instance  = m::mock('FooMigration');
+        $instance   = m::mock('FooMigration');
 
         $file      = 'foo_migration.php';
         $pretend   = true;
-        $migration = new Fluent(array('migration' => $file));
+        $migration = new Fluent(['migration' => $file]);
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve,pretendToRun]', array($repository, $resolver, $files))
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve,pretendToRun]', [$repository, $resolver, $files])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
         $stub->setEntity($model);
@@ -168,13 +168,13 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
         $resolver   = m::mock('\Illuminate\Database\ConnectionResolverInterface');
         $files      = m::mock('\Illuminate\Filesystem\Filesystem');
         $model      = m::mock('\Illuminate\Database\Eloquent\Model');
-        $instance  = m::mock('FooMigration');
+        $instance   = m::mock('FooMigration');
 
         $file    = 'foo_migration.php';
         $batch   = 5;
         $pretend = true;
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve]', array($repository, $resolver, $files))
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve]', [$repository, $resolver, $files])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
         $stub->setEntity($model);
@@ -183,7 +183,7 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('up')->once()->with(15, $model)->andReturnNull();
         $resolver->shouldReceive('connection')->once()->with('default')->andReturnSelf()
             ->shouldReceive('pretend')->once()->with(m::type('Closure'))
-                ->andReturnUsing(function ($c)  {
+                ->andReturnUsing(function ($c) {
                     $c();
 
                     return [['query' => 'SELECT * FROM `foobar`']];

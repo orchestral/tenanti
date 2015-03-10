@@ -12,7 +12,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $app = new Container;
+        $app = new Container();
 
         Facade::clearResolvedInstances();
         Facade::setFacadeApplication($app);
@@ -40,7 +40,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
         $stub->shouldReceive('getDriverName')->once()->andReturn('user');
         $model->shouldReceive('getKey')->once()->andReturn(5);
         $queue->shouldReceive('push')->once()
-            ->with('Orchestra\Tenanti\Migrator\Queue@create', array('database' => null, 'driver' => 'user', 'id' => 5))
+            ->with('Orchestra\Tenanti\Migrator\Queue@create', ['database' => null, 'driver' => 'user', 'id' => 5])
             ->andReturnNull();
 
         Queue::swap($queue);
@@ -63,7 +63,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('getConnectionName')->once()->andReturn('primary');
         $model->shouldReceive('getKey')->once()->andReturn(5);
         $queue->shouldReceive('push')->once()
-            ->with('Orchestra\Tenanti\Migrator\Queue@delete', array('database' => 'primary', 'driver' => 'user', 'id' => 5))
+            ->with('Orchestra\Tenanti\Migrator\Queue@delete', ['database' => 'primary', 'driver' => 'user', 'id' => 5])
             ->andReturnNull();
 
         Queue::swap($queue);
