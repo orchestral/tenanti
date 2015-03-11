@@ -37,6 +37,27 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test Orchestra\Tenanti\Migrator\OperationTrait::resolveModel()
+     * method with connection name.
+     *
+     * @test
+     */
+    public function testResolveModelMethodWithConnectionName()
+    {
+        $this->app = m::mock('\Illuminate\Container\Container[make]');
+        $this->config = ['model' => 'User', 'database' => 'primary'];
+
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+
+        $this->app->shouldReceive('make')->once()->with('User')->andReturn($model);
+
+        $model->shouldReceive('on')->once()->with('primary')->andReturnSelf()
+            ->shouldReceive('useWritePdo')->once()->andReturnSelf();
+
+        $this->assertEquals($model, $this->getModel());
+    }
+
+    /**
+     * Test Orchestra\Tenanti\Migrator\OperationTrait::resolveModel()
      * method throw an exception when model is not an instance of
      * Eloquent.
      *
