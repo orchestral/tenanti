@@ -1,7 +1,7 @@
 <?php namespace Orchestra\Tenanti\TestCase\Migrator;
 
-use Illuminate\Support\Fluent;
 use Mockery as m;
+use Illuminate\Support\Fluent;
 use Orchestra\Tenanti\Migrator\Migrator;
 
 class MigratorTest extends \PHPUnit_Framework_TestCase
@@ -53,6 +53,7 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
         $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve,note]', [$repository, $resolver, $files])
                     ->makePartial()
                     ->shouldAllowMockingProtectedMethods();
+
         $stub->setEntity($model);
 
         $stub->shouldReceive('resolve')->once()->with($file)->andReturn($migration)
@@ -86,6 +87,7 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
         $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve,pretendToRun]', [$repository, $resolver, $files])
                     ->makePartial()
                     ->shouldAllowMockingProtectedMethods();
+
         $stub->setEntity($model);
 
         $stub->shouldReceive('resolve')->once()->with($file)->andReturn($instance)
@@ -148,6 +150,7 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
         $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve,pretendToRun]', [$repository, $resolver, $files])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
+
         $stub->setEntity($model);
 
         $stub->shouldReceive('resolve')->once()->with($file)->andReturn($instance)
@@ -177,6 +180,7 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
         $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve]', [$repository, $resolver, $files])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
+
         $stub->setEntity($model);
 
         $instance->shouldReceive('getConnection')->once()->andReturn('default')

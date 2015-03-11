@@ -1,9 +1,9 @@
 <?php namespace Orchestra\Tenanti\TestCase\Migrator;
 
+use Mockery as m;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Facade;
-use Mockery as m;
 use Orchestra\Tenanti\Migrator\Queue;
 
 class QueueTest extends \PHPUnit_Framework_TestCase
@@ -18,7 +18,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->app                      = new Container();
+        $this->app = new Container();
         $this->app['orchestra.tenanti'] = m::mock('\Orchestra\Tenanti\TenantiManager');
 
         Facade::clearResolvedInstances();
@@ -75,7 +75,6 @@ class QueueTest extends \PHPUnit_Framework_TestCase
     {
         $migrator = m::mock('\Orchestra\Tenanti\Migrator\Factory');
         $tenanti  = $this->app['orchestra.tenanti'];
-        $model    = m::mock('\Illuminate\Database\Eloquent\Model');
 
         $stub = new Queue();
         $job  = m::mock('\Illuminate\Queue\Jobs\Job');
@@ -133,7 +132,6 @@ class QueueTest extends \PHPUnit_Framework_TestCase
     {
         $migrator = m::mock('\Orchestra\Tenanti\Migrator\Factory');
         $tenanti  = $this->app['orchestra.tenanti'];
-        $model    = m::mock('\Illuminate\Database\Eloquent\Model');
 
         $stub = new Queue();
         $job  = m::mock('\Illuminate\Queue\Jobs\Job');

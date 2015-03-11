@@ -24,9 +24,9 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegisterMethod()
     {
-        $app  = m::mock('\Illuminate\Container\Container[bindShared]');
+        $app  = m::mock('\Illuminate\Container\Container[singleton]');
 
-        $app->shouldReceive('bindShared')->once()->with('orchestra.tenanti', m::type('Closure'))
+        $app->shouldReceive('singleton')->once()->with('orchestra.tenanti', m::type('Closure'))
             ->andReturnUsing(function ($n, $c) use ($app) {
                 $app[$n] = $c($app);
             });
@@ -47,7 +47,8 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
         $stub = m::mock('\Orchestra\Tenanti\TenantiServiceProvider[addConfigComponent]', [null]);
         $path = realpath(__DIR__.'/../resources/config');
 
-        $stub->shouldReceive('addConfigComponent')->once()->with('orchestra/tenanti', 'orchestra/tenanti', $path)->andReturnNull();
+        $stub->shouldReceive('addConfigComponent')->once()
+            ->with('orchestra/tenanti', 'orchestra/tenanti', $path)->andReturnNull();
 
         $this->assertNull($stub->boot());
     }
