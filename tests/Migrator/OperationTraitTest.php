@@ -23,7 +23,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
      */
     public function testResolveModelMethod()
     {
-        $this->app    = m::mock('\Illuminate\Container\Container[make]');
+        $this->app = m::mock('\Illuminate\Container\Container[make]');
         $this->config = ['model' => 'User'];
 
         $model = m::mock('\Illuminate\Database\Eloquent\Model');
@@ -43,7 +43,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
      */
     public function testResolveModelMethodThrowsException()
     {
-        $this->app    = m::mock('\Illuminate\Container\Container[make]');
+        $this->app = m::mock('\Illuminate\Container\Container[make]');
         $this->config = ['model' => 'User'];
 
         $this->app->shouldReceive('make')->once()->with('User')->andReturnNull();
@@ -72,7 +72,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMigrationPathMethod()
     {
-        $path         = realpath(__DIR__);
+        $path = realpath(__DIR__);
         $this->config = ['path' => $path];
 
         $this->assertEquals($path, $this->getMigrationPath());

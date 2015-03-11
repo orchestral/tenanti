@@ -1,9 +1,9 @@
 <?php namespace Orchestra\Tenanti\TestCase;
 
-use Illuminate\Container\Container;
-use Illuminate\Support\Facades\Facade;
-use Illuminate\Support\Facades\Queue;
 use Mockery as m;
+use Illuminate\Container\Container;
+use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Facade;
 
 class ObserverTest extends \PHPUnit_Framework_TestCase
 {

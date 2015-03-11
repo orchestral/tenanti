@@ -21,7 +21,7 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testDriverMethod()
     {
-        $app           = new Container();
+        $app = new Container();
         $app['config'] = $config = m::mock('\Illuminate\Config\Repository');
 
         $option = ['model' => 'User'];
@@ -46,7 +46,7 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testDriverMethodGivenDriverNotAvailable()
     {
-        $app           = new Container();
+        $app = new Container();
         $app['config'] = $config = m::mock('\Illuminate\Config\Repository');
 
         $config->shouldReceive('get')->once()->with('orchestra/tenanti::drivers.user')->andReturnNull()
