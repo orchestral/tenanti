@@ -30,6 +30,8 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
 
         $this->app->shouldReceive('make')->once()->with('User')->andReturn($model);
 
+        $model->shouldReceive('useWritePdo')->once()->andReturnSelf();
+
         $this->assertEquals($model, $this->getModel());
     }
 

@@ -68,6 +68,14 @@ trait OperationTrait
             throw new InvalidArgumentException("Model [{$name}] should be an instance of Eloquent.");
         }
 
+        $database = Arr::get($this->config, 'database');
+
+        if (! is_null($database)) {
+            $model->on($database);
+        }
+
+        $model->useWritePdo();
+
         return $model;
     }
 
