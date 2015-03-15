@@ -5,12 +5,20 @@ title: Tenanti Change Log
 
 ## Version 3.0 {#3-0}
 
+### v3.0.1 {#v3-0-1}
+
+* Allow different connection name to be used when resolving migration.
+
 ### v3.0.0 {#v3-0-0}
 
 * Update support to Laravel Framework v5.0.
 * Simplify PSR-4 path.
 
 ## Version 2.2 {#v2-2}
+
+### v2.2.4 {#v2-2-4}
+
+* Allow different connection name to be used when resolving migration.
 
 ### v2.2.3 {#v2-2-3}
 
