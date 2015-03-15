@@ -5,6 +5,10 @@ title: Tenanti Change Log
 
 ## Version 2.2 {#v2-2}
 
+### v2.2.4 {#v2-2-4}
+
+* Allow different connection name to be used when resolving migration.
+
 ### v2.2.3 {#v2-2-3}
 
 * Allow migration note to be available when running command.
