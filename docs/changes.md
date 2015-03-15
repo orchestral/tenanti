@@ -5,6 +5,10 @@ title: Tenanti Change Log
 
 ## Version 3.0 {#3-0}
 
+### v3.0.1 {#v3-0-1}
+
+* Allow different connection name to be used when resolving migration.
+
 ### v3.0.0 {#v3-0-0}
 
 * Update support to Laravel Framework v5.0.
