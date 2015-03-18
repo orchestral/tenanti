@@ -5,6 +5,10 @@ title: Tenanti Change Log
 
 ## Version 3.0 {#3-0}
 
+### v3.0.2 {#v3-0-2}
+
+* Add fallback support to Laravel 5 configuration.
+
 ### v3.0.1 {#v3-0-1}
 
 * Allow different connection name to be used when resolving migration.
