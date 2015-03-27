@@ -24,7 +24,10 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegisterMethod()
     {
-        $app  = m::mock('\Illuminate\Container\Container[singleton]');
+        $app = m::mock('\Illuminate\Container\Container[singleton]');
+        $app['config'] = $config = m::mock('\Illuminate\Contracts\Config\Repository', '\ArrayAccess');
+
+        $config->shouldReceive('offsetGet')->once()->with('orchestra.tenanti')->andReturn([]);
 
         $app->shouldReceive('singleton')->once()->with('orchestra.tenanti', m::type('Closure'))
             ->andReturnUsing(function ($n, $c) use ($app) {
@@ -44,11 +47,14 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testBootMethod()
     {
-        $stub = m::mock('\Orchestra\Tenanti\TenantiServiceProvider[addConfigComponent]', [null]);
-        $path = realpath(__DIR__.'/../resources/config');
+        $stub = m::mock('\Orchestra\Tenanti\TenantiServiceProvider[addConfigComponent,bootUsingLaravel]', [null])
+                    ->shouldAllowMockingProtectedMethods();
+        $path = realpath(__DIR__.'/../resources');
 
         $stub->shouldReceive('addConfigComponent')->once()
-            ->with('orchestra/tenanti', 'orchestra/tenanti', $path)->andReturnNull();
+                ->with('orchestra/tenanti', 'orchestra/tenanti', $path.'/config')->andReturnNull()
+            ->shouldReceive('bootUsingLaravel')->once()
+                ->with($path)->andReturnNull();
 
         $this->assertNull($stub->boot());
     }

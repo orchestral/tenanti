@@ -22,14 +22,14 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
     public function testDriverMethod()
     {
         $app = new Container();
-        $app['config'] = $config = m::mock('\Illuminate\Config\Repository');
 
-        $option = ['model' => 'User'];
-
-        $config->shouldReceive('get')->once()->with('orchestra/tenanti::drivers.user')->andReturn($option)
-            ->shouldReceive('get')->once()->with('orchestra/tenanti::chunk', 100)->andReturn(100);
+        $config = [
+            'drivers' => ['user' => ['model' => 'User']],
+            'chunk'   => 100,
+        ];
 
         $stub = new TenantiManager($app);
+        $stub->setConfig($config);
 
         $resolver = $stub->driver('user');
 
@@ -47,12 +47,13 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
     public function testDriverMethodGivenDriverNotAvailable()
     {
         $app = new Container();
-        $app['config'] = $config = m::mock('\Illuminate\Config\Repository');
 
-        $config->shouldReceive('get')->once()->with('orchestra/tenanti::drivers.user')->andReturnNull()
-            ->shouldReceive('get')->once()->with('orchestra/tenanti::chunk', 100)->andReturn(100);
+        $config = [
+            'drivers' => [],
+            'chunk'   => 100,
+        ];
 
-        with(new TenantiManager($app))->driver('user');
+        with(new TenantiManager($app))->setConfig($config)->driver('user');
     }
 
     /**

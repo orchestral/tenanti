@@ -19,7 +19,12 @@ class TenantiServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('orchestra.tenanti', function ($app) {
-            return new TenantiManager($app);
+            $manager = new TenantiManager($app);
+            $namespace = $this->hasPackageRepository() ? 'orchestra/tenanti::' : 'orchestra.tenanti';
+
+            $manager->setConfig($app['config'][$namespace]);
+
+            return $manager;
         });
 
         $this->app->alias('orchestra.tenanti', 'Orchestra\Tenanti\TenantiManager');
@@ -35,6 +40,26 @@ class TenantiServiceProvider extends ServiceProvider
         $path = realpath(__DIR__.'/../resources');
 
         $this->addConfigComponent('orchestra/tenanti', 'orchestra/tenanti', $path.'/config');
+
+        if (! $this->hasPackageRepository()) {
+            $this->bootUsingLaravel($path);
+        }
+    }
+
+    /**
+     * Boot using Laravel setup.
+     *
+     * @param  string  $path
+     *
+     * @return void
+     */
+    protected function bootUsingLaravel($path)
+    {
+        $this->mergeConfigFrom("{$path}/config/config.php", 'orchestra.tenanti');
+
+        $this->publishes([
+            "{$path}/config/config.php" => config_path('orchestra/tenanti.php'),
+        ]);
     }
 
     /**

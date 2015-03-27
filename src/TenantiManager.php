@@ -1,10 +1,18 @@
 <?php namespace Orchestra\Tenanti;
 
+use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Illuminate\Support\Manager;
 
 class TenantiManager extends Manager
 {
+    /**
+     * Configuration values.
+     *
+     * @var array
+     */
+    protected $config = [];
+
     /**
      * Migration factory resolver.
      *
@@ -23,8 +31,8 @@ class TenantiManager extends Manager
      */
     protected function createDriver($driver)
     {
-        $config = $this->app['config']->get("orchestra/tenanti::drivers.{$driver}");
-        $chunk  = $this->app['config']->get('orchestra/tenanti::chunk', 100);
+        $config = Arr::get($this->config, "drivers.{$driver}");
+        $chunk  = Arr::get($this->config, 'chunk', 100);
 
         if (is_null($config)) {
             throw new InvalidArgumentException("Driver [$driver] not supported.");
@@ -41,5 +49,29 @@ class TenantiManager extends Manager
     public function getDefaultDriver()
     {
         throw new InvalidArgumentException("Default driver not implemented.");
+    }
+
+    /**
+     * Get configuration values.
+     *
+     * @return array
+     */
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
+    /**
+     * Set configuration.
+     *
+     * @param  array  $config
+     *
+     * @return $this
+     */
+    public function setConfig(array $config)
+    {
+        $this->config = $config;
+
+        return $this;
     }
 }
