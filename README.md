@@ -70,9 +70,9 @@ class ConfigServiceProvider extends ServiceProvider
 	public function register()
 	{
 		config([
-			'orchestra/tenanti::drivers.user' => [
+			'orchestra.tenanti.drivers.user' => [
 				'model' => 'App\User',
-				'path'  => base_path('database/tenanti/user'),
+				'path'  => database_path('tenanti/user'),
 			],
 		]);
 	}
@@ -80,6 +80,8 @@ class ConfigServiceProvider extends ServiceProvider
 ```
 
 You can customize, or add new driver in the configuration. It is important to note that `model` configuration only work with `Eloquent` instance.
+
+Alternatively, you could also use `php artisan vendor:publish` command to publish the configuration file to `config/orchestra/tenanti.php`.
 
 #### Setup migration autoload
 
