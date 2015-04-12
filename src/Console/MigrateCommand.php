@@ -54,7 +54,7 @@ class MigrateCommand extends BaseCommand
      */
     protected function prepareDatabase($driver, $database)
     {
-        $this->call("tenanti:install", [
+        $this->call('tenanti:install', [
             'driver'     => $driver,
             '--database' => $database,
         ]);

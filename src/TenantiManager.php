@@ -48,7 +48,7 @@ class TenantiManager extends Manager
      */
     public function getDefaultDriver()
     {
-        throw new InvalidArgumentException("Default driver not implemented.");
+        throw new InvalidArgumentException('Default driver not implemented.');
     }
 
     /**
