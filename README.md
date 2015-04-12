@@ -168,7 +168,7 @@ class ConfigServiceProvider extends ServiceProvider
             'orchestra/tenanti::drivers.user' => [
                 'model'     => 'App\User',
                 'migration' => 'tenant_migrations',
-                'path'      => base_path('database/tenanti/user'),
+                'path'      => database_path('tenanti/user'),
             ],
         ]);
     }
