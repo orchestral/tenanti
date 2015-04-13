@@ -44,7 +44,7 @@ class MigrateMakeCommand extends BaseCommand
      */
     public function __construct(TenantiManager $tenant, Creator $creator, Composer $composer)
     {
-        $this->creator = $creator;
+        $this->creator  = $creator;
         $this->composer = $composer;
 
         parent::__construct($tenant);
