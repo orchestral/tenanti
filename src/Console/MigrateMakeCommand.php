@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Tenanti\Console;
 
 use Orchestra\Support\Str;
+use Illuminate\Foundation\Composer;
 use Orchestra\Tenanti\TenantiManager;
 use Orchestra\Tenanti\Migrator\Creator;
 use Symfony\Component\Console\Input\InputOption;
@@ -23,19 +24,28 @@ class MigrateMakeCommand extends BaseCommand
     protected $description = 'Create a new migration file';
 
     /**
+     * The migration creator instance.
+     *
      * @var \Orchestra\Tenanti\Migrator\Creator
      */
     protected $creator;
 
     /**
+     * @var \Illuminate\Foundation\Composer
+     */
+    protected $composer;
+
+    /**
      * Create a make migration command instance.
      *
-     * @param  \Orchestra\Tenanti\TenantiManager  $tenant
-     * @param  \Orchestra\Tenanti\Migrator\Creator  $creator
+     * @param \Orchestra\Tenanti\TenantiManager  $tenant
+     * @param \Orchestra\Tenanti\Migrator\Creator  $creator
+     * @param \Illuminate\Foundation\Composer  $composer
      */
-    public function __construct(TenantiManager $tenant, Creator $creator)
+    public function __construct(TenantiManager $tenant, Creator $creator, Composer $composer)
     {
         $this->creator = $creator;
+        $this->composer = $composer;
 
         parent::__construct($tenant);
     }
@@ -64,7 +74,7 @@ class MigrateMakeCommand extends BaseCommand
         // make sure that the migrations are registered by the class loaders.
         $this->writeMigration($driver, $name, $table, $create);
 
-        $this->call('dump-autoload');
+        $this->composer->dumpAutoloads();
     }
 
     /**

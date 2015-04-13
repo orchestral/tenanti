@@ -23,10 +23,7 @@
 	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
-		"illuminate/config": "5.0.*",
-		"illuminate/console": "5.0.*",
-		"illuminate/database": "5.0.*",
-		"illuminate/queue": "5.0.*"
+		"laravel/framework": "5.0.*"
 	},
 	"extra": {
 		"branch-alias": {
