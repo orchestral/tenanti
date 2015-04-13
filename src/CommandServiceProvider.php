@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Tenanti;
 
+use Illuminate\Foundation\Composer;
 use Illuminate\Support\ServiceProvider;
 use Orchestra\Tenanti\Migrator\Creator;
 use Orchestra\Tenanti\Console\ResetCommand;
@@ -122,7 +123,11 @@ class CommandServiceProvider extends ServiceProvider
             // Once we have the migration creator registered, we will create the command
             // and inject the creator. The creator is responsible for the actual file
             // creation of the migrations, and may be extended by these developers.
-            return new MigrateMakeCommand($app['orchestra.tenanti'], $app['orchestra.tenanti.creator']);
+            return new MigrateMakeCommand(
+                $app['orchestra.tenanti'],
+                $app['orchestra.tenanti.creator'],
+                $app['composer']
+            );
         });
     }
 
