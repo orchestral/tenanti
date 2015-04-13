@@ -5,6 +5,11 @@ title: Tenanti Change Log
 
 ## Version 3.0 {#3-0}
 
+### v3.0.3 {#v3-0-3}
+
+* Use `Illuminate\Foundation\Composer::dumpAutoloads()` directly and remove deprecated call to `$this->call('dump-autoload');`.
+* Use available `database_path()` helper.
+
 ### v3.0.2 {#v3-0-2}
 
 * Add fallback support to Laravel 5 configuration.
