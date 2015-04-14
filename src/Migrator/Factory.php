@@ -34,14 +34,19 @@ class Factory implements FactoryInterface
      * Install migrations.
      *
      * @param  string|null  $database
+     * @param  mixed|null  $id
      *
      * @return void
      */
-    public function install($database)
+    public function install($database, $id = null)
     {
-        $model = $this->getModel();
+        if (! is_null($id)) {
+            $entity = $this->newQuery()->findOrFail($id);
 
-        $model->newQuery()->chunk($this->chunk, function ($entities) use ($database) {
+            return $this->runInstall($entity, $database);
+        }
+
+        $this->executeByChunk(function ($entities) use ($database) {
             foreach ($entities as $entity) {
                 $this->runInstall($entity, $database);
             }
@@ -52,15 +57,20 @@ class Factory implements FactoryInterface
      * Run migrations.
      *
      * @param  string|null  $database
+     * @param  mixed|null  $id
      * @param  bool  $pretend
      *
      * @return void
      */
-    public function run($database, $pretend = false)
+    public function run($database, $id = null, $pretend = false)
     {
-        $model = $this->getModel();
+        if (! is_null($id)) {
+            $entity = $this->newQuery()->findOrFail($id);
 
-        $model->newQuery()->chunk($this->chunk, function ($entities) use ($database, $pretend) {
+            return $this->runUp($entity, $database, $pretend);
+        }
+
+        $this->executeByChunk(function ($entities) use ($database, $pretend) {
             foreach ($entities as $entity) {
                 $this->runUp($entity, $database, $pretend);
             }
@@ -71,15 +81,20 @@ class Factory implements FactoryInterface
      * Rollback migrations.
      *
      * @param  string|null  $database
+     * @param  mixed|null  $id
      * @param  bool  $pretend
      *
      * @return void
      */
-    public function rollback($database, $pretend = false)
+    public function rollback($database, $id = null, $pretend = false)
     {
-        $model = $this->getModel();
+        if (! is_null($id)) {
+            $entity = $this->newQuery()->findOrFail($id);
 
-        $model->newQuery()->chunk($this->chunk, function ($entities) use ($database, $pretend) {
+            return $this->runDown($entity, $database, $pretend);
+        }
+
+        $this->executeByChunk(function ($entities) use ($database, $pretend) {
             foreach ($entities as $entity) {
                 $this->runDown($entity, $database, $pretend);
             }
@@ -90,15 +105,20 @@ class Factory implements FactoryInterface
      * Reset migrations.
      *
      * @param  string|null  $database
+     * @param  mixed|null  $id
      * @param  bool  $pretend
      *
      * @return void
      */
-    public function reset($database, $pretend = false)
+    public function reset($database, $id = null, $pretend = false)
     {
-        $model = $this->getModel();
+        if (! is_null($id)) {
+            $entity = $this->newQuery()->findOrFail($id);
 
-        $model->newQuery()->chunk($this->chunk, function ($entities) use ($database, $pretend) {
+            return $this->runReset($entity, $database, $pretend);
+        }
+
+        $this->executeByChunk(function ($entities) use ($database, $pretend) {
             foreach ($entities as $entity) {
                 $this->runReset($entity, $database, $pretend);
             }

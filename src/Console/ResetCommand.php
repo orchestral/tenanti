@@ -33,11 +33,12 @@ class ResetCommand extends BaseCommand
 
         $driver   = $this->argument('driver');
         $database = $this->option('database');
+        $id       = $this->option('id');
         $pretend  = $this->option('pretend');
 
         $migrator = $this->tenant->driver($driver);
 
-        $migrator->reset($database, $pretend);
+        $migrator->reset($database, $id, $pretend);
 
         $this->writeMigrationOutput($migrator);
     }

@@ -33,11 +33,12 @@ class RollbackCommand extends BaseCommand
 
         $driver   = $this->argument('driver');
         $database = $this->option('database');
+        $id       = $this->option('id');
         $pretend  = $this->option('pretend');
 
         $migrator = $this->tenant->driver($driver);
 
-        $migrator->rollback($database, $pretend);
+        $migrator->rollback($database, $id, $pretend);
 
         $this->writeMigrationOutput($migrator);
     }

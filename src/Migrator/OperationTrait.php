@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Tenanti\Migrator;
 
+use Closure;
 use Orchestra\Support\Str;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
@@ -53,6 +54,18 @@ trait OperationTrait
     ];
 
     /**
+     * Execute query via chunk.
+     *
+     * @param  \Closure  $callback
+     *
+     * @return int
+     */
+    public function executeByChunk(Closure $callback)
+    {
+        $this->newQuery()->chunk($this->chunk, $callback);
+    }
+
+    /**
      * Resolve model.
      *
      * @return \Illuminate\Database\Eloquent\Model
@@ -77,6 +90,16 @@ trait OperationTrait
         $model->useWritePdo();
 
         return $model;
+    }
+
+    /**
+     * Get Model as new query.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function newQuery()
+    {
+        return $this->getModel()->newQuery();
     }
 
     /**
