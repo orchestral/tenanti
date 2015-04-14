@@ -20,7 +20,7 @@ class CommandServiceProvider extends ServiceProvider
     protected $commands = [
         'Queued'   => 'orchestra.commands.tenanti.queue',
         'Install'  => 'orchestra.commands.tenanti.install',
-        'Make'     => 'orchestra.tenanti.tenanti.make',
+        'Make'     => 'orchestra.commands.tenanti.make',
         'Migrate'  => 'orchestra.commands.tenanti.migrate',
         'Rollback' => 'orchestra.commands.tenanti.rollback',
         'Reset'    => 'orchestra.commands.tenanti.reset',
