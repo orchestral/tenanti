@@ -1,6 +1,5 @@
 <?php namespace Orchestra\Tenanti;
 
-use Illuminate\Support\ServiceProvider;
 use Orchestra\Tenanti\Migrator\Creator;
 use Orchestra\Tenanti\Console\ResetCommand;
 use Orchestra\Tenanti\Console\QueuedCommand;
@@ -9,16 +8,10 @@ use Orchestra\Tenanti\Console\InstallCommand;
 use Orchestra\Tenanti\Console\MigrateCommand;
 use Orchestra\Tenanti\Console\RollbackCommand;
 use Orchestra\Tenanti\Console\MigrateMakeCommand;
+use Orchestra\Support\Providers\CommandServiceProvider as ServiceProvider;
 
 class CommandServiceProvider extends ServiceProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
     /**
      * The commands to be registered.
      *
@@ -42,22 +35,6 @@ class CommandServiceProvider extends ServiceProvider
     protected $provides = [
         'orchestra.tenanti.creator',
     ];
-
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        foreach (array_keys($this->commands) as $command) {
-            $method = "register{$command}Command";
-
-            call_user_func_array([$this, $method], []);
-        }
-
-        $this->commands(array_values($this->commands));
-    }
 
     /**
      * Register the "queue" migration command.
@@ -152,15 +129,5 @@ class CommandServiceProvider extends ServiceProvider
         $this->app->singleton('orchestra.commands.tenanti.refresh', function ($app) {
             return new RefreshCommand($app['orchestra.tenanti']);
         });
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return array_merge(array_values($this->commands), $this->provides);
     }
 }
