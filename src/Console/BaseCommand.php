@@ -68,6 +68,7 @@ abstract class BaseCommand extends Command
         return [
             ['pretend', null, InputOption::VALUE_NONE, 'Dump the SQL queries that would be run.'],
             ['database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.'],
+            ['id', null, InputOption::VALUE_OPTIONAL, 'The entity ID (for single entity operation).'],
             ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production.'],
         ];
     }

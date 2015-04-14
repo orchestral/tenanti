@@ -33,13 +33,14 @@ class MigrateCommand extends BaseCommand
 
         $driver   = $this->argument('driver');
         $database = $this->option('database');
+        $id       = $this->option('id');
         $pretend  = $this->option('pretend');
 
         $this->prepareDatabase($driver, $database);
 
         $migrator = $this->tenant->driver($driver);
 
-        $migrator->run($database, $pretend);
+        $migrator->run($database, $id, $pretend);
 
         $this->writeMigrationOutput($migrator);
     }

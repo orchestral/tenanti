@@ -27,10 +27,11 @@ class InstallCommand extends BaseCommand
     {
         $driver   = $this->argument('driver');
         $database = $this->option('database');
+        $id = $this->option('id');
 
         $migrator = $this->tenant->driver($driver);
 
-        $migrator->install($database);
+        $migrator->install($database, $id);
 
         $this->writeMigrationOutput($migrator);
     }
@@ -44,6 +45,7 @@ class InstallCommand extends BaseCommand
     {
         return [
             ['database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.'],
+            ['id', null, InputOption::VALUE_OPTIONAL, 'The entity ID (for single entity operation).'],
         ];
     }
 }
