@@ -36,7 +36,7 @@ class MigrateCommand extends BaseCommand
         $id       = $this->option('id');
         $pretend  = $this->option('pretend');
 
-        $this->prepareDatabase($driver, $database);
+        $this->prepareDatabase($driver, $database, $id);
 
         $migrator = $this->tenant->driver($driver);
 
@@ -50,14 +50,21 @@ class MigrateCommand extends BaseCommand
      *
      * @param  string  $driver
      * @param  string|null  $database
+     * @param  mixed|null  $id
      *
      * @return void
      */
-    protected function prepareDatabase($driver, $database)
+    protected function prepareDatabase($driver, $database, $id = null)
     {
-        $this->call('tenanti:install', [
+        $parameters = [
             'driver'     => $driver,
             '--database' => $database,
-        ]);
+        ];
+
+        if (! is_null($id)) {
+            $parameters['--id'] = $id;
+        }
+
+        $this->call('tenanti:install', $parameters);
     }
 }
