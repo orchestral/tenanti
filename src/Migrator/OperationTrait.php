@@ -57,6 +57,7 @@ trait OperationTrait
      * Execute query via chunk.
      *
      * @param  \Closure  $callback
+     *
      * @return int
      */
     public function executeByChunk(Closure $callback)

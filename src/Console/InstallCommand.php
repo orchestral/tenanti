@@ -27,7 +27,7 @@ class InstallCommand extends BaseCommand
     {
         $driver   = $this->argument('driver');
         $database = $this->option('database');
-        $id = $this->option('id');
+        $id       = $this->option('id');
 
         $migrator = $this->tenant->driver($driver);
 
