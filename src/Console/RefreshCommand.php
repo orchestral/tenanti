@@ -34,9 +34,8 @@ class RefreshCommand extends BaseCommand
         $driver   = $this->argument('driver');
         $database = $this->option('database');
         $id       = $this->option('id');
-        $force    = $this->option('force');
 
-        $parameters = ['driver' => $driver, '--database' => $database, '--force' => $force, '--id' => $id];
+        $parameters = ['driver' => $driver, '--database' => $database, '--force' => true, '--id' => $id];
 
         $this->call('tenanti:reset', $parameters);
 
