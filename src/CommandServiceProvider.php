@@ -27,11 +27,20 @@ class CommandServiceProvider extends ServiceProvider
     protected $commands = [
         'Queued'   => 'orchestra.commands.tenanti.queue',
         'Install'  => 'orchestra.commands.tenanti.install',
-        'Make'     => 'orchestra.tenanti.creator',
-        'Migrate'  => 'orchestra.commands.tenanti',
+        'Make'     => 'orchestra.tenanti.tenanti.make',
+        'Migrate'  => 'orchestra.commands.tenanti.migrate',
         'Rollback' => 'orchestra.commands.tenanti.rollback',
         'Reset'    => 'orchestra.commands.tenanti.reset',
         'Refresh'  => 'orchestra.commands.tenanti.refresh',
+    ];
+
+     /**
+     * Additional provides.
+     *
+     * @var array
+     */
+    protected $provides = [
+        'orchestra.tenanti.creator',
     ];
 
     /**
@@ -104,7 +113,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerMigrateCommand()
     {
-        $this->app->singleton('orchestra.commands.tenanti', function ($app) {
+        $this->app->singleton('orchestra.commands.tenanti.migrate', function ($app) {
             return new MigrateCommand($app['orchestra.tenanti']);
         });
     }
@@ -152,6 +161,6 @@ class CommandServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array_values($this->commands);
+        return array_merge(array_values($this->commands), $this->provides);
     }
 }
