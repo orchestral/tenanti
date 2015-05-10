@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class {{class}} extends Migration
+class DummyClass extends Migration
 {
     /**
      * Run the migrations.
@@ -16,7 +16,7 @@ class {{class}} extends Migration
      */
     public function up($id, Model $model)
     {
-        Schema::table("{{table}}", function (Blueprint $table) {
+        Schema::table("DummyTable", function (Blueprint $table) {
 
         });
     }
@@ -30,7 +30,7 @@ class {{class}} extends Migration
      */
     public function down($id, Model $model)
     {
-        Schema::table("{{table}}", function (Blueprint $table) {
+        Schema::table("DummyTable", function (Blueprint $table) {
 
         });
     }
