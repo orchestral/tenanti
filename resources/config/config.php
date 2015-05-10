@@ -26,7 +26,7 @@ return [
 
     'drivers' => [
         'user' => [
-            'model' => 'User',
+            'model' => 'App\User',
             'path'  => database_path('tenant/users'),
         ],
     ],
