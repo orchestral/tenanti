@@ -27,7 +27,7 @@ class CommandServiceProvider extends ServiceProvider
         'Refresh'  => 'orchestra.commands.tenanti.refresh',
     ];
 
-     /**
+    /**
      * Additional provides.
      *
      * @var array

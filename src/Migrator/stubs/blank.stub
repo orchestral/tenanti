@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class DummyClass extends Migration
@@ -11,6 +10,7 @@ class DummyClass extends Migration
      *
      * @param  string|int  $id
      * @param  \Illuminate\Database\Eloquent\Model  $model
+     *
      * @return void
      */
     public function up($id, Model $model)
@@ -23,6 +23,7 @@ class DummyClass extends Migration
      *
      * @param  string|int  $id
      * @param  \Illuminate\Database\Eloquent\Model  $model
+     *
      * @return void
      */
     public function down($id, Model $entity)

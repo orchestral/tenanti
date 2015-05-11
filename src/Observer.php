@@ -31,7 +31,7 @@ abstract class Observer
      */
     public function created(Model $entity)
     {
-        Queue::push('Orchestra\Tenanti\Migrator\Queue@create', [
+        Queue::push('Orchestra\Tenanti\Jobs\CreateTenant', [
             'database' => $this->getConnectionName(),
             'driver'   => $this->getDriverName(),
             'id'       => $entity->getKey(),
@@ -49,7 +49,7 @@ abstract class Observer
      */
     public function deleted(Model $entity)
     {
-        Queue::push('Orchestra\Tenanti\Migrator\Queue@delete', [
+        Queue::push('Orchestra\Tenanti\Jobs\DeleteTenant', [
             'database' => $this->getConnectionName(),
             'driver'   => $this->getDriverName(),
             'id'       => $entity->getKey(),

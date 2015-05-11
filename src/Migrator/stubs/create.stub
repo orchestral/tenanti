@@ -12,11 +12,12 @@ class DummyClass extends Migration
      *
      * @param  string|int  $id
      * @param  \Illuminate\Database\Eloquent\Model  $model
+     *
      * @return void
      */
     public function up($id, Model $model)
     {
-        Schema::create("DummyTable", function (Blueprint $table) {
+        Schema::create('DummyTable', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -27,10 +28,11 @@ class DummyClass extends Migration
      *
      * @param  string|int  $id
      * @param  \Illuminate\Database\Eloquent\Model  $model
+     *
      * @return void
      */
     public function down($id, Model $model)
     {
-        Schema::drop("DummyTable");
+        Schema::drop('DummyTable');
     }
 }

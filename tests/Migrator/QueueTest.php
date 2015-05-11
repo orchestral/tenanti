@@ -47,7 +47,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
         $model    = m::mock('\Illuminate\Database\Eloquent\Model');
 
         $stub = new Queue();
-        $job  = m::mock('\Illuminate\Queue\Jobs\Job');
+        $job  = m::mock('\Illuminate\Contracts\Queue\Job');
         $data = [
             'database' => 'foo',
             'driver'   => 'user',
@@ -77,7 +77,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
         $tenanti  = $this->app['orchestra.tenanti'];
 
         $stub = new Queue();
-        $job  = m::mock('\Illuminate\Queue\Jobs\Job');
+        $job  = m::mock('\Illuminate\Contracts\Queue\Job');
         $data = [
             'database' => 'foo',
             'driver'   => 'user',
@@ -105,7 +105,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
         $model    = m::mock('\Illuminate\Database\Eloquent\Model');
 
         $stub = new Queue();
-        $job  = m::mock('\Illuminate\Queue\Jobs\Job');
+        $job  = m::mock('\Illuminate\Contracts\Queue\Job');
         $data = [
             'database' => 'foo',
             'driver'   => 'user',
@@ -134,7 +134,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
         $tenanti  = $this->app['orchestra.tenanti'];
 
         $stub = new Queue();
-        $job  = m::mock('\Illuminate\Queue\Jobs\Job');
+        $job  = m::mock('\Illuminate\Contracts\Queue\Job');
         $data = [
             'database' => 'foo',
             'driver'   => 'user',
