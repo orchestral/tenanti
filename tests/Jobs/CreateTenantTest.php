@@ -1,4 +1,4 @@
-<?php namespace Orchestra\Tenanti\Jobs\TestCase; 
+<?php namespace Orchestra\Tenanti\Jobs\TestCase;
 
 use Mockery as m;
 use Illuminate\Container\Container;
@@ -65,4 +65,3 @@ class CreateTenantTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($stub->fire($job, $data));
     }
 }
-

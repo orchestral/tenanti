@@ -62,4 +62,3 @@ class DeleteTenantTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($stub->fire($job, $data));
     }
 }
-
