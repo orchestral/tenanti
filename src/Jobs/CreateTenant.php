@@ -3,7 +3,7 @@
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\Queue\Job;
 
-class CreateTenant extends Queue
+class CreateTenant extends Tenant
 {
     /**
      * Run queue on creating a model.

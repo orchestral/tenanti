@@ -3,7 +3,7 @@
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\Queue\Job;
 
-class DeleteTenant extends Queue
+class DeleteTenant extends Tenant
 {
     /**
      * Run queue on deleting a model.

@@ -4,7 +4,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Orchestra\Tenanti\Migrator\FactoryInterface;
 
-abstract class Queue
+abstract class Tenant
 {
     /**
      * Resolve migrator instance.
