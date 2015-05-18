@@ -6,9 +6,9 @@ Tenanti allow you to manage multi-tenant data schema and migration manager for y
 [![Latest Stable Version](https://img.shields.io/github/release/orchestral/tenanti.svg?style=flat)](https://packagist.org/packages/orchestra/tenanti)
 [![Total Downloads](https://img.shields.io/packagist/dt/orchestra/tenanti.svg?style=flat)](https://packagist.org/packages/orchestra/tenanti)
 [![MIT License](https://img.shields.io/packagist/l/orchestra/tenanti.svg?style=flat)](https://packagist.org/packages/orchestra/tenanti)
-[![Build Status](https://img.shields.io/travis/orchestral/tenanti/master.svg?style=flat)](https://travis-ci.org/orchestral/tenanti)
-[![Coverage Status](https://img.shields.io/coveralls/orchestral/tenanti/master.svg?style=flat)](https://coveralls.io/r/orchestral/tenanti?branch=master)
-[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/orchestral/tenanti/master.svg?style=flat)](https://scrutinizer-ci.com/g/orchestral/tenanti/)
+[![Build Status](https://img.shields.io/travis/orchestral/tenanti/3.0.svg?style=flat)](https://travis-ci.org/orchestral/tenanti)
+[![Coverage Status](https://img.shields.io/coveralls/orchestral/tenanti/3.0.svg?style=flat)](https://coveralls.io/r/orchestral/tenanti?branch=3.0)
+[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/orchestral/tenanti/3.0.svg?style=flat)](https://scrutinizer-ci.com/g/orchestral/tenanti/)
 
 ## Version Compatibility
 
@@ -24,7 +24,7 @@ To install through composer, simply put the following in your `composer.json` fi
 ```json
 {
 	"require": {
-		"orchestra/tenanti": "3.0.*"
+		"orchestra/tenanti": "~3.0"
 	}
 }
 ```
@@ -36,12 +36,12 @@ And then run `composer install` to fetch the package.
 You could also simplify the above code by using the following command:
 
 ```
-composer require "orchestra/tenanti=3.0.*"
+composer require "orchestra/tenanti=~3.0"
 ```
 
 ### Setup
 
-Next add the following service provider in `app/config/app.php`.
+Next add the following service provider in `config/app.php`.
 
 ```php
 'providers' => [
@@ -52,7 +52,7 @@ Next add the following service provider in `app/config/app.php`.
 ],
 ```
 
-> The command utility is enabled via Orchestra\Tenanti\CommandServiceProvider.
+> The command utility is enabled via `Orchestra\Tenanti\CommandServiceProvider`.
 
 ## Usage
 
@@ -85,7 +85,7 @@ Alternatively, you could also use `php artisan vendor:publish` command to publis
 
 #### Setup migration autoload
 
-For each driver, you should also consider adding the migration path into autoload. To do this you can edit your `composer.json`.
+For each driver, you should also consider adding the migration path into autoload (if it not already defined). To do this you can edit your `composer.json`.
 
 ##### composer.json
 
@@ -165,7 +165,7 @@ class ConfigServiceProvider extends ServiceProvider
     public function register()
     {
         config([
-            'orchestra/tenanti::drivers.user' => [
+            'orchestra.tenanti.drivers.user' => [
                 'model'     => 'App\User',
                 'migration' => 'tenant_migrations',
                 'path'      => database_path('tenanti/user'),
