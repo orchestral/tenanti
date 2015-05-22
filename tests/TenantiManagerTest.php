@@ -34,6 +34,7 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
         $resolver = $stub->driver('user');
 
         $this->assertInstanceOf('\Orchestra\Tenanti\Migrator\Factory', $resolver);
+        $this->assertEquals($config, $stub->getConfig());
     }
 
     /**
