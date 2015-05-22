@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Tenanti\TestCase;
 
 use Mockery as m;
+use Illuminate\Container\Container;
 use Orchestra\Tenanti\TenantiServiceProvider;
 
 class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
@@ -53,8 +54,37 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
 
         $stub->shouldReceive('addConfigComponent')->once()
                 ->with('orchestra/tenanti', 'orchestra/tenanti', $path.'/config')->andReturnNull()
-            ->shouldReceive('bootUsingLaravel')->once()
-                ->with($path)->andReturnNull();
+            ->shouldReceive('bootUsingLaravel')->once()->with($path)->andReturnNull();
+
+        $this->assertNull($stub->boot());
+    }
+
+    /**
+     * Test \Orchestra\Tenanti\TenantiServiceProvider::bootWithLaravel()
+     * method.
+     *
+     * @test
+     */
+    public function testBootWithLaravelMethod()
+    {
+        $app = m::mock('\Illuminate\Contracts\Foundation\Application');
+        Container::setInstance($app);
+
+        $stub = m::mock('\Orchestra\Tenanti\TenantiServiceProvider[addConfigComponent,hasPackageRepository,mergeConfigFrom,publishes]', [$app])
+                    ->shouldAllowMockingProtectedMethods();
+        $path = realpath(__DIR__.'/../resources');
+
+        $app->shouldReceive('make')->once()->with('path.config')->andReturn('/var/www/config');
+
+        $stub->shouldReceive('addConfigComponent')->once()
+                ->with('orchestra/tenanti', 'orchestra/tenanti', $path.'/config')->andReturnNull()
+            ->shouldReceive('hasPackageRepository')->once()->andReturn(false)
+            ->shouldReceive('mergeConfigFrom')->once()
+                ->with($path.'/config/config.php', 'orchestra.tenanti')->andReturnNull()
+            ->shouldReceive('publishes')
+                ->with([
+                    $path.'/config/config.php' => '/var/www/config/orchestra/tenanti.php'
+                ])->andReturnNull();
 
         $this->assertNull($stub->boot());
     }
