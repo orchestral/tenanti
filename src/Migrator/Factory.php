@@ -41,9 +41,9 @@ class Factory implements FactoryInterface
     public function install($database, $id = null)
     {
         if (! is_null($id)) {
-            $entity = $this->newQuery()->findOrFail($id);
-
-            return $this->runInstall($entity, $database);
+            return $this->executeById($id, function ($entity) use ($database) {
+                $this->runInstall($entity, $database);
+            });
         }
 
         $this->executeByChunk(function ($entities) use ($database) {
@@ -65,9 +65,9 @@ class Factory implements FactoryInterface
     public function run($database, $id = null, $pretend = false)
     {
         if (! is_null($id)) {
-            $entity = $this->newQuery()->findOrFail($id);
-
-            return $this->runUp($entity, $database, $pretend);
+            return $this->executeById($id, function ($entity) use ($database, $pretend) {
+                $this->runUp($entity, $database, $pretend);
+            });
         }
 
         $this->executeByChunk(function ($entities) use ($database, $pretend) {
@@ -89,9 +89,9 @@ class Factory implements FactoryInterface
     public function rollback($database, $id = null, $pretend = false)
     {
         if (! is_null($id)) {
-            $entity = $this->newQuery()->findOrFail($id);
-
-            return $this->runDown($entity, $database, $pretend);
+            return $this->executeById($id, function ($entity) use ($database, $pretend) {
+                $this->runDown($entity, $database, $pretend);
+            });
         }
 
         $this->executeByChunk(function ($entities) use ($database, $pretend) {
@@ -113,9 +113,9 @@ class Factory implements FactoryInterface
     public function reset($database, $id = null, $pretend = false)
     {
         if (! is_null($id)) {
-            $entity = $this->newQuery()->findOrFail($id);
-
-            return $this->runReset($entity, $database, $pretend);
+            return $this->executeById($id, function ($entity) use ($database, $pretend) {
+                $this->runReset($entity, $database, $pretend);
+            });
         }
 
         $this->executeByChunk(function ($entities) use ($database, $pretend) {

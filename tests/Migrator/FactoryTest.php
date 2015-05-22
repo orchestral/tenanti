@@ -42,6 +42,29 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test Orchestra\Tenanti\Migrator\Factory::install() method.
+     *
+     * @test
+     */
+    public function testInstallMethodOnSingleId()
+    {
+        $app    = $this->getAppContainer();
+        $driver = 'user';
+        $config = [];
+
+        $stub   = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runInstall]', [$app, $driver, $config]);
+        $model  = m::mock('\Illuminate\Database\Eloquent\Model');
+        $entity = m::mock('\Illuminate\Database\Eloquent\Model');
+
+        $stub->shouldReceive('getModel')->once()->andReturn($model)
+            ->shouldReceive('runInstall')->once()->with($entity, 'foo')->andReturnNull();
+        $model->shouldReceive('newQuery->findOrFail')->once()->with(10)
+            ->andReturn($entity);
+
+        $this->assertNull($stub->install('foo', 10));
+    }
+
+    /**
      * Test Orchestra\Tenanti\Migrator\Factory::run() method.
      *
      * @test
@@ -66,6 +89,29 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             });
 
         $this->assertNull($stub->run('foo'));
+    }
+
+    /**
+     * Test Orchestra\Tenanti\Migrator\Factory::run() method.
+     *
+     * @test
+     */
+    public function testRunMethodOnSingleId()
+    {
+        $app    = $this->getAppContainer();
+        $driver = 'user';
+        $config = [];
+
+        $stub   = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runUp]', [$app, $driver, $config]);
+        $model  = m::mock('\Illuminate\Database\Eloquent\Model');
+        $entity = m::mock('\Illuminate\Database\Eloquent\Model');
+
+        $stub->shouldReceive('getModel')->once()->andReturn($model)
+            ->shouldReceive('runUp')->once()->with($entity, 'foo', false)->andReturnNull();
+        $model->shouldReceive('newQuery->findOrFail')->once()->with(10)
+            ->andReturn($entity);
+
+        $this->assertNull($stub->run('foo', 10));
     }
 
     /**
@@ -96,6 +142,29 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test Orchestra\Tenanti\Migrator\Factory::rollback() method.
+     *
+     * @test
+     */
+    public function testRollbackMethodOnSingleId()
+    {
+        $app    = $this->getAppContainer();
+        $driver = 'user';
+        $config = [];
+
+        $stub   = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runDown]', [$app, $driver, $config]);
+        $model  = m::mock('\Illuminate\Database\Eloquent\Model');
+        $entity = m::mock('\Illuminate\Database\Eloquent\Model');
+
+        $stub->shouldReceive('getModel')->once()->andReturn($model)
+            ->shouldReceive('runDown')->once()->with($entity, 'foo', false)->andReturnNull();
+        $model->shouldReceive('newQuery->findOrFail')->once()->with(10)
+            ->andReturn($entity);
+
+        $this->assertNull($stub->rollback('foo', 10));
+    }
+
+    /**
      * Test Orchestra\Tenanti\Migrator\Factory::reset() method.
      *
      * @test
@@ -120,6 +189,29 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
                 });
 
         $this->assertNull($stub->reset('foo'));
+    }
+
+    /**
+     * Test Orchestra\Tenanti\Migrator\Factory::reset() method.
+     *
+     * @test
+     */
+    public function testResetMethodOnSingleId()
+    {
+        $app    = $this->getAppContainer();
+        $driver = 'user';
+        $config = [];
+
+        $stub   = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runReset]', [$app, $driver, $config]);
+        $model  = m::mock('\Illuminate\Database\Eloquent\Model');
+        $entity = m::mock('\Illuminate\Database\Eloquent\Model');
+
+        $stub->shouldReceive('getModel')->once()->andReturn($model)
+            ->shouldReceive('runReset')->once()->with($entity, 'foo', false)->andReturnNull();
+        $model->shouldReceive('newQuery->findOrFail')->once()->with(10)
+            ->andReturn($entity);
+
+        $this->assertNull($stub->reset('foo', 10));
     }
 
     /**

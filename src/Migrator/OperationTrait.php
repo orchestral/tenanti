@@ -54,11 +54,26 @@ trait OperationTrait
     ];
 
     /**
+     * Execute query by id.
+     *
+     * @param  int|string  $id
+     * @param  \Closure  $callback
+     *
+     * @return void
+     */
+    public function executeById($id, Closure $callback)
+    {
+        $entity = $this->newQuery()->findOrFail($id);
+
+        return call_user_func($callback, $entity);
+    }
+
+    /**
      * Execute query via chunk.
      *
      * @param  \Closure  $callback
      *
-     * @return int
+     * @return void
      */
     public function executeByChunk(Closure $callback)
     {
