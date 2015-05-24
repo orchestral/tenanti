@@ -3,6 +3,16 @@ title: Tenanti Change Log
 
 ---
 
+## Version 3.1 {#3-1}
+
+### v3.1.0 {#v3-1-0}
+
+* Update support to Laravel Framework v5.1.
+* Allow different connection name to be used when resolving migration.
+* Allow multiple command to allow `--id` option on action command ("install", "migrate", "rollback", "reset" or "refresh").
+* Add `php artisan tenanti:queue` to run action command ("install", "migrate", "rollback", "reset" or "refresh") via background queue workers.
+* Pass `--force` to all child command.
+
 ## Version 3.0 {#3-0}
 
 ### v3.0.4 {#v3-0-4}
