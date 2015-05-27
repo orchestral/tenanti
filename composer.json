@@ -22,7 +22,7 @@
 		"orchestra/support-providers": "3.0.*"
 	},
 	"require-dev": {
-		"mockery/mockery": "0.9.*",
+		"mockery/mockery": "^0.9.1",
 		"laravel/framework": "5.0.*"
 	},
 	"extra": {
