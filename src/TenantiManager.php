@@ -3,6 +3,7 @@
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Illuminate\Support\Manager;
+use Orchestra\Tenanti\Migrator\Factory;
 
 class TenantiManager extends Manager
 {
@@ -18,7 +19,7 @@ class TenantiManager extends Manager
      *
      * @var string
      */
-    protected $resolver = 'Orchestra\Tenanti\Migrator\Factory';
+    protected $resolver = Factory::class;
 
     /**
      * Create a new driver instance.

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Database\Eloquent\Model;
+use Orchestra\Tenanti\Jobs\CreateTenant;
+use Orchestra\Tenanti\Jobs\DeleteTenant;
 
 abstract class Observer
 {
@@ -31,7 +33,7 @@ abstract class Observer
      */
     public function created(Model $entity)
     {
-        Queue::push('Orchestra\Tenanti\Jobs\CreateTenant', [
+        Queue::push(CreateTenant::class, [
             'database' => $this->getConnectionName(),
             'driver'   => $this->getDriverName(),
             'id'       => $entity->getKey(),
@@ -49,7 +51,7 @@ abstract class Observer
      */
     public function deleted(Model $entity)
     {
-        Queue::push('Orchestra\Tenanti\Jobs\DeleteTenant', [
+        Queue::push(DeleteTenant::class, [
             'database' => $this->getConnectionName(),
             'driver'   => $this->getDriverName(),
             'id'       => $entity->getKey(),
