@@ -1,8 +1,9 @@
 <?php namespace Orchestra\Tenanti\Migrator;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Migrations\Migrator as BaseMigrator;
 
-class Migrator extends \Illuminate\Database\Migrations\Migrator
+class Migrator extends BaseMigrator
 {
     /**
      * Entity.
