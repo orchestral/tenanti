@@ -2,6 +2,8 @@
 
 use Illuminate\Contracts\Queue\Job;
 use Illuminate\Support\Facades\App;
+use Orchestra\Tenanti\Jobs\CreateTenant;
+use Orchestra\Tenanti\Jobs\DeleteTenant;
 
 class Queue
 {
@@ -15,7 +17,7 @@ class Queue
      */
     public function create(Job $job, array $data)
     {
-        $task = App::make('Orchestra\Tenanti\Jobs\CreateTenant');
+        $task = App::make(CreateTenant::class);
 
         return $task->fire($job, $data);
     }
@@ -30,7 +32,7 @@ class Queue
      */
     public function delete(Job $job, array $data)
     {
-        $task = App::make('Orchestra\Tenanti\Jobs\DeleteTenant');
+        $task = App::make(DeleteTenant::class);
 
         return $task->fire($job, $data);
     }
