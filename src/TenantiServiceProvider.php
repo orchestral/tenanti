@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Tenanti;
 
+use Orchestra\Tenanti\TenantiManager;
 use Orchestra\Support\Providers\ServiceProvider;
 
 class TenantiServiceProvider extends ServiceProvider
@@ -27,7 +28,7 @@ class TenantiServiceProvider extends ServiceProvider
             return $manager;
         });
 
-        $this->app->alias('orchestra.tenanti', 'Orchestra\Tenanti\TenantiManager');
+        $this->app->alias('orchestra.tenanti', TenantiManager::class);
     }
 
     /**
@@ -39,7 +40,7 @@ class TenantiServiceProvider extends ServiceProvider
     {
         $path = realpath(__DIR__.'/../resources');
 
-        $this->addConfigComponent('orchestra/tenanti', 'orchestra/tenanti', $path.'/config');
+        $this->addConfigComponent('orchestra/tenanti', 'orchestra/tenanti', "{$path}/config");
 
         if (! $this->hasPackageRepository()) {
             $this->bootUsingLaravel($path);
