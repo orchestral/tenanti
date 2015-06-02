@@ -17,13 +17,13 @@
 	},
 	"require": {
 		"php": ">=5.5.0",
-		"illuminate/filesystem": "5.1.*",
-		"orchestra/support-core": "3.1.*",
-		"orchestra/support-providers": "3.1.*"
+		"illuminate/filesystem": "5.2.*",
+		"orchestra/support-core": "3.2.*",
+		"orchestra/support-providers": "3.2.*"
 	},
 	"require-dev": {
 		"mockery/mockery": "^0.9.1",
-		"laravel/framework": "5.1.*"
+		"laravel/framework": "5.2.*"
 	},
 	"extra": {
 		"branch-alias": {
