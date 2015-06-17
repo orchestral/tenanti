@@ -25,7 +25,7 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegisterMethod()
     {
-        $app = m::mock('\Illuminate\Container\Container[singleton]');
+        $app = m::mock('\Illuminate\Container\Container[singleton]', '\ArrayAccess');
         $config = m::mock('\Illuminate\Contracts\Config\Repository');
 
         $app->instance('config', $config);
