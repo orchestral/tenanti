@@ -25,15 +25,11 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegisterMethod()
     {
-        $app = m::mock('\Illuminate\Container\Container[singleton]');
-        $app['config'] = $config = m::mock('\Illuminate\Contracts\Config\Repository', '\ArrayAccess');
+        $app = new Container();
+        $config = m::mock('\Illuminate\Contracts\Config\Repository');
 
-        $config->shouldReceive('offsetGet')->once()->with('orchestra.tenanti')->andReturn([]);
-
-        $app->shouldReceive('singleton')->once()->with('orchestra.tenanti', m::type('Closure'))
-            ->andReturnUsing(function ($n, $c) use ($app) {
-                $app[$n] = $c($app);
-            });
+        $app->instance('config', $config);
+        $config->shouldReceive('get')->once()->with('orchestra.tenanti')->andReturn([]);
 
         $stub = new TenantiServiceProvider($app);
 
@@ -48,7 +44,12 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testBootMethod()
     {
-        $stub = m::mock('\Orchestra\Tenanti\TenantiServiceProvider[addConfigComponent,bootUsingLaravel]', [null])
+        $app = new Container();
+        $config = m::mock('\Illuminate\Contracts\Config\Repository');
+
+        $app->instance('config', $config);
+
+        $stub = m::mock('\Orchestra\Tenanti\TenantiServiceProvider[addConfigComponent,bootUsingLaravel]', [$app])
                     ->shouldAllowMockingProtectedMethods();
         $path = realpath(__DIR__.'/../resources');
 

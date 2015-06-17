@@ -23,7 +23,7 @@ class TenantiServiceProvider extends ServiceProvider
             $manager = new TenantiManager($app);
             $namespace = $this->hasPackageRepository() ? 'orchestra/tenanti::' : 'orchestra.tenanti';
 
-            $manager->setConfig($app['config'][$namespace]);
+            $manager->setConfig($app->make('config')->get($namespace));
 
             return $manager;
         });
