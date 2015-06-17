@@ -44,10 +44,10 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testBootMethod()
     {
-        $app = m::mock('\Illuminate\Contracts\Container\Container');
+        $app = new Container();
         $config = m::mock('\Illuminate\Contracts\Config\Repository');
 
-        $app->shouldReceive('make')->once()->with('config')->andReturn($config);
+        $app->instance('config', $config);
 
         $stub = m::mock('\Orchestra\Tenanti\TenantiServiceProvider[addConfigComponent,bootUsingLaravel]', [$app])
                     ->shouldAllowMockingProtectedMethods();
