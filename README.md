@@ -46,8 +46,8 @@ Next add the following service provider in `config/app.php`.
 'providers' => [
 
 	// ...
-	'Orchestra\Tenanti\TenantiServiceProvider',
-	'Orchestra\Tenanti\CommandServiceProvider',
+	Orchestra\Tenanti\TenantiServiceProvider::class,
+	Orchestra\Tenanti\CommandServiceProvider::class,
 ],
 ```
 
