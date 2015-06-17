@@ -25,16 +25,11 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegisterMethod()
     {
-        $app = m::mock('\Illuminate\Container\Container[singleton]', '\ArrayAccess');
+        $app = new Container();
         $config = m::mock('\Illuminate\Contracts\Config\Repository');
 
         $app->instance('config', $config);
         $config->shouldReceive('get')->once()->with('orchestra.tenanti')->andReturn([]);
-
-        $app->shouldReceive('singleton')->once()->with('orchestra.tenanti', m::type('Closure'))
-                ->andReturnUsing(function ($n, $c) use ($app) {
-                    $app[$n] = $c($app);
-                });
 
         $stub = new TenantiServiceProvider($app);
 
