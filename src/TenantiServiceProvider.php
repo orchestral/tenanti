@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Tenanti;
 
 use Orchestra\Tenanti\TenantiManager;
+use Illuminate\Contracts\Foundation\Application;
 use Orchestra\Support\Providers\ServiceProvider;
 
 class TenantiServiceProvider extends ServiceProvider
@@ -19,7 +20,7 @@ class TenantiServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('orchestra.tenanti', function ($app) {
+        $this->app->singleton('orchestra.tenanti', function (Application $app) {
             $manager = new TenantiManager($app);
             $namespace = $this->hasPackageRepository() ? 'orchestra/tenanti::' : 'orchestra.tenanti';
 
