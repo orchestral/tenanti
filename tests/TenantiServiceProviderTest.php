@@ -2,6 +2,7 @@
 
 use Mockery as m;
 use Illuminate\Container\Container;
+use Illuminate\Foundation\Application;
 use Orchestra\Tenanti\TenantiServiceProvider;
 
 class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
@@ -25,7 +26,7 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegisterMethod()
     {
-        $app = new Container();
+        $app = new Application(null);
         $config = m::mock('\Illuminate\Contracts\Config\Repository');
 
         $app->instance('config', $config);
