@@ -3,6 +3,7 @@
 $finder = Symfony\Component\Finder\Finder::create()
     ->files()
     ->in(__DIR__.'/src')
+    ->in(__DIR__.'/resources/config')
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);
 
