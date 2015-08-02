@@ -1,6 +1,5 @@
 <?php namespace Orchestra\Tenanti;
 
-use Orchestra\Tenanti\TenantiManager;
 use Illuminate\Contracts\Foundation\Application;
 use Orchestra\Support\Providers\ServiceProvider;
 
