@@ -64,7 +64,7 @@ trait OperationTrait
      */
     public function executeById($id, Closure $callback)
     {
-        $entity = $this->newQuery()->find($id);
+        $entity = $this->newQuery()->findOrFail($id);
 
         return call_user_func($callback, $entity);
     }
@@ -100,7 +100,7 @@ trait OperationTrait
         $database = Arr::get($this->config, 'database');
 
         if (! is_null($database)) {
-            $model->on($database);
+            $model->setConnection($database);
         }
 
         $model->useWritePdo();

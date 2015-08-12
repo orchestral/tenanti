@@ -57,7 +57,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
         $migrator->shouldReceive('runInstall')->once()->with($model, 'foo')->andReturnNull()
             ->shouldReceive('runUp')->once()->with($model, 'foo')->andReturnNull()
-            ->shouldReceive('getModel->newInstance->find')->with(5)->andReturn($model);
+            ->shouldReceive('getModel->find')->with(5)->andReturn($model);
         $job->shouldReceive('delete')->once()->andReturnNull();
 
         App::swap($this->app);
@@ -85,7 +85,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
         ];
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
-        $migrator->shouldReceive('getModel->newInstance->find')->with(5)->andReturnNUll();
+        $migrator->shouldReceive('getModel->find')->with(5)->andReturnNUll();
         $job->shouldReceive('delete')->once()->andReturnNull();
 
         App::swap($this->app);
@@ -114,7 +114,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
         $migrator->shouldReceive('runReset')->once()->with($model, 'foo')->andReturnNull()
-            ->shouldReceive('getModel->newInstance->find')->with(5)->andReturn($model);
+            ->shouldReceive('getModel->find')->with(5)->andReturn($model);
         $job->shouldReceive('delete')->once()->andReturnNull();
 
         App::swap($this->app);
@@ -142,7 +142,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
         ];
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
-        $migrator->shouldReceive('getModel->newInstance->find')->with(5)->andReturnNUll();
+        $migrator->shouldReceive('getModel->find')->with(5)->andReturnNUll();
         $job->shouldReceive('delete')->once()->andReturnNull();
 
         App::swap($this->app);

@@ -54,7 +54,7 @@ class DeleteTenantTest extends \PHPUnit_Framework_TestCase
         ];
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
-        $migrator->shouldReceive('getModel->newInstance->find')->with(5)->andReturnNUll();
+        $migrator->shouldReceive('getModel->find')->with(5)->andReturnNUll();
         $job->shouldReceive('delete')->once()->andReturnNull();
 
         App::swap($this->app);

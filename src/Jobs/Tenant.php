@@ -32,6 +32,6 @@ abstract class Tenant
     {
         $id = Arr::get($data, 'id');
 
-        return $migrator->getModel()->newInstance()->find($id);
+        return $migrator->getModel()->find($id);
     }
 }
