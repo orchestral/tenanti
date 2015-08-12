@@ -85,7 +85,7 @@ class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
                 ->with($path.'/config/config.php', 'orchestra.tenanti')->andReturnNull()
             ->shouldReceive('publishes')
                 ->with([
-                    $path.'/config/config.php' => '/var/www/config/orchestra/tenanti.php'
+                    $path.'/config/config.php' => '/var/www/config/orchestra/tenanti.php',
                 ])->andReturnNull();
 
         $this->assertNull($stub->boot());

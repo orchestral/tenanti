@@ -43,15 +43,15 @@ class QueueTest extends \PHPUnit_Framework_TestCase
     public function testCreateMethod()
     {
         $migrator = m::mock('\Orchestra\Tenanti\Migrator\Factory');
-        $tenanti  = $this->app['orchestra.tenanti'];
-        $model    = m::mock('\Illuminate\Database\Eloquent\Model');
+        $tenanti = $this->app['orchestra.tenanti'];
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
 
         $stub = new Queue();
-        $job  = m::mock('\Illuminate\Contracts\Queue\Job');
+        $job = m::mock('\Illuminate\Contracts\Queue\Job');
         $data = [
             'database' => 'foo',
-            'driver'   => 'user',
-            'id'       => 5,
+            'driver' => 'user',
+            'id' => 5,
         ];
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
@@ -74,14 +74,14 @@ class QueueTest extends \PHPUnit_Framework_TestCase
     public function testCreateMethodWhenModelIsNull()
     {
         $migrator = m::mock('\Orchestra\Tenanti\Migrator\Factory');
-        $tenanti  = $this->app['orchestra.tenanti'];
+        $tenanti = $this->app['orchestra.tenanti'];
 
         $stub = new Queue();
-        $job  = m::mock('\Illuminate\Contracts\Queue\Job');
+        $job = m::mock('\Illuminate\Contracts\Queue\Job');
         $data = [
             'database' => 'foo',
-            'driver'   => 'user',
-            'id'       => 5,
+            'driver' => 'user',
+            'id' => 5,
         ];
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
@@ -101,15 +101,15 @@ class QueueTest extends \PHPUnit_Framework_TestCase
     public function testDeleteMethod()
     {
         $migrator = m::mock('\Orchestra\Tenanti\Migrator\Factory');
-        $tenanti  = $this->app['orchestra.tenanti'];
-        $model    = m::mock('\Illuminate\Database\Eloquent\Model');
+        $tenanti = $this->app['orchestra.tenanti'];
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
 
         $stub = new Queue();
-        $job  = m::mock('\Illuminate\Contracts\Queue\Job');
+        $job = m::mock('\Illuminate\Contracts\Queue\Job');
         $data = [
             'database' => 'foo',
-            'driver'   => 'user',
-            'id'       => 5,
+            'driver' => 'user',
+            'id' => 5,
         ];
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
@@ -131,14 +131,14 @@ class QueueTest extends \PHPUnit_Framework_TestCase
     public function testDeleteMethodWhenModelIsNull()
     {
         $migrator = m::mock('\Orchestra\Tenanti\Migrator\Factory');
-        $tenanti  = $this->app['orchestra.tenanti'];
+        $tenanti = $this->app['orchestra.tenanti'];
 
         $stub = new Queue();
-        $job  = m::mock('\Illuminate\Contracts\Queue\Job');
+        $job = m::mock('\Illuminate\Contracts\Queue\Job');
         $data = [
             'database' => 'foo',
-            'driver'   => 'user',
-            'id'       => 5,
+            'driver' => 'user',
+            'id' => 5,
         ];
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);

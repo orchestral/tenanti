@@ -34,7 +34,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     public function testCreatedMethod()
     {
         $queue = m::mock('\Illuminate\Queue\QueueInterface');
-        $stub  = m::mock('\Orchestra\Tenanti\Observer[getDriverName]');
+        $stub = m::mock('\Orchestra\Tenanti\Observer[getDriverName]');
         $model = m::mock('\Illuminate\Database\Eloquent\Model');
 
         $stub->shouldReceive('getDriverName')->once()->andReturn('user');
@@ -56,7 +56,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     public function testDeletedMethod()
     {
         $queue = m::mock('\Illuminate\Queue\QueueInterface');
-        $stub  = m::mock('\Orchestra\Tenanti\Observer[getConnectionName,getDriverName]');
+        $stub = m::mock('\Orchestra\Tenanti\Observer[getConnectionName,getDriverName]');
         $model = m::mock('\Illuminate\Database\Eloquent\Model');
 
         $stub->shouldReceive('getDriverName')->once()->andReturn('user')
