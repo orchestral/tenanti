@@ -43,18 +43,18 @@ class DeleteTenantTest extends \PHPUnit_Framework_TestCase
     public function testFireMethod()
     {
         $migrator = m::mock('\Orchestra\Tenanti\Migrator\Factory');
-        $tenanti  = $this->app['orchestra.tenanti'];
+        $tenanti = $this->app['orchestra.tenanti'];
 
         $stub = new DeleteTenant();
-        $job  = m::mock('\Illuminate\Contracts\Queue\Job');
+        $job = m::mock('\Illuminate\Contracts\Queue\Job');
         $data = [
             'database' => 'foo',
-            'driver'   => 'user',
-            'id'       => 5,
+            'driver' => 'user',
+            'id' => 5,
         ];
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
-        $migrator->shouldReceive('getModel->newInstance->find')->with(5)->andReturnNUll();
+        $migrator->shouldReceive('getModel->find')->with(5)->andReturnNUll();
         $job->shouldReceive('delete')->once()->andReturnNull();
 
         App::swap($this->app);

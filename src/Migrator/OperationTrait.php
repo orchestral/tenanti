@@ -5,6 +5,7 @@ use Orchestra\Support\Str;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Migrations\DatabaseMigrationRepository;
 
 trait OperationTrait
 {
@@ -49,8 +50,8 @@ trait OperationTrait
      * @var array
      */
     protected $resolver = [
-        'repository' => 'Illuminate\Database\Migrations\DatabaseMigrationRepository',
-        'migrator'   => 'Orchestra\Tenanti\Migrator\Migrator',
+        'repository' => DatabaseMigrationRepository::class,
+        'migrator'   => Migrator::class,
     ];
 
     /**
@@ -99,7 +100,7 @@ trait OperationTrait
         $database = Arr::get($this->config, 'database');
 
         if (! is_null($database)) {
-            $model->on($database);
+            $model->setConnection($database);
         }
 
         $model->useWritePdo();

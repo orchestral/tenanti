@@ -25,7 +25,7 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
 
         $config = [
             'drivers' => ['user' => ['model' => 'User']],
-            'chunk'   => 100,
+            'chunk' => 100,
         ];
 
         $stub = new TenantiManager($app);
@@ -51,7 +51,7 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
 
         $config = [
             'drivers' => [],
-            'chunk'   => 100,
+            'chunk' => 100,
         ];
 
         with(new TenantiManager($app))->setConfig($config)->driver('user');

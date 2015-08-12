@@ -21,12 +21,12 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testInstallMethod()
     {
-        $app    = $this->getAppContainer();
+        $app = $this->getAppContainer();
         $driver = 'user';
         $config = [];
 
-        $stub     = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runInstall]', [$app, $driver, $config]);
-        $model    = m::mock('\Illuminate\Database\Eloquent\Model');
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runInstall]', [$app, $driver, $config]);
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
         $entities = [
             $entity = m::mock('\Illuminate\Database\Eloquent\Model'),
         ];
@@ -48,12 +48,12 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testInstallMethodOnSingleId()
     {
-        $app    = $this->getAppContainer();
+        $app = $this->getAppContainer();
         $driver = 'user';
         $config = [];
 
-        $stub   = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runInstall]', [$app, $driver, $config]);
-        $model  = m::mock('\Illuminate\Database\Eloquent\Model');
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runInstall]', [$app, $driver, $config]);
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
         $entity = m::mock('\Illuminate\Database\Eloquent\Model');
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
@@ -71,12 +71,12 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testRunMethod()
     {
-        $app    = $this->getAppContainer();
+        $app = $this->getAppContainer();
         $driver = 'user';
         $config = [];
 
-        $stub     = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runUp]', [$app, $driver, $config]);
-        $model    = m::mock('\Illuminate\Database\Eloquent\Model');
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runUp]', [$app, $driver, $config]);
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
         $entities = [
             $entity = m::mock('\Illuminate\Database\Eloquent\Model'),
         ];
@@ -98,12 +98,12 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testRunMethodOnSingleId()
     {
-        $app    = $this->getAppContainer();
+        $app = $this->getAppContainer();
         $driver = 'user';
         $config = [];
 
-        $stub   = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runUp]', [$app, $driver, $config]);
-        $model  = m::mock('\Illuminate\Database\Eloquent\Model');
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runUp]', [$app, $driver, $config]);
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
         $entity = m::mock('\Illuminate\Database\Eloquent\Model');
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
@@ -121,12 +121,12 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testRollbackMethod()
     {
-        $app    = $this->getAppContainer();
+        $app = $this->getAppContainer();
         $driver = 'user';
         $config = [];
 
-        $stub     = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runDown]', [$app, $driver, $config]);
-        $model    = m::mock('\Illuminate\Database\Eloquent\Model');
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runDown]', [$app, $driver, $config]);
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
         $entities = [
             $entity = m::mock('\Illuminate\Database\Eloquent\Model'),
         ];
@@ -148,12 +148,12 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testRollbackMethodOnSingleId()
     {
-        $app    = $this->getAppContainer();
+        $app = $this->getAppContainer();
         $driver = 'user';
         $config = [];
 
-        $stub   = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runDown]', [$app, $driver, $config]);
-        $model  = m::mock('\Illuminate\Database\Eloquent\Model');
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runDown]', [$app, $driver, $config]);
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
         $entity = m::mock('\Illuminate\Database\Eloquent\Model');
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
@@ -171,12 +171,12 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testResetMethod()
     {
-        $app    = $this->getAppContainer();
+        $app = $this->getAppContainer();
         $driver = 'user';
         $config = [];
 
-        $stub     = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runReset]', [$app, $driver, $config]);
-        $model    = m::mock('\Illuminate\Database\Eloquent\Model');
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runReset]', [$app, $driver, $config]);
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
         $entities = [
             $entity = m::mock('\Illuminate\Database\Eloquent\Model'),
         ];
@@ -198,12 +198,12 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testResetMethodOnSingleId()
     {
-        $app    = $this->getAppContainer();
+        $app = $this->getAppContainer();
         $driver = 'user';
         $config = [];
 
-        $stub   = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runReset]', [$app, $driver, $config]);
-        $model  = m::mock('\Illuminate\Database\Eloquent\Model');
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runReset]', [$app, $driver, $config]);
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
         $entity = m::mock('\Illuminate\Database\Eloquent\Model');
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
@@ -222,14 +222,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testRunInstallMethod()
     {
-        $app    = $this->getAppContainer();
+        $app = $this->getAppContainer();
         $driver = 'user';
         $config = [];
 
         $app['schema']->shouldReceive('hasTable')->once()->with('user_5_migrations')->andReturn(false)
             ->shouldReceive('create')->once()->with('user_5_migrations', m::type('Closure'))->andReturnNull();
 
-        $stub  = new Factory($app, $driver, $config);
+        $stub = new Factory($app, $driver, $config);
         $model = $this->getMockModel();
 
         $this->assertNull($stub->runInstall($model, 'primary'));
@@ -243,7 +243,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testRunInstallMethodWithCustomAttribute()
     {
-        $app    = $this->getAppContainer();
+        $app = $this->getAppContainer();
         $driver = 'user';
         $config = ['migration' => 'migrations'];
 
@@ -253,7 +253,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $app['db']->shouldReceive('connection')->with('tenant_foo')->andReturnSelf()
             ->shouldReceive('getSchemaBuilder')->andReturn($app['schema']);
 
-        $stub  = new Factory($app, $driver, $config);
+        $stub = new Factory($app, $driver, $config);
         $model = $this->getMockModel();
 
         $this->assertNull($stub->runInstall($model, 'tenant_{entity.username}'));
@@ -267,7 +267,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testRunInstallMethodWithoutDatabaseConnectionName()
     {
-        $app    = $this->getAppContainer();
+        $app = $this->getAppContainer();
         $driver = 'user';
         $config = ['migration' => 'migrations'];
 
@@ -277,7 +277,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $app['db']->shouldReceive('connection')->with(null)->andReturnSelf()
             ->shouldReceive('getSchemaBuilder')->andReturn($app['schema']);
 
-        $stub  = new Factory($app, $driver, $config);
+        $stub = new Factory($app, $driver, $config);
         $model = $this->getMockModel();
 
         $this->assertNull($stub->runInstall($model, null));
@@ -291,13 +291,13 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testRunUpMethod()
     {
-        $app    = $this->getAppContainer();
+        $app = $this->getAppContainer();
         $driver = 'user';
         $config = [
             'path' => '/var/app/migrations',
         ];
 
-        $stub  = m::mock('\Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', [$app, $driver, $config])
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', [$app, $driver, $config])
                     ->shouldAllowMockingProtectedMethods();
         $model = $this->getMockModel();
 
@@ -320,13 +320,13 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testRunDownMethod()
     {
-        $app    = $this->getAppContainer();
+        $app = $this->getAppContainer();
         $driver = 'user';
         $config = [
             'path' => '/var/app/migrations',
         ];
 
-        $stub  = m::mock('\Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', [$app, $driver, $config])
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', [$app, $driver, $config])
             ->shouldAllowMockingProtectedMethods();
         $model = $this->getMockModel();
 
@@ -349,13 +349,13 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testRunResetMethod()
     {
-        $app    = $this->getAppContainer();
+        $app = $this->getAppContainer();
         $driver = 'user';
         $config = [
             'path' => '/var/app/migrations',
         ];
 
-        $stub  = m::mock('\Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', [$app, $driver, $config])
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', [$app, $driver, $config])
             ->shouldAllowMockingProtectedMethods();
         $model = $this->getMockModel();
 
@@ -390,9 +390,9 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     protected function getAppContainer()
     {
-        $app           = new Container();
-        $app['db']     = m::mock('\Illuminate\Database\ConnectionResolverInterface');
-        $app['files']  = m::mock('\Illuminate\Filesystem\Filesystem');
+        $app = new Container();
+        $app['db'] = m::mock('\Illuminate\Database\ConnectionResolverInterface');
+        $app['files'] = m::mock('\Illuminate\Filesystem\Filesystem');
         $app['schema'] = m::mock('\Illuminate\Database\Schema\Builder');
 
         $app['db']->shouldReceive('connection')->with('primary')->andReturnSelf()
