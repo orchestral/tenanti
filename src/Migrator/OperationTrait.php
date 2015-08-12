@@ -5,6 +5,7 @@ use Orchestra\Support\Str;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Migrations\DatabaseMigrationRepository;
 
 trait OperationTrait
 {
@@ -49,8 +50,8 @@ trait OperationTrait
      * @var array
      */
     protected $resolver = [
-        'repository' => 'Illuminate\Database\Migrations\DatabaseMigrationRepository',
-        'migrator'   => 'Orchestra\Tenanti\Migrator\Migrator',
+        'repository' => DatabaseMigrationRepository::class,
+        'migrator'   => Migrator::class,
     ];
 
     /**
@@ -63,7 +64,7 @@ trait OperationTrait
      */
     public function executeById($id, Closure $callback)
     {
-        $entity = $this->newQuery()->findOrFail($id);
+        $entity = $this->newQuery()->find($id);
 
         return call_user_func($callback, $entity);
     }
