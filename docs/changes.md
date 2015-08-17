@@ -5,6 +5,10 @@ title: Tenanti Change Log
 
 ## Version 3.1 {#3-1}
 
+### v3.1.2 {#v3-1-2}
+
+* Fixes migration is failing on some scenarios when using read/write connection setup.
+
 ### v3.1.1 {#v3-1-1}
 
 * Improved performances by reducing call within `Illuminate\Container\Container`.
