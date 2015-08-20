@@ -17,7 +17,7 @@ class DummyClass extends Migration
      */
     public function up($id, Model $model)
     {
-        Schema::table('DummyTable', function (Blueprint $table) {
+        Schema::table("DummyTable", function (Blueprint $table) {
 
         });
     }
@@ -32,7 +32,7 @@ class DummyClass extends Migration
      */
     public function down($id, Model $model)
     {
-        Schema::table('DummyTable', function (Blueprint $table) {
+        Schema::table("DummyTable", function (Blueprint $table) {
 
         });
     }
