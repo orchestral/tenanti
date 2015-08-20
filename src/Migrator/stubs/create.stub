@@ -17,7 +17,7 @@ class DummyClass extends Migration
      */
     public function up($id, Model $model)
     {
-        Schema::create('DummyTable', function (Blueprint $table) {
+        Schema::create("DummyTable", function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -33,6 +33,6 @@ class DummyClass extends Migration
      */
     public function down($id, Model $model)
     {
-        Schema::drop('DummyTable');
+        Schema::drop("DummyTable");
     }
 }
