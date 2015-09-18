@@ -5,6 +5,10 @@ title: Tenanti Change Log
 
 ## Version 3.1 {#3-1}
 
+### v3.1.4 {#v3-1-4}
+
+* Add `Orchestra\Tenanti\Migrator\OperationTrait::resolveDatabaseConnection()` and `Orchestra\Tenanti\Migrator\OperationTrait::asDefaultDatabase()` to allow resolving dynamic database connection for multiple database connection setup.
+
 ### v3.1.3 {#v3-1-3}
 
 * Fixes generated migration file schema.
