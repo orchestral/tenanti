@@ -12,6 +12,14 @@ Tenanti allow you to manage multi-tenant data schema and migration manager for y
 [![Coverage Status](https://img.shields.io/coveralls/orchestral/tenanti/3.1.svg?style=flat-square)](https://coveralls.io/r/orchestral/tenanti?branch=3.1)
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/orchestral/tenanti/3.1.svg?style=flat-square)](https://scrutinizer-ci.com/g/orchestral/tenanti/)
 
+## Table of Content
+
+* [Version Compatibility](#version-compatibility)
+* [Installation](#installation)
+* [Configuration](#configuration)
+* [Usage](#usage)
+* [Change Log](http://orchestraplatform.com/docs/latest/components/tenanti/changes#v3-1)
+
 ## Version Compatibility
 
 Laravel  | Tenanti
@@ -40,7 +48,7 @@ You could also simplify the above code by using the following command:
 
     composer require "orchestra/tenanti=~3.0"
 
-### Setup
+## Configuration
 
 Next add the following service provider in `config/app.php`.
 
@@ -54,6 +62,18 @@ Next add the following service provider in `config/app.php`.
 ```
 
 > The command utility is enabled via `Orchestra\Tenanti\CommandServiceProvider`.
+
+### Aliases
+
+To make development easier, you could add `Orchestra\Support\Facades\Tenanti` alias for easier reference:
+
+```php
+'aliases' => [
+
+    'Tenanti' => Orchestra\Support\Facades\Tenanti::class,
+
+],
+```
 
 ## Usage
 
@@ -174,6 +194,42 @@ class ConfigServiceProvider extends ServiceProvider
         ]);
     }
 }
+```
+
+### Database Connection Resolver
+
+For tenanti to automatically resolve your multiple database connection, we need to setup the resolver. You can do this via:
+
+```
+<?php namespace App\Providers;
+
+class AppServiceProvider extends ServiceProvider
+{
+    public function boot()
+    {
+        Tenanti::setupMultiDatabase('tenants', function (User $entity, array $template) {
+            $template['database'] = "acme_{$entity->getKey()}";
+
+            return $template;
+        });
+    }
+}
+```
+
+Behind the scene, `$template` will contain the template database configuration fetch from `"database.connections.tenants"` (based on the first parameter `tenants`). We can dynamically modify the connection configuration and return the updated configuration for the tenant.
+
+### Setting Default Database Connection
+
+Alternatively you can also use Tenanti to set the default database connection for your application:
+
+```php
+<?php
+
+use App\User;
+
+$user = User::find(5);
+
+Tenanti::driver('user')->asDefaultConnection($user, 'tenants_{id}');
 ```
 
 ### Observer

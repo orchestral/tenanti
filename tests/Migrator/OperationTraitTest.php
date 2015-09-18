@@ -58,8 +58,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
                 'id' => 5,
             ]);
 
-        $this->asDefaultDatabase($model, 'tenant_{id}');
-
+        $this->assertEquals('tenant_5', $this->asDefaultDatabase($model, 'tenant_{id}'));
         $this->assertEquals(['database' => 'tenants_5'], $repository->get('database.connections.tenant_5'));
         $this->assertEquals('tenant_5', $repository->get('database.default'));
     }

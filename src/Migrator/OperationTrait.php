@@ -146,13 +146,15 @@ trait OperationTrait
      * @param  \Illuminate\Database\Eloquent\Model  $entity
      * @param  string  $database
      *
-     * @return void
+     * @return string
      */
     public function asDefaultDatabase(Model $entity, $database)
     {
         $connection = $this->resolveDatabaseConnection($entity, $database);
 
         $this->app->make('config')->set('database.default', $connection);
+
+        return $connection;
     }
 
     /**
