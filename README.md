@@ -157,14 +157,15 @@ class UserObserver extends Observer
 
 Tenanti include additional command to help you run bulk migration when a new schema is created, the available command resemble the usage available from `php artisan migrate` namespace.
 
-Command                                    | Description
-:------------------------------------------|:---------------------
- php artisan tenanti:install {driver}      | Setup migration table on each entry for a given driver.
- php artisan tenanti:make {driver} {name}  | Make a new Schema generator for a given driver.
- php artisan tenanti:migrate {driver}      | Run migration on each entry for a given driver.
- php artisan tenanti:rollback {driver}     | Rollback migration on each entry for a given driver.
- php artisan tenanti:reset {driver}        | Reset migration on each entry for a given driver.
- php artisan tenanti:refresh {driver}      | Refresh migration (reset and migrate) on each entry for a given driver.
+Command                                      | Description
+:--------------------------------------------|:--------------------------------------------
+ php artisan tenanti:install {driver}        | Setup migration table on each entry for a given driver.
+ php artisan tenanti:make {driver} {name}    | Make a new Schema generator for a given driver.
+ php artisan tenanti:migrate {driver}        | Run migration on each entry for a given driver.
+ php artisan tenanti:rollback {driver}       | Rollback migration on each entry for a given driver.
+ php artisan tenanti:reset {driver}          | Reset migration on each entry for a given driver.
+ php artisan tenanti:refresh {driver}        | Refresh migration (reset and migrate) on each entry for a given driver.
+ php artisan tenanti:queue {driver} {action} | Execute any of above action using separate queue to minimize impact on current process.
 
 ## Multi Database Connection Setup
 
