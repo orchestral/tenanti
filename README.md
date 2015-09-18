@@ -198,6 +198,8 @@ For tenanti to automatically resolve your multiple database connection, we need 
 ```php
 <?php namespace App\Providers;
 
+use Orchestra\Support\Facades\Tenanti;
+
 class AppServiceProvider extends ServiceProvider
 {
     public function boot()
@@ -218,9 +220,11 @@ Behind the scene, `$template` will contain the template database configuration f
 Alternatively you can also use Tenanti to set the default database connection for your application:
 
 ```php
-<?php
 
 use App\User;
+use Orchestra\Support\Facades\Tenanti;
+
+// ...
 
 $user = User::find(5);
 
