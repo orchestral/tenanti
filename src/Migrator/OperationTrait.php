@@ -147,7 +147,7 @@ trait OperationTrait
      * @param  \Illuminate\Database\Eloquent\Model  $entity
      * @param  string  $database
      *
-     * @return void
+     * @return string
      */
     protected function resolveDatabaseConnection(Model $entity, $database)
     {
@@ -156,11 +156,7 @@ trait OperationTrait
         $database   = Arr::get($this->config, 'database');
         $name       = "database.connections.{$connection}";
 
-        if (is_null($database)) {
-            throw new RuntimeException('Multiple database resolver is not available, Please configure!');
-        }
-
-        if (is_null($repository->get($name))) {
+        if (! is_null($database) && is_null($repository->get($name))) {
             $config = $this->app->call($database['resolver'], [
                 'id'         => $entity->getKey(),
                 'template'   => $database['template'],
@@ -169,6 +165,8 @@ trait OperationTrait
 
             $repository->set($name, $config);
         }
+
+        return $connection;
     }
 
     /**

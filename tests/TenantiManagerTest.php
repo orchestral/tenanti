@@ -26,6 +26,12 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
         $config = [
             'drivers' => ['user' => ['model' => 'User']],
             'chunk' => 100,
+            'path'  => '/var/www/laravel/database/tenant/users',
+        ];
+
+        $expected = [
+            'drivers' => [],
+            'path'  => '/var/www/laravel/database/tenant/users',
         ];
 
         $stub = new TenantiManager($app);
@@ -34,7 +40,7 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
         $resolver = $stub->driver('user');
 
         $this->assertInstanceOf('\Orchestra\Tenanti\Migrator\Factory', $resolver);
-        $this->assertEquals($config, $stub->getConfig());
+        $this->assertEquals($expected, $stub->getConfig());
     }
 
     /**
