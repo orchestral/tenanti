@@ -1,7 +1,6 @@
 <?php namespace Orchestra\Tenanti\Migrator;
 
 use Closure;
-use RuntimeException;
 use Orchestra\Support\Str;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
