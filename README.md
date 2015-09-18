@@ -75,34 +75,32 @@ To make development easier, you could add `Orchestra\Support\Facades\Tenanti` al
 ],
 ```
 
+### Publish Configuration
+
+To make it easier to configuration your tenant setup, publish the configuration:
+
+    php artisan vendor:publish
+
 ## Usage
 
-### Configuration
+### Configuration Tenant Driver for Single Database
 
-Update your `App\Providers\ConfigServiceProvider` to include following options:
+Open `config/orchestra/tenanti.php` and customize the drivers.
 
 ```php
-<?php namespace App\Providers;
+<?php
 
-use Illuminate\Support\ServiceProvider;
-
-class ConfigServiceProvider extends ServiceProvider
-{
-	public function register()
-	{
-		config([
-			'orchestra.tenanti.drivers.user' => [
-				'model' => 'App\User',
-				'path'  => database_path('tenanti/user'),
-			],
-		]);
-	}
-}
+return [
+    'drivers' => [
+        'user' => [
+            'model' => App\User::class,
+            'path'  => database_path('tenanti/user'),
+        ],
+    ],
+];
 ```
 
 You can customize, or add new driver in the configuration. It is important to note that `model` configuration only work with `Eloquent` instance.
-
-Alternatively, you could also use `php artisan vendor:publish` command to publish the configuration file to `config/orchestra/tenanti.php`.
 
 #### Setup migration autoload
 
@@ -172,35 +170,31 @@ Command                                    | Description
 
 Instead of using Tenanti with a single database connection, you could also setup a database connection for each tenant.
 
-### Configuration
+### Configuration Tenant Driver for Multiple Database
 
-By introducing a `migration` config, you can now setup the migration table name to be `tenant_migrations` instead of `user_{id}_migrations`.
+Open `config/orchestra/tenanti.php` and customize the drivers.
 
 ```php
-<?php namespace App\Providers;
+<?php
 
-use Illuminate\Support\ServiceProvider;
-
-class ConfigServiceProvider extends ServiceProvider
-{
-    public function register()
-    {
-        config([
-            'orchestra.tenanti.drivers.user' => [
-                'model'     => 'App\User',
-                'migration' => 'tenant_migrations',
-                'path'      => database_path('tenanti/user'),
-            ],
-        ]);
-    }
-}
+return [
+    'drivers' => [
+        'user' => [
+            'model'     => App\User::class,
+            'migration' => 'tenant_migrations',
+            'path'      => database_path('tenanti/user'),
+        ],
+    ],
+];
 ```
+
+By introducing a `migration` config, you can now setup the migration table name to be `tenant_migrations` instead of `user_{id}_migrations`.
 
 ### Database Connection Resolver
 
 For tenanti to automatically resolve your multiple database connection, we need to setup the resolver. You can do this via:
 
-```
+```php
 <?php namespace App\Providers;
 
 class AppServiceProvider extends ServiceProvider
