@@ -1,6 +1,8 @@
 <?php namespace Orchestra\Tenanti\TestCase\Migrator;
 
 use Mockery as m;
+use Illuminate\Config\Repository;
+use Illuminate\Database\Eloquent\Model;
 use Orchestra\Tenanti\Migrator\OperationTrait;
 
 class OperationTraitTest extends \PHPUnit_Framework_TestCase
@@ -14,6 +16,98 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
     {
         m::close();
     }
+
+    /**
+     * Test Orchestra\Tenanti\Migrator\OperationTrait::asDefaultDatabase()
+     * method.
+     *
+     * @test
+     */
+    public function testAsDefaultDatabaseMethod()
+    {
+        $this->app = m::mock('\Illuminate\Container\Container[make]');
+
+        $repository = new Repository([
+            'database' => [
+                'default' => 'mysql',
+                'connections' => [
+                    'tenant' => [
+                        'database' => 'tenants',
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->config = [
+            'model' => 'User',
+            'database' => [
+                'template' => $repository->get('database.connections.tenant'),
+                'resolver' => function (Model $entity, array $template) {
+                    return array_merge($template, [
+                        'database' => "tenants_{$entity->getKey()}",
+                    ]);
+                },
+            ],
+        ];
+
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+
+        $this->app->shouldReceive('make')->twice()->with('config')->andReturn($repository);
+        $model->shouldReceive('getKey')->twice()->andReturn(5)
+            ->shouldReceive('toArray')->once()->andReturn([
+                'id' => 5,
+            ]);
+
+        $this->assertEquals('tenant_5', $this->asDefaultDatabase($model, 'tenant_{id}'));
+        $this->assertEquals(['database' => 'tenants_5'], $repository->get('database.connections.tenant_5'));
+        $this->assertEquals('tenant_5', $repository->get('database.default'));
+    }
+
+    /**
+     * Test Orchestra\Tenanti\Migrator\OperationTrait::resolveDatabaseConnection()
+     * method.
+     *
+     * @test
+     */
+    public function testResolveDatabaseConnectionMethod()
+    {
+        $this->app = m::mock('\Illuminate\Container\Container[make]');
+
+        $repository = new Repository([
+            'database' => [
+                'default' => 'mysql',
+                'connections' => [
+                    'tenant' => [
+                        'database' => 'tenants',
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->config = [
+            'model' => 'User',
+            'database' => [
+                'template' => $repository->get('database.connections.tenant'),
+                'resolver' => function (Model $entity, array $template) {
+                    return array_merge($template, [
+                        'database' => "tenants_{$entity->getKey()}",
+                    ]);
+                },
+            ],
+        ];
+
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+
+        $this->app->shouldReceive('make')->once()->with('config')->andReturn($repository);
+        $model->shouldReceive('getKey')->twice()->andReturn(5)
+            ->shouldReceive('toArray')->once()->andReturn([
+                'id' => 5,
+            ]);
+
+        $this->assertEquals('tenant_5', $this->resolveDatabaseConnection($model, 'tenant_{id}'));
+        $this->assertEquals(['database' => 'tenants_5'], $repository->get('database.connections.tenant_5'));
+    }
+
 
     /**
      * Test Orchestra\Tenanti\Migrator\OperationTrait::resolveModel()

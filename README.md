@@ -12,6 +12,14 @@ Tenanti allow you to manage multi-tenant data schema and migration manager for y
 [![Coverage Status](https://img.shields.io/coveralls/orchestral/tenanti/master.svg?style=flat-square)](https://coveralls.io/r/orchestral/tenanti?branch=master)
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/orchestral/tenanti/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/orchestral/tenanti/)
 
+## Table of Content
+
+* [Version Compatibility](#version-compatibility)
+* [Installation](#installation)
+* [Configuration](#configuration)
+* [Usage](#usage)
+* [Change Log](http://orchestraplatform.com/docs/latest/components/tenanti/changes#v3-1)
+
 ## Version Compatibility
 
 Laravel  | Tenanti
@@ -41,7 +49,7 @@ You could also simplify the above code by using the following command:
 
     composer require "orchestra/tenanti=~3.0"
 
-### Setup
+## Configuration
 
 Next add the following service provider in `config/app.php`.
 
@@ -56,34 +64,44 @@ Next add the following service provider in `config/app.php`.
 
 > The command utility is enabled via `Orchestra\Tenanti\CommandServiceProvider`.
 
-## Usage
+### Aliases
 
-### Configuration
-
-Update your `App\Providers\ConfigServiceProvider` to include following options:
+To make development easier, you could add `Orchestra\Support\Facades\Tenanti` alias for easier reference:
 
 ```php
-<?php namespace App\Providers;
+'aliases' => [
 
-use Illuminate\Support\ServiceProvider;
+    'Tenanti' => Orchestra\Support\Facades\Tenanti::class,
 
-class ConfigServiceProvider extends ServiceProvider
-{
-	public function register()
-	{
-		config([
-			'orchestra.tenanti.drivers.user' => [
-				'model' => 'App\User',
-				'path'  => database_path('tenanti/user'),
-			],
-		]);
-	}
-}
+],
+```
+
+### Publish Configuration
+
+To make it easier to configuration your tenant setup, publish the configuration:
+
+    php artisan vendor:publish
+
+## Usage
+
+### Configuration Tenant Driver for Single Database
+
+Open `config/orchestra/tenanti.php` and customize the drivers.
+
+```php
+<?php
+
+return [
+    'drivers' => [
+        'user' => [
+            'model' => App\User::class,
+            'path'  => database_path('tenanti/user'),
+        ],
+    ],
+];
 ```
 
 You can customize, or add new driver in the configuration. It is important to note that `model` configuration only work with `Eloquent` instance.
-
-Alternatively, you could also use `php artisan vendor:publish` command to publish the configuration file to `config/orchestra/tenanti.php`.
 
 #### Setup migration autoload
 
@@ -140,42 +158,81 @@ class UserObserver extends Observer
 
 Tenanti include additional command to help you run bulk migration when a new schema is created, the available command resemble the usage available from `php artisan migrate` namespace.
 
-Command                                    | Description
-:------------------------------------------|:---------------------
- php artisan tenanti:install {driver}      | Setup migration table on each entry for a given driver.
- php artisan tenanti:make {driver} {name}  | Make a new Schema generator for a given driver.
- php artisan tenanti:migrate {driver}      | Run migration on each entry for a given driver.
- php artisan tenanti:rollback {driver}     | Rollback migration on each entry for a given driver.
- php artisan tenanti:reset {driver}        | Reset migration on each entry for a given driver.
- php artisan tenanti:refresh {driver}      | Refresh migration (reset and migrate) on each entry for a given driver.
+Command                                      | Description
+:--------------------------------------------|:--------------------------------------------
+ php artisan tenanti:install {driver}        | Setup migration table on each entry for a given driver.
+ php artisan tenanti:make {driver} {name}    | Make a new Schema generator for a given driver.
+ php artisan tenanti:migrate {driver}        | Run migration on each entry for a given driver.
+ php artisan tenanti:rollback {driver}       | Rollback migration on each entry for a given driver.
+ php artisan tenanti:reset {driver}          | Reset migration on each entry for a given driver.
+ php artisan tenanti:refresh {driver}        | Refresh migration (reset and migrate) on each entry for a given driver.
+ php artisan tenanti:queue {driver} {action} | Execute any of above action using separate queue to minimize impact on current process.
 
 ## Multi Database Connection Setup
 
 Instead of using Tenanti with a single database connection, you could also setup a database connection for each tenant.
 
-### Configuration
+### Configuration Tenant Driver for Multiple Database
+
+Open `config/orchestra/tenanti.php` and customize the drivers.
+
+```php
+<?php
+
+return [
+    'drivers' => [
+        'user' => [
+            'model'     => App\User::class,
+            'migration' => 'tenant_migrations',
+            'path'      => database_path('tenanti/user'),
+        ],
+    ],
+];
+```
 
 By introducing a `migration` config, you can now setup the migration table name to be `tenant_migrations` instead of `user_{id}_migrations`.
+
+### Database Connection Resolver
+
+For tenanti to automatically resolve your multiple database connection, we need to setup the resolver. You can do this via:
 
 ```php
 <?php namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Orchestra\Support\Facades\Tenanti;
 
-class ConfigServiceProvider extends ServiceProvider
+class AppServiceProvider extends ServiceProvider
 {
-    public function register()
+    public function boot()
     {
-        config([
-            'orchestra.tenanti.drivers.user' => [
-                'model'     => 'App\User',
-                'migration' => 'tenant_migrations',
-                'path'      => database_path('tenanti/user'),
-            ],
-        ]);
+        Tenanti::setupMultiDatabase('tenants', function (User $entity, array $template) {
+            $template['database'] = "acme_{$entity->getKey()}";
+
+            return $template;
+        });
     }
 }
 ```
+
+Behind the scene, `$template` will contain the template database configuration fetch from `"database.connections.tenants"` (based on the first parameter `tenants`). We can dynamically modify the connection configuration and return the updated configuration for the tenant.
+
+### Setting Default Database Connection
+
+Alternatively you can also use Tenanti to set the default database connection for your application:
+
+```php
+
+use App\User;
+use Orchestra\Support\Facades\Tenanti;
+
+// ...
+
+$user = User::find(5);
+
+Tenanti::driver('user')->asDefaultDatabase($user, 'tenants_{id}');
+```
+
+> Most of the time, this would be use in a Middleware Class when you resolve the tenant ID based on `Illuminate\Http\Request` object.
 
 ### Observer
 
@@ -195,7 +252,7 @@ class UserObserver extends Observer
 
 	public function getConnectionName()
 	{
-		return 'tenant_{id}';
+		return 'tenants_{id}';
 	}
 }
 ```

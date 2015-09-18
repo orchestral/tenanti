@@ -141,6 +141,51 @@ trait OperationTrait
     }
 
     /**
+     * Set tenant as default database connection.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  string  $database
+     *
+     * @return string
+     */
+    public function asDefaultDatabase(Model $entity, $database)
+    {
+        $connection = $this->resolveDatabaseConnection($entity, $database);
+
+        $this->app->make('config')->set('database.default', $connection);
+
+        return $connection;
+    }
+
+    /**
+     * Resolve database connection.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  string  $database
+     *
+     * @return string
+     */
+    protected function resolveDatabaseConnection(Model $entity, $database)
+    {
+        $repository = $this->app->make('config');
+        $connection = $this->bindWithKey($entity, $database);
+        $database   = Arr::get($this->config, 'database');
+        $name       = "database.connections.{$connection}";
+
+        if (! is_null($database) && is_null($repository->get($name))) {
+            $config = $this->app->call($database['resolver'], [
+                'entity'     => $entity,
+                'template'   => $database['template'],
+                'connection' => $connection,
+            ]);
+
+            $repository->set($name, $config);
+        }
+
+        return $connection;
+    }
+
+    /**
      * Get table name.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
