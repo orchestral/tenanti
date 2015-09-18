@@ -223,7 +223,7 @@ use App\User;
 
 $user = User::find(5);
 
-Tenanti::driver('user')->asDefaultConnection($user, 'tenants_{id}');
+Tenanti::driver('user')->asDefaultDatabase($user, 'tenants_{id}');
 ```
 
 > Most of the time, this would be use in a Middleware Class when you resolve the tenant ID based on `Illuminate\Http\Request` object.
