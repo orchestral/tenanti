@@ -16,7 +16,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
         m::close();
     }
 
-     /**
+    /**
      * Test Orchestra\Tenanti\Migrator\OperationTrait::resolveDatabaseConnection()
      * method.
      *
@@ -32,20 +32,20 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
                     'tenant' => [
                         'database' => 'tenants',
                     ],
-                ]
+                ],
             ],
         ]);
 
         $this->config = [
-            'model'    => 'User',
+            'model' => 'User',
             'database' => [
                 'template' => $repository->get('database.connections.tenant'),
                 'resolver' => function ($id, $template) {
                     return array_merge($template, [
                         'database' => "tenants_{$id}",
                     ]);
-                }
-            ]
+                },
+            ],
         ];
 
         $model = m::mock('\Illuminate\Database\Eloquent\Model');

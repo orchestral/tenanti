@@ -26,12 +26,12 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
         $config = [
             'drivers' => ['user' => ['model' => 'User']],
             'chunk' => 100,
-            'path'  => '/var/www/laravel/database/tenant/users',
+            'path' => '/var/www/laravel/database/tenant/users',
         ];
 
         $expected = [
             'drivers' => [],
-            'path'  => '/var/www/laravel/database/tenant/users',
+            'path' => '/var/www/laravel/database/tenant/users',
         ];
 
         $stub = new TenantiManager($app);
@@ -137,7 +137,6 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(['database' => $expected], $stub->getConfig());
     }
-
 
     /**
      * Test Orchestra\Tenanti\TenantiManager::setupMultiDatabase() method
