@@ -141,6 +141,21 @@ trait OperationTrait
     }
 
     /**
+     * Set tenant as default database connection.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  string  $database
+     *
+     * @return void
+     */
+    public function asDefaultDatabase(Model $entity, $database)
+    {
+        $connection = $this->resolveDatabaseConnection($entity, $database);
+
+        $this->app->make('config')->set('database.default', $connection);
+    }
+
+    /**
      * Resolve database connection.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
@@ -157,7 +172,7 @@ trait OperationTrait
 
         if (! is_null($database) && is_null($repository->get($name))) {
             $config = $this->app->call($database['resolver'], [
-                'id'         => $entity->getKey(),
+                'entity'     => $entity,
                 'template'   => $database['template'],
                 'connection' => $connection,
             ]);
