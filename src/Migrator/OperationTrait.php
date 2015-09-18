@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Tenanti\Migrator;
 
 use Closure;
+use RuntimeException;
 use Orchestra\Support\Str;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
@@ -138,6 +139,36 @@ trait OperationTrait
         }
 
         return $this->migrator[$table];
+    }
+
+    /**
+     * Resolve database connection.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  string  $database
+     *
+     * @return void
+     */
+    protected function resolveDatabaseConnection(Model $entity, $database)
+    {
+        $repository = $this->app->make('config');
+        $connection = $this->bindWithKey($entity, $database);
+        $database   = Arr::get($this->config, 'database');
+        $name       = "database.connections.{$connection}";
+
+        if (is_null($database)) {
+            throw new RuntimeException('Multiple database resolver is not available, Please configure!');
+        }
+
+        if (is_null($repository->get($name))) {
+            $config = $this->app->call($database['resolver'], [
+                'id'         => $entity->getKey(),
+                'template'   => $database['template'],
+                'connection' => $connection,
+            ]);
+
+            $repository->set($name, $config);
+        }
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Tenanti;
 
+use Closure;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Illuminate\Support\Manager;
@@ -32,8 +33,8 @@ class TenantiManager extends Manager
      */
     protected function createDriver($driver)
     {
-        $config = Arr::get($this->config, "drivers.{$driver}");
-        $chunk  = Arr::get($this->config, 'chunk', 100);
+        $config = Arr::pull($this->config, "drivers.{$driver}");
+        $chunk  = Arr::pull($this->config, 'chunk', 100);
 
         if (is_null($config)) {
             throw new InvalidArgumentException("Driver [$driver] not supported.");
@@ -74,5 +75,35 @@ class TenantiManager extends Manager
         $this->config = $config;
 
         return $this;
+    }
+
+    /**
+     * Setup multiple database connection from template.
+     *
+     * @param  string  $connection
+     * @param  \Closure  $callback
+     *
+     * @return void
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function setupMultiDatabase($connection, Closure $callback)
+    {
+        $repository = $this->app->make('config');
+
+        if (is_null($connection)) {
+            $connection = $repository->get('database.default');
+        }
+
+        $config = $repository->get("database.connections.{$connection}", null);
+
+        if (is_null($config)) {
+            throw new InvalidArgumentException("Database connection [{$connection}] is not available.");
+        }
+
+        Arr::set($this->config, 'database', [
+            'template' => $config,
+            'resolver' => $callback,
+        ]);
     }
 }
