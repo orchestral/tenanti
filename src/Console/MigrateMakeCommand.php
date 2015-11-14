@@ -1,7 +1,7 @@
 <?php namespace Orchestra\Tenanti\Console;
 
 use Orchestra\Support\Str;
-use Illuminate\Foundation\Composer;
+use Illuminate\Support\Composer;
 use Orchestra\Tenanti\TenantiManager;
 use Orchestra\Tenanti\Migrator\Creator;
 use Symfony\Component\Console\Input\InputOption;
@@ -31,7 +31,7 @@ class MigrateMakeCommand extends BaseCommand
     protected $creator;
 
     /**
-     * @var \Illuminate\Foundation\Composer
+     * @var \Illuminate\Support\Composer
      */
     protected $composer;
 
@@ -40,7 +40,7 @@ class MigrateMakeCommand extends BaseCommand
      *
      * @param \Orchestra\Tenanti\TenantiManager  $tenant
      * @param \Orchestra\Tenanti\Migrator\Creator  $creator
-     * @param \Illuminate\Foundation\Composer  $composer
+     * @param \Illuminate\Support\Composer  $composer
      */
     public function __construct(TenantiManager $tenant, Creator $creator, Composer $composer)
     {

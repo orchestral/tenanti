@@ -306,7 +306,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
-            ->shouldReceive('run')->once()->with('/var/app/migrations', false)->andReturnNull()
+            ->shouldReceive('run')->once()->with('/var/app/migrations', ['pretend' => false])->andReturnNull()
             ->shouldReceive('getNotes')->once()->andReturn([]);
 
         $this->assertNull($stub->runUp($model, 'primary'));
