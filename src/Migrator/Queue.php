@@ -17,7 +17,7 @@ class Queue
      */
     public function create(Job $job, array $data)
     {
-        $task = App::make(CreateTenant::class);
+        $task = App::make($this->getCreateTenantJob());
 
         return $task->fire($job, $data);
     }
@@ -32,8 +32,28 @@ class Queue
      */
     public function delete(Job $job, array $data)
     {
-        $task = App::make(DeleteTenant::class);
+        $task = App::make($this->getDeleteTenantJob());
 
         return $task->fire($job, $data);
+    }
+
+    /**
+     * Get create tenant job class.
+     *
+     * @return string
+     */
+    protected function getCreateTenantJob()
+    {
+        return CreateTenant::class;
+    }
+
+    /**
+     * Get delete tenant job class.
+     *
+     * @return string
+     */
+    protected function getDeleteTenantJob()
+    {
+        return DeleteTenant::class;
     }
 }
