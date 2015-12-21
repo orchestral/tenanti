@@ -80,30 +80,47 @@ class TenantiManager extends Manager
     /**
      * Setup multiple database connection from template.
      *
-     * @param  string  $connection
+     * @param  string  $using
      * @param  \Closure  $callback
      *
      * @return void
      *
      * @throws \InvalidArgumentException
      */
-    public function setupMultiDatabase($connection, Closure $callback)
+    public function connection($connection, Closure $callback)
     {
         $repository = $this->app->make('config');
 
-        if (is_null($connection)) {
-            $connection = $repository->get('database.default');
+        if (is_null($using)) {
+            $using = $repository->get('database.default');
         }
 
-        $config = $repository->get("database.connections.{$connection}", null);
+        $config = $repository->get("database.connections.{$using}", null);
 
         if (is_null($config)) {
-            throw new InvalidArgumentException("Database connection [{$connection}] is not available.");
+            throw new InvalidArgumentException("Database connection [{$using}] is not available.");
         }
 
         Arr::set($this->config, 'database', [
             'template' => $config,
             'resolver' => $callback,
         ]);
+    }
+
+    /**
+     * Setup multiple database connection from template.
+     *
+     * @param  string  $using
+     * @param  \Closure  $callback
+     *
+     * @return void
+     *
+     * @deprecated since 3.1.x and to be removed in 3.3.0.
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function setupMultiDatabase($using, Closure $callback)
+    {
+        return $this->connection($using, $callback);
     }
 }

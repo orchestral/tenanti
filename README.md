@@ -204,10 +204,11 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Tenanti::setupMultiDatabase('tenants', function (User $entity, array $template) {
-            $template['database'] = "acme_{$entity->getKey()}";
+        Tenanti::connection('tenants', function (User $entity, array $config) {
+            $config['database'] = "acme_{$entity->getKey()}"; 
+            // refer to config under `database.connections.tenants.*`.
 
-            return $template;
+            return $config;
         });
     }
 }
