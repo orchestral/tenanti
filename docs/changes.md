@@ -9,6 +9,7 @@ title: Tenanti Change Log
 
 * Allow Tenant job to be configurable.
 * Add `Orchestra\Tenanti\TenantiManager::connection()` and deprecate `Orchestra\Tenanti\TenantiManager::setupMultipleDatabase()`.
+* Add `Orchestra\Tenanti\Migrator\OperationTrait::asDefaultConnection()` and deprecate `Orchestra\Tenanti\Migrator\OperationTrait::asDefaultDatabase()`.
 
 ### v3.1.4 {#v3-1-4}
 
