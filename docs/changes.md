@@ -5,9 +5,16 @@ title: Tenanti Change Log
 
 ## Version 3.1 {#3-1}
 
+### v3.1.5 {#v3-1-5}
+
+* Allow Tenant job to be configurable.
+* Add `Orchestra\Tenanti\TenantiManager::connection()` and deprecate `Orchestra\Tenanti\TenantiManager::setupMultipleDatabase()`.
+* Add `Orchestra\Tenanti\Migrator\OperationTrait::asDefaultConnection()` and deprecate `Orchestra\Tenanti\Migrator\OperationTrait::asDefaultDatabase()`.
+
 ### v3.1.4 {#v3-1-4}
 
 * Add `Orchestra\Tenanti\Migrator\OperationTrait::resolveDatabaseConnection()` and `Orchestra\Tenanti\Migrator\OperationTrait::asDefaultDatabase()` to allow resolving dynamic database connection for multiple database connection setup.
+* Add `Orchestra\Tenanti\TenantiManager::setupMultipleDatabase()`.
 
 ### v3.1.3 {#v3-1-3}
 

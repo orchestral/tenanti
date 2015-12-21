@@ -206,16 +206,17 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Tenanti::setupMultiDatabase('tenants', function (User $entity, array $template) {
-            $template['database'] = "acme_{$entity->getKey()}";
+        Tenanti::connection('tenants', function (User $entity, array $config) {
+            $config['database'] = "acme_{$entity->getKey()}"; 
+            // refer to config under `database.connections.tenants.*`.
 
-            return $template;
+            return $config;
         });
     }
 }
 ```
 
-Behind the scene, `$template` will contain the template database configuration fetch from `"database.connections.tenants"` (based on the first parameter `tenants`). We can dynamically modify the connection configuration and return the updated configuration for the tenant.
+Behind the scene, `$config` will contain the template database configuration fetch from `"database.connections.tenants"` (based on the first parameter `tenants`). We can dynamically modify the connection configuration and return the updated configuration for the tenant.
 
 ### Setting Default Database Connection
 
@@ -230,7 +231,7 @@ use Orchestra\Support\Facades\Tenanti;
 
 $user = User::find(5);
 
-Tenanti::driver('user')->asDefaultDatabase($user, 'tenants_{id}');
+Tenanti::driver('user')->asDefaultConnection($user, 'tenants_{id}');
 ```
 
 > Most of the time, this would be use in a Middleware Class when you resolve the tenant ID based on `Illuminate\Http\Request` object.
