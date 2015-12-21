@@ -87,7 +87,7 @@ class TenantiManager extends Manager
      *
      * @throws \InvalidArgumentException
      */
-    public function connection($connection, Closure $callback)
+    public function connection($using, Closure $callback)
     {
         $repository = $this->app->make('config');
 

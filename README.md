@@ -214,7 +214,7 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
-Behind the scene, `$template` will contain the template database configuration fetch from `"database.connections.tenants"` (based on the first parameter `tenants`). We can dynamically modify the connection configuration and return the updated configuration for the tenant.
+Behind the scene, `$config` will contain the template database configuration fetch from `"database.connections.tenants"` (based on the first parameter `tenants`). We can dynamically modify the connection configuration and return the updated configuration for the tenant.
 
 ### Setting Default Database Connection
 
