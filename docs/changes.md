@@ -3,6 +3,15 @@ title: Tenanti Change Log
 
 ---
 
+## Version 3.2 {#v3-2}
+
+### v3.2.0 {#v3-2-0}
+
+* Update support to Laravel Framework v5.2.
+* Improved performances by reducing call within `Illuminate\Container\Container`.
+* Add `Orchestra\Tenanti\Migrator\OperationTrait::resolveDatabaseConnection()` and `Orchestra\Tenanti\Migrator\OperationTrait::asDefaultConnection()` to allow resolving dynamic database connection for multiple database connection setup.
+* Add `Orchestra\Tenanti\TenantiManager::connection()`.
+
 ## Version 3.1 {#3-1}
 
 ### v3.1.5 {#v3-1-5}
