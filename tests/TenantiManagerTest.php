@@ -37,6 +37,7 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
                 'connection' => null,
                 'model'      => 'User',
             ],
+            'chunk' => 100,
         ];
 
         $stub = new TenantiManager($app);
