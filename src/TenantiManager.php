@@ -35,7 +35,7 @@ class TenantiManager extends Manager
     {
         $chunk = Arr::get($this->config, 'chunk', 100);
 
-        if (is_null($this->getConfig($driver))) {
+        if (is_null($this->setupConfig($driver))) {
             throw new InvalidArgumentException("Driver [$driver] not supported.");
         }
 
@@ -61,20 +61,8 @@ class TenantiManager extends Manager
      */
     public function getConfig($driver = null)
     {
-        if (! is_null($driver)) {
-            if (isset($this->config[$driver])) {
-                return $this->config[$driver];
-            } elseif (is_null($config = Arr::pull($this->config, "drivers.{$driver}"))) {
-                return;
-            }
-
-            $connection = Arr::get($this->config, 'connection');
-
-            if (! is_null($connection) && $this->driverExcludedByOptions($driver, $connection['options'])) {
-                $connection = null;
-            }
-
-            return $this->config[$driver] = array_merge($config, ['connection' => $connection]);
+        if (! is_null($driver) && isset($this->config[$driver])) {
+            return $this->config[$driver];
         }
 
         return $this->config;
@@ -142,6 +130,32 @@ class TenantiManager extends Manager
     public function setupMultiDatabase($using, Closure $callback)
     {
         return $this->connection($using, $callback);
+    }
+
+    /**
+     * Prepare configuration values.
+     *
+     * @param  string  $driver
+     *
+     * @return array|null
+     */
+    protected function setupConfig($driver)
+    {
+        if (isset($this->config[$driver])) {
+            return;
+        }
+
+        if (is_null($config = Arr::pull($this->config, "drivers.{$driver}"))) {
+            return;
+        }
+
+        $connection = Arr::get($this->config, 'connection');
+
+        if (! is_null($connection) && $this->driverExcludedByOptions($driver, $connection['options'])) {
+            $connection = null;
+        }
+
+        return $this->config[$driver] = array_merge($config, ['connection' => $connection]);
     }
 
     /**
