@@ -50,8 +50,8 @@ class CreateTenantTest extends \PHPUnit_Framework_TestCase
         $job = m::mock('\Illuminate\Contracts\Queue\Job');
         $data = [
             'database' => 'foo',
-            'driver' => 'user',
-            'id' => 5,
+            'driver'   => 'user',
+            'id'       => 5,
         ];
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);

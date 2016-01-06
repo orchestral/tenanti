@@ -40,7 +40,9 @@ class TenantiManager extends Manager
             throw new InvalidArgumentException("Driver [$driver] not supported.");
         }
 
-        return $this->app->make($this->resolver, [$this->app, $driver, $config, $chunk]);
+        $this->config[$driver] = array_merge($config, ['connection' => Arr::get($this->config, 'connection')]);
+
+        return $this->app->make($this->resolver, [$this->app, $this, $driver, $chunk]);
     }
 
     /**
@@ -101,7 +103,8 @@ class TenantiManager extends Manager
             throw new InvalidArgumentException("Database connection [{$using}] is not available.");
         }
 
-        Arr::set($this->config, 'database', [
+        Arr::set($this->config, 'connection', [
+            'name'     => "{$using}_{id}",
             'template' => $config,
             'resolver' => $callback,
         ]);

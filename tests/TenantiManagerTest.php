@@ -24,14 +24,19 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
         $app = new Container();
 
         $config = [
-            'drivers' => ['user' => ['model' => 'User']],
+            'drivers' => [
+                'user' => ['model' => 'User', 'path' => '/var/www/laravel/database/tenant/users'],
+            ],
             'chunk' => 100,
-            'path' => '/var/www/laravel/database/tenant/users',
         ];
 
         $expected = [
             'drivers' => [],
-            'path' => '/var/www/laravel/database/tenant/users',
+            'user'    => [
+                'path'       => '/var/www/laravel/database/tenant/users',
+                'connection' => null,
+                'model'      => 'User',
+            ],
         ];
 
         $stub = new TenantiManager($app);
@@ -57,7 +62,7 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
 
         $config = [
             'drivers' => [],
-            'chunk' => 100,
+            'chunk'   => 100,
         ];
 
         with(new TenantiManager($app))->setConfig($config)->driver('user');
@@ -98,12 +103,13 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
         $expected = [
             'template' => ['database' => 'tenant'],
             'resolver' => $callback,
+            'name'     => 'tenant_{id}',
         ];
 
         $stub = new TenantiManager($app);
         $stub->setupMultiDatabase('tenant', $callback);
 
-        $this->assertEquals(['database' => $expected], $stub->getConfig());
+        $this->assertEquals(['connection' => $expected], $stub->getConfig());
     }
 
     /**
@@ -130,12 +136,13 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
         $expected = [
             'template' => ['database' => 'tenant'],
             'resolver' => $callback,
+            'name'     => 'mysql_{id}',
         ];
 
         $stub = new TenantiManager($app);
         $stub->setupMultiDatabase(null, $callback);
 
-        $this->assertEquals(['database' => $expected], $stub->getConfig());
+        $this->assertEquals(['connection' => $expected], $stub->getConfig());
     }
 
     /**
