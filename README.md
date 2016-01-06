@@ -234,21 +234,3 @@ Tenanti::driver('user')->asDefaultConnection($user, 'tenants_{id}');
 ```
 
 > Most of the time, this would be use in a Middleware Class when you resolve the tenant ID based on `Illuminate\Http\Request` object.
-
-### Observer
-
-Adding an override method for `getConnectionName()` would allow you to force the migration to be executed on the desire connection.
-
-```php
-<?php namespace App\Observers;
-
-use Orchestra\Tenanti\Observer;
-
-class UserObserver extends Observer
-{
-	public function getDriverName()
-	{
-		return 'user';
-	}
-}
-```
