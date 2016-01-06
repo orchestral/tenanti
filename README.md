@@ -249,10 +249,5 @@ class UserObserver extends Observer
 	{
 		return 'user';
 	}
-
-	public function getConnectionName()
-	{
-		return 'tenants_{id}';
-	}
 }
 ```
