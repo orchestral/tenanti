@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Tenanti\Migrator;
 
+use Orchestra\Tenanti\TenantiManager;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Container\Container;
 
@@ -18,16 +19,16 @@ class Factory implements FactoryInterface
      * Construct a new migration manager.
      *
      * @param  \Illuminate\Contracts\Container\Container  $app
+     * @param  \Orchestra\Tenanti\TenantiManager  $manager
      * @param  string  $driver
-     * @param  array  $config
      * @param  int  $chunk
      */
-    public function __construct(Container $app, $driver, array $config = [], $chunk = 100)
+    public function __construct(Container $app, TenantiManager $manager, $driver, $chunk = 100)
     {
-        $this->app    = $app;
-        $this->driver = $driver;
-        $this->config = $config;
-        $this->chunk  = $chunk;
+        $this->app     = $app;
+        $this->manager = $manager;
+        $this->driver  = $driver;
+        $this->chunk   = $chunk;
     }
 
     /**
@@ -166,7 +167,7 @@ class Factory implements FactoryInterface
 
         $migrator->setConnection($database);
         $migrator->setEntity($entity);
-        $migrator->run($this->getMigrationPath(), $pretend);
+        $migrator->run($this->getMigrationPath(), ['pretend' => $pretend]);
 
         $this->mergeMigratorNotes($migrator);
     }
