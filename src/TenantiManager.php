@@ -56,12 +56,13 @@ class TenantiManager extends Manager
      * Get configuration values.
      *
      * @param  string|null  $group
+     * @param  mixed  $default
      *
-     * @return array
+     * @return mixed
      */
-    public function getConfig($group = null)
+    public function getConfig($group = null, $default = null)
     {
-        return Arr::get($this->config, $group);
+        return Arr::get($this->config, $group, $default);
     }
 
     /**
