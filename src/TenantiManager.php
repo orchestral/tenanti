@@ -40,7 +40,13 @@ class TenantiManager extends Manager
             throw new InvalidArgumentException("Driver [$driver] not supported.");
         }
 
-        $this->config[$driver] = array_merge($config, ['connection' => Arr::get($this->config, 'connection')]);
+        $connection = Arr::get($this->config, 'connection');
+
+        if (! is_null($connection) && $this->driverExcludedByOptions($driver, $connection['options'])) {
+            $connection = null;
+        }
+
+        $this->config[$driver] = array_merge($config, ['connection' => $connection]);
 
         return $this->app->make($this->resolver, [$this->app, $this, $driver, $chunk]);
     }
@@ -58,11 +64,13 @@ class TenantiManager extends Manager
     /**
      * Get configuration values.
      *
+     * @param  string|null  $group
+     *
      * @return array
      */
-    public function getConfig()
+    public function getConfig($group = null)
     {
-        return $this->config;
+        return Arr::get($this->config, $group);
     }
 
     /**
@@ -84,12 +92,13 @@ class TenantiManager extends Manager
      *
      * @param  string  $using
      * @param  \Closure  $callback
+     * @param  array  $option
      *
      * @return void
      *
      * @throws \InvalidArgumentException
      */
-    public function connection($using, Closure $callback)
+    public function connection($using, Closure $callback, array $options = [])
     {
         $repository = $this->app->make('config');
 
@@ -107,6 +116,7 @@ class TenantiManager extends Manager
             'name'     => "{$using}_{id}",
             'template' => $config,
             'resolver' => $callback,
+            'options'  => $options,
         ]);
     }
 
@@ -125,5 +135,19 @@ class TenantiManager extends Manager
     public function setupMultiDatabase($using, Closure $callback)
     {
         return $this->connection($using, $callback);
+    }
+
+    /**
+     * Determine if the given options exclude a particular driver.
+     *
+     * @param  string  $driver
+     * @param  array  $options
+     *
+     * @return bool
+     */
+    protected function driverExcludedByOptions($driver, array $options)
+    {
+        return (! empty($options['only']) && ! in_array($driver, (array) $options['only'])) ||
+            (! empty($options['except']) && in_array($driver, (array) $options['except']));
     }
 }

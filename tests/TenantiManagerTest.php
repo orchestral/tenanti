@@ -104,6 +104,7 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
             'template' => ['database' => 'tenant'],
             'resolver' => $callback,
             'name'     => 'tenant_{id}',
+            'options'  => [],
         ];
 
         $stub = new TenantiManager($app);
@@ -137,6 +138,7 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
             'template' => ['database' => 'tenant'],
             'resolver' => $callback,
             'name'     => 'mysql_{id}',
+            'options'  => [],
         ];
 
         $stub = new TenantiManager($app);

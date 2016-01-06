@@ -52,7 +52,8 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
                             'database' => "tenants_{$entity->getKey()}",
                         ]);
                     },
-                    'name' => 'tenant_{id}',
+                    'name'    => 'tenant_{id}',
+                    'options' => ['only' => ['user']],
                 ],
             ],
         ]);
@@ -106,7 +107,8 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
                             'database' => "tenants_{$entity->getKey()}",
                         ]);
                     },
-                    'name' => 'tenant_{id}',
+                    'name'    => 'tenant_{id}',
+                    'options' => [],
                 ],
             ],
         ]);
