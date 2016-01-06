@@ -35,7 +35,7 @@ class TenantiManager extends Manager
     {
         $chunk = Arr::get($this->config, 'chunk', 100);
 
-        if (is_null($this->setupConfig($driver))) {
+        if (is_null($this->setupDriverConfig($driver))) {
             throw new InvalidArgumentException("Driver [$driver] not supported.");
         }
 
@@ -135,7 +135,7 @@ class TenantiManager extends Manager
      *
      * @return array|null
      */
-    protected function setupConfig($driver)
+    protected function setupDriverConfig($driver)
     {
         if (isset($this->config[$driver])) {
             return;
