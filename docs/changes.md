@@ -5,6 +5,11 @@ title: Tenanti Change Log
 
 ## Version 3.1 {#3-1}
 
+### v3.1.6 {#v3-1-6}
+
+* Rework on how configuration are being pull for multi database connection.
+* Add third parameters for `Orchestra\Tenanti\TenantiManager::connection()` to allow filtering by `except` or `only`. This allows only selection of driver to utilize multi database connection.
+
 ### v3.1.5 {#v3-1-5}
 
 * Allow Tenant job to be configurable.
