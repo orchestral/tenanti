@@ -33,20 +33,11 @@ class TenantiManager extends Manager
      */
     protected function createDriver($driver)
     {
-        $config = Arr::pull($this->config, "drivers.{$driver}");
-        $chunk  = Arr::pull($this->config, 'chunk', 100);
+        $chunk = Arr::get($this->config, 'chunk', 100);
 
-        if (is_null($config)) {
+        if (is_null($this->setupDriverConfig($driver))) {
             throw new InvalidArgumentException("Driver [$driver] not supported.");
         }
-
-        $connection = Arr::get($this->config, 'connection');
-
-        if (! is_null($connection) && $this->driverExcludedByOptions($driver, $connection['options'])) {
-            $connection = null;
-        }
-
-        $this->config[$driver] = array_merge($config, ['connection' => $connection]);
 
         return $this->app->make($this->resolver, [$this->app, $this, $driver, $chunk]);
     }
@@ -65,12 +56,13 @@ class TenantiManager extends Manager
      * Get configuration values.
      *
      * @param  string|null  $group
+     * @param  mixed  $default
      *
-     * @return array
+     * @return mixed
      */
-    public function getConfig($group = null)
+    public function getConfig($group = null, $default = null)
     {
-        return Arr::get($this->config, $group);
+        return Arr::get($this->config, $group, $default);
     }
 
     /**
@@ -135,6 +127,32 @@ class TenantiManager extends Manager
     public function setupMultiDatabase($using, Closure $callback)
     {
         return $this->connection($using, $callback);
+    }
+
+    /**
+     * Prepare configuration values.
+     *
+     * @param  string  $driver
+     *
+     * @return array|null
+     */
+    protected function setupDriverConfig($driver)
+    {
+        if (isset($this->config[$driver])) {
+            return;
+        }
+
+        if (is_null($config = Arr::pull($this->config, "drivers.{$driver}"))) {
+            return;
+        }
+
+        $connection = Arr::get($this->config, 'connection');
+
+        if (! is_null($connection) && $this->driverExcludedByOptions($driver, $connection['options'])) {
+            $connection = null;
+        }
+
+        return $this->config[$driver] = array_merge($config, ['connection' => $connection]);
     }
 
     /**

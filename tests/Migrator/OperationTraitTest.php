@@ -42,10 +42,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
 
         $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$this->app]);
 
-        $manager->shouldReceive('getConfig')->andReturn([
-            'user' => [
-                'model'      => 'User',
-                'connection' => [
+        $manager->shouldReceive('getConfig')->with('user.connection', null)->andReturn([
                     'template' => $repository->get('database.connections.tenant'),
                     'resolver' => function (Model $entity, array $template) {
                         return array_merge($template, [
@@ -54,9 +51,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
                     },
                     'name'    => 'tenant_{id}',
                     'options' => ['only' => ['user']],
-                ],
-            ],
-        ]);
+                ]);
 
         $this->manager = $manager;
 
@@ -97,21 +92,16 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
 
         $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$this->app]);
 
-        $manager->shouldReceive('getConfig')->andReturn([
-            'user' => [
-                'model'      => 'User',
-                'connection' => [
-                    'template' => $repository->get('database.connections.tenant'),
-                    'resolver' => function (Model $entity, array $template) {
-                        return array_merge($template, [
-                            'database' => "tenants_{$entity->getKey()}",
-                        ]);
-                    },
-                    'name'    => 'tenant_{id}',
-                    'options' => [],
-                ],
-            ],
-        ]);
+        $manager->shouldReceive('getConfig')->with('user.connection', null)->andReturn([
+                'template' => $repository->get('database.connections.tenant'),
+                'resolver' => function (Model $entity, array $template) {
+                    return array_merge($template, [
+                        'database' => "tenants_{$entity->getKey()}",
+                    ]);
+                },
+                'name'    => 'tenant_{id}',
+                'options' => [],
+            ]);
 
         $this->manager = $manager;
 
@@ -140,9 +130,8 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
 
         $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$this->app]);
 
-        $manager->shouldReceive('getConfig')->andReturn([
-            'user' => ['model' => 'User'],
-        ]);
+        $manager->shouldReceive('getConfig')->with('user.model', null)->andReturn('User')
+            ->shouldReceive('getConfig')->with('user.database', null)->andReturnNull();
 
         $this->manager = $manager;
 
@@ -168,9 +157,8 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
 
         $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$this->app]);
 
-        $manager->shouldReceive('getConfig')->andReturn([
-            'user' => ['model' => 'User', 'database' => 'primary'],
-        ]);
+        $manager->shouldReceive('getConfig')->with('user.model', null)->andReturn('User')
+            ->shouldReceive('getConfig')->with('user.database', null)->andReturn('primary');
 
         $this->manager = $manager;
 
@@ -199,7 +187,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
 
         $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$this->app]);
 
-        $manager->shouldReceive('getConfig')->andReturn(['user' => ['model' => 'User']]);
+        $manager->shouldReceive('getConfig')->with('user.model', null)->andReturn('User');
 
         $this->manager = $manager;
 
@@ -221,7 +209,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
 
         $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
 
-        $manager->shouldReceive('getConfig')->andReturn(['user' => ['model' => 'User']]);
+        $manager->shouldReceive('getConfig')->with('user.model', null)->andReturn('User');
 
         $this->manager = $manager;
 
@@ -242,7 +230,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
 
         $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
 
-        $manager->shouldReceive('getConfig')->andReturn(['user' => compact('path')]);
+        $manager->shouldReceive('getConfig')->with('user.path', null)->andReturn($path);
 
         $this->manager = $manager;
 

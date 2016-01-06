@@ -323,7 +323,9 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $stub = new Factory($app, $manager, $driver);
         $model = $this->getMockModel();
 
-        $manager->shouldReceive('getConfig')->andReturn(['user' => ['migration' => 'migrations']]);
+        $manager->shouldReceive('getConfig')->with('user.path', null)->andReturn('/var/app/migrations')
+            ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('getConfig')->with('user.migration', null)->andReturn('migrations');
 
         $this->assertNull($stub->runInstall($model, 'tenant_{entity.username}'));
     }
@@ -350,7 +352,9 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $model = $this->getMockModel();
 
-        $manager->shouldReceive('getConfig')->andReturn(['user' => ['migration' => 'migrations']]);
+        $manager->shouldReceive('getConfig')->with('user.path', null)->andReturn('/var/app/migrations')
+            ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('getConfig')->with('user.migration', null)->andReturn('migrations');
 
         $this->assertNull($stub->runInstall($model, null));
     }
@@ -375,7 +379,9 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->andReturn(['user' => ['path' => '/var/app/migrations']]);
+        $manager->shouldReceive('getConfig')->with('user.path', null)->andReturn('/var/app/migrations')
+            ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('getConfig')->with('user.migration', null)->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
             ->shouldReceive('run')->once()->with('/var/app/migrations', ['pretend' => false])->andReturnNull()
@@ -404,7 +410,9 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->andReturn(['user' => ['path' => '/var/app/migrations']]);
+        $manager->shouldReceive('getConfig')->with('user.path', null)->andReturn('/var/app/migrations')
+            ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('getConfig')->with('user.migration', null)->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
             ->shouldReceive('rollback')->once()->with(false)->andReturnNull()
@@ -433,7 +441,9 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->andReturn(['user' => ['path' => '/var/app/migrations']]);
+        $manager->shouldReceive('getConfig')->with('user.path', null)->andReturn('/var/app/migrations')
+            ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('getConfig')->with('user.migration', null)->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
             ->shouldReceive('rollback')->once()->with(false)->andReturn(5)

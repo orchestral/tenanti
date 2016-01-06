@@ -91,7 +91,7 @@ trait OperationTrait
      */
     protected function getConfig($key, $default = null)
     {
-        return Arr::get($this->manager->getConfig(), "{$this->driver}.{$key}", $default);
+        return $this->manager->getConfig("{$this->driver}.{$key}", $default);
     }
 
     /**
