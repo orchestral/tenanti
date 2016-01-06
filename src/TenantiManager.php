@@ -55,17 +55,13 @@ class TenantiManager extends Manager
     /**
      * Get configuration values.
      *
-     * @param  string|null  $driver
+     * @param  string|null  $group
      *
      * @return array
      */
-    public function getConfig($driver = null)
+    public function getConfig($group = null)
     {
-        if (! is_null($driver) && isset($this->config[$driver])) {
-            return $this->config[$driver];
-        }
-
-        return $this->config;
+        return Arr::get($this->config, $group);
     }
 
     /**
