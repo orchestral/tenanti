@@ -26,9 +26,9 @@ trait OperationTrait
     /**
      * Tenant configuration.
      *
-     * @var array
+     * @var \Orchestra\Tenanti\TenantiManager
      */
-    protected $config = [];
+    protected $manager;
 
     /**
      * Cached migrators.
@@ -82,6 +82,19 @@ trait OperationTrait
     }
 
     /**
+     * Get tenant configuration.
+     *
+     * @param  string  $key
+     * @param  mixed  $default
+     *
+     * @return mixed
+     */
+    protected function getConfig($key, $default = null)
+    {
+        return $this->manager->getConfig("{$this->driver}.{$key}", $default);
+    }
+
+    /**
      * Resolve model.
      *
      * @return \Illuminate\Database\Eloquent\Model
@@ -97,7 +110,7 @@ trait OperationTrait
             throw new InvalidArgumentException("Model [{$name}] should be an instance of Eloquent.");
         }
 
-        $database = Arr::get($this->config, 'database');
+        $database = $this->getConfig('database');
 
         if (! is_null($database)) {
             $model->setConnection($database);
@@ -183,14 +196,19 @@ trait OperationTrait
     protected function resolveDatabaseConnection(Model $entity, $database)
     {
         $repository = $this->app->make('config');
+        $tenants    = $this->getConfig('connection');
+
+        if (! is_null($tenants)) {
+            $database = $tenants['name'];
+        }
+
         $connection = $this->bindWithKey($entity, $database);
-        $database   = Arr::get($this->config, 'database');
         $name       = "database.connections.{$connection}";
 
-        if (! is_null($database) && is_null($repository->get($name))) {
-            $config = $this->app->call($database['resolver'], [
+        if (! is_null($tenants) && is_null($repository->get($name))) {
+            $config = $this->app->call($tenants['resolver'], [
                 'entity'     => $entity,
-                'template'   => $database['template'],
+                'template'   => $tenants['template'],
                 'connection' => $connection,
             ]);
 
@@ -209,7 +227,7 @@ trait OperationTrait
      */
     protected function resolveMigrationTableName(Model $entity)
     {
-        if (is_null($table = Arr::get($this->config, 'migration'))) {
+        if (is_null($table = $this->getConfig('migration'))) {
             $table = $this->getTablePrefix().'_migrations';
         }
 
@@ -223,7 +241,7 @@ trait OperationTrait
      */
     public function getMigrationPath()
     {
-        return Arr::get($this->config, 'path');
+        return $this->getConfig('path');
     }
 
     /**
@@ -233,7 +251,7 @@ trait OperationTrait
      */
     public function getModelName()
     {
-        return Arr::get($this->config, 'model');
+        return $this->getConfig('model');
     }
 
     /**
@@ -256,15 +274,14 @@ trait OperationTrait
      */
     protected function bindWithKey(Model $entity, $name)
     {
-        if (is_null($name)) {
+        if (is_null($name) || (strpos($name, '{') === false && strpos($name, '}') === false)) {
             return $name;
         }
 
         $id = $entity->getKey();
 
         if (! isset($this->data[$id])) {
-            $data       = Arr::dot(['entity' => $entity->toArray()]);
-            $data['id'] = $id;
+            $data = array_merge(Arr::dot(['entity' => $entity->toArray()]), compact('id'));
 
             $this->data[$id] = $data;
         }

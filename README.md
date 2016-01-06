@@ -132,7 +132,7 @@ use App\Observers\UserObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
-	public function register()
+	public function boot()
 	{
 		User::observe(new UserObserver);
 	}
@@ -250,11 +250,6 @@ class UserObserver extends Observer
 	public function getDriverName()
 	{
 		return 'user';
-	}
-
-	public function getConnectionName()
-	{
-		return 'tenants_{id}';
 	}
 }
 ```
