@@ -167,7 +167,7 @@ class Factory implements FactoryInterface
 
         $migrator->setConnection($database);
         $migrator->setEntity($entity);
-        $migrator->run($this->getMigrationPath(), ['pretend' => $pretend]);
+        $migrator->run($this->getMigrationPath(), $pretend);
 
         $this->mergeMigratorNotes($migrator);
     }
