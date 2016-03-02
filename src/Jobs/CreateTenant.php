@@ -15,13 +15,16 @@ class CreateTenant extends Tenant
      */
     public function fire(Job $job, array $data)
     {
+        if ($job->attempts() > 3) {
+            return $job->failed();
+        }
+
         $database = Arr::get($data, 'database');
         $migrator = $this->resolveMigrator($data);
         $entity   = $this->resolveModelEntity($migrator, $data);
 
         if (is_null($entity)) {
-            $job->delete();
-            return ;
+            return $job->release(10);
         }
 
         $migrator->runInstall($entity, $database);
