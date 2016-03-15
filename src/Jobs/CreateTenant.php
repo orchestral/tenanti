@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Arr;
 
-class CreateTenant extends Tenant
+class CreateTenant extends Job
 {
     /**
      * Fire queue on creating a model.

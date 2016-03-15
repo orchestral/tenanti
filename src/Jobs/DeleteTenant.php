@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Arr;
 
-class DeleteTenant extends Tenant
+class DeleteTenant extends Job
 {
     /**
      * Fire queue on deleting a model.

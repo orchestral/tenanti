@@ -1,6 +1,5 @@
 <?php namespace Orchestra\Tenanti;
 
-use Illuminate\Support\Facades\Queue;
 use Illuminate\Database\Eloquent\Model;
 use Orchestra\Tenanti\Jobs\CreateTenant;
 use Orchestra\Tenanti\Jobs\DeleteTenant;
