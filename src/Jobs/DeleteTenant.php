@@ -1,34 +1,29 @@
 <?php namespace Orchestra\Tenanti\Jobs;
 
 use Illuminate\Support\Arr;
-use Illuminate\Contracts\Queue\Job;
 
 class DeleteTenant extends Tenant
 {
     /**
-     * Run queue on deleting a model.
-     *
-     * @param  \Illuminate\Contracts\Queue\Job  $job
-     * @param  array  $data
+     * Fire queue on deleting a model.
      *
      * @return void
      */
-    public function fire(Job $job, array $data)
+    public function handle()
     {
-        if ($job->attempts() > 3) {
-            return $job->failed();
+        if ($this->attempts() > 3) {
+            return $this->failed();
         }
 
-        $database = Arr::get($data, 'database');
-        $migrator = $this->resolveMigrator($data);
-        $entity   = $this->resolveModelEntity($migrator, $data);
+        $database = Arr::get($this->config, 'database');
+        $migrator = $this->resolveMigrator();
 
-        if (is_null($entity)) {
-            return $job->release(10);
+        if (is_null($this->model)) {
+            return $this->release(10);
         }
 
-        $migrator->runReset($entity, $database);
+        $migrator->runReset($this->model, $database);
 
-        $job->delete();
+        $this->delete();
     }
 }

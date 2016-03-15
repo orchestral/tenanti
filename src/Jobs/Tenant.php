@@ -1,37 +1,50 @@
 <?php namespace Orchestra\Tenanti\Jobs;
 
 use Illuminate\Support\Arr;
+use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\App;
-use Orchestra\Tenanti\Migrator\FactoryInterface;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Queue\InteractsWithQueue;
 
 abstract class Tenant
 {
-    /**
-     * Resolve migrator instance.
-     *
-     * @param  array  $data
-     *
-     * @return \Orchestra\Tenanti\Migrator\FactoryInterface
-     */
-    protected function resolveMigrator(array $data)
-    {
-        $driver = Arr::get($data, 'driver');
+    use InteractsWithQueue, Queueable;
 
-        return App::make('orchestra.tenanti')->driver($driver);
+    /**
+     * The eloquent model.
+     *
+     * @var \Illuminate\Database\Eloquent\Model
+     */
+    public $model;
+
+    /**
+     * Tenant configuration.
+     *
+     * @var array
+     */
+    public $config = [];
+
+    /**
+     * Construct a new Job.
+     *
+     * @param \Illuminate\Database\Eloquent\Model  $model
+     * @param array  $config
+     */
+    public function __construct(Model $model, array $config)
+    {
+        $this->model = $model;
+        $this->config = $config;
     }
 
     /**
-     * Resolve model entity.
+     * Resolve migrator instance.
      *
-     * @param  \Orchestra\Tenanti\Migrator\FactoryInterface  $migrator
-     * @param  array  $data
-     *
-     * @return \Illuminate\Database\Eloquent\Model|null
+     * @return \Orchestra\Tenanti\Migrator\FactoryInterface
      */
-    protected function resolveModelEntity(FactoryInterface $migrator, $data)
+    protected function resolveMigrator()
     {
-        $id = Arr::get($data, 'id');
+        $driver = Arr::get($this->config, 'driver');
 
-        return $migrator->getModel()->find($id);
+        return App::make('orchestra.tenanti')->driver($driver);
     }
 }

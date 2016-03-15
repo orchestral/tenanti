@@ -4,9 +4,12 @@ use Illuminate\Support\Facades\Queue;
 use Illuminate\Database\Eloquent\Model;
 use Orchestra\Tenanti\Jobs\CreateTenant;
 use Orchestra\Tenanti\Jobs\DeleteTenant;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 abstract class Observer
 {
+    use DispatchesJobs;
+
     /**
      * Get connection name.
      *
@@ -33,11 +36,12 @@ abstract class Observer
      */
     public function created(Model $entity)
     {
-        Queue::push(CreateTenant::class, [
+        $data = [
             'database' => $this->getConnectionName(),
             'driver'   => $this->getDriverName(),
-            'id'       => $entity->getKey(),
-        ]);
+        ];
+
+        $this->dispatch($this->getCreateTenantJob($entity, $data));
 
         return true;
     }
@@ -51,12 +55,39 @@ abstract class Observer
      */
     public function deleted(Model $entity)
     {
-        Queue::push(DeleteTenant::class, [
+        $data = [
             'database' => $this->getConnectionName(),
             'driver'   => $this->getDriverName(),
-            'id'       => $entity->getKey(),
-        ]);
+        ];
+
+        $this->dispatch($this->getDeleteTenantJob($entity, $data));
 
         return true;
+    }
+
+    /**
+     * Resolve create tenant job.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  array  $data
+     *
+     * @return \Orchestra\Tenanti\Jobs\CreateTenant
+     */
+    protected function getCreateTenantJob(Model $entity, array $data)
+    {
+        return new CreateTenant($entity, $data);
+    }
+
+    /**
+     * Resolve create tenant job.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  array  $data
+     *
+     * @return \Orchestra\Tenanti\Jobs\DeleteTenant
+     */
+    protected function getDeleteTenantJob(Model $entity, array $data)
+    {
+        return new DeleteTenant($entity, $data);
     }
 }
