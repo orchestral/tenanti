@@ -19,6 +19,10 @@ title: Tenanti Change Log
 
 ## Version 3.1 {#3-1}
 
+### v3.1.7 {#v3-1-7}
+
+* Fixes `php artisan tenanti:migrate` command always running on pretending mode.
+
 ### v3.1.6 {#v3-1-6}
 
 * Rework on how configuration are being pull for multi database connection.

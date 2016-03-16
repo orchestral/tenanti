@@ -1,32 +1,30 @@
 <?php namespace Orchestra\Tenanti\Jobs;
 
 use Illuminate\Support\Arr;
-use Illuminate\Contracts\Queue\Job;
 
-class CreateTenant extends Tenant
+class CreateTenant extends Job
 {
     /**
-     * Run queue on creating a model.
-     *
-     * @param  \Illuminate\Contracts\Queue\Job  $job
-     * @param  array  $data
+     * Fire queue on creating a model.
      *
      * @return void
      */
-    public function fire(Job $job, array $data)
+    public function handle()
     {
-        $database = Arr::get($data, 'database');
-        $migrator = $this->resolveMigrator($data);
-        $entity   = $this->resolveModelEntity($migrator, $data);
-
-        if (is_null($entity)) {
-            $job->delete();
-            return ;
+        if ($this->attempts() > 3) {
+            return $this->failed();
         }
 
-        $migrator->runInstall($entity, $database);
-        $migrator->runUp($entity, $database);
+        $database = Arr::get($this->config, 'database');
+        $migrator = $this->resolveMigrator();
 
-        $job->delete();
+        if (is_null($this->model)) {
+            return $this->release(10);
+        }
+
+        $migrator->runInstall($this->model, $database);
+        $migrator->runUp($this->model, $database);
+
+        $this->delete();
     }
 }
