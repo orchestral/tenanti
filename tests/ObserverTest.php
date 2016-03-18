@@ -8,14 +8,20 @@ use Illuminate\Support\Facades\Facade;
 class ObserverTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var \Illuminate\Container\Container
+     */
+    private $app;
+
+    /**
      * Setup the test environment.
      */
     public function setUp()
     {
-        $app = new Container();
+        $this->app = new Container();
 
         Facade::clearResolvedInstances();
-        Facade::setFacadeApplication($app);
+        Facade::setFacadeApplication($this->app);
+        Container::setInstance($this->app);
     }
 
     /**
@@ -23,6 +29,8 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
+        unset($this->app);
+
         m::close();
     }
 
@@ -33,17 +41,20 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreatedMethod()
     {
-        $queue = m::mock('\Illuminate\Queue\QueueInterface');
-        $stub = m::mock('\Orchestra\Tenanti\Observer[getDriverName]');
+        $app = $this->app;
+        $app['Illuminate\Contracts\Bus\Dispatcher'] = $bus = m::mock('Illuminate\Contracts\Bus\Dispatcher');
+
+        $config = ['database' => null, 'driver' => 'user'];
+
+        $stub = m::mock('\Orchestra\Tenanti\Observer[getDriverName,getCreateTenantJob]')
+                    ->shouldAllowMockingProtectedMethods();
+
         $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $job = m::mock('\Orchestra\Tenanti\Jobs\CreateTenant', [$model, $config]);
 
-        $stub->shouldReceive('getDriverName')->once()->andReturn('user');
-        $model->shouldReceive('getKey')->once()->andReturn(5);
-        $queue->shouldReceive('push')->once()
-            ->with('Orchestra\Tenanti\Jobs\CreateTenant', ['database' => null, 'driver' => 'user', 'id' => 5])
-            ->andReturnNull();
-
-        Queue::swap($queue);
+        $stub->shouldReceive('getDriverName')->once()->andReturn('user')
+            ->shouldReceive('getCreateTenantJob')->once()->with($model, $config)->andReturn($job);
+        $bus->shouldReceive('dispatch')->once()->with($job)->andReturnNull();
 
         $this->assertTrue($stub->created($model));
     }
@@ -55,18 +66,21 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeletedMethod()
     {
-        $queue = m::mock('\Illuminate\Queue\QueueInterface');
-        $stub = m::mock('\Orchestra\Tenanti\Observer[getConnectionName,getDriverName]');
+        $app = $this->app;
+        $app['Illuminate\Contracts\Bus\Dispatcher'] = $bus = m::mock('Illuminate\Contracts\Bus\Dispatcher');
+
+        $config = ['database' => 'primary', 'driver' => 'user'];
+
+        $stub = m::mock('\Orchestra\Tenanti\Observer[getConnectionName,getDriverName,getDeleteTenantJob]')
+                    ->shouldAllowMockingProtectedMethods();;
+
         $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $job = m::mock('\Orchestra\Tenanti\Jobs\DeleteTenant', [$model, $config]);
 
         $stub->shouldReceive('getDriverName')->once()->andReturn('user')
-            ->shouldReceive('getConnectionName')->once()->andReturn('primary');
-        $model->shouldReceive('getKey')->once()->andReturn(5);
-        $queue->shouldReceive('push')->once()
-            ->with('Orchestra\Tenanti\Jobs\DeleteTenant', ['database' => 'primary', 'driver' => 'user', 'id' => 5])
-            ->andReturnNull();
-
-        Queue::swap($queue);
+            ->shouldReceive('getConnectionName')->once()->andReturn('primary')
+            ->shouldReceive('getDeleteTenantJob')->once()->with($model, $config)->andReturn($job);
+        $bus->shouldReceive('dispatch')->once()->with($job)->andReturnNull();
 
         $this->assertTrue($stub->deleted($model));
     }

@@ -11,7 +11,7 @@ class CreateTenantTest extends \PHPUnit_Framework_TestCase
     /**
      * @var \Illuminate\Container\Container
      */
-    protected $app;
+    private $app;
 
     /**
      * Setup the test environment.
@@ -23,6 +23,7 @@ class CreateTenantTest extends \PHPUnit_Framework_TestCase
 
         Facade::clearResolvedInstances();
         Facade::setFacadeApplication($this->app);
+        Container::setInstance($this->app);
     }
 
     /**
@@ -40,28 +41,25 @@ class CreateTenantTest extends \PHPUnit_Framework_TestCase
      *
      * @test
      */
-    public function testFireMethod()
+    public function testHandleMethod()
     {
         $migrator = m::mock('\Orchestra\Tenanti\Migrator\Factory');
         $tenanti = $this->app['orchestra.tenanti'];
         $model = m::mock('\Illuminate\Database\Eloquent\Model');
 
-        $stub = new CreateTenant();
-        $job = m::mock('\Illuminate\Contracts\Queue\Job');
         $data = [
             'database' => 'foo',
             'driver'   => 'user',
-            'id'       => 5,
         ];
+
+        $stub = new CreateTenant($model, $data);
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
         $migrator->shouldReceive('runInstall')->once()->with($model, 'foo')->andReturnNull()
-            ->shouldReceive('runUp')->once()->with($model, 'foo')->andReturnNull()
-            ->shouldReceive('getModel->find')->with(5)->andReturn($model);
-        $job->shouldReceive('delete')->once()->andReturnNull();
+            ->shouldReceive('runUp')->once()->with($model, 'foo')->andReturnNull();
 
         App::swap($this->app);
 
-        $this->assertNull($stub->fire($job, $data));
+        $this->assertNull($stub->handle());
     }
 }
