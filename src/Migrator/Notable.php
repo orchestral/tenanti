@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migrator as BaseMigrator;
 
-trait NotableTrait
+trait Notable
 {
     /**
      * The notes for the current operation.

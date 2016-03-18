@@ -1,13 +1,13 @@
 <?php namespace Orchestra\Tenanti\TestCase\Migrator;
 
-use Orchestra\Tenanti\Migrator\NotableTrait;
+use Orchestra\Tenanti\Migrator\Notable;
 
-class NotableTraitTest extends \PHPUnit_Framework_TestCase
+class NotableTest extends \PHPUnit_Framework_TestCase
 {
-    use NotableTrait;
+    use Notable;
 
     /**
-     * Test Orchestra\Tenanti\Migrator\NotableTrait::getNotes()
+     * Test Orchestra\Tenanti\Migrator\Notable::getNotes()
      * method.
      *
      * @test
@@ -20,7 +20,7 @@ class NotableTraitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\NotableTrait::flushNotes()
+     * Test Orchestra\Tenanti\Migrator\Notable::flushNotes()
      * method.
      *
      * @test

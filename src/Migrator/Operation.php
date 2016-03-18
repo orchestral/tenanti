@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\DatabaseMigrationRepository;
 
-trait OperationTrait
+trait Operation
 {
     /**
      * Application instance.

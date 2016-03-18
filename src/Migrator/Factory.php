@@ -6,7 +6,7 @@ use Illuminate\Contracts\Container\Container;
 
 class Factory implements FactoryInterface
 {
-    use NotableTrait, OperationTrait;
+    use Notable, Operation;
 
     /**
      * Chunk value.

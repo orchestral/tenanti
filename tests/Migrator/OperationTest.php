@@ -4,11 +4,11 @@ use Mockery as m;
 use Illuminate\Config\Repository;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
-use Orchestra\Tenanti\Migrator\OperationTrait;
+use Orchestra\Tenanti\Migrator\Operation;
 
-class OperationTraitTest extends \PHPUnit_Framework_TestCase
+class OperationTest extends \PHPUnit_Framework_TestCase
 {
-    use OperationTrait;
+    use Operation;
 
     /**
      * Teardown the test environment.
@@ -19,7 +19,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\OperationTrait::asDefaultDatabase()
+     * Test Orchestra\Tenanti\Migrator\Operation::asDefaultDatabase()
      * method.
      *
      * @test
@@ -69,7 +69,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\OperationTrait::resolveDatabaseConnection()
+     * Test Orchestra\Tenanti\Migrator\Operation::resolveDatabaseConnection()
      * method.
      *
      * @test
@@ -118,7 +118,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\OperationTrait::resolveModel()
+     * Test Orchestra\Tenanti\Migrator\Operation::resolveModel()
      * method.
      *
      * @test
@@ -145,7 +145,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\OperationTrait::resolveModel()
+     * Test Orchestra\Tenanti\Migrator\Operation::resolveModel()
      * method with connection name.
      *
      * @test
@@ -173,7 +173,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\OperationTrait::resolveModel()
+     * Test Orchestra\Tenanti\Migrator\Operation::resolveModel()
      * method throw an exception when model is not an instance of
      * Eloquent.
      *
@@ -197,7 +197,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\OperationTrait::getModelName()
+     * Test Orchestra\Tenanti\Migrator\Operation::getModelName()
      * method.
      *
      * @test
@@ -217,7 +217,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\OperationTrait::getMigrationPath()
+     * Test Orchestra\Tenanti\Migrator\Operation::getMigrationPath()
      * method.
      *
      * @test
@@ -238,7 +238,7 @@ class OperationTraitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\OperationTrait::getTablePrefix()
+     * Test Orchestra\Tenanti\Migrator\Operation::getTablePrefix()
      * method.
      *
      * @test
