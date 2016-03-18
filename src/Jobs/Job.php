@@ -47,4 +47,16 @@ abstract class Job
 
         return App::make('orchestra.tenanti')->driver($driver);
     }
+
+    /**
+     * Fail the job from the queue.
+     *
+     * @return void
+     */
+    public function failed()
+    {
+        if ($this->job) {
+            return $this->job->failed();
+        }
+    }
 }
