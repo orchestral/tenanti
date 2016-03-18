@@ -5,6 +5,13 @@ title: Tenanti Change Log
 
 ## Version 3.2 {#v3-2}
 
+### v3.2.2 {#v3-2-2}
+
+* Convert `Orchestra\Tenanti\Jobs\CreateTenant` and `Orchestra\Tenanti\Jobs\DeleteTenant` to dispatchable job and use self-handling job by default.
+* Add `Orchestra\Tenanti\Jobs\Queueable\CreateTenant` to dispatch job via queue.
+* Add `Orchestra\Tenanti\Jobs\Job` and deprecate `Orchestra\Tenanti\Jobs\Tenant`.
+* Remove `Trait` prefix.
+
 ### v3.2.1 {#v3-2-1}
 
 * Rework on how configuration are being pull for multi database connection.
