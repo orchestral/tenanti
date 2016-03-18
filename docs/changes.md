@@ -5,6 +5,10 @@ title: Tenanti Change Log
 
 ## Version 3.2 {#v3-2}
 
+### v3.2.3 {#v3-2-3}
+
+* Add `Orchestra\Tenanti\Jobs\Job::failed()` method.
+
 ### v3.2.2 {#v3-2-2}
 
 * Convert `Orchestra\Tenanti\Jobs\CreateTenant` and `Orchestra\Tenanti\Jobs\DeleteTenant` to dispatchable job and use self-handling job by default.
