@@ -14,7 +14,7 @@ title: Tenanti Change Log
 * Convert `Orchestra\Tenanti\Jobs\CreateTenant` and `Orchestra\Tenanti\Jobs\DeleteTenant` to dispatchable job and use self-handling job by default.
 * Add `Orchestra\Tenanti\Jobs\Queueable\CreateTenant` to dispatch job via queue.
 * Add `Orchestra\Tenanti\Jobs\Job` and deprecate `Orchestra\Tenanti\Jobs\Tenant`.
-* Remove `Trait` prefix.
+* Remove `Trait` suffix.
 
 ### v3.2.1 {#v3-2-1}
 
