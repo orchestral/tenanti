@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Tenanti\Migrator;
+<?php
+
+namespace Orchestra\Tenanti\Migrator;
 
 use Orchestra\Tenanti\TenantiManager;
 use Illuminate\Database\Eloquent\Model;

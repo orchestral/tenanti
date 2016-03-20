@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Tenanti\Jobs;
+<?php
+
+namespace Orchestra\Tenanti\Jobs;
 
 use Illuminate\Support\Arr;
 

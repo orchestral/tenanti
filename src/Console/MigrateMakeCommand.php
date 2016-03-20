@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Tenanti\Console;
+<?php
+
+namespace Orchestra\Tenanti\Console;
 
 use Orchestra\Support\Str;
 use Illuminate\Support\Composer;

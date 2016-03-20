@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Tenanti\Console;
+<?php
+
+namespace Orchestra\Tenanti\Console;
 
 use InvalidArgumentException;
 use Illuminate\Console\ConfirmableTrait;

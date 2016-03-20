@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Tenanti;
+<?php
+
+namespace Orchestra\Tenanti;
 
 use Illuminate\Database\Eloquent\Model;
 use Orchestra\Tenanti\Jobs\CreateTenant;

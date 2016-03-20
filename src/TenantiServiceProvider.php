@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Tenanti;
+<?php
+
+namespace Orchestra\Tenanti;
 
 use Illuminate\Contracts\Foundation\Application;
 use Orchestra\Support\Providers\ServiceProvider;

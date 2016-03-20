@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Tenanti\Console;
+<?php
+
+namespace Orchestra\Tenanti\Console;
 
 use Illuminate\Console\ConfirmableTrait;
 

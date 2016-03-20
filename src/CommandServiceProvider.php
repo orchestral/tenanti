@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Tenanti;
+<?php
+
+namespace Orchestra\Tenanti;
 
 use Orchestra\Tenanti\Migrator\Creator;
 use Orchestra\Tenanti\Console\ResetCommand;

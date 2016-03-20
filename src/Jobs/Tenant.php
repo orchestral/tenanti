@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Tenanti\Jobs;
+<?php
+
+namespace Orchestra\Tenanti\Jobs;
 
 /**
  * @deprecated v3.2.x

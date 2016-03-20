@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Tenanti\Jobs\Queueable;
+<?php
+
+namespace Orchestra\Tenanti\Jobs\Queueable;
 
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;

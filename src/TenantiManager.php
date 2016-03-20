@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Tenanti;
+<?php
+
+namespace Orchestra\Tenanti;
 
 use Closure;
 use Illuminate\Support\Arr;
