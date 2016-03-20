@@ -74,7 +74,7 @@ class TenantiManager extends Manager
      */
     public function setConfig(array $config)
     {
-        $this->config = $config;
+        $this->config = array_merge($config, ['connection' => $this->getConfig('connection')]);
 
         return $this;
     }
