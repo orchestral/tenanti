@@ -1,7 +1,7 @@
 <?php
 
+use Orchestra\Tenanti\Migration;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Migrations\Migration;
 
 class DummyClass extends Migration
 {
