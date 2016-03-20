@@ -27,6 +27,19 @@ class Migrator extends BaseMigrator
     }
 
     /**
+     * Set the default connection name.
+     *
+     * @param  string  $name
+     * @return void
+     */
+    public function setConnection($name)
+    {
+        $this->repository->setSource($name);
+
+        $this->connection = $name;
+    }
+
+    /**
      * Run "up" a migration instance.
      *
      * @param  string  $file
