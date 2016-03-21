@@ -5,6 +5,13 @@ title: Tenanti Change Log
 
 ## Version 3.2 {#v3-2}
 
+### v3.2.4 {#v3-2-4}
+
+* Add `Orchestra\Tenanti\Migration` class.
+* Add `Orchestra\Tenanti\TenantiServiceProvider::registerConfigurationForManager()` method.
+* Always merge `connection` value when overriding configuration.
+* Ensure the default database connection get restored after running migration.
+
 ### v3.2.3 {#v3-2-3}
 
 * Add `Orchestra\Tenanti\Jobs\Job::failed()` method.
