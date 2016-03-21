@@ -2,6 +2,7 @@
 
 namespace Orchestra\Tenanti\Migrator;
 
+use Orchestra\Tenanti\Migration;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migrator as BaseMigrator;
 
@@ -15,6 +16,13 @@ class Migrator extends BaseMigrator
     protected $entity;
 
     /**
+     * The database default connection.
+     *
+     * @var string|null
+     */
+    protected $defaultConnection;
+
+    /**
      * Set entity for migration.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
@@ -26,6 +34,49 @@ class Migrator extends BaseMigrator
         $this->entity = $entity;
 
         return $this;
+    }
+
+    /**
+     * Set the default connection name.
+     *
+     * @param  string  $name
+     * @return void
+     */
+    public function setConnection($name)
+    {
+        if (! is_null($name)) {
+            $this->defaultConnection = $this->resolver->getDefaultConnection();
+        }
+
+        parent::setConnection($name);
+    }
+
+    /**
+     * Reset the default connection name.
+     *
+     * @param  string  $name
+     * @return void
+     */
+    public function resetConnection()
+    {
+        $this->resolver->setDefaultConnection($this->defaultConnection);
+    }
+
+    /**
+     * Resolve a migration instance from a file.
+     *
+     * @param  string  $file
+     * @return object
+     */
+    public function resolve($file)
+    {
+        $class = parent::resolve($file);
+
+        if ($class instanceof Migration) {
+            $class->setConnection($this->connection);
+        }
+
+        return $class;
     }
 
     /**

@@ -5,6 +5,13 @@ title: Tenanti Change Log
 
 ## Version 3.2 {#v3-2}
 
+### v3.2.4 {#v3-2-4}
+
+* Add `Orchestra\Tenanti\Migration` class.
+* Add `Orchestra\Tenanti\TenantiServiceProvider::registerConfigurationForManager()` method.
+* Always merge `connection` value when overriding configuration.
+* Ensure the default database connection get restored after running migration.
+
 ### v3.2.3 {#v3-2-3}
 
 * Add `Orchestra\Tenanti\Jobs\Job::failed()` method.
@@ -29,6 +36,17 @@ title: Tenanti Change Log
 * Add `Orchestra\Tenanti\TenantiManager::connection()`.
 
 ## Version 3.1 {#3-1}
+
+### v3.1.8 {#v3-1-8}
+
+* Convert `Orchestra\Tenanti\Jobs\CreateTenant` and `Orchestra\Tenanti\Jobs\DeleteTenant` to dispatchable job and use self-handling job by default.
+* Add `Orchestra\Tenanti\Jobs\Queueable\CreateTenant` to dispatch job via queue.
+* Add `Orchestra\Tenanti\Jobs\Job` and deprecate `Orchestra\Tenanti\Jobs\Tenant`.
+* Add `Orchestra\Tenanti\Jobs\Job::failed()` method.
+* Add `Orchestra\Tenanti\Migration` class.
+* Add `Orchestra\Tenanti\TenantiServiceProvider::registerConfigurationForManager()` method.
+* Always merge `connection` value when overriding configuration.
+* Ensure the default database connection get restored after running migration.
 
 ### v3.1.7 {#v3-1-7}
 

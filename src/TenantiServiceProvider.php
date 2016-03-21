@@ -23,14 +23,28 @@ class TenantiServiceProvider extends ServiceProvider
     {
         $this->app->singleton('orchestra.tenanti', function (Application $app) {
             $manager = new TenantiManager($app);
-            $namespace = $this->hasPackageRepository() ? 'orchestra/tenanti::' : 'orchestra.tenanti';
 
-            $manager->setConfig($app->make('config')->get($namespace));
+            $this->registerConfigurationForManager($manager);
 
             return $manager;
         });
 
         $this->app->alias('orchestra.tenanti', TenantiManager::class);
+    }
+
+    /**
+     * Register configuration for manager.
+     *
+     * @param  \Orchestra\Tenanti\TenantiManager  $manager
+     * @return void
+     */
+    protected function registerConfigurationForManager(TenantiManager $manager)
+    {
+        $namespace = $this->hasPackageRepository() ? 'orchestra/tenanti::' : 'orchestra.tenanti';
+
+        $this->app->booted(function ($app) use ($manager, $namespace) {
+            $manager->setConfig($app->make('config')->get($namespace));
+        });
     }
 
     /**
