@@ -59,7 +59,9 @@ class Migrator extends BaseMigrator
      */
     public function resetConnection()
     {
-        $this->resolver->setDefaultConnection($this->defaultConnection);
+        if (! is_null($this->defaultConnection)) {
+            $this->resolver->setDefaultConnection($this->defaultConnection);
+        }
     }
 
     /**

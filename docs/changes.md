@@ -5,6 +5,11 @@ title: Tenanti Change Log
 
 ## Version 3.2 {#v3-2}
 
+### v3.2.5 {#v3-2-5}
+
+* Avoid resetting the database connection when `$this->defaultConnection` is
+`null`.
+
 ### v3.2.4 {#v3-2-4}
 
 * Add `Orchestra\Tenanti\Migration` class.
@@ -36,6 +41,11 @@ title: Tenanti Change Log
 * Add `Orchestra\Tenanti\TenantiManager::connection()`.
 
 ## Version 3.1 {#3-1}
+
+### v3.1.9 {#v3-1-9}
+
+* Avoid resetting the database connection when `$this->defaultConnection` is
+`null`.
 
 ### v3.1.8 {#v3-1-8}
 
