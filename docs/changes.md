@@ -37,6 +37,11 @@ title: Tenanti Change Log
 
 ## Version 3.1 {#3-1}
 
+### v3.1.9 {#v3-1-9}
+
+* Avoid resetting the database connection when `$this->defaultConnection` is
+`null`.
+
 ### v3.1.8 {#v3-1-8}
 
 * Convert `Orchestra\Tenanti\Jobs\CreateTenant` and `Orchestra\Tenanti\Jobs\DeleteTenant` to dispatchable job and use self-handling job by default.
