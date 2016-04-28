@@ -45,7 +45,7 @@ abstract class Observer
         return true;
     }
 
-     /**
+    /**
      * Run on restored observer.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity

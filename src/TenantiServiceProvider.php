@@ -34,6 +34,7 @@ class TenantiServiceProvider extends ServiceProvider
      * Register configuration for manager.
      *
      * @param  \Orchestra\Tenanti\TenantiManager  $manager
+     *
      * @return void
      */
     protected function registerConfigurationForManager(TenantiManager $manager)
