@@ -5,6 +5,10 @@ title: Tenanti Change Log
 
 ## Version 3.2 {#v3-2}
 
+### v3.2.6 {#v3-2-6}
+
+* Add `Orchestra\Tenanti\Observer::restored()` method to refresh/recreate tenant schema for the affected tenant.
+
 ### v3.2.5 {#v3-2-5}
 
 * Avoid resetting the database connection when `$this->defaultConnection` is
@@ -41,6 +45,10 @@ title: Tenanti Change Log
 * Add `Orchestra\Tenanti\TenantiManager::connection()`.
 
 ## Version 3.1 {#3-1}
+
+### v3.1.10 {#v3-1-10}
+
+* Add `Orchestra\Tenanti\Observer::restored()` method to refresh/recreate tenant schema for the affected tenant.
 
 ### v3.1.9 {#v3-1-9}
 

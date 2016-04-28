@@ -40,6 +40,7 @@ class Migrator extends BaseMigrator
      * Set the default connection name.
      *
      * @param  string  $name
+     *
      * @return void
      */
     public function setConnection($name)
@@ -55,6 +56,7 @@ class Migrator extends BaseMigrator
      * Reset the default connection name.
      *
      * @param  string  $name
+     *
      * @return void
      */
     public function resetConnection()
@@ -68,6 +70,7 @@ class Migrator extends BaseMigrator
      * Resolve a migration instance from a file.
      *
      * @param  string  $file
+     *
      * @return object
      */
     public function resolve($file)
