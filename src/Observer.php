@@ -45,6 +45,25 @@ abstract class Observer
         return true;
     }
 
+     /**
+     * Run on restored observer.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     *
+     * @return bool
+     */
+    public function restored(Model $entity)
+    {
+        $data = [
+            'database' => $this->getConnectionName(),
+            'driver'   => $this->getDriverName(),
+        ];
+
+        $this->dispatch($this->getRestoreTenantJob($entity, $data));
+
+        return true;
+    }
+
     /**
      * Run on deleted observer.
      *
@@ -73,6 +92,19 @@ abstract class Observer
      * @return \Orchestra\Tenanti\Jobs\CreateTenant
      */
     protected function getCreateTenantJob(Model $entity, array $data)
+    {
+        return new CreateTenant($entity, $data);
+    }
+
+    /**
+     * Resolve restore tenant job.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  array  $data
+     *
+     * @return \Orchestra\Tenanti\Jobs\CreateTenant
+     */
+    protected function getRestoreTenantJob(Model $entity, array $data)
     {
         return new CreateTenant($entity, $data);
     }
