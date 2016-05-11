@@ -245,8 +245,33 @@ class OperationTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTablePrefixMethod()
     {
+        $app = new Container();
+        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
+
+        $manager->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('user');
+
         $this->driver = 'user';
+        $this->manager = $manager;
 
         $this->assertEquals('user_{id}', $this->getTablePrefix());
+    }
+
+    /**
+     * Test Orchestra\Tenanti\Migrator\Operation::getTablePrefix()
+     * method.
+     *
+     * @test
+     */
+    public function testGetTablePrefixMethodWithDifferentPrefix()
+    {
+        $app = new Container();
+        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
+
+        $manager->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('member');
+
+        $this->driver = 'user';
+        $this->manager = $manager;
+
+        $this->assertEquals('member_{id}', $this->getTablePrefix());
     }
 }

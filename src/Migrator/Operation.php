@@ -229,11 +229,15 @@ trait Operation
      */
     protected function resolveMigrationTableName(Model $entity)
     {
-        if (is_null($table = $this->getConfig('migration'))) {
-            $table = $this->getTablePrefix().'_migrations';
+        if (! is_null($table = $this->getConfig('migration'))) {
+            return $this->bindWithKey($entity, $table);
         }
 
-        return $this->bindWithKey($entity, $table);
+        if ($this->getConfig('shared', true) === true) {
+            return $this->bindWithKey($entity, $this->getTablePrefix().'_migrations');
+        }
+
+        return 'tenant_migrations';
     }
 
     /**
@@ -263,7 +267,9 @@ trait Operation
      */
     public function getTablePrefix()
     {
-        return implode('_', [$this->driver, '{id}']);
+        $prefix = $this->getConfig('prefix', $this->driver);
+
+        return implode('_', [$prefix, '{id}']);
     }
 
     /**
