@@ -5,6 +5,11 @@ title: Tenanti Change Log
 
 ## Version 3.2 {#v3-2}
 
+### v3.2.7 {#v3-2-7}
+
+* Simplify single-database vs multi-database configuration by introducing `shared` boolean config.
+* Allow tenant driver to define table name prefix.
+
 ### v3.2.6 {#v3-2-6}
 
 * Add `Orchestra\Tenanti\Observer::restored()` method to refresh/recreate tenant schema for the affected tenant.
