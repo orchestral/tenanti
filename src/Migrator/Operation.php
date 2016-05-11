@@ -265,7 +265,9 @@ trait Operation
      */
     public function getTablePrefix()
     {
-        return implode('_', [$this->driver, '{id}']);
+        $prefix = $this->getConfig('prefix', $this->driver);
+
+        return implode('_', [$prefix, '{id}']);
     }
 
     /**
