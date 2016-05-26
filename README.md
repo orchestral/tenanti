@@ -8,9 +8,9 @@ Tenanti allow you to manage multi-tenant data schema and migration manager for y
 [![Latest Stable Version](https://img.shields.io/github/release/orchestral/tenanti.svg?style=flat-square)](https://packagist.org/packages/orchestra/tenanti)
 [![Total Downloads](https://img.shields.io/packagist/dt/orchestra/tenanti.svg?style=flat-square)](https://packagist.org/packages/orchestra/tenanti)
 [![MIT License](https://img.shields.io/packagist/l/orchestra/tenanti.svg?style=flat-square)](https://packagist.org/packages/orchestra/tenanti)
-[![Build Status](https://img.shields.io/travis/orchestral/tenanti/3.3.svg?style=flat-square)](https://travis-ci.org/orchestral/tenanti)
-[![Coverage Status](https://img.shields.io/coveralls/orchestral/tenanti/3.3.svg?style=flat-square)](https://coveralls.io/r/orchestral/tenanti?branch=3.3)
-[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/orchestral/tenanti/3.3.svg?style=flat-square)](https://scrutinizer-ci.com/g/orchestral/tenanti/)
+[![Build Status](https://img.shields.io/travis/orchestral/tenanti/master.svg?style=flat-square)](https://travis-ci.org/orchestral/tenanti)
+[![Coverage Status](https://img.shields.io/coveralls/orchestral/tenanti/master.svg?style=flat-square)](https://coveralls.io/r/orchestral/tenanti?branch=master)
+[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/orchestral/tenanti/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/orchestral/tenanti/)
 
 ## Table of Content
 
@@ -18,7 +18,7 @@ Tenanti allow you to manage multi-tenant data schema and migration manager for y
 * [Installation](#installation)
 * [Configuration](#configuration)
 * [Usage](#usage)
-* [Change Log](http://orchestraplatform.com/docs/latest/components/tenanti/changes#v3-3)
+* [Change Log](http://orchestraplatform.com/docs/latest/components/tenanti/changes#v3-4)
 
 ## Version Compatibility
 
