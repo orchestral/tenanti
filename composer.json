@@ -17,12 +17,12 @@
     },
     "require": {
         "php": ">=5.6.0",
-        "illuminate/filesystem": "~5.3.0",
+        "illuminate/filesystem": "~5.4.0",
         "orchestra/support": "~3.4.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",
-        "laravel/framework": "~5.3.0"
+        "laravel/framework": "~5.4.0"
     },
     "extra": {
         "branch-alias": {
