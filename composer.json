@@ -15,6 +15,11 @@
             "Orchestra\\Tenanti\\": "src/"
         }
     },
+    "autoload-dev": {
+        "classmap": [
+            "tests/stubs"
+        ]
+    },
     "require": {
         "php": ">=5.6.0",
         "illuminate/filesystem": "~5.3.0",

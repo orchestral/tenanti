@@ -95,6 +95,8 @@ class Migrator extends BaseMigrator
      */
     protected function runUp($file, $batch, $pretend)
     {
+        $file = $this->getMigrationName($file);
+
         // First we will resolve a "real" instance of the migration class from this
         // migration file name. Once we have the instances we can run the actual
         // command such as "up" or "down", or we can just simulate the action.
@@ -117,14 +119,14 @@ class Migrator extends BaseMigrator
     /**
      * Run "down" a migration instance.
      *
+     * @param  string  $file
      * @param  object  $migration
      * @param  bool    $pretend
-     *
      * @return void
      */
-    protected function runDown($migration, $pretend)
+    protected function runDown($file, $migration, $pretend)
     {
-        $file = $migration->migration;
+        $file = $this->getMigrationName($file);
 
         // First we will get the file name of the migration so we can resolve out an
         // instance of the migration. Once we get an instance we can either run a

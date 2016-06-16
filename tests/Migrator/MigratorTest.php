@@ -50,13 +50,15 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
         $batch = 5;
         $pretend = false;
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve,note]', [$repository, $resolver, $files])
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve,note]', [$repository, $resolver, $files])
                     ->makePartial()
                     ->shouldAllowMockingProtectedMethods();
 
+        $stub->path(realpath(__DIR__.'/../stubs'));
         $stub->setEntity($model);
 
-        $stub->shouldReceive('resolve')->once()->with($file)->andReturn($migration)
+        $stub->shouldReceive('getMigrationName')->once()->with($file)->andReturn($file)
+            ->shouldReceive('resolve')->once()->with($file)->andReturn($migration)
             ->shouldReceive('note')->once()->with("<info>Migrated [foobar:10]:</info> $file")->andReturnNull();
         $model->shouldReceive('getKey')->once()->andReturn(10)
             ->shouldReceive('getTable')->once()->andReturn('foobar');
@@ -84,13 +86,15 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
         $batch = 5;
         $pretend = true;
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve,pretendToRun]', [$repository, $resolver, $files])
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve,pretendToRun]', [$repository, $resolver, $files])
                     ->makePartial()
                     ->shouldAllowMockingProtectedMethods();
 
+        $stub->path(realpath(__DIR__.'/../stubs'));
         $stub->setEntity($model);
 
-        $stub->shouldReceive('resolve')->once()->with($file)->andReturn($instance)
+        $stub->shouldReceive('getMigrationName')->once()->with($file)->andReturn($file)
+            ->shouldReceive('resolve')->once()->with($file)->andReturn($instance)
             ->shouldReceive('pretendToRun')->once()->with($instance, 'up')->andReturnNull();
 
         $this->assertNull($stub->runUp($file, $batch, $pretend));
@@ -114,19 +118,22 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
         $pretend = false;
         $migration = new Fluent(['migration' => $file]);
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve,note]', [$repository, $resolver, $files])
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve,note]', [$repository, $resolver, $files])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
+
+        $stub->path(realpath(__DIR__.'/../stubs'));
         $stub->setEntity($model);
 
-        $stub->shouldReceive('resolve')->once()->with($file)->andReturn($instance)
+        $stub->shouldReceive('getMigrationName')->once()->with($file)->andReturn($file)
+            ->shouldReceive('resolve')->once()->with($file)->andReturn($instance)
             ->shouldReceive('note')->once()->with("<info>Rolled back [foobar:10]:</info> $file")->andReturnNull();
         $model->shouldReceive('getKey')->once()->andReturn(10)
             ->shouldReceive('getTable')->once()->andReturn('foobar');
         $instance->shouldReceive('down')->once()->with(10, $model)->andReturnNull();
         $repository->shouldReceive('delete')->once()->with($migration)->andReturnNull();
 
-        $this->assertNull($stub->runDown($migration, $pretend));
+        $this->assertNull($stub->runDown($file, $migration, $pretend));
     }
 
     /**
@@ -147,16 +154,18 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
         $pretend = true;
         $migration = new Fluent(['migration' => $file]);
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve,pretendToRun]', [$repository, $resolver, $files])
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve,pretendToRun]', [$repository, $resolver, $files])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
 
+        $stub->path(realpath(__DIR__.'/../stubs'));
         $stub->setEntity($model);
 
-        $stub->shouldReceive('resolve')->once()->with($file)->andReturn($instance)
+        $stub->shouldReceive('getMigrationName')->once()->with($file)->andReturn($file)
+            ->shouldReceive('resolve')->once()->with($file)->andReturn($instance)
             ->shouldReceive('pretendToRun')->once()->with($instance, 'down')->andReturnNull();
 
-        $this->assertNull($stub->runDown($migration, $pretend));
+        $this->assertNull($stub->runDown($file, $migration, $pretend));
     }
 
     /**
@@ -177,10 +186,11 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
         $batch = 5;
         $pretend = true;
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[resolve]', [$repository, $resolver, $files])
+        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve]', [$repository, $resolver, $files])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
 
+        $stub->path(realpath(__DIR__.'/../stubs'));
         $stub->setEntity($model);
 
         $instance->shouldReceive('getConnection')->once()->andReturn('default')
@@ -194,7 +204,8 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
                 });
         $model->shouldReceive('getKey')->twice()->andReturn(15)
             ->shouldReceive('getTable')->once()->andReturn('foobar');
-        $stub->shouldReceive('resolve')->once()->with($file)->andReturn($instance);
+        $stub->shouldReceive('getMigrationName')->once()->with($file)->andReturn($file)
+            ->shouldReceive('resolve')->once()->with($file)->andReturn($instance);
 
         $this->assertNull($stub->runUp($file, $batch, $pretend));
     }
