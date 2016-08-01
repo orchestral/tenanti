@@ -202,7 +202,7 @@ trait Operation
             $database = $tenants['name'];
         }
 
-        if (substr($database, -5) !== '_{id}') {
+        if (substr($database, -5) !== '_{id}' && $this->getConfig('shared', true) === false) {
             $database .= '_{id}';
         }
 
