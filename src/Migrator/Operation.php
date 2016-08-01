@@ -186,7 +186,7 @@ trait Operation
     }
 
     /**
-     * Resolve database connection.
+     * Set tenant database connection.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
      * @param  string  $database
@@ -216,6 +216,19 @@ trait Operation
         }
 
         return $connection;
+    }
+
+    /**
+     * Resolve tenant database connection.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  string  $database
+     *
+     * @return \Illuminate\Database\Connection
+     */
+    public function resolveConnection(Model $entity, $database)
+    {
+        return $this->app->make('db')->connection($this->asConnection($entity, $database));
     }
 
     /**
