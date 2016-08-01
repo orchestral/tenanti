@@ -173,21 +173,6 @@ trait Operation
     }
 
     /**
-     * Set tenant as default database connection.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string  $database
-     *
-     * @return string
-     *
-     * @deprecated since 3.1.x and to be removed in 3.3.0
-     */
-    public function asDefaultDatabase(Model $entity, $database)
-    {
-        return $this->asDefaultConnection($entity, $database);
-    }
-
-    /**
      * Resolve database connection.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity

@@ -115,23 +115,6 @@ class TenantiManager extends Manager
     }
 
     /**
-     * Setup multiple database connection from template.
-     *
-     * @param  string  $using
-     * @param  \Closure  $callback
-     *
-     * @return void
-     *
-     * @deprecated since 3.1.x and to be removed in 3.3.0.
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function setupMultiDatabase($using, Closure $callback)
-    {
-        return $this->connection($using, $callback);
-    }
-
-    /**
      * Prepare configuration values.
      *
      * @param  string  $driver
