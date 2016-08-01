@@ -138,7 +138,7 @@ class Factory implements FactoryInterface
      */
     public function runInstall(Model $entity, $database)
     {
-        $database = $this->resolveDatabaseConnection($entity, $database);
+        $database = $this->asConnection($entity, $database);
         $table    = $this->resolveMigrationTableName($entity);
 
         $repository = $this->resolveMigrator($table)->getRepository();
@@ -163,7 +163,7 @@ class Factory implements FactoryInterface
      */
     public function runUp(Model $entity, $database, $pretend = false)
     {
-        $database = $this->resolveDatabaseConnection($entity, $database);
+        $database = $this->asConnection($entity, $database);
         $table    = $this->resolveMigrationTableName($entity);
         $migrator = $this->resolveMigrator($table);
 
@@ -186,7 +186,7 @@ class Factory implements FactoryInterface
      */
     public function runDown(Model $entity, $database, $pretend = false)
     {
-        $database = $this->resolveDatabaseConnection($entity, $database);
+        $database = $this->asConnection($entity, $database);
         $table    = $this->resolveMigrationTableName($entity);
         $migrator = $this->resolveMigrator($table);
 
@@ -209,7 +209,7 @@ class Factory implements FactoryInterface
      */
     public function runReset(Model $entity, $database, $pretend = false)
     {
-        $database = $this->resolveDatabaseConnection($entity, $database);
+        $database = $this->asConnection($entity, $database);
         $table    = $this->resolveMigrationTableName($entity);
         $migrator = $this->resolveMigrator($table);
 

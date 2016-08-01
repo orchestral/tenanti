@@ -63,18 +63,18 @@ class OperationTest extends \PHPUnit_Framework_TestCase
                 'id' => 5,
             ]);
 
-        $this->assertEquals('tenant_5', $this->asDefaultDatabase($model, 'tenant_{id}'));
+        $this->assertEquals('tenant_5', $this->asDefaultConnection($model, 'tenant_{id}'));
         $this->assertEquals(['database' => 'tenants_5'], $repository->get('database.connections.tenant_5'));
         $this->assertEquals('tenant_5', $repository->get('database.default'));
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\Operation::resolveDatabaseConnection()
+     * Test Orchestra\Tenanti\Migrator\Operation::asConnection()
      * method.
      *
      * @test
      */
-    public function testResolveDatabaseConnectionMethod()
+    public function testAsConnectionMethod()
     {
         $this->app = m::mock('\Illuminate\Container\Container[make]');
         $this->driver = 'user';
@@ -113,7 +113,7 @@ class OperationTest extends \PHPUnit_Framework_TestCase
                 'id' => 5,
             ]);
 
-        $this->assertEquals('tenant_5', $this->resolveDatabaseConnection($model, 'tenant_{id}'));
+        $this->assertEquals('tenant_5', $this->asConnection($model, 'tenant_{id}'));
         $this->assertEquals(['database' => 'tenants_5'], $repository->get('database.connections.tenant_5'));
     }
 

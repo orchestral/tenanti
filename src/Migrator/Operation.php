@@ -156,7 +156,7 @@ trait Operation
     }
 
     /**
-     * Set tenant as default database connection.
+     * Set tenant as default database connection and get the connection name.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
      * @param  string  $database
@@ -165,7 +165,7 @@ trait Operation
      */
     public function asDefaultConnection(Model $entity, $database)
     {
-        $connection = $this->resolveDatabaseConnection($entity, $database);
+        $connection = $this->asConnection($entity, $database);
 
         $this->app->make('config')->set('database.default', $connection);
 
@@ -180,7 +180,7 @@ trait Operation
      *
      * @return string
      */
-    protected function resolveDatabaseConnection(Model $entity, $database)
+    public function asConnection(Model $entity, $database)
     {
         $repository = $this->app->make('config');
         $tenants    = $this->getConfig('connection');

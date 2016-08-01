@@ -84,11 +84,11 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Tenanti\TenantiManager::setupMultiDatabase() method.
+     * Test Orchestra\Tenanti\TenantiManager::connection() method.
      *
      * @test
      */
-    public function testSetupMultiDatabaseMethod()
+    public function testConnectionMethod()
     {
         $app = new Container();
         $app['config'] = $config = m::mock('\Illuminate\Contracts\Config\Repository');
@@ -110,18 +110,18 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
         ];
 
         $stub = new TenantiManager($app);
-        $stub->setupMultiDatabase('tenant', $callback);
+        $stub->connection('tenant', $callback);
 
         $this->assertEquals(['connection' => $expected], $stub->getConfig());
     }
 
     /**
-     * Test Orchestra\Tenanti\TenantiManager::setupMultiDatabase() method
+     * Test Orchestra\Tenanti\TenantiManager::connection() method
      * using default connection.
      *
      * @test
      */
-    public function testSetupMultiDatabaseMethodWithDefaultConnection()
+    public function testConnectionMethodWithDefaultConnection()
     {
         $app = new Container();
         $app['config'] = $config = m::mock('\Illuminate\Contracts\Config\Repository');
@@ -144,20 +144,20 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
         ];
 
         $stub = new TenantiManager($app);
-        $stub->setupMultiDatabase(null, $callback);
+        $stub->connection(null, $callback);
 
         $this->assertEquals(['connection' => $expected], $stub->getConfig());
     }
 
     /**
-     * Test Orchestra\Tenanti\TenantiManager::setupMultiDatabase() method
+     * Test Orchestra\Tenanti\TenantiManager::connection() method
      * given configuration template doesn't exists.
      *
      * @test
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Database connection [foo] is not available.
      */
-    public function testSetupMultiDatabaseMethodGivenConfigTemplateDoesNotExists()
+    public function testConnectionMethodGivenConfigTemplateDoesNotExists()
     {
         $app = new Container();
         $app['config'] = $config = m::mock('\Illuminate\Contracts\Config\Repository');
@@ -169,6 +169,6 @@ class TenantiManagerTest extends \PHPUnit_Framework_TestCase
         };
 
         $stub = new TenantiManager($app);
-        $stub->setupMultiDatabase('foo', $callback);
+        $stub->connection('foo', $callback);
     }
 }
