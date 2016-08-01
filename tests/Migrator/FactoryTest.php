@@ -334,6 +334,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $manager->shouldReceive('getConfig')->with('user.path', null)->andReturn('/var/app/migrations')
             ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('getConfig')->with('user.shared', true)->andReturn(true)
             ->shouldReceive('getConfig')->with('user.migration', null)->andReturn('migrations');
 
         $this->assertNull($stub->runInstall($model, 'tenant_{entity.username}'));
@@ -363,6 +364,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $manager->shouldReceive('getConfig')->with('user.path', null)->andReturn('/var/app/migrations')
             ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('getConfig')->with('user.shared', true)->andReturn(true)
             ->shouldReceive('getConfig')->with('user.migration', null)->andReturn('migrations');
 
         $this->assertNull($stub->runInstall($model, null));
