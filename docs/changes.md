@@ -5,6 +5,11 @@ title: Tenanti Change Log
 
 ## Version 3.2 {#v3-2}
 
+### v3.2.8 {#v3-2-8}
+
+* Add `Orchestra\Tenanti\Migrator\Operation::resolveConnection()` method.
+* Rename `Orchestra\Tenanti\Migrator\Operation::resolveDatabaseConnection()` to `Orchestra\Tenanti\Migrator\Operation::asConnection()`.
+
 ### v3.2.7 {#v3-2-7}
 
 * Simplify single-database vs multi-database configuration by introducing `shared` boolean config.

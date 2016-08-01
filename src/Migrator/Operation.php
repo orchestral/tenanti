@@ -189,6 +189,10 @@ trait Operation
             $database = $tenants['name'];
         }
 
+        if (substr($database, -5) !== '_{id}') {
+            $database .= '_{id}';
+        }
+
         $connection = $this->bindWithKey($entity, $database);
         $name       = "database.connections.{$connection}";
 
