@@ -13,8 +13,8 @@ class DeleteTenant extends Job
      */
     public function handle()
     {
-        if ($this->attempts() > 3) {
-            return $this->failed();
+        if ($this->shouldBeFailed()) {
+            return;
         }
 
         $database = Arr::get($this->config, 'database');

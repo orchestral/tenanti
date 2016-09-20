@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Tenanti;
+<?php
+
+namespace Orchestra\Tenanti;
 
 use Illuminate\Database\Migrations\Migration as BaseMigration;
 

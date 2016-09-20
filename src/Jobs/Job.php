@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 abstract class Job
 {
@@ -36,6 +37,24 @@ abstract class Job
     {
         $this->model  = $model;
         $this->config = $config;
+    }
+
+    /**
+     * Should the job be failed.
+     *
+     * @return bool
+     */
+    protected function shouldBeFailed()
+    {
+        if ($this->attempts() <= 3) {
+            return false;
+        }
+
+        if ($this instanceof ShouldQueue) {
+            $this->failed();
+        }
+
+        return true;
     }
 
     /**
