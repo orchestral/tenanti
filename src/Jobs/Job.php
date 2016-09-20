@@ -7,7 +7,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 abstract class Job
 {
@@ -50,8 +49,8 @@ abstract class Job
             return false;
         }
 
-        if ($this instanceof ShouldQueue) {
-            $this->failed();
+        if ($this->job) {
+            $this->job->failed();
         }
 
         return true;
