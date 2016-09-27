@@ -54,9 +54,11 @@ class CreateTenantTest extends \PHPUnit_Framework_TestCase
 
         $stub = new CreateTenant($model, $data);
 
+        $model->shouldReceive('getKey')->once()->andReturn(4);
+
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
-        $migrator->shouldReceive('runInstall')->once()->with($model, 'foo')->andReturnNull()
-            ->shouldReceive('runUp')->once()->with($model, 'foo')->andReturnNull();
+        $migrator->shouldReceive('install')->once()->with('foo', 4)->andReturnNull()
+            ->shouldReceive('run')->once()->with('foo', 4)->andReturnNull();
 
         App::swap($this->app);
 
