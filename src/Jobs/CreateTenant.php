@@ -24,8 +24,10 @@ class CreateTenant extends Job
             return $this->release(10);
         }
 
-        $migrator->runInstall($this->model, $database);
-        $migrator->runUp($this->model, $database);
+        $id = $this->model->getKey();
+
+        $migrator->install($database, $id);
+        $migrator->run($database, $id);
 
         $this->delete();
     }

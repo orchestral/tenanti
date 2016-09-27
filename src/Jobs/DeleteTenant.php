@@ -24,7 +24,9 @@ class DeleteTenant extends Job
             return $this->release(10);
         }
 
-        $migrator->runReset($this->model, $database);
+        $id = $this->model->getKey();
+
+        $migrator->reset($database, $id);
 
         $this->delete();
     }
