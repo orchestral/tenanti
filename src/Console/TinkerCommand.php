@@ -1,6 +1,5 @@
 <?php namespace Orchestra\Tenanti\Console;
 
-use Artisan;
 use Symfony\Component\Console\Input\InputArgument;
 
 class TinkerCommand extends BaseCommand
@@ -33,7 +32,7 @@ class TinkerCommand extends BaseCommand
         $model   = $tenanti->getModel()->findOrFail($id);
         $tenanti->asDefaultConnection($model, 'tinker');
 
-        Artisan::call('tinker');
+        $this->call('tinker');
     }
 
     /**
@@ -46,17 +45,6 @@ class TinkerCommand extends BaseCommand
         return [
             ['driver', InputArgument::REQUIRED, 'Tenant driver name'],
             ['id', InputArgument::REQUIRED, 'Tenant model ID'],
-        ];
-    }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [
         ];
     }
 }
