@@ -9,6 +9,7 @@ use Orchestra\Tenanti\Console\InstallCommand;
 use Orchestra\Tenanti\Console\MigrateCommand;
 use Orchestra\Tenanti\Console\RefreshCommand;
 use Orchestra\Tenanti\Console\RollbackCommand;
+use Orchestra\Tenanti\Console\TinkerCommand;
 use Illuminate\Contracts\Foundation\Application;
 use Orchestra\Tenanti\Console\MigrateMakeCommand;
 use Orchestra\Support\Providers\CommandServiceProvider as ServiceProvider;
@@ -28,6 +29,7 @@ class CommandServiceProvider extends ServiceProvider
         'Rollback' => 'orchestra.commands.tenanti.rollback',
         'Reset'    => 'orchestra.commands.tenanti.reset',
         'Refresh'  => 'orchestra.commands.tenanti.refresh',
+        'Tinker'   => 'orchestra.commands.tenanti.tinker',
     ];
 
     /**
@@ -64,7 +66,7 @@ class CommandServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the "install" migration command.
+     * Register the "make" migration command.
      *
      * @return void
      */
@@ -131,6 +133,18 @@ class CommandServiceProvider extends ServiceProvider
     {
         $this->app->singleton('orchestra.commands.tenanti.refresh', function (Application $app) {
             return new RefreshCommand($app->make('orchestra.tenanti'));
+        });
+    }
+
+    /**
+     * Register the "tinker" migration command.
+     *
+     * @return void
+     */
+    protected function registerTinkerCommand()
+    {
+        $this->app->singleton('orchestra.commands.tenanti.tinker', function (Application $app) {
+            return new TinkerCommand($app->make('orchestra.tenanti'));
         });
     }
 }
