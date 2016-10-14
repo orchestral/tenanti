@@ -168,6 +168,7 @@ Command                                      | Description
  php artisan tenanti:reset {driver}          | Reset migration on each entry for a given driver.
  php artisan tenanti:refresh {driver}        | Refresh migration (reset and migrate) on each entry for a given driver.
  php artisan tenanti:queue {driver} {action} | Execute any of above action using separate queue to minimize impact on current process.
+ php artisan tenanti:tinker {driver} {id}    | Run tinker using a given driver and ID.
 
 ## Multi Database Connection Setup
 
