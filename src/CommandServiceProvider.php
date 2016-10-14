@@ -64,7 +64,7 @@ class CommandServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the "install" migration command.
+     * Register the "make" migration command.
      *
      * @return void
      */
