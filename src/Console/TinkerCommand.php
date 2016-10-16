@@ -43,8 +43,8 @@ class TinkerCommand extends BaseCommand
     protected function getArguments()
     {
         return [
-            ['driver', InputArgument::REQUIRED, 'Tenant driver name'],
-            ['id', InputArgument::REQUIRED, 'Tenant model ID'],
+            ['driver', InputArgument::REQUIRED, 'Tenant driver name.'],
+            ['id', InputArgument::REQUIRED, 'The entity ID.'],
         ];
     }
 }
