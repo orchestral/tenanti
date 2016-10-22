@@ -99,9 +99,9 @@ trait Operation
     /**
      * Resolve model.
      *
-     * @return \Illuminate\Database\Eloquent\Model
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return \Illuminate\Database\Eloquent\Model
      */
     public function getModel()
     {

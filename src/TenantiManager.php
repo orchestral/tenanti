@@ -29,9 +29,9 @@ class TenantiManager extends Manager
      *
      * @param  string  $driver
      *
-     * @return \Orchestra\Tenanti\Migrator\FactoryInterface
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return \Orchestra\Tenanti\Migrator\FactoryInterface
      */
     protected function createDriver($driver)
     {
@@ -88,9 +88,9 @@ class TenantiManager extends Manager
      * @param  \Closure  $callback
      * @param  array  $option
      *
-     * @return void
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return void
      */
     public function connection($using, Closure $callback, array $options = [])
     {
