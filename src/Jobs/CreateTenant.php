@@ -13,8 +13,8 @@ class CreateTenant extends Job
      */
     public function handle()
     {
-        if ($this->attempts() > 3) {
-            return $this->failed();
+        if ($this->shouldBeFailed()) {
+            return;
         }
 
         $database = Arr::get($this->config, 'database');
@@ -24,8 +24,10 @@ class CreateTenant extends Job
             return $this->release(10);
         }
 
-        $migrator->runInstall($this->model, $database);
-        $migrator->runUp($this->model, $database);
+        $id = $this->model->getKey();
+
+        $migrator->install($database, $id);
+        $migrator->run($database, $id);
 
         $this->delete();
     }

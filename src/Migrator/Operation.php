@@ -99,9 +99,9 @@ trait Operation
     /**
      * Resolve model.
      *
-     * @return \Illuminate\Database\Eloquent\Model
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return \Illuminate\Database\Eloquent\Model
      */
     public function getModel()
     {
@@ -156,7 +156,7 @@ trait Operation
     }
 
     /**
-     * Set tenant as default database connection.
+     * Set tenant as default database connection and get the connection name.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
      * @param  string  $database
@@ -165,7 +165,7 @@ trait Operation
      */
     public function asDefaultConnection(Model $entity, $database)
     {
-        $connection = $this->resolveDatabaseConnection($entity, $database);
+        $connection = $this->asConnection($entity, $database);
 
         $this->app->make('config')->set('database.default', $connection);
 
@@ -173,35 +173,24 @@ trait Operation
     }
 
     /**
-     * Set tenant as default database connection.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string  $database
-     *
-     * @return string
-     *
-     * @deprecated since 3.1.x and to be removed in 3.3.0
-     */
-    public function asDefaultDatabase(Model $entity, $database)
-    {
-        return $this->asDefaultConnection($entity, $database);
-    }
-
-    /**
-     * Resolve database connection.
+     * Set tenant database connection.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
      * @param  string  $database
      *
      * @return string
      */
-    protected function resolveDatabaseConnection(Model $entity, $database)
+    public function asConnection(Model $entity, $database)
     {
         $repository = $this->app->make('config');
         $tenants    = $this->getConfig('connection');
 
         if (! is_null($tenants)) {
             $database = $tenants['name'];
+        }
+
+        if (substr($database, -5) !== '_{id}' && $this->getConfig('shared', true) === false) {
+            $database .= '_{id}';
         }
 
         $connection = $this->bindWithKey($entity, $database);
@@ -218,6 +207,19 @@ trait Operation
         }
 
         return $connection;
+    }
+
+    /**
+     * Resolve tenant database connection.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  string  $database
+     *
+     * @return \Illuminate\Database\Connection
+     */
+    public function resolveConnection(Model $entity, $database)
+    {
+        return $this->app->make('db')->connection($this->asConnection($entity, $database));
     }
 
     /**

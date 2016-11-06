@@ -39,6 +39,24 @@ abstract class Job
     }
 
     /**
+     * Should the job be failed.
+     *
+     * @return bool
+     */
+    protected function shouldBeFailed()
+    {
+        if ($this->attempts() <= 3) {
+            return false;
+        }
+
+        if ($this->job) {
+            $this->job->failed();
+        }
+
+        return true;
+    }
+
+    /**
      * Resolve migrator instance.
      *
      * @return \Orchestra\Tenanti\Migrator\FactoryInterface

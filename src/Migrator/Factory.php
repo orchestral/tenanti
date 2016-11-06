@@ -138,7 +138,7 @@ class Factory implements FactoryInterface
      */
     public function runInstall(Model $entity, $database)
     {
-        $database = $this->resolveDatabaseConnection($entity, $database);
+        $database = $this->asConnection($entity, $database);
         $table    = $this->resolveMigrationTableName($entity);
 
         $repository = $this->resolveMigrator($table)->getRepository();
@@ -163,13 +163,13 @@ class Factory implements FactoryInterface
      */
     public function runUp(Model $entity, $database, $pretend = false)
     {
-        $database = $this->resolveDatabaseConnection($entity, $database);
+        $database = $this->asConnection($entity, $database);
         $table    = $this->resolveMigrationTableName($entity);
         $migrator = $this->resolveMigrator($table);
 
         $migrator->setConnection($database);
         $migrator->setEntity($entity);
-        $migrator->run($this->getMigrationPath(), ['pretend' => $pretend]);
+        $migrator->run($this->getMigrationPath(), ['pretend' => (bool) $pretend]);
         $migrator->resetConnection();
 
         $this->mergeMigratorNotes($migrator);
@@ -186,13 +186,13 @@ class Factory implements FactoryInterface
      */
     public function runDown(Model $entity, $database, $pretend = false)
     {
-        $database = $this->resolveDatabaseConnection($entity, $database);
+        $database = $this->asConnection($entity, $database);
         $table    = $this->resolveMigrationTableName($entity);
         $migrator = $this->resolveMigrator($table);
 
         $migrator->setConnection($database);
         $migrator->setEntity($entity);
-        $migrator->rollback($pretend);
+        $migrator->rollback($this->getMigrationPath(), ['pretend' => (bool) $pretend]);
         $migrator->resetConnection();
 
         $this->mergeMigratorNotes($migrator);
@@ -209,17 +209,13 @@ class Factory implements FactoryInterface
      */
     public function runReset(Model $entity, $database, $pretend = false)
     {
-        $database = $this->resolveDatabaseConnection($entity, $database);
+        $database = $this->asConnection($entity, $database);
         $table    = $this->resolveMigrationTableName($entity);
         $migrator = $this->resolveMigrator($table);
 
         $migrator->setConnection($database);
         $migrator->setEntity($entity);
-
-        do {
-            $count = $migrator->rollback($pretend);
-        } while ($count > 0);
-
+        $migrator->reset($this->getMigrationPath(), ['pretend' => (bool) $pretend]);
         $migrator->resetConnection();
 
         $this->mergeMigratorNotes($migrator);

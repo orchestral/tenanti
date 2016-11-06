@@ -163,7 +163,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $manager->shouldReceive('getConfig')->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
-            ->shouldReceive('rollback')->once()->with(false)->andReturnNull()
+            ->shouldReceive('rollback')->once()->with(null, ['pretend' => false])->andReturnNull()
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull()
             ->shouldReceive('getNotes')->once()->andReturn([]);
         $model->shouldReceive('getKey')->andReturn(5)
@@ -199,7 +199,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $manager->shouldReceive('getConfig')->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
-            ->shouldReceive('rollback')->once()->with(false)->andReturnNull()
+            ->shouldReceive('rollback')->once()->with(null, ['pretend' => false])->andReturnNull()
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull()
             ->shouldReceive('getNotes')->once()->andReturn([]);
         $model->shouldReceive('getKey')->andReturn(5)
@@ -235,7 +235,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $manager->shouldReceive('getConfig')->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
-            ->shouldReceive('rollback')->once()->with(false)->andReturnNull()
+            ->shouldReceive('reset')->once()->with(null, ['pretend' => false])->andReturnNull()
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull()
             ->shouldReceive('getNotes')->once()->andReturn([]);
         $model->shouldReceive('getKey')->andReturn(5)
@@ -271,7 +271,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $manager->shouldReceive('getConfig')->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
-            ->shouldReceive('rollback')->once()->with(false)->andReturnNull()
+            ->shouldReceive('reset')->once()->with(null, ['pretend' => false])->andReturnNull()
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull()
             ->shouldReceive('getNotes')->once()->andReturn([]);
         $model->shouldReceive('getKey')->andReturn(5)
@@ -334,6 +334,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $manager->shouldReceive('getConfig')->with('user.path', null)->andReturn('/var/app/migrations')
             ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('getConfig')->with('user.shared', true)->andReturn(true)
             ->shouldReceive('getConfig')->with('user.migration', null)->andReturn('migrations');
 
         $this->assertNull($stub->runInstall($model, 'tenant_{entity.username}'));
@@ -363,6 +364,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $manager->shouldReceive('getConfig')->with('user.path', null)->andReturn('/var/app/migrations')
             ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('getConfig')->with('user.shared', true)->andReturn(true)
             ->shouldReceive('getConfig')->with('user.migration', null)->andReturn('migrations');
 
         $this->assertNull($stub->runInstall($model, null));
@@ -429,7 +431,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('user');
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
-            ->shouldReceive('rollback')->once()->with(false)->andReturnNull()
+            ->shouldReceive('rollback')->with('/var/app/migrations', ['pretend' => false])->andReturnNull()
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull()
             ->shouldReceive('getNotes')->once()->andReturn([]);
 
@@ -463,8 +465,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('user');
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
-            ->shouldReceive('rollback')->once()->with(false)->andReturn(5)
-            ->shouldReceive('rollback')->once()->with(false)->andReturn(0)
+            ->shouldReceive('reset')->once()->with('/var/app/migrations', ['pretend' => false])->andReturn(5)
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull()
             ->shouldReceive('getNotes')->once()->andReturn([]);
 

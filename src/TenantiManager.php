@@ -29,9 +29,9 @@ class TenantiManager extends Manager
      *
      * @param  string  $driver
      *
-     * @return \Orchestra\Tenanti\Migrator\FactoryInterface
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return \Orchestra\Tenanti\Migrator\FactoryInterface
      */
     protected function createDriver($driver)
     {
@@ -88,9 +88,9 @@ class TenantiManager extends Manager
      * @param  \Closure  $callback
      * @param  array  $option
      *
-     * @return void
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return void
      */
     public function connection($using, Closure $callback, array $options = [])
     {
@@ -112,23 +112,6 @@ class TenantiManager extends Manager
             'resolver' => $callback,
             'options'  => $options,
         ]);
-    }
-
-    /**
-     * Setup multiple database connection from template.
-     *
-     * @param  string  $using
-     * @param  \Closure  $callback
-     *
-     * @return void
-     *
-     * @deprecated since 3.1.x and to be removed in 3.3.0.
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function setupMultiDatabase($using, Closure $callback)
-    {
-        return $this->connection($using, $callback);
     }
 
     /**

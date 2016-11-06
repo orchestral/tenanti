@@ -13,8 +13,8 @@ class DeleteTenant extends Job
      */
     public function handle()
     {
-        if ($this->attempts() > 3) {
-            return $this->failed();
+        if ($this->shouldBeFailed()) {
+            return;
         }
 
         $database = Arr::get($this->config, 'database');
@@ -24,7 +24,9 @@ class DeleteTenant extends Job
             return $this->release(10);
         }
 
-        $migrator->runReset($this->model, $database);
+        $id = $this->model->getKey();
+
+        $migrator->reset($database, $id);
 
         $this->delete();
     }

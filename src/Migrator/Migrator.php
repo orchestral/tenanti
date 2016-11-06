@@ -2,6 +2,7 @@
 
 namespace Orchestra\Tenanti\Migrator;
 
+use Illuminate\Support\Arr;
 use Orchestra\Tenanti\Migration;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migrator as BaseMigrator;
@@ -122,6 +123,7 @@ class Migrator extends BaseMigrator
      * @param  string  $file
      * @param  object  $migration
      * @param  bool    $pretend
+     *
      * @return void
      */
     protected function runDown($file, $migration, $pretend)
