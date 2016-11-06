@@ -5,6 +5,11 @@ title: Tenanti Change Log
 
 ## Version 3.2 {#v3-2}
 
+### v3.2.9 {#v3-2-9}
+
+* Add `php artisan tenanti:tinker {driver} {id}` to test working on individual tenant.
+* Append `_{id}` to database only when working on none shared database environment.
+
 ### v3.2.8 {#v3-2-8}
 
 * Add `Orchestra\Tenanti\Migrator\Operation::resolveConnection()` method.
