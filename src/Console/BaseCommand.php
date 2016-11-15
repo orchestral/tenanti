@@ -5,6 +5,7 @@ namespace Orchestra\Tenanti\Console;
 use Illuminate\Console\Command;
 use Orchestra\Tenanti\TenantiManager;
 use Orchestra\Tenanti\Migrator\FactoryInterface;
+use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -49,6 +50,44 @@ abstract class BaseCommand extends Command
     }
 
     /**
+     * Get driver argument or first driver in the config.
+     *
+     * @return string
+     */
+    protected function getDriver()
+    {
+        $argument = $this->argument('driver');
+
+        if (!empty($argument)) {
+            return $argument;
+        }
+
+        $driver = $this->getDriverFromConfig();
+
+        if (!empty($driver)) {
+            return $driver;
+        }
+
+        throw new RuntimeException('Not enough arguments (missing: "driver").');
+    }
+
+    /**
+     * Get first driver in the config.
+     *
+     * @return string
+     */
+    protected function getDriverFromConfig()
+    {
+        $drivers = array_keys($this->tenant->getConfig('drivers'));
+
+        if (count($drivers) === 1) {
+            return $drivers[0];
+        }
+
+        return null;
+    }
+
+    /**
      * Get the console command arguments.
      *
      * @return array
@@ -56,7 +95,7 @@ abstract class BaseCommand extends Command
     protected function getArguments()
     {
         return [
-            ['driver', InputArgument::REQUIRED, 'Tenant driver name.'],
+            ['driver', InputArgument::OPTIONAL, 'Tenant driver name.'],
         ];
     }
 

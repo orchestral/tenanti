@@ -6,6 +6,7 @@ use Orchestra\Support\Str;
 use Illuminate\Support\Composer;
 use Orchestra\Tenanti\TenantiManager;
 use Orchestra\Tenanti\Migrator\Creator;
+use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -59,11 +60,26 @@ class MigrateMakeCommand extends BaseCommand
      */
     public function handle()
     {
+        $arg1 = $this->argument('driver');
+        $arg2 = $this->argument('name');
+
+        if (empty($arg1) && empty($arg2)) {
+            throw new RuntimeException('Not enough arguments (missing: "driver, name").');
+        } else if (empty($arg2)) {
+            $name = $arg1;
+            $driver = $this->getDriverFromConfig();
+
+            if (empty($driver)) {
+                throw new RuntimeException('Not enough arguments (missing: "driver").');
+            }
+        } else {
+            $name = $arg2;
+            $driver = $arg1;
+        }
+
         // It's possible for the developer to specify the tables to modify in this
         // schema operation. The developer may also specify if this table needs
         // to be freshly created so we can create the appropriate migrations.
-        $driver = $this->input->getArgument('driver');
-        $name   = $this->input->getArgument('name');
         $create = $this->input->getOption('create');
         $table  = $this->input->getOption('table');
 
@@ -118,8 +134,8 @@ class MigrateMakeCommand extends BaseCommand
     protected function getArguments()
     {
         return [
-            ['driver', InputArgument::REQUIRED, 'Tenant driver name.'],
-            ['name', InputArgument::REQUIRED, 'The name of the migration'],
+            ['driver', InputArgument::OPTIONAL, 'Tenant driver name.'],
+            ['name', InputArgument::OPTIONAL, 'The name of the migration'],
         ];
     }
 
