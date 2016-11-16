@@ -27,8 +27,10 @@ class TinkerCommand extends BaseCommand
      */
     public function handle()
     {
-        $driver  = $this->argument('driver');
-        $id      = $this->argument('id');
+        $arguments = $this->getArgumentsWithDriver('id');
+        $driver = $arguments['driver'];
+        $id = $arguments['id'];
+
         $tenanti = $this->tenant->driver($driver);
 
         $model   = $tenanti->getModel()->findOrFail($id);
@@ -45,8 +47,8 @@ class TinkerCommand extends BaseCommand
     protected function getArguments()
     {
         return [
-            ['driver', InputArgument::REQUIRED, 'Tenant driver name.'],
-            ['id', InputArgument::REQUIRED, 'The entity ID.'],
+            ['driver', InputArgument::OPTIONAL, 'Tenant driver name.'],
+            ['id', InputArgument::OPTIONAL, 'The entity ID.'],
         ];
     }
 }

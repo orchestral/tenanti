@@ -46,7 +46,7 @@ class QueuedCommand extends BaseCommand
             return;
         }
 
-        $driver   = $this->argument('driver');
+        $driver   = $this->getDriver();
         $action   = $this->argument('action');
         $database = $this->option('database');
 

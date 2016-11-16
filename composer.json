@@ -17,7 +17,8 @@
     },
     "autoload-dev": {
         "classmap": [
-            "tests/stubs"
+            "tests/stubs",
+            "tests/Kernel.php"
         ]
     },
     "require": {
@@ -27,7 +28,8 @@
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",
-        "laravel/framework": "~5.4.0"
+        "laravel/framework": "~5.4.0",
+        "orchestra/testbench": "~3.4.0"
     },
     "extra": {
         "branch-alias": {

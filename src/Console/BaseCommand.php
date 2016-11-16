@@ -7,6 +7,7 @@ use Orchestra\Tenanti\TenantiManager;
 use Orchestra\Tenanti\Migrator\FactoryInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Exception\RuntimeException;
 
 abstract class BaseCommand extends Command
 {
@@ -49,6 +50,93 @@ abstract class BaseCommand extends Command
     }
 
     /**
+     * Get driver argument or first driver in the config.
+     *
+     * @return string
+     */
+    protected function getDriver()
+    {
+        $driver = $this->argument('driver') ?: $this->getDriverFromConfig();
+
+        if (! empty($driver)) {
+            return $driver;
+        }
+
+        throw new RuntimeException('Not enough arguments (missing: "driver").');
+    }
+
+    /**
+     * Get first driver in the config.
+     *
+     * @return string
+     */
+    protected function getDriverFromConfig()
+    {
+        $drivers = array_keys($this->tenant->getConfig('drivers'));
+
+        if (count($drivers) === 1) {
+            return $drivers[0];
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the required arguments when used with optional driver argument.
+     *
+     * @return array
+     */
+    protected function getArgumentsWithDriver(...$arguments)
+    {
+        array_unshift($arguments, 'driver');
+
+        $resolvedArguments = [];
+
+        $this->validateMissingArguments($arguments);
+
+        if (empty($this->argument(end($arguments)))) {
+            $driver = $this->getDriverFromConfig();
+
+            if (empty($driver)) {
+                throw new RuntimeException('Not enough arguments (missing: "driver").');
+            }
+
+            $resolvedArguments['driver'] = $driver;
+
+            for ($i = 1; $i < count($arguments); $i++) {
+                $resolvedArguments[$arguments[$i]] = $this->argument($arguments[$i - 1]);
+            }
+        } else {
+            foreach ($arguments as $argument) {
+                $resolvedArguments[$argument] = $this->argument($argument);
+            }
+        }
+
+        return $resolvedArguments;
+    }
+
+    /**
+     * Validate missing arguments.
+     *
+     * @param  array  $arguments
+     * @return bool
+     *
+     * @throws \Symfony\Component\Console\Exception\RuntimeException
+     */
+    protected function validateMissingArguments(array $arguments)
+    {
+        $missingArguments = array_filter($arguments, function ($argument) {
+            return empty($this->argument($argument));
+        });
+
+        if (count($missingArguments) > 1) {
+            throw new RuntimeException(sprintf('Not enough arguments (missing: "%s").', implode(', ', $missingArguments)));
+        }
+
+        return true;
+    }
+
+    /**
      * Get the console command arguments.
      *
      * @return array
@@ -56,7 +144,7 @@ abstract class BaseCommand extends Command
     protected function getArguments()
     {
         return [
-            ['driver', InputArgument::REQUIRED, 'Tenant driver name.'],
+            ['driver', InputArgument::OPTIONAL, 'Tenant driver name.'],
         ];
     }
 

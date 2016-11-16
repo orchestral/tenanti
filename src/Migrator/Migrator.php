@@ -2,7 +2,6 @@
 
 namespace Orchestra\Tenanti\Migrator;
 
-use Illuminate\Support\Arr;
 use Orchestra\Tenanti\Migration;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migrator as BaseMigrator;

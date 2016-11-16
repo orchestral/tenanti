@@ -59,11 +59,13 @@ class MigrateMakeCommand extends BaseCommand
      */
     public function handle()
     {
+        $arguments = $this->getArgumentsWithDriver('name');
+        $driver = $arguments['driver'];
+        $name = $arguments['name'];
+
         // It's possible for the developer to specify the tables to modify in this
         // schema operation. The developer may also specify if this table needs
         // to be freshly created so we can create the appropriate migrations.
-        $driver = $this->input->getArgument('driver');
-        $name   = $this->input->getArgument('name');
         $create = $this->input->getOption('create');
         $table  = $this->input->getOption('table');
 
@@ -118,8 +120,8 @@ class MigrateMakeCommand extends BaseCommand
     protected function getArguments()
     {
         return [
-            ['driver', InputArgument::REQUIRED, 'Tenant driver name.'],
-            ['name', InputArgument::REQUIRED, 'The name of the migration'],
+            ['driver', InputArgument::OPTIONAL, 'Tenant driver name.'],
+            ['name', InputArgument::OPTIONAL, 'The name of the migration'],
         ];
     }
 

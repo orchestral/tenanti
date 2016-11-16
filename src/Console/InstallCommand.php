@@ -27,7 +27,7 @@ class InstallCommand extends BaseCommand
      */
     public function handle()
     {
-        $driver   = $this->argument('driver');
+        $driver   = $this->getDriver();
         $database = $this->option('database');
         $id       = $this->option('id');
 
