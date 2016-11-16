@@ -56,15 +56,9 @@ abstract class BaseCommand extends Command
      */
     protected function getDriver()
     {
-        $argument = $this->argument('driver');
+        $driver = $this->argument('driver') ?: $this->getDriverFromConfig();
 
-        if (!empty($argument)) {
-            return $argument;
-        }
-
-        $driver = $this->getDriverFromConfig();
-
-        if (!empty($driver)) {
+        if (! empty($driver)) {
             return $driver;
         }
 
@@ -85,6 +79,43 @@ abstract class BaseCommand extends Command
         }
 
         return null;
+    }
+
+    /**
+     * Get the required arguments when used with optional driver argument.
+     *
+     * @return array
+     */
+    protected function getArgumentsWithDriver(...$arguments)
+    {
+        array_unshift($arguments, 'driver');
+        $resolvedArguments = [];
+
+        $missingArguments = array_filter($arguments, function ($argument) {
+            return empty($this->argument($argument));
+        });
+
+        if (count($missingArguments) > 1) {
+            throw new RuntimeException(sprintf('Not enough arguments (missing: "%s").', implode(', ', $missingArguments)));
+        } else if (empty($this->argument(end($arguments)))) {
+            $driver = $this->getDriverFromConfig();
+
+            if (empty($driver)) {
+                throw new RuntimeException('Not enough arguments (missing: "driver").');
+            }
+
+            $resolvedArguments['driver'] = $driver;
+
+            for ($i = 1; $i < count($arguments); $i++) {
+                $resolvedArguments[$arguments[$i]] = $this->argument($arguments[$i - 1]);
+            }
+        } else {
+            foreach ($arguments as $argument) {
+                $resolvedArguments[$argument] = $this->argument($argument);
+            }
+        }
+
+        return $resolvedArguments;
     }
 
     /**
