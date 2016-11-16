@@ -5,9 +5,9 @@ namespace Orchestra\Tenanti\Console;
 use Illuminate\Console\Command;
 use Orchestra\Tenanti\TenantiManager;
 use Orchestra\Tenanti\Migrator\FactoryInterface;
-use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Exception\RuntimeException;
 
 abstract class BaseCommand extends Command
 {
@@ -89,15 +89,12 @@ abstract class BaseCommand extends Command
     protected function getArgumentsWithDriver(...$arguments)
     {
         array_unshift($arguments, 'driver');
+
         $resolvedArguments = [];
 
-        $missingArguments = array_filter($arguments, function ($argument) {
-            return empty($this->argument($argument));
-        });
+        $this->validateMissingArguments($arguments);
 
-        if (count($missingArguments) > 1) {
-            throw new RuntimeException(sprintf('Not enough arguments (missing: "%s").', implode(', ', $missingArguments)));
-        } else if (empty($this->argument(end($arguments)))) {
+        if (empty($this->argument(end($arguments)))) {
             $driver = $this->getDriverFromConfig();
 
             if (empty($driver)) {
@@ -116,6 +113,27 @@ abstract class BaseCommand extends Command
         }
 
         return $resolvedArguments;
+    }
+
+    /**
+     * Validate missing arguments.
+     *
+     * @param  array  $arguments
+     * @return bool
+     *
+     * @throws \Symfony\Component\Console\Exception\RuntimeException
+     */
+    protected function validateMissingArguments(array $arguments)
+    {
+        $missingArguments = array_filter($arguments, function ($argument) {
+            return empty($this->argument($argument));
+        });
+
+        if (count($missingArguments) > 1) {
+            throw new RuntimeException(sprintf('Not enough arguments (missing: "%s").', implode(', ', $missingArguments)));
+        }
+
+        return true;
     }
 
     /**
