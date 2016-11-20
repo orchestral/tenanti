@@ -18,16 +18,19 @@
     "autoload-dev": {
         "classmap": [
             "tests/stubs",
+            "tests/Console/CommandTest.php",
             "tests/Kernel.php"
         ]
     },
     "require": {
         "php": ">=5.6.0",
+        "illuminate/console": "~5.4.0",
         "illuminate/filesystem": "~5.4.0",
         "orchestra/support": "~3.4.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",
+        "phpunit/phpunit": "~5.6",
         "laravel/framework": "~5.4.0",
         "orchestra/testbench": "~3.4.0"
     },
