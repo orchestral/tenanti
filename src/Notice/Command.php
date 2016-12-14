@@ -15,6 +15,11 @@ class Command implements Notice
      */
     protected $output;
 
+    /**
+     * Construct Notice implementation for Command.
+     *
+     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+     */
     public function __construct(OutputInterface $output)
     {
         $this->output = $output;
