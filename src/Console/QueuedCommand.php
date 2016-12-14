@@ -49,13 +49,14 @@ class QueuedCommand extends BaseCommand
         $driver   = $this->getDriver();
         $action   = $this->argument('action');
         $database = $this->option('database');
+        $queue    = $this->option('queue');
 
         if (! in_array($action, $this->actions)) {
             throw new InvalidArgumentException("Action [{$action}] is not available for this command.");
         }
 
         $command    = "tenanti:{$action}";
-        $parameters = ['driver' => $driver, '--database' => $database, '--force' => true];
+        $parameters = ['driver' => $driver, '--database' => $database, '--force' => true, '--queue' => $queue];
 
         $migrator = $this->tenant->driver($driver);
 
@@ -89,6 +90,7 @@ class QueuedCommand extends BaseCommand
     {
         return [
             ['database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.'],
+            ['queue', null, InputOption::VALUE_OPTIONAL, 'The queue connection to use.', 'default'],
             ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production.'],
         ];
     }
