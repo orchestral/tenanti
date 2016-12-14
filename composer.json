@@ -24,14 +24,14 @@
     },
     "require": {
         "php": ">=5.6.0",
-        "illuminate/console": "~5.3.20",
-        "illuminate/filesystem": "~5.3.0",
+        "illuminate/console": "~5.3.26",
+        "illuminate/filesystem": "~5.3.26",
         "orchestra/support": "~3.3.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",
         "phpunit/phpunit": "~5.6",
-        "laravel/framework": "~5.3.20",
+        "laravel/framework": "~5.3.26",
         "orchestra/testbench": "~3.3.4"
     },
     "extra": {
