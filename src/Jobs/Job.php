@@ -59,7 +59,7 @@ abstract class Job
     /**
      * Resolve migrator instance.
      *
-     * @return \Orchestra\Tenanti\Migrator\FactoryInterface
+     * @return \Orchestra\Tenanti\Contracts\Factory
      */
     protected function resolveMigrator()
     {

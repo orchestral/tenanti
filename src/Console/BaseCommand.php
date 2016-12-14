@@ -4,7 +4,8 @@ namespace Orchestra\Tenanti\Console;
 
 use Illuminate\Console\Command;
 use Orchestra\Tenanti\TenantiManager;
-use Orchestra\Tenanti\Migrator\FactoryInterface;
+use Orchestra\Tenanti\Contracts\Factory;
+use Orchestra\Tenanti\Notice\Command as Notice;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Exception\RuntimeException;
@@ -33,20 +34,13 @@ abstract class BaseCommand extends Command
     /**
      * Write migration output.
      *
-     * @param  \Orchestra\Tenanti\Migrator\FactoryInterface  $migrator
+     * @param  \Orchestra\Tenanti\Contracts\Factory  $migrator
      *
      * @return void
      */
-    protected function writeMigrationOutput(FactoryInterface $migrator)
+    protected function setupMigrationOutput(Factory $migrator)
     {
-        // Once the migrator has run we will grab the note output and send it out to
-        // the console screen, since the migrator itself functions without having
-        // any instances of the OutputInterface contract passed into the class.
-        foreach ($migrator->getNotes() as $note) {
-            $this->output->writeln($note);
-        }
-
-        $migrator->flushNotes();
+        $migrator->setNotice(new Notice($this->output));
     }
 
     /**

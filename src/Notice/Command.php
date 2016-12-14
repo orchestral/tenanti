@@ -1,0 +1,60 @@
+<?php
+
+namespace Orchestra\Tenanti\Notice;
+
+use Orchestra\Tenanti\Contracts\Notice;
+use Illuminate\Database\Migrations\Migrator;
+use Symfony\Component\Console\Output\OutputInterface;
+
+class Command implements Notice
+{
+    /**
+     * The output implementation.
+     *
+     * @var \Symfony\Component\Console\Output\OutputInterface
+     */
+    protected $output;
+
+    public function __construct(OutputInterface $output)
+    {
+        $this->output = $output;
+    }
+
+    /**
+     * Raise a note event.
+     *
+     * @param  string  $message
+     *
+     * @return void
+     */
+    public function add(...$message)
+    {
+        $this->send(...$message);
+    }
+
+    /**
+     * Merge migrator operation notes.
+     *
+     * @param  \Illuminate\Database\Migrations\Migrator  $migrator
+     *
+     * @return void
+     */
+    public function mergeFrom(Migrator $migrator)
+    {
+        $this->send($migrator->getNotes());
+    }
+
+    /**
+     * Send output of notes.
+     *
+     * @param  array  $notes
+     *
+     * @return void
+     */
+    protected function send(array $notes)
+    {
+        foreach ($notes as $note) {
+            $this->output->writeln($note);
+        }
+    }
+}

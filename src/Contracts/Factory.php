@@ -1,10 +1,10 @@
 <?php
 
-namespace Orchestra\Tenanti\Migrator;
+namespace Orchestra\Tenanti\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
 
-interface FactoryInterface
+interface Factory
 {
     /**
      * Install migrations.
@@ -103,23 +103,9 @@ interface FactoryInterface
     public function getModelName();
 
     /**
-     * Get the notes for the last operation.
-     *
-     * @return array
-     */
-    public function getNotes();
-
-    /**
      * Get table prefix.
      *
      * @return string
      */
     public function getTablePrefix();
-
-    /**
-     * Flush notes.
-     *
-     * @return void
-     */
-    public function flushNotes();
 }

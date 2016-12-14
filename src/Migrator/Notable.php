@@ -2,16 +2,31 @@
 
 namespace Orchestra\Tenanti\Migrator;
 
+use Orchestra\Tenanti\Contracts\Notice;
 use Illuminate\Database\Migrations\Migrator as BaseMigrator;
 
 trait Notable
 {
     /**
-     * The notes for the current operation.
+     * The notice implementation.
      *
-     * @var array
+     * @var \Orchestra\Tenanti\Contracts\Notice|null
      */
-    protected $notes = [];
+    protected $notice;
+
+    /**
+     * Set notice implementation.
+     *
+     * @param  \Orchestra\Tenanti\Contracts\Notice  $notice
+     *
+     * @return $this
+     */
+    public function setNotice(Notice $notice)
+    {
+        $this->notice = $notice;
+
+        return $this;
+    }
 
     /**
      * Merge migrator operation notes.
@@ -22,7 +37,9 @@ trait Notable
      */
     protected function mergeMigratorNotes(BaseMigrator $migrator)
     {
-        $this->notes = array_merge($this->notes, $migrator->getNotes());
+        if ($this->notice instanceof Notice) {
+            $this->notice->mergeFrom($migrator);
+        }
     }
 
     /**
@@ -32,28 +49,10 @@ trait Notable
      *
      * @return void
      */
-    protected function note($message)
+    protected function note(...$message)
     {
-        $this->notes[] = $message;
-    }
-
-    /**
-     * Get the notes for the last operation.
-     *
-     * @return array
-     */
-    public function getNotes()
-    {
-        return $this->notes;
-    }
-
-    /**
-     * Flush notes.
-     *
-     * @return void
-     */
-    public function flushNotes()
-    {
-        $this->notes = [];
+        if ($this->notice instanceof Notice) {
+            $this->notice->add($message);
+        }
     }
 }
