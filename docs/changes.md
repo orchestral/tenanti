@@ -5,6 +5,13 @@ title: Tenanti Change Log
 
 ## Version 3.3 {#v3-3}
 
+### v3.3.2 {#v3-3-2}
+
+* Add `Orchestra\Tenanti\Contracts\Notice`.
+* Rename `Orchestra\Tenanti\Migrator\FactoryInterface` to `Orchestra\Tenanti\Contracts\Factory`.
+* Refactor console notice output to not deferred until migration is completed for all tenant.
+* Allow to set `--queue` used with `php artisan tenanti:queue` command.
+
 ### v3.3.1 {#v3-3-1}
 
 * Add console command shortcut. ([@i906](https://github.com/i906))
