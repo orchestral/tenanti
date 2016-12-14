@@ -5,8 +5,9 @@ namespace Orchestra\Tenanti\Migrator;
 use Orchestra\Tenanti\TenantiManager;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Container\Container;
+use Orchestra\Tenanti\Contracts\Factory as FactoryContract;
 
-class Factory implements FactoryInterface
+class Factory implements FactoryContract
 {
     use Notable, Operation;
 

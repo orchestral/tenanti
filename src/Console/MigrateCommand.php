@@ -42,9 +42,9 @@ class MigrateCommand extends BaseCommand
 
         $migrator = $this->tenant->driver($driver);
 
-        $migrator->run($database, $id, $pretend);
+        $this->setupMigrationOutput($migrator);
 
-        $this->writeMigrationOutput($migrator);
+        $migrator->run($database, $id, $pretend);
     }
 
     /**

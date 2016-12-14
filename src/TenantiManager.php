@@ -31,7 +31,7 @@ class TenantiManager extends Manager
      *
      * @throws \InvalidArgumentException
      *
-     * @return \Orchestra\Tenanti\Migrator\FactoryInterface
+     * @return \Orchestra\Tenanti\Contracts\Factory
      */
     protected function createDriver($driver)
     {

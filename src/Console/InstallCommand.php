@@ -33,9 +33,9 @@ class InstallCommand extends BaseCommand
 
         $migrator = $this->tenant->driver($driver);
 
-        $migrator->install($database, $id);
+        $this->setupMigrationOutput($migrator);
 
-        $this->writeMigrationOutput($migrator);
+        $migrator->install($database, $id);
     }
 
     /**
