@@ -5,6 +5,10 @@ title: Tenanti Change Log
 
 ## Version 3.3 {#v3-3}
 
+### v3.3.3 {#v3-3-3}
+
+* Fixes setting up migration output for `Orchestra\Tenanti\Console\RollbackCommand`.
+
 ### v3.3.2 {#v3-3-2}
 
 * Add `Orchestra\Tenanti\Contracts\Notice`.
