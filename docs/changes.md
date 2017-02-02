@@ -5,6 +5,10 @@ title: Tenanti Change Log
 
 ## Version 3.3 {#v3-3}
 
+### v3.3.4 {#v3-3-4}
+
+* Revert allow to set `--queue` used with `php artisan tenanti:queue` command.
+
 ### v3.3.3 {#v3-3-3}
 
 * Fixes setting up migration output for `Orchestra\Tenanti\Console\RollbackCommand`.
