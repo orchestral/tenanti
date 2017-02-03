@@ -56,7 +56,7 @@ class QueuedCommand extends BaseCommand
         }
 
         $command    = "tenanti:{$action}";
-        $parameters = ['driver' => $driver, '--database' => $database, '--force' => true, '--queue' => $queue];
+        $parameters = ['driver' => $driver, '--database' => $database, '--force' => true];
 
         $migrator = $this->tenant->driver($driver);
 
