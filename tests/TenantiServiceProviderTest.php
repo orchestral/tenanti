@@ -1,11 +1,14 @@
-<?php namespace Orchestra\Tenanti\TestCase;
+<?php
+
+namespace Orchestra\Tenanti\TestCase;
 
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Application;
 use Orchestra\Tenanti\TenantiServiceProvider;
 
-class TenantiServiceProviderTest extends \PHPUnit_Framework_TestCase
+class TenantiServiceProviderTest extends TestCase
 {
     /**
      * Test \Orchestra\Tenanti\TenantiServiceProvider is deferred.

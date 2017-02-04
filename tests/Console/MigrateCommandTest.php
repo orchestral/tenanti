@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Tenanti\TestCase\Console;
+<?php
+
+namespace Orchestra\Tenanti\TestCase\Console;
 
 use Mockery as m;
 use Symfony\Component\Console\Exception\RuntimeException;

@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Tenanti\TestCase;
+<?php
+
+namespace Orchestra\Tenanti\TestCase;
 
 use Exception;
 

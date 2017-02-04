@@ -1,10 +1,13 @@
-<?php namespace Orchestra\Tenanti\TestCase\Migrator;
+<?php
 
-use Illuminate\Container\Container;
+namespace Orchestra\Tenanti\TestCase\Migrator;
+
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
+use Illuminate\Container\Container;
 use Orchestra\Tenanti\Migrator\Factory;
 
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class FactoryTest extends TestCase
 {
     /**
      * Teardown the test environment.

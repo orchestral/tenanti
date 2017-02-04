@@ -1,12 +1,15 @@
-<?php namespace Orchestra\Tenanti\Jobs\TestCase;
+<?php
+
+namespace Orchestra\Tenanti\Jobs\TestCase;
 
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Facade;
 use Orchestra\Tenanti\Jobs\DeleteTenant;
 
-class DeleteTenantTest extends \PHPUnit_Framework_TestCase
+class DeleteTenantTest extends TestCase
 {
     /**
      * @var \Illuminate\Container\Container
