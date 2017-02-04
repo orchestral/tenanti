@@ -41,7 +41,7 @@ class TenantiManager extends Manager
             throw new InvalidArgumentException("Driver [$driver] not supported.");
         }
 
-        return $this->app->make($this->resolver, [$this->app, $this, $driver, $chunk]);
+        return new $this->resolver($this->app, $this, $driver, $chunk);
     }
 
     /**

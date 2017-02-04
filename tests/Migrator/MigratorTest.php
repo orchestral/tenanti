@@ -23,7 +23,7 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
     public function testSetEntityMethod()
     {
         $repository = m::mock('\Illuminate\Database\Migrations\MigrationRepositoryInterface');
-        $resolver = m::mock('\Illuminate\Database\ConnectionResolverInterface');
+        $resolver = m::mock('\Illuminate\Database\ConnectionResolver');
         $files = m::mock('\Illuminate\Filesystem\Filesystem');
         $model = m::mock('\Illuminate\Database\Eloquent\Model');
 
@@ -41,7 +41,7 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
     public function testRunUpMethod()
     {
         $repository = m::mock('\Illuminate\Database\Migrations\MigrationRepositoryInterface');
-        $resolver = m::mock('\Illuminate\Database\ConnectionResolverInterface');
+        $resolver = m::mock('\Illuminate\Database\ConnectionResolver');
         $files = m::mock('\Illuminate\Filesystem\Filesystem');
         $model = m::mock('\Illuminate\Database\Eloquent\Model');
         $migration = m::mock('FooMigration');
@@ -77,7 +77,7 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
     public function testRunUpMethodWhenPretending()
     {
         $repository = m::mock('\Illuminate\Database\Migrations\MigrationRepositoryInterface');
-        $resolver = m::mock('\Illuminate\Database\ConnectionResolverInterface');
+        $resolver = m::mock('\Illuminate\Database\ConnectionResolver');
         $files = m::mock('\Illuminate\Filesystem\Filesystem');
         $model = m::mock('\Illuminate\Database\Eloquent\Model');
         $instance = m::mock('FooMigration');
@@ -109,7 +109,7 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
     public function testRunDownMethod()
     {
         $repository = m::mock('\Illuminate\Database\Migrations\MigrationRepositoryInterface');
-        $resolver = m::mock('\Illuminate\Database\ConnectionResolverInterface');
+        $resolver = m::mock('\Illuminate\Database\ConnectionResolver');
         $files = m::mock('\Illuminate\Filesystem\Filesystem');
         $model = m::mock('\Illuminate\Database\Eloquent\Model');
         $instance = m::mock('FooMigration');
@@ -145,7 +145,7 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
     public function testRunDownMethodWhenPretending()
     {
         $repository = m::mock('\Illuminate\Database\Migrations\MigrationRepositoryInterface');
-        $resolver = m::mock('\Illuminate\Database\ConnectionResolverInterface');
+        $resolver = m::mock('\Illuminate\Database\ConnectionResolver');
         $files = m::mock('\Illuminate\Filesystem\Filesystem');
         $model = m::mock('\Illuminate\Database\Eloquent\Model');
         $instance = m::mock('FooMigration');
@@ -177,7 +177,7 @@ class MigratorTest extends \PHPUnit_Framework_TestCase
     public function testGetQueriesMethodWhenPretending()
     {
         $repository = m::mock('\Illuminate\Database\Migrations\MigrationRepositoryInterface');
-        $resolver = m::mock('\Illuminate\Database\ConnectionResolverInterface');
+        $resolver = m::mock('\Illuminate\Database\ConnectionResolver');
         $files = m::mock('\Illuminate\Filesystem\Filesystem');
         $model = m::mock('\Illuminate\Database\Eloquent\Model');
         $instance = m::mock('FooMigration');

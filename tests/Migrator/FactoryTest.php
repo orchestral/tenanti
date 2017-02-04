@@ -484,7 +484,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $app = new Container();
         $app['config'] = m::mock('\Illuminate\Contracts\Config\Repository');
-        $app['db'] = m::mock('\Illuminate\Database\ConnectionResolverInterface');
+        $app['db'] = m::mock('\Illuminate\Database\ConnectionResolver');
         $app['files'] = m::mock('\Illuminate\Filesystem\Filesystem');
         $app['schema'] = m::mock('\Illuminate\Database\Schema\Builder');
 
