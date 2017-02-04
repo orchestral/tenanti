@@ -1,10 +1,13 @@
-<?php namespace Orchestra\Tenanti\TestCase;
+<?php
+
+namespace Orchestra\Tenanti\TestCase;
 
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
 use Orchestra\Tenanti\TenantiManager;
 
-class TenantiManagerTest extends \PHPUnit_Framework_TestCase
+class TenantiManagerTest extends TestCase
 {
     /**
      * Teardown the test environment.

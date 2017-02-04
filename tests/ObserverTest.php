@@ -1,11 +1,14 @@
-<?php namespace Orchestra\Tenanti\TestCase;
+<?php
+
+namespace Orchestra\Tenanti\TestCase;
 
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Facade;
 
-class ObserverTest extends \PHPUnit_Framework_TestCase
+class ObserverTest extends TestCase
 {
     /**
      * @var \Illuminate\Container\Container
