@@ -146,8 +146,11 @@ trait Operation
         $resolver = $this->resolver;
 
         if (! isset($this->migrator[$table])) {
-            $repository = $app->make(Arr::get($resolver, 'repository'), [$app['db'], $table]);
-            $migrator   = $app->make(Arr::get($resolver, 'migrator'), [$repository, $app['db'], $app['files']]);
+            $respositoryClass = Arr::get($resolver, 'repository');
+            $migratorClass = Arr::get($resolver, 'migrator');
+
+            $repository = new $respositoryClass($app['db'], $table);
+            $migrator   = new $migratorClass($repository, $app['db'], $app['files']);
 
             $this->migrator[$table] = $migrator;
         }
