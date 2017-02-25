@@ -11,7 +11,7 @@ class Creator extends MigrationCreator
      *
      * @return string
      */
-    public function getStubPath()
+    public function stubPath()
     {
         return __DIR__.'/stubs';
     }
