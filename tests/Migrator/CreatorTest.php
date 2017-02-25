@@ -28,6 +28,6 @@ class CreatorTest extends TestCase
 
         $stub = new Creator($files);
 
-        $this->assertContains('src/Migrator/stubs', $stub->getStubPath());
+        $this->assertContains('src/Migrator/stubs', $stub->stubPath());
     }
 }
