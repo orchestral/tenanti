@@ -26,7 +26,7 @@ class {{class}} extends Migration
      * @param  \Illuminate\Database\Eloquent\Model  $model
      * @return void
      */
-    public function down($id, Model $entity)
+    public function down($id, Model $model)
     {
         //
     }
