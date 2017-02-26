@@ -26,7 +26,7 @@ class DummyClass extends Migration
      *
      * @return void
      */
-    public function down($id, Model $entity)
+    public function down($id, Model $model)
     {
         //
     }
