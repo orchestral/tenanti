@@ -76,7 +76,7 @@ class Factory implements FactoryContract
 
         $this->executeByChunk(function ($entities) use ($database, $pretend) {
             foreach ($entities as $entity) {
-                $this->runUp($entity, $database, ['pretend' => (bool) $pretend]);
+                $this->runUp($entity, $database, $pretend);
             }
         });
     }
@@ -170,7 +170,7 @@ class Factory implements FactoryContract
 
         $migrator->setConnection($database);
         $migrator->setEntity($entity);
-        $migrator->run($this->getMigrationPath(), $pretend);
+        $migrator->run($this->getMigrationPath(), ['pretend' => (bool) $pretend]);
         $migrator->resetConnection();
 
         $this->mergeMigratorNotes($migrator);
