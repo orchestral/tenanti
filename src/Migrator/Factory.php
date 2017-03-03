@@ -76,7 +76,7 @@ class Factory implements FactoryContract
 
         $this->executeByChunk(function ($entities) use ($database, $pretend) {
             foreach ($entities as $entity) {
-                $this->runUp($entity, $database, $pretend);
+                $this->runUp($entity, $database, ['pretend' => (bool) $pretend]);
             }
         });
     }
