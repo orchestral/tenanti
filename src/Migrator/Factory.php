@@ -193,7 +193,7 @@ class Factory implements FactoryContract
 
         $migrator->setConnection($database);
         $migrator->setEntity($entity);
-        $migrator->rollback($this->getMigrationPath(), $pretend);
+        $migrator->rollback($this->getMigrationPath(), ['pretend' => (bool) $pretend]);
         $migrator->resetConnection();
 
         $this->mergeMigratorNotes($migrator);
