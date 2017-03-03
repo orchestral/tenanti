@@ -216,7 +216,7 @@ class Factory implements FactoryContract
 
         $migrator->setConnection($database);
         $migrator->setEntity($entity);
-        $migrator->reset($this->getMigrationPath(), ['pretend' => (bool) $pretend]);
+        $migrator->reset($this->getMigrationPath(), $pretend);
         $migrator->resetConnection();
 
         $this->mergeMigratorNotes($migrator);
