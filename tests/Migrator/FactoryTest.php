@@ -394,7 +394,7 @@ class FactoryTest extends TestCase
             ->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('user');
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
-            ->shouldReceive('run')->once()->with('/var/app/migrations', ['pretend' => false])->andReturnNull()
+            ->shouldReceive('run')->once()->with(['/var/app/migrations'], ['pretend' => false])->andReturnNull()
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
 
         $this->assertNull($stub->runUp($model, 'primary'));
@@ -427,7 +427,7 @@ class FactoryTest extends TestCase
             ->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('user');
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
-            ->shouldReceive('rollback')->with('/var/app/migrations', ['pretend' => false])->andReturnNull()
+            ->shouldReceive('rollback')->with(['/var/app/migrations'], ['pretend' => false])->andReturnNull()
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
 
         $this->assertNull($stub->runDown($model, 'primary'));
@@ -460,7 +460,7 @@ class FactoryTest extends TestCase
             ->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('user');
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnNull()
-            ->shouldReceive('reset')->once()->with('/var/app/migrations', false)->andReturn(5)
+            ->shouldReceive('reset')->once()->with(['/var/app/migrations'], false)->andReturn(5)
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
 
         $this->assertNull($stub->runReset($model, 'primary'));
