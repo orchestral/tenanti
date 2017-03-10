@@ -72,7 +72,7 @@ abstract class BaseCommand extends Command
             return $drivers[0];
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -113,9 +113,10 @@ abstract class BaseCommand extends Command
      * Validate missing arguments.
      *
      * @param  array  $arguments
-     * @return bool
      *
      * @throws \Symfony\Component\Console\Exception\RuntimeException
+     *
+     * @return bool
      */
     protected function validateMissingArguments(array $arguments)
     {

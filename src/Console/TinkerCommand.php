@@ -28,8 +28,8 @@ class TinkerCommand extends BaseCommand
     public function handle()
     {
         $arguments = $this->getArgumentsWithDriver('id');
-        $driver = $arguments['driver'];
-        $id = $arguments['id'];
+        $driver    = $arguments['driver'];
+        $id        = $arguments['id'];
 
         $tenanti = $this->tenant->driver($driver);
 

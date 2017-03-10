@@ -5,6 +5,11 @@ title: Tenanti Change Log
 
 ## Version 3.3 {#v3-3}
 
+### v3.3.5 {#v3-3-5}
+
+* Fixes `artisan tenanti:reset` command. ([@fernandobandeira](https://github.com/fernandobandeira))
+* Fixes variable name on `blank.stub`. ([@fernandobandeira](https://github.com/fernandobandeira))
+
 ### v3.3.4 {#v3-3-4}
 
 * Revert allow to set `--queue` used with `php artisan tenanti:queue` command.

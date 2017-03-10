@@ -60,8 +60,8 @@ class MigrateMakeCommand extends BaseCommand
     public function handle()
     {
         $arguments = $this->getArgumentsWithDriver('name');
-        $driver = $arguments['driver'];
-        $name = $arguments['name'];
+        $driver    = $arguments['driver'];
+        $name      = $arguments['name'];
 
         // It's possible for the developer to specify the tables to modify in this
         // schema operation. The developer may also specify if this table needs
