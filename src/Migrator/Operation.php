@@ -142,12 +142,11 @@ trait Operation
      */
     protected function resolveMigrator($table)
     {
-        $app      = $this->app;
-        $resolver = $this->resolver;
+        $app = $this->app;
 
         if (! isset($this->migrator[$table])) {
-            $respositoryClass = Arr::get($resolver, 'repository');
-            $migratorClass    = Arr::get($resolver, 'migrator');
+            $respositoryClass = Arr::get($this->resolver, 'repository');
+            $migratorClass    = Arr::get($this->resolver, 'migrator');
 
             $repository = new $respositoryClass($app['db'], $table);
             $migrator   = new $migratorClass($repository, $app['db'], $app['files']);
