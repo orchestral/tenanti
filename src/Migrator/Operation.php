@@ -47,6 +47,13 @@ trait Operation
     protected $data = [];
 
     /**
+     * Paths that will be added to the migration.
+     *
+     * @var array
+     */
+    protected $migrationPaths = [];
+
+    /**
      * Resolver list.
      *
      * @var array
@@ -203,6 +210,7 @@ trait Operation
                 'entity'     => $entity,
                 'template'   => $tenants['template'],
                 'connection' => $connection,
+                'factory'    => $this,
             ]);
 
             $repository->set($name, $config);
@@ -251,7 +259,7 @@ trait Operation
      */
     public function getMigrationPath()
     {
-        return $this->getConfig('path');
+        return array_merge([$this->getConfig('path')], $this->migrationPaths);
     }
 
     /**
@@ -299,5 +307,17 @@ trait Operation
         }
 
         return Str::replace($name, $this->data[$id]);
+    }
+
+    /**
+     * Load migrations from a specific path.
+     *
+     * @param  string|array  $path
+     *
+     * @return null
+     */
+    public function loadMigrationsFrom($path) {
+        $this->migrationPaths = array_merge($this->migrationPaths, is_array($path) ? $path : [$path]);
+        $this->migrationPaths = array_unique($this->migrationPaths);
     }
 }
