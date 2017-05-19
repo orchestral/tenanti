@@ -259,7 +259,11 @@ trait Operation
      */
     public function getMigrationPath()
     {
-        return array_merge([$this->getConfig('path')], $this->migrationPaths);
+        if (! empty($this->migrationPaths)) {
+            return array_merge([$this->getConfig('path')], $this->migrationPaths);
+        }
+
+        return $this->getConfig('path');
     }
 
     /**
