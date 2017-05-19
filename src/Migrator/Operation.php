@@ -210,7 +210,7 @@ trait Operation
                 'entity'     => $entity,
                 'template'   => $tenants['template'],
                 'connection' => $connection,
-                'migrator'    => $this,
+                'migrator'   => $this,
             ]);
 
             $repository->set($name, $config);
