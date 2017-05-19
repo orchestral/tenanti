@@ -255,12 +255,14 @@ trait Operation
     /**
      * Get migration path.
      *
-     * @return mixed
+     * @param  \Illuminate\Database\Eloquent\Model|null  $entity
+     *
+     * @return string|array|null
      */
-    public function getMigrationPath()
+    public function getMigrationPath($entity = null)
     {
-        if (! empty($this->migrationPaths)) {
-            return array_merge([$this->getConfig('path')], $this->migrationPaths);
+        if ($entity !== null && isset($this->migrationPaths[$entity->getKey()])) {
+            return array_merge([$this->getConfig('path')], $this->migrationPaths[$entity->getKey()]);
         }
 
         return $this->getConfig('path');
@@ -317,11 +319,18 @@ trait Operation
      * Load migrations from a specific path.
      *
      * @param  string|array  $path
+     * @param  \Illuminate\Database\Eloquent\Model  $entity
      *
      * @return null
      */
-    public function loadMigrationsFrom($path) {
-        $this->migrationPaths = array_merge($this->migrationPaths, is_array($path) ? $path : [$path]);
-        $this->migrationPaths = array_unique($this->migrationPaths);
+    public function loadMigrationsFrom($path, $entity) {
+        $id = $entity->getKey();
+
+        if (! isset($this->migrationPaths[$id])) {
+            $this->migrationPaths[$id] = [];
+        }
+
+        $this->migrationPaths[$id] = array_merge($this->migrationPaths[$id], is_array($path) ? $path : [$path]);
+        $this->migrationPaths[$id] = array_unique($this->migrationPaths[$id]);
     }
 }
