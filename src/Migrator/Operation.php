@@ -259,7 +259,7 @@ trait Operation
      *
      * @return string|array|null
      */
-    public function getMigrationPath($entity = null)
+    public function getMigrationPath(Model $entity = null)
     {
         if ($entity !== null && isset($this->migrationPaths[$entity->getKey()])) {
             return array_merge([$this->getConfig('path')], $this->migrationPaths[$entity->getKey()]);
@@ -318,19 +318,20 @@ trait Operation
     /**
      * Load migrations from a specific path.
      *
-     * @param  string|array  $path
+     * @param  string|array  $paths
      * @param  \Illuminate\Database\Eloquent\Model  $entity
      *
      * @return null
      */
-    public function loadMigrationsFrom($path, $entity) {
+    public function loadMigrationsFrom($paths, Model $entity)
+    {
         $id = $entity->getKey();
 
         if (! isset($this->migrationPaths[$id])) {
             $this->migrationPaths[$id] = [];
         }
 
-        $this->migrationPaths[$id] = array_merge($this->migrationPaths[$id], is_array($path) ? $path : [$path]);
+        $this->migrationPaths[$id] = array_merge($this->migrationPaths[$id], (array) $paths);
         $this->migrationPaths[$id] = array_unique($this->migrationPaths[$id]);
     }
 }
