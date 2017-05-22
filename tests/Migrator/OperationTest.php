@@ -237,6 +237,20 @@ class OperationTest extends TestCase
 
         $this->manager = $manager;
 
+        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $model->shouldReceive('getKey')->andReturn(5);
+        $this->loadMigrationsFrom('customPath', $model);
+        $this->assertEquals([$path, 'customPath'], $this->getMigrationPath($model));
+
+        $model2 = m::mock('\Illuminate\Database\Eloquent\Model');
+        $model2->shouldReceive('getKey')->andReturn(6);
+        $this->loadMigrationsFrom(['customPath', 'customPath2'], $model2);
+        $this->assertEquals([$path, 'customPath', 'customPath2'], $this->getMigrationPath($model2));
+
+        $model3 = m::mock('\Illuminate\Database\Eloquent\Model');
+        $model3->shouldReceive('getKey')->andReturn(7);
+        $this->assertEquals($path, $this->getMigrationPath($model3));
+
         $this->assertEquals($path, $this->getMigrationPath());
     }
 
