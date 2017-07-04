@@ -2,8 +2,6 @@
 
 namespace Orchestra\Tenanti\Jobs;
 
-use Illuminate\Support\Arr;
-
 class DeleteTenant extends Job
 {
     /**
@@ -17,7 +15,7 @@ class DeleteTenant extends Job
             return;
         }
 
-        $database = Arr::get($this->config, 'database');
+        $database = $this->config['database'] ?? null;
         $migrator = $this->resolveMigrator();
 
         if (is_null($this->model)) {

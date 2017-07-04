@@ -35,13 +35,11 @@ class TenantiManager extends Manager
      */
     protected function createDriver($driver)
     {
-        $chunk = Arr::get($this->config, 'chunk', 100);
-
         if (is_null($this->setupDriverConfig($driver))) {
             throw new InvalidArgumentException("Driver [$driver] not supported.");
         }
 
-        return new $this->resolver($this->app, $this, $driver, $chunk);
+        return new $this->resolver($this->app, $this, $driver, $this->config['chunk'] ?? 100);
     }
 
     /**
@@ -131,7 +129,7 @@ class TenantiManager extends Manager
             return;
         }
 
-        $connection = Arr::get($this->config, 'connection');
+        $connection = $this->config['connection'] ?? null;
 
         if (! is_null($connection) && $this->driverExcludedByOptions($driver, $connection['options'])) {
             $connection = null;
