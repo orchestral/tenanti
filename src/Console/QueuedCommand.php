@@ -62,8 +62,9 @@ class QueuedCommand extends BaseCommand
 
         $migrator->executeByChunk(function ($entities) use ($kernel, $command, $parameters) {
             foreach ($entities as $entity) {
-                $parameters['--id'] = $entity->getKey();
-                $kernel->queue($command, $parameters);
+                $kernel->queue(
+                    $command, array_merge($parameters, ['--id' => $entity->getKey()])
+                )->onQueue($this->option('queue'));
             }
         });
     }
@@ -91,6 +92,7 @@ class QueuedCommand extends BaseCommand
         return [
             ['database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.'],
             ['queue', null, InputOption::VALUE_OPTIONAL, 'The queue connection to use.', 'default'],
+            // @deprecated
             ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production.'],
         ];
     }
