@@ -152,8 +152,8 @@ trait Operation
         $app = $this->app;
 
         if (! isset($this->migrator[$table])) {
-            $respositoryClass = $resolver['repository'];
-            $migratorClass    = $resolver['migrator'];
+            $respositoryClass = $this->resolver['repository'];
+            $migratorClass    = $this->resolver['migrator'];
 
             $repository = new $respositoryClass($app['db'], $table);
             $migrator   = new $migratorClass($repository, $app['db'], $app['files']);
