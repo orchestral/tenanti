@@ -3,12 +3,11 @@ Multi-tenant Database Schema Manager for Laravel
 
 Tenanti allow you to manage multi-tenant data schema and migration manager for your Laravel application.
 
-[![Latest Stable Version](https://img.shields.io/github/release/orchestral/tenanti.svg?style=flat-square)](https://packagist.org/packages/orchestra/tenanti)
-[![Total Downloads](https://img.shields.io/packagist/dt/orchestra/tenanti.svg?style=flat-square)](https://packagist.org/packages/orchestra/tenanti)
-[![MIT License](https://img.shields.io/packagist/l/orchestra/tenanti.svg?style=flat-square)](https://packagist.org/packages/orchestra/tenanti)
-[![Build Status](https://img.shields.io/travis/orchestral/tenanti/master.svg?style=flat-square)](https://travis-ci.org/orchestral/tenanti)
-[![Coverage Status](https://img.shields.io/coveralls/orchestral/tenanti/master.svg?style=flat-square)](https://coveralls.io/r/orchestral/tenanti?branch=master)
-[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/orchestral/tenanti/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/orchestral/tenanti/)
+[![Build Status](https://travis-ci.org/orchestral/tenanti.svg?branch=3.5)](https://travis-ci.org/orchestral/tenanti)
+[![Latest Stable Version](https://poser.pugx.org/orchestra/tenanti/v/stable)](https://packagist.org/packages/orchestra/tenanti)
+[![Total Downloads](https://poser.pugx.org/orchestra/tenanti/downloads)](https://packagist.org/packages/orchestra/tenanti)
+[![Latest Unstable Version](https://poser.pugx.org/orchestra/tenanti/v/unstable)](https://packagist.org/packages/orchestra/tenanti)
+[![License](https://poser.pugx.org/orchestra/tenanti/license)](https://packagist.org/packages/orchestra/tenanti)
 
 ## Table of Content
 
@@ -16,7 +15,7 @@ Tenanti allow you to manage multi-tenant data schema and migration manager for y
 * [Installation](#installation)
 * [Configuration](#configuration)
 * [Usage](#usage)
-* [Change Log](https://github.com/orchestral/tenanti/releases)
+* [Changelog](https://github.com/orchestral/tenanti/releases)
 
 ## Version Compatibility
 
@@ -27,7 +26,7 @@ Laravel  | Tenanti
  5.1.x   | 3.1.x
  5.2.x   | 3.2.x
  5.3.x   | 3.3.x
- 5.4.x   | 3.4.x@dev
+ 5.4.x   | 3.4.x
  5.5.x   | 5.5.x@dev
 
 ## Installation
@@ -36,9 +35,9 @@ To install through composer, simply put the following in your `composer.json` fi
 
 ```json
 {
-	"require": {
-		"orchestra/tenanti": "~3.0"
-	}
+    "require": {
+        "orchestra/tenanti": "~3.0"
+    }
 }
 ```
 
@@ -57,9 +56,9 @@ Next add the following service provider in `config/app.php`.
 ```php
 'providers' => [
 
-	// ...
-	Orchestra\Tenanti\TenantiServiceProvider::class,
-	Orchestra\Tenanti\CommandServiceProvider::class,
+    // ...
+    Orchestra\Tenanti\TenantiServiceProvider::class,
+    Orchestra\Tenanti\CommandServiceProvider::class,
 ],
 ```
 
@@ -113,11 +112,11 @@ For each driver, you should also consider adding the migration path into autoloa
 
 ```json
 {
-	"autoload": {
-		"classmap": [
-			"database/tenant/users"
-		]
-	}
+    "autoload": {
+        "classmap": [
+            "database/tenant/users"
+        ]
+    }
 }
 ```
 
@@ -133,10 +132,10 @@ use App\Observers\UserObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
-	public function boot()
-	{
-		User::observe(new UserObserver);
-	}
+    public function boot()
+    {
+        User::observe(new UserObserver);
+    }
 }
 ```
 
@@ -149,10 +148,10 @@ use Orchestra\Tenanti\Observer;
 
 class UserObserver extends Observer
 {
-	public function getDriverName()
-	{
-		return 'user';
-	}
+    public function getDriverName()
+    {
+        return 'user';
+    }
 }
 ```
 
