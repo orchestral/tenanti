@@ -2,6 +2,7 @@
 
 use Orchestra\Tenanti\Migration;
 
-class FooMigration extends Migration {
+class FooMigration extends Migration
+{
     //
 }

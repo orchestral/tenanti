@@ -5,7 +5,6 @@ namespace Orchestra\Tenanti\TestCase;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
-use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Facade;
 
 class ObserverTest extends TestCase
@@ -75,7 +74,7 @@ class ObserverTest extends TestCase
         $config = ['database' => 'primary', 'driver' => 'user'];
 
         $stub = m::mock('\Orchestra\Tenanti\Observer[getConnectionName,getDriverName,getDeleteTenantJob]')
-                    ->shouldAllowMockingProtectedMethods();;
+                    ->shouldAllowMockingProtectedMethods();
 
         $model = m::mock('\Illuminate\Database\Eloquent\Model');
         $job = m::mock('\Orchestra\Tenanti\Jobs\DeleteTenant', [$model, $config]);

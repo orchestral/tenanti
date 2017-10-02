@@ -52,7 +52,7 @@ class CreateTenantTest extends TestCase
 
         $data = [
             'database' => 'foo',
-            'driver'   => 'user',
+            'driver' => 'user',
         ];
 
         $stub = new CreateTenant($model, $data);

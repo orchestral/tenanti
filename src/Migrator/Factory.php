@@ -28,10 +28,10 @@ class Factory implements FactoryContract
      */
     public function __construct(Container $app, TenantiManager $manager, $driver, $chunk = 100)
     {
-        $this->app     = $app;
+        $this->app = $app;
         $this->manager = $manager;
-        $this->driver  = $driver;
-        $this->chunk   = $chunk;
+        $this->driver = $driver;
+        $this->chunk = $chunk;
     }
 
     /**
@@ -140,7 +140,7 @@ class Factory implements FactoryContract
     public function runInstall(Model $entity, $database)
     {
         $database = $this->asConnection($entity, $database);
-        $table    = $this->resolveMigrationTableName($entity);
+        $table = $this->resolveMigrationTableName($entity);
 
         $repository = $this->resolveMigrator($table)->getRepository();
 
@@ -165,7 +165,7 @@ class Factory implements FactoryContract
     public function runUp(Model $entity, $database, $pretend = false)
     {
         $database = $this->asConnection($entity, $database);
-        $table    = $this->resolveMigrationTableName($entity);
+        $table = $this->resolveMigrationTableName($entity);
         $migrator = $this->resolveMigrator($table);
 
         $migrator->setConnection($database);
@@ -188,7 +188,7 @@ class Factory implements FactoryContract
     public function runDown(Model $entity, $database, $pretend = false)
     {
         $database = $this->asConnection($entity, $database);
-        $table    = $this->resolveMigrationTableName($entity);
+        $table = $this->resolveMigrationTableName($entity);
         $migrator = $this->resolveMigrator($table);
 
         $migrator->setConnection($database);
@@ -211,7 +211,7 @@ class Factory implements FactoryContract
     public function runReset(Model $entity, $database, $pretend = false)
     {
         $database = $this->asConnection($entity, $database);
-        $table    = $this->resolveMigrationTableName($entity);
+        $table = $this->resolveMigrationTableName($entity);
         $migrator = $this->resolveMigrator($table);
 
         $migrator->setConnection($database);

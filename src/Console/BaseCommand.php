@@ -97,7 +97,7 @@ abstract class BaseCommand extends Command
 
             $resolvedArguments['driver'] = $driver;
 
-            for ($i = 1; $i < count($arguments); $i++) {
+            for ($i = 1; $i < count($arguments); ++$i) {
                 $resolvedArguments[$arguments[$i]] = $this->argument($arguments[$i - 1]);
             }
         } else {

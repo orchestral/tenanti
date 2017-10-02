@@ -170,8 +170,8 @@ class FactoryTest extends TestCase
             ->shouldReceive('toArray')->andReturn([])
             ->shouldReceive('newQuery->chunk')->once()->with(100, m::type('Closure'))
                 ->andReturnUsing(function ($n, $c) use ($entities) {
-                        $c($entities);
-                    });
+                    $c($entities);
+                });
 
         $this->assertNull($stub->rollback('foo'));
     }

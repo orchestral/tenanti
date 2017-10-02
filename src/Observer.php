@@ -39,7 +39,7 @@ abstract class Observer
     {
         $data = [
             'database' => $this->getConnectionName(),
-            'driver'   => $this->getDriverName(),
+            'driver' => $this->getDriverName(),
         ];
 
         $this->dispatch($this->getCreateTenantJob($entity, $data));
@@ -58,7 +58,7 @@ abstract class Observer
     {
         $data = [
             'database' => $this->getConnectionName(),
-            'driver'   => $this->getDriverName(),
+            'driver' => $this->getDriverName(),
         ];
 
         $this->dispatch($this->getRestoreTenantJob($entity, $data));
@@ -77,7 +77,7 @@ abstract class Observer
     {
         $data = [
             'database' => $this->getConnectionName(),
-            'driver'   => $this->getDriverName(),
+            'driver' => $this->getDriverName(),
         ];
 
         $this->dispatch($this->getDeleteTenantJob($entity, $data));
