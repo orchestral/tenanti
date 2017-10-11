@@ -52,7 +52,7 @@ class DeleteTenantTest extends TestCase
 
         $data = [
             'database' => 'foo',
-            'driver'   => 'user',
+            'driver' => 'user',
         ];
 
         $stub = new DeleteTenant($model, $data);

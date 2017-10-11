@@ -46,7 +46,7 @@ class MigrateMakeCommand extends BaseCommand
      */
     public function __construct(TenantiManager $tenant, Creator $creator, Composer $composer)
     {
-        $this->creator  = $creator;
+        $this->creator = $creator;
         $this->composer = $composer;
 
         parent::__construct($tenant);
@@ -60,14 +60,14 @@ class MigrateMakeCommand extends BaseCommand
     public function handle()
     {
         $arguments = $this->getArgumentsWithDriver('name');
-        $driver    = $arguments['driver'];
-        $name      = $arguments['name'];
+        $driver = $arguments['driver'];
+        $name = $arguments['name'];
 
         // It's possible for the developer to specify the tables to modify in this
         // schema operation. The developer may also specify if this table needs
         // to be freshly created so we can create the appropriate migrations.
         $create = $this->input->getOption('create');
-        $table  = $this->input->getOption('table');
+        $table = $this->input->getOption('table');
 
         if (! $table && is_string($create)) {
             $table = $create;
@@ -94,8 +94,8 @@ class MigrateMakeCommand extends BaseCommand
     protected function writeMigration($driver, $name, $table, $create)
     {
         $migrator = $this->tenant->driver($driver);
-        $files    = $this->creator->getFilesystem();
-        $path     = $migrator->getMigrationPath();
+        $files = $this->creator->getFilesystem();
+        $path = $migrator->getMigrationPath();
 
         if (! $files->isDirectory($path)) {
             $files->makeDirectory($path, 0755, true);
@@ -105,7 +105,7 @@ class MigrateMakeCommand extends BaseCommand
             $table = Str::replace($migrator->getTablePrefix()."_{$table}", ['id' => '{$id}']);
         }
 
-        $name  = implode('_', [$driver, 'tenant', $name]);
+        $name = implode('_', [$driver, 'tenant', $name]);
 
         $file = pathinfo($this->creator->create($name, $path, $table, $create), PATHINFO_FILENAME);
 

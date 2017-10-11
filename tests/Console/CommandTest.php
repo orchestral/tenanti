@@ -3,7 +3,6 @@
 namespace Orchestra\Tenanti\TestCase\Console;
 
 use Mockery as m;
-use Illuminate\Support\Composer;
 use Orchestra\Testbench\TestCase;
 use Orchestra\Tenanti\TenantiManager;
 use Orchestra\Tenanti\TestCase\Kernel;
@@ -17,7 +16,7 @@ abstract class CommandTest extends TestCase
     protected function getMockDriverFactory()
     {
         $factory = m::mock(Factory::class);
-        $notice  = m::mock(Notice::class);
+        $notice = m::mock(Notice::class);
 
         $factory->shouldReceive('install');
 

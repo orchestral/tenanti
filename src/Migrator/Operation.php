@@ -60,7 +60,7 @@ trait Operation
      */
     protected $resolver = [
         'repository' => DatabaseMigrationRepository::class,
-        'migrator'   => Migrator::class,
+        'migrator' => Migrator::class,
     ];
 
     /**
@@ -112,7 +112,7 @@ trait Operation
      */
     public function getModel()
     {
-        $name  = $this->getModelName();
+        $name = $this->getModelName();
         $model = $this->app->make($name);
 
         if (! $model instanceof Model) {
@@ -153,10 +153,10 @@ trait Operation
 
         if (! isset($this->migrator[$table])) {
             $respositoryClass = $this->resolver['repository'];
-            $migratorClass    = $this->resolver['migrator'];
+            $migratorClass = $this->resolver['migrator'];
 
             $repository = new $respositoryClass($app['db'], $table);
-            $migrator   = new $migratorClass($repository, $app['db'], $app['files']);
+            $migrator = new $migratorClass($repository, $app['db'], $app['files']);
 
             $this->migrator[$table] = $migrator;
         }
@@ -192,7 +192,7 @@ trait Operation
     public function asConnection(Model $entity, $database)
     {
         $repository = $this->app->make('config');
-        $tenants    = $this->getConfig('connection');
+        $tenants = $this->getConfig('connection');
 
         if (! is_null($tenants)) {
             $database = $tenants['name'];
@@ -203,14 +203,14 @@ trait Operation
         }
 
         $connection = $this->bindWithKey($entity, $database);
-        $name       = "database.connections.{$connection}";
+        $name = "database.connections.{$connection}";
 
         if (! is_null($tenants) && is_null($repository->get($name))) {
             $config = $this->app->call($tenants['resolver'], [
-                'entity'     => $entity,
-                'template'   => $tenants['template'],
+                'entity' => $entity,
+                'template' => $tenants['template'],
                 'connection' => $connection,
-                'migrator'   => $this,
+                'migrator' => $this,
             ]);
 
             $repository->set($name, $config);

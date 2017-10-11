@@ -26,8 +26,8 @@ return [
 
     'drivers' => [
         'user' => [
-            'model'  => 'App\User',
-            'path'   => database_path('tenant/users'),
+            'model' => 'App\User',
+            'path' => database_path('tenant/users'),
             'shared' => true,
         ],
     ],
