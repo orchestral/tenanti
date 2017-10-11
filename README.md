@@ -32,10 +32,7 @@ Laravel  | Tenanti
  5.3.x   | 3.3.x
  5.4.x   | 3.4.x
  5.5.x   | 3.5.x@dev
-<<<<<<< HEAD
  5.6.x   | 3.6.x@dev
-=======
->>>>>>> 3.5
 
 ## Installation
 
