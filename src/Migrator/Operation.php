@@ -71,23 +71,25 @@ trait Operation
      *
      * @return void
      */
-    public function executeById($id, Closure $callback)
+    public function executeFor($id, Closure $callback)
     {
-        $entity = $this->newQuery()->findOrFail($id);
-
-        return call_user_func($callback, $entity);
+        return $callback(
+            $this->newQuery()->findOrFail($id)
+        );
     }
 
     /**
-     * Execute query via chunk.
+     * Execute query via cursor.
      *
      * @param  \Closure  $callback
      *
      * @return void
      */
-    public function executeByChunk(Closure $callback)
+    public function executeForEach(Closure $callback)
     {
-        $this->newQuery()->chunk($this->chunk, $callback);
+        foreach ($this->newQuery()->cursor() as $entity) {
+            $callback($entity);
+        }
     }
 
     /**

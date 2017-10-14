@@ -36,10 +36,7 @@ class FactoryTest extends TestCase
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('runInstall')->once()->with($entity, 'foo')->andReturnNull();
-        $model->shouldReceive('newQuery->chunk')->once()->with(100, m::type('Closure'))
-            ->andReturnUsing(function ($n, $c) use ($entities) {
-                $c($entities);
-            });
+        $model->shouldReceive('newQuery->cursor')->once()->andReturn($entities);
 
         $this->assertNull($stub->install('foo'));
     }
@@ -98,10 +95,7 @@ class FactoryTest extends TestCase
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
         $model->shouldReceive('getKey')->andReturn(5)
             ->shouldReceive('toArray')->andReturn([])
-            ->shouldReceive('newQuery->chunk')->once()->with(100, m::type('Closure'))
-                ->andReturnUsing(function ($n, $c) use ($entities) {
-                    $c($entities);
-                });
+            ->shouldReceive('newQuery->cursor')->once()->andReturn($entities);
 
         $this->assertNull($stub->run('foo'));
     }
@@ -168,10 +162,7 @@ class FactoryTest extends TestCase
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
         $model->shouldReceive('getKey')->andReturn(5)
             ->shouldReceive('toArray')->andReturn([])
-            ->shouldReceive('newQuery->chunk')->once()->with(100, m::type('Closure'))
-                ->andReturnUsing(function ($n, $c) use ($entities) {
-                    $c($entities);
-                });
+            ->shouldReceive('newQuery->cursor')->once()->andReturn($entities);
 
         $this->assertNull($stub->rollback('foo'));
     }
@@ -238,10 +229,7 @@ class FactoryTest extends TestCase
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
         $model->shouldReceive('getKey')->andReturn(5)
             ->shouldReceive('toArray')->andReturn([])
-            ->shouldReceive('newQuery->chunk')->once()->with(100, m::type('Closure'))
-                ->andReturnUsing(function ($n, $c) use ($entities) {
-                    $c($entities);
-                });
+            ->shouldReceive('newQuery->cursor')->once()->andReturn($entities);
 
         $this->assertNull($stub->reset('foo'));
     }
