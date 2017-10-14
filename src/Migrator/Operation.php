@@ -73,9 +73,9 @@ trait Operation
      */
     public function executeFor($id, Closure $callback)
     {
-        $entity = $this->newQuery()->findOrFail($id);
-
-        return call_user_func($callback, $entity);
+        return $callback(
+            $this->newQuery()->findOrFail($id)
+        );
     }
 
     /**
