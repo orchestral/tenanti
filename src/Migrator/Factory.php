@@ -12,26 +12,17 @@ class Factory implements FactoryContract
     use Notable, Operation;
 
     /**
-     * Chunk value.
-     *
-     * @var int
-     */
-    protected $chunk = 100;
-
-    /**
      * Construct a new migration manager.
      *
      * @param  \Illuminate\Contracts\Container\Container  $app
      * @param  \Orchestra\Tenanti\TenantiManager  $manager
      * @param  string  $driver
-     * @param  int  $chunk
      */
-    public function __construct(Container $app, TenantiManager $manager, $driver, $chunk = 100)
+    public function __construct(Container $app, TenantiManager $manager, $driver)
     {
         $this->app = $app;
         $this->manager = $manager;
         $this->driver = $driver;
-        $this->chunk = $chunk;
     }
 
     /**
@@ -45,15 +36,13 @@ class Factory implements FactoryContract
     public function install($database, $id = null)
     {
         if (! is_null($id)) {
-            return $this->executeById($id, function ($entity) use ($database) {
+            return $this->executeFor($id, function ($entity) use ($database) {
                 $this->runInstall($entity, $database);
             });
         }
 
-        $this->executeByChunk(function ($entities) use ($database) {
-            foreach ($entities as $entity) {
-                $this->runInstall($entity, $database);
-            }
+        $this->executeForEach(function ($entity) use ($database) {
+            $this->runInstall($entity, $database);
         });
     }
 
@@ -69,15 +58,13 @@ class Factory implements FactoryContract
     public function run($database, $id = null, $pretend = false)
     {
         if (! is_null($id)) {
-            return $this->executeById($id, function ($entity) use ($database, $pretend) {
+            return $this->executeFor($id, function ($entity) use ($database, $pretend) {
                 $this->runUp($entity, $database, $pretend);
             });
         }
 
-        $this->executeByChunk(function ($entities) use ($database, $pretend) {
-            foreach ($entities as $entity) {
-                $this->runUp($entity, $database, $pretend);
-            }
+        $this->executeForEach(function ($entity) use ($database, $pretend) {
+            $this->runUp($entity, $database, $pretend);
         });
     }
 
@@ -93,15 +80,13 @@ class Factory implements FactoryContract
     public function rollback($database, $id = null, $pretend = false)
     {
         if (! is_null($id)) {
-            return $this->executeById($id, function ($entity) use ($database, $pretend) {
+            return $this->executeFor($id, function ($entity) use ($database, $pretend) {
                 $this->runDown($entity, $database, $pretend);
             });
         }
 
-        $this->executeByChunk(function ($entities) use ($database, $pretend) {
-            foreach ($entities as $entity) {
-                $this->runDown($entity, $database, $pretend);
-            }
+        $this->executeForEach(function ($entity) use ($database, $pretend) {
+            $this->runDown($entity, $database, $pretend);
         });
     }
 
@@ -117,15 +102,13 @@ class Factory implements FactoryContract
     public function reset($database, $id = null, $pretend = false)
     {
         if (! is_null($id)) {
-            return $this->executeById($id, function ($entity) use ($database, $pretend) {
+            return $this->executeFor($id, function ($entity) use ($database, $pretend) {
                 $this->runReset($entity, $database, $pretend);
             });
         }
 
-        $this->executeByChunk(function ($entities) use ($database, $pretend) {
-            foreach ($entities as $entity) {
-                $this->runReset($entity, $database, $pretend);
-            }
+        $this->executeForEach(function ($entity) use ($database, $pretend) {
+            $this->runReset($entity, $database, $pretend);
         });
     }
 
