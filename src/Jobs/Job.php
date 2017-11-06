@@ -3,7 +3,6 @@
 namespace Orchestra\Tenanti\Jobs;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -60,6 +59,6 @@ abstract class Job
      */
     protected function resolveMigrator()
     {
-        return App::make('orchestra.tenanti')->driver($this->config['driver'] ?? null);
+        return resolve('orchestra.tenanti')->driver($this->config['driver'] ?? null);
     }
 }

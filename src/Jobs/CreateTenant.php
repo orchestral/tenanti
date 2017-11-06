@@ -2,6 +2,8 @@
 
 namespace Orchestra\Tenanti\Jobs;
 
+use RuntimeException;
+
 class CreateTenant extends Job
 {
     /**
@@ -19,7 +21,7 @@ class CreateTenant extends Job
         $migrator = $this->resolveMigrator();
 
         if (is_null($this->model)) {
-            return $this->release(10);
+            throw new RuntimeException("Missing model");
         }
 
         $id = $this->model->getKey();
