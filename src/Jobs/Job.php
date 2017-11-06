@@ -4,7 +4,6 @@ namespace Orchestra\Tenanti\Jobs;
 
 use Illuminate\Support\Arr;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -45,15 +44,29 @@ abstract class Job
      */
     protected function shouldBeFailed()
     {
-        if ($this->attempts() <= 3) {
-            return false;
-        }
-
-        if ($this->job) {
+        if ($this->attempts() > 3 && $this->job) {
             $this->job->failed();
+
+            return true;
         }
 
-        return true;
+        return false;
+    }
+
+    /**
+     * Should the job be delayed.
+     *
+     * @return bool
+     */
+    protected function shouldBeDelayed()
+    {
+        if ($this->job && is_null($this->model)) {
+            $this->job->release(10);
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -65,6 +78,6 @@ abstract class Job
     {
         $driver = Arr::get($this->config, 'driver');
 
-        return App::make('orchestra.tenanti')->driver($driver);
+        return resolve('orchestra.tenanti')->driver($driver);
     }
 }
