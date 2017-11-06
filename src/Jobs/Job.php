@@ -53,6 +53,22 @@ abstract class Job
     }
 
     /**
+     * Should the job be delayed.
+     *
+     * @return bool
+     */
+    protected function shouldBeDelayed()
+    {
+        if ($this->job && is_null($this->model)) {
+            $this->job->release(10);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Resolve migrator instance.
      *
      * @return \Orchestra\Tenanti\Contracts\Factory

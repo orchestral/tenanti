@@ -57,10 +57,10 @@ class DeleteTenantTest extends TestCase
 
         $stub = new DeleteTenant($model, $data);
 
-        $model->shouldReceive('getKey')->once()->andReturn(4);
+        $model->shouldReceive('getKey')->never()->andReturn(4);
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
-        $migrator->shouldReceive('reset')->once()->with('foo', 4)->andReturnNull();
+        $migrator->shouldReceive('runReset')->once()->with($model, 'foo')->andReturnNull();
 
         App::swap($this->app);
 
