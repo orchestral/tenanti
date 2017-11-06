@@ -44,15 +44,13 @@ abstract class Job
      */
     protected function shouldBeFailed()
     {
-        if ($this->attempts() <= 3) {
-            return false;
-        }
-
-        if ($this->job) {
+        if ($this->attempts() > 3 && $this->job) {
             $this->job->failed();
+
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     /**
