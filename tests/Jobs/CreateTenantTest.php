@@ -57,11 +57,11 @@ class CreateTenantTest extends TestCase
 
         $stub = new CreateTenant($model, $data);
 
-        $model->shouldReceive('getKey')->once()->andReturn(4);
+        $model->shouldReceive('getKey')->never()->andReturn(4);
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
-        $migrator->shouldReceive('install')->once()->with('foo', 4)->andReturnNull()
-            ->shouldReceive('run')->once()->with('foo', 4)->andReturnNull();
+        $migrator->shouldReceive('runInstall')->once()->with($model, 'foo')->andReturnNull()
+            ->shouldReceive('runUp')->once()->with($model, 'foo')->andReturnNull();
 
         App::swap($this->app);
 
