@@ -33,10 +33,10 @@ class MigrateCommand extends BaseCommand
             return;
         }
 
-        $driver   = $this->getDriver();
+        $driver = $this->getDriver();
         $database = $this->option('database');
-        $id       = $this->option('id');
-        $pretend  = $this->option('pretend', false);
+        $id = $this->option('id');
+        $pretend = $this->option('pretend', false);
 
         $this->prepareDatabase($driver, $database, $id);
 
@@ -59,7 +59,7 @@ class MigrateCommand extends BaseCommand
     protected function prepareDatabase($driver, $database, $id = null)
     {
         $parameters = [
-            'driver'     => $driver,
+            'driver' => $driver,
             '--database' => $database,
         ];
 

@@ -107,10 +107,10 @@ class TenantiManager extends Manager
         }
 
         Arr::set($this->config, 'connection', [
-            'name'     => "{$using}_{id}",
+            'name' => "{$using}_{id}",
             'template' => $config,
             'resolver' => $callback,
-            'options'  => $options,
+            'options' => $options,
         ]);
     }
 

@@ -159,7 +159,7 @@ class Migrator extends BaseMigrator
     protected function pretendToRun($migration, $method)
     {
         $table = $this->entity->getTable();
-        $key   = $this->entity->getKey();
+        $key = $this->entity->getKey();
 
         foreach ($this->getQueries($migration, $method) as $query) {
             $name = get_class($migration);

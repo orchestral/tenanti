@@ -5,11 +5,11 @@ namespace Orchestra\Tenanti;
 use Orchestra\Tenanti\Migrator\Creator;
 use Orchestra\Tenanti\Console\ResetCommand;
 use Orchestra\Tenanti\Console\QueuedCommand;
+use Orchestra\Tenanti\Console\TinkerCommand;
 use Orchestra\Tenanti\Console\InstallCommand;
 use Orchestra\Tenanti\Console\MigrateCommand;
 use Orchestra\Tenanti\Console\RefreshCommand;
 use Orchestra\Tenanti\Console\RollbackCommand;
-use Orchestra\Tenanti\Console\TinkerCommand;
 use Illuminate\Contracts\Foundation\Application;
 use Orchestra\Tenanti\Console\MigrateMakeCommand;
 use Orchestra\Support\Providers\CommandServiceProvider as ServiceProvider;
@@ -22,14 +22,14 @@ class CommandServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
-        'Queued'   => 'orchestra.commands.tenanti.queue',
-        'Install'  => 'orchestra.commands.tenanti.install',
-        'Make'     => 'orchestra.commands.tenanti.make',
-        'Migrate'  => 'orchestra.commands.tenanti.migrate',
+        'Queued' => 'orchestra.commands.tenanti.queue',
+        'Install' => 'orchestra.commands.tenanti.install',
+        'Make' => 'orchestra.commands.tenanti.make',
+        'Migrate' => 'orchestra.commands.tenanti.migrate',
         'Rollback' => 'orchestra.commands.tenanti.rollback',
-        'Reset'    => 'orchestra.commands.tenanti.reset',
-        'Refresh'  => 'orchestra.commands.tenanti.refresh',
-        'Tinker'   => 'orchestra.commands.tenanti.tinker',
+        'Reset' => 'orchestra.commands.tenanti.reset',
+        'Refresh' => 'orchestra.commands.tenanti.refresh',
+        'Tinker' => 'orchestra.commands.tenanti.tinker',
     ];
 
     /**

@@ -34,7 +34,7 @@ abstract class Job
      */
     public function __construct(Model $model, array $config)
     {
-        $this->model  = $model;
+        $this->model = $model;
         $this->config = $config;
     }
 

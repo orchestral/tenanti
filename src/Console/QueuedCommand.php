@@ -46,16 +46,16 @@ class QueuedCommand extends BaseCommand
             return;
         }
 
-        $driver   = $this->getDriver();
-        $action   = $this->argument('action');
+        $driver = $this->getDriver();
+        $action = $this->argument('action');
         $database = $this->option('database');
-        $queue    = $this->option('queue');
+        $queue = $this->option('queue');
 
         if (! in_array($action, $this->actions)) {
             throw new InvalidArgumentException("Action [{$action}] is not available for this command.");
         }
 
-        $command    = "tenanti:{$action}";
+        $command = "tenanti:{$action}";
         $parameters = ['driver' => $driver, '--database' => $database, '--force' => true];
 
         $migrator = $this->tenant->driver($driver);

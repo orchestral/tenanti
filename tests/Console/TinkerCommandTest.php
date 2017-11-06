@@ -9,7 +9,6 @@ use Symfony\Component\Console\Exception\RuntimeException;
 
 class TinkerCommandTest extends CommandTest
 {
-
     public function testTinkerWithoutAnyDrivers()
     {
         $tenanti = $this->app['orchestra.tenanti'];

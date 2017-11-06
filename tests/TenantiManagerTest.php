@@ -35,10 +35,10 @@ class TenantiManagerTest extends TestCase
 
         $expected = [
             'drivers' => [],
-            'user'    => [
-                'path'       => '/var/www/laravel/database/tenant/users',
+            'user' => [
+                'path' => '/var/www/laravel/database/tenant/users',
                 'connection' => null,
-                'model'      => 'User',
+                'model' => 'User',
             ],
             'chunk' => 100,
             'connection' => null,
@@ -67,7 +67,7 @@ class TenantiManagerTest extends TestCase
 
         $config = [
             'drivers' => [],
-            'chunk'   => 100,
+            'chunk' => 100,
         ];
 
         with(new TenantiManager($app))->setConfig($config)->driver('user');
@@ -108,8 +108,8 @@ class TenantiManagerTest extends TestCase
         $expected = [
             'template' => ['database' => 'tenant'],
             'resolver' => $callback,
-            'name'     => 'tenant_{id}',
-            'options'  => [],
+            'name' => 'tenant_{id}',
+            'options' => [],
         ];
 
         $stub = new TenantiManager($app);
@@ -142,8 +142,8 @@ class TenantiManagerTest extends TestCase
         $expected = [
             'template' => ['database' => 'tenant'],
             'resolver' => $callback,
-            'name'     => 'mysql_{id}',
-            'options'  => [],
+            'name' => 'mysql_{id}',
+            'options' => [],
         ];
 
         $stub = new TenantiManager($app);

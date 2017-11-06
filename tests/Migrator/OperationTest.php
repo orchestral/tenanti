@@ -34,7 +34,7 @@ class OperationTest extends TestCase
 
         $repository = new Repository([
             'database' => [
-                'default'     => 'mysql',
+                'default' => 'mysql',
                 'connections' => [
                     'tenant' => [
                         'database' => 'tenants',
@@ -52,7 +52,7 @@ class OperationTest extends TestCase
                             'database' => "tenants_{$entity->getKey()}",
                         ]);
                     },
-                    'name'    => 'tenant_{id}',
+                    'name' => 'tenant_{id}',
                     'options' => ['only' => ['user']],
                 ]);
 
@@ -84,7 +84,7 @@ class OperationTest extends TestCase
 
         $repository = new Repository([
             'database' => [
-                'default'     => 'mysql',
+                'default' => 'mysql',
                 'connections' => [
                     'tenant' => [
                         'database' => 'tenants',
@@ -102,7 +102,7 @@ class OperationTest extends TestCase
                         'database' => "tenants_{$entity->getKey()}",
                     ]);
                 },
-                'name'    => 'tenant_{id}',
+                'name' => 'tenant_{id}',
                 'options' => [],
             ]);
 
