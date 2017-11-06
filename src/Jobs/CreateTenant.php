@@ -2,8 +2,6 @@
 
 namespace Orchestra\Tenanti\Jobs;
 
-use RuntimeException;
-
 class CreateTenant extends Job
 {
     /**
