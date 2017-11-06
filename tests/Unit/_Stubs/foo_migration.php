@@ -1,6 +1,6 @@
 <?php
 
-use Orchestra\Tenanti\Migration;
+use Orchestra\Tenanti\Tests\Unit\StubsMigration;
 
 class FooMigration extends Migration
 {

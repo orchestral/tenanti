@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Tenanti\TestCase\Migrator;
+namespace Orchestra\Tenanti\Tests\Unit\Migrator;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;

@@ -1,10 +1,11 @@
 <?php
 
-namespace Orchestra\Tenanti\TestCase;
+namespace Orchestra\Tenanti\Tests;
 
 use Exception;
+use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
-class Kernel extends \Illuminate\Foundation\Console\Kernel
+class Kernel extends ConsoleKernel
 {
     /**
      * The bootstrap classes for the application.
@@ -34,6 +35,11 @@ class Kernel extends \Illuminate\Foundation\Console\Kernel
         throw $e;
     }
 
+    /**
+     * Get artisan.
+     *
+     * @return \Illuminate\Contracts\Console\Application
+     */
     public function getArtisan()
     {
         return $this->app['artisan'];

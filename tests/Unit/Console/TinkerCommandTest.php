@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Tenanti\TestCase\Console;
+namespace Orchestra\Tenanti\Tests\Unit\Console;
 
 use Mockery as m;
 use Illuminate\Database\Eloquent\Model;
