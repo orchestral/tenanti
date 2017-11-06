@@ -2,10 +2,7 @@
 
 namespace Orchestra\Tenanti\Tests\Unit;
 
-use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use Illuminate\Container\Container;
-use Illuminate\Foundation\Application;
 use Orchestra\Tenanti\TenantiServiceProvider;
 
 class TenantiServiceProviderTest extends TestCase

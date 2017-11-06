@@ -12,7 +12,6 @@ class ServiceProviderTest extends TestCase
         $this->assertInstanceOf('\Orchestra\Tenanti\TenantiManager', resolve('orchestra.tenanti'));
     }
 
-
     /** @test */
     public function it_boot_tenanti_configuration()
     {
