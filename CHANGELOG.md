@@ -2,6 +2,15 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/tenanti`.
 
+## 3.4.2
+
+Released: 2017-11-13
+
+### Fixes
+
+* Tenant creation and deletion job should attempt to use given model instead of querying the database again.
+* Reset database connection after migration if possible.
+
 ## 3.4.1
 
 Released: 2017-09-17
