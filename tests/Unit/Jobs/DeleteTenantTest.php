@@ -1,15 +1,15 @@
 <?php
 
-namespace Orchestra\Tenanti\Jobs\TestCase;
+namespace Orchestra\Tenanti\Tests\Unit\Jobs;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Facade;
-use Orchestra\Tenanti\Jobs\CreateTenant;
+use Orchestra\Tenanti\Jobs\DeleteTenant;
 
-class CreateTenantTest extends TestCase
+class DeleteTenantTest extends TestCase
 {
     /**
      * @var \Illuminate\Container\Container
@@ -40,28 +40,27 @@ class CreateTenantTest extends TestCase
     }
 
     /**
-     * Test Orchestra\Tenanti\Jobs\CreateTenant::fire() method.
+     * Test Orchestra\Tenanti\Jobs\DeleteTenant::fire() method.
      *
      * @test
      */
     public function testHandleMethod()
     {
         $migrator = m::mock('\Orchestra\Tenanti\Migrator\Factory');
-        $tenanti = $this->app['orchestra.tenanti'];
         $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $tenanti = $this->app['orchestra.tenanti'];
 
         $data = [
             'database' => 'foo',
             'driver' => 'user',
         ];
 
-        $stub = new CreateTenant($model, $data);
+        $stub = new DeleteTenant($model, $data);
 
-        $model->shouldReceive('getKey')->once()->andReturn(4);
+        $model->shouldReceive('getKey')->never()->andReturn(4);
 
         $tenanti->shouldReceive('driver')->once()->andReturn($migrator);
-        $migrator->shouldReceive('install')->once()->with('foo', 4)->andReturnNull()
-            ->shouldReceive('run')->once()->with('foo', 4)->andReturnNull();
+        $migrator->shouldReceive('runReset')->once()->with($model, 'foo')->andReturnNull();
 
         App::swap($this->app);
 

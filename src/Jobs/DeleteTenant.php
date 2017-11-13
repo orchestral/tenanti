@@ -18,14 +18,10 @@ class DeleteTenant extends Job
         $database = $this->config['database'] ?? null;
         $migrator = $this->resolveMigrator();
 
-        if (is_null($this->model)) {
-            return $this->release(10);
+        if (! $this->shouldBeDelayed()) {
+            $migrator->runReset($this->model, $database);
+
+            $this->delete();
         }
-
-        $id = $this->model->getKey();
-
-        $migrator->reset($database, $id);
-
-        $this->delete();
     }
 }

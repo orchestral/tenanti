@@ -1,11 +1,11 @@
 <?php
 
-namespace Orchestra\Tenanti\TestCase\Console;
+namespace Orchestra\Tenanti\Tests\Unit\Console;
 
 use Mockery as m;
 use Orchestra\Testbench\TestCase;
+use Orchestra\Tenanti\Tests\Kernel;
 use Orchestra\Tenanti\TenantiManager;
-use Orchestra\Tenanti\TestCase\Kernel;
 use Orchestra\Tenanti\Contracts\Notice;
 use Orchestra\Tenanti\Migrator\Creator;
 use Orchestra\Tenanti\Contracts\Factory;

@@ -18,15 +18,11 @@ class CreateTenant extends Job
         $database = $this->config['database'] ?? null;
         $migrator = $this->resolveMigrator();
 
-        if (is_null($this->model)) {
-            return $this->release(10);
+        if (! $this->shouldBeDelayed()) {
+            $migrator->runInstall($this->model, $database);
+            $migrator->runUp($this->model, $database);
+
+            $this->delete();
         }
-
-        $id = $this->model->getKey();
-
-        $migrator->install($database, $id);
-        $migrator->run($database, $id);
-
-        $this->delete();
     }
 }
