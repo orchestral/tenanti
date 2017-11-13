@@ -15,7 +15,7 @@ Tenanti allow you to manage multi-tenant data schema and migration manager for y
 * [Installation](#installation)
 * [Configuration](#configuration)
 * [Usage](#usage)
-* [Change Log](https://github.com/orchestral/tenanti/releases)
+* [Changelog](https://github.com/orchestral/tenanti/releases)
 
 ## Version Compatibility
 

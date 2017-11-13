@@ -30,13 +30,16 @@
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",
-        "phpunit/phpunit": "~5.7",
-        "orchestra/testbench": "~3.4.3"
+        "orchestra/testbench": "~3.4.3",
+        "phpunit/phpunit": "~5.7"
     },
     "extra": {
         "branch-alias": {
             "dev-master": "3.4-dev"
         }
+    },
+    "config": {
+        "sort-packages": true
     },
     "minimum-stability": "dev"
 }
