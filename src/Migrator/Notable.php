@@ -21,7 +21,7 @@ trait Notable
      *
      * @return $this
      */
-    public function setNotice(Notice $notice)
+    public function setNotice(Notice $notice): self
     {
         $this->notice = $notice;
 
@@ -35,7 +35,7 @@ trait Notable
      *
      * @return void
      */
-    protected function mergeMigratorNotes(BaseMigrator $migrator)
+    protected function mergeMigratorNotes(BaseMigrator $migrator): void
     {
         if ($this->notice instanceof Notice) {
             $this->notice->mergeFrom($migrator);
@@ -49,7 +49,7 @@ trait Notable
      *
      * @return void
      */
-    protected function note(...$message)
+    protected function note(...$message): void
     {
         if ($this->notice instanceof Notice) {
             $this->notice->add($message);

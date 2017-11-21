@@ -33,7 +33,7 @@ class TenantiManager extends Manager
      *
      * @return \Orchestra\Tenanti\Contracts\Factory
      */
-    protected function createDriver($driver)
+    protected function createDriver($driver): Contracts\Factory
     {
         if (is_null($this->setupDriverConfig($driver))) {
             throw new InvalidArgumentException("Driver [$driver] not supported.");
@@ -60,7 +60,7 @@ class TenantiManager extends Manager
      *
      * @return mixed
      */
-    public function getConfig($group = null, $default = null)
+    public function getConfig(?string $group = null, $default = null)
     {
         return Arr::get($this->config, $group, $default);
     }
@@ -72,7 +72,7 @@ class TenantiManager extends Manager
      *
      * @return $this
      */
-    public function setConfig(array $config)
+    public function setConfig(array $config): self
     {
         $this->config = array_merge($config, ['connection' => $this->getConfig('connection')]);
 
@@ -82,7 +82,7 @@ class TenantiManager extends Manager
     /**
      * Setup multiple database connection from template.
      *
-     * @param  string  $using
+     * @param  string|null  $using
      * @param  \Closure  $callback
      * @param  array  $option
      *
@@ -90,7 +90,7 @@ class TenantiManager extends Manager
      *
      * @return void
      */
-    public function connection($using, Closure $callback, array $options = [])
+    public function connection(?string $using, Closure $callback, array $options = []): void
     {
         $repository = $this->app->make('config');
 
@@ -119,14 +119,14 @@ class TenantiManager extends Manager
      *
      * @return array|null
      */
-    protected function setupDriverConfig($driver)
+    protected function setupDriverConfig(string $driver): ?array
     {
         if (isset($this->config[$driver])) {
-            return;
+            return null;
         }
 
         if (is_null($config = Arr::pull($this->config, "drivers.{$driver}"))) {
-            return;
+            return null;
         }
 
         $connection = $this->config['connection'] ?? null;
@@ -146,7 +146,7 @@ class TenantiManager extends Manager
      *
      * @return bool
      */
-    protected function driverExcludedByOptions($driver, array $options)
+    protected function driverExcludedByOptions(string $driver, array $options): bool
     {
         return (! empty($options['only']) && ! in_array($driver, (array) $options['only'])) ||
             (! empty($options['except']) && in_array($driver, (array) $options['except']));

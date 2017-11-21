@@ -29,7 +29,7 @@ class Migrator extends BaseMigrator
      *
      * @return $this
      */
-    public function setEntity(Model $entity)
+    public function setEntity(Model $entity): self
     {
         $this->entity = $entity;
 
@@ -55,11 +55,9 @@ class Migrator extends BaseMigrator
     /**
      * Reset the default connection name.
      *
-     * @param  string  $name
-     *
      * @return void
      */
-    public function resetConnection()
+    public function resetConnection(): void
     {
         if (! is_null($this->defaultConnection)) {
             $this->resolver->connection($this->connection)->disconnect();
@@ -105,7 +103,9 @@ class Migrator extends BaseMigrator
         $migration = $this->resolve($file);
 
         if ($pretend) {
-            return $this->pretendToRun($migration, 'up');
+            $this->pretendToRun($migration, 'up');
+
+            return;
         }
 
         $migration->up($key = $this->entity->getKey(), $this->entity);

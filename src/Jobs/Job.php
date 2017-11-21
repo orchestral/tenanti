@@ -5,6 +5,7 @@ namespace Orchestra\Tenanti\Jobs;
 use Illuminate\Bus\Queueable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Queue\InteractsWithQueue;
+use Orchestra\Tenanti\Contracts\Factory as FactoryContract;
 
 abstract class Job
 {
@@ -41,7 +42,7 @@ abstract class Job
      *
      * @return bool
      */
-    protected function shouldBeFailed()
+    protected function shouldBeFailed(): bool
     {
         if ($this->attempts() > 3 && $this->job) {
             $this->job->failed();
@@ -57,7 +58,7 @@ abstract class Job
      *
      * @return bool
      */
-    protected function shouldBeDelayed()
+    protected function shouldBeDelayed(): bool
     {
         if ($this->job && is_null($this->model)) {
             $this->job->release(10);
@@ -73,7 +74,7 @@ abstract class Job
      *
      * @return \Orchestra\Tenanti\Contracts\Factory
      */
-    protected function resolveMigrator()
+    protected function resolveMigrator(): FactoryContract
     {
         return resolve('orchestra.tenanti')->driver($this->config['driver'] ?? null);
     }

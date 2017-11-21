@@ -71,9 +71,9 @@ trait Operation
      *
      * @return void
      */
-    public function executeFor($id, Closure $callback)
+    public function executeFor($id, Closure $callback): void
     {
-        return $callback(
+        $callback(
             $this->newQuery()->findOrFail($id)
         );
     }
@@ -85,7 +85,7 @@ trait Operation
      *
      * @return void
      */
-    public function executeForEach(Closure $callback)
+    public function executeForEach(Closure $callback): void
     {
         foreach ($this->newQuery()->cursor() as $entity) {
             $callback($entity);
@@ -100,7 +100,7 @@ trait Operation
      *
      * @return mixed
      */
-    protected function getConfig($key, $default = null)
+    protected function getConfig(string $key, $default = null)
     {
         return $this->manager->getConfig("{$this->driver}.{$key}", $default);
     }
@@ -112,7 +112,7 @@ trait Operation
      *
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function getModel()
+    public function getModel(): Model
     {
         $name = $this->getModelName();
         $model = $this->app->make($name);
@@ -149,7 +149,7 @@ trait Operation
      *
      * @return \Orchestra\Tenanti\Migrator\Migrator
      */
-    protected function resolveMigrator($table)
+    protected function resolveMigrator(string $table): Migrator
     {
         $app = $this->app;
 
@@ -170,11 +170,11 @@ trait Operation
      * Set tenant as default database connection and get the connection name.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string  $database
+     * @param  string|null  $database
      *
-     * @return string
+     * @return string|null
      */
-    public function asDefaultConnection(Model $entity, $database)
+    public function asDefaultConnection(Model $entity, ?string $database): ?string
     {
         $connection = $this->asConnection($entity, $database);
 
@@ -187,11 +187,11 @@ trait Operation
      * Set tenant database connection.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string  $database
+     * @param  string|null  $database
      *
-     * @return string
+     * @return string|null
      */
-    public function asConnection(Model $entity, $database)
+    public function asConnection(Model $entity, ?string $database): ?string
     {
         $repository = $this->app->make('config');
         $tenants = $this->getConfig('connection');
@@ -229,7 +229,7 @@ trait Operation
      *
      * @return \Illuminate\Database\Connection
      */
-    public function resolveConnection(Model $entity, $database)
+    public function resolveConnection(Model $entity, string $database)
     {
         return $this->app->make('db')->connection($this->asConnection($entity, $database));
     }
@@ -241,7 +241,7 @@ trait Operation
      *
      * @return string
      */
-    protected function resolveMigrationTableName(Model $entity)
+    protected function resolveMigrationTableName(Model $entity): string
     {
         if (! is_null($table = $this->getConfig('migration'))) {
             return $this->bindWithKey($entity, $table);
@@ -273,9 +273,9 @@ trait Operation
     /**
      * Get model name.
      *
-     * @return mixed
+     * @return string
      */
-    public function getModelName()
+    public function getModelName(): string
     {
         return $this->getConfig('model');
     }
@@ -285,7 +285,7 @@ trait Operation
      *
      * @return string
      */
-    public function getTablePrefix()
+    public function getTablePrefix(): string
     {
         $prefix = $this->getConfig('prefix', $this->driver);
 
@@ -300,7 +300,7 @@ trait Operation
      *
      * @return string|null
      */
-    protected function bindWithKey(Model $entity, $name)
+    protected function bindWithKey(Model $entity, ?string $name): ?string
     {
         if (is_null($name) || (strpos($name, '{') === false && strpos($name, '}') === false)) {
             return $name;
@@ -323,9 +323,9 @@ trait Operation
      * @param  string|array  $paths
      * @param  \Illuminate\Database\Eloquent\Model  $entity
      *
-     * @return null
+     * @return void
      */
-    public function loadMigrationsFrom($paths, Model $entity)
+    public function loadMigrationsFrom($paths, Model $entity): void
     {
         $id = $entity->getKey();
 

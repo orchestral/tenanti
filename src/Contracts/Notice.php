@@ -13,7 +13,7 @@ interface Notice
      *
      * @return void
      */
-    public function add(...$message);
+    public function add(...$message): void;
 
     /**
      * Merge migrator operation notes.
@@ -22,5 +22,5 @@ interface Notice
      *
      * @return void
      */
-    public function mergeFrom(Migrator $migrator);
+    public function mergeFrom(Migrator $migrator): void;
 }

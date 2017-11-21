@@ -32,7 +32,7 @@ class Command implements Notice
      *
      * @return void
      */
-    public function add(...$message)
+    public function add(...$message): void
     {
         $this->send(...$message);
     }
@@ -44,7 +44,7 @@ class Command implements Notice
      *
      * @return void
      */
-    public function mergeFrom(Migrator $migrator)
+    public function mergeFrom(Migrator $migrator): void
     {
         $this->send($migrator->getNotes());
     }
@@ -56,7 +56,7 @@ class Command implements Notice
      *
      * @return void
      */
-    protected function send(array $notes)
+    protected function send(array $notes): void
     {
         foreach ($notes as $note) {
             $this->output->writeln($note);

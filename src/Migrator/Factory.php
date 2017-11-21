@@ -18,7 +18,7 @@ class Factory implements FactoryContract
      * @param  \Orchestra\Tenanti\TenantiManager  $manager
      * @param  string  $driver
      */
-    public function __construct(Container $app, TenantiManager $manager, $driver)
+    public function __construct(Container $app, TenantiManager $manager, string $driver)
     {
         $this->app = $app;
         $this->manager = $manager;
@@ -33,12 +33,14 @@ class Factory implements FactoryContract
      *
      * @return void
      */
-    public function install($database, $id = null)
+    public function install(?string $database, $id = null): void
     {
         if (! is_null($id)) {
-            return $this->executeFor($id, function ($entity) use ($database) {
+            $this->executeFor($id, function ($entity) use ($database) {
                 $this->runInstall($entity, $database);
             });
+
+            return;
         }
 
         $this->executeForEach(function ($entity) use ($database) {
@@ -55,12 +57,14 @@ class Factory implements FactoryContract
      *
      * @return void
      */
-    public function run($database, $id = null, $pretend = false)
+    public function run(?string $database, $id = null, bool $pretend = false): void
     {
         if (! is_null($id)) {
-            return $this->executeFor($id, function ($entity) use ($database, $pretend) {
+            $this->executeFor($id, function ($entity) use ($database, $pretend) {
                 $this->runUp($entity, $database, $pretend);
             });
+
+            return;
         }
 
         $this->executeForEach(function ($entity) use ($database, $pretend) {
@@ -77,12 +81,14 @@ class Factory implements FactoryContract
      *
      * @return void
      */
-    public function rollback($database, $id = null, $pretend = false)
+    public function rollback(?string $database, $id = null, bool $pretend = false): void
     {
         if (! is_null($id)) {
-            return $this->executeFor($id, function ($entity) use ($database, $pretend) {
+            $this->executeFor($id, function ($entity) use ($database, $pretend) {
                 $this->runDown($entity, $database, $pretend);
             });
+
+            return;
         }
 
         $this->executeForEach(function ($entity) use ($database, $pretend) {
@@ -99,12 +105,14 @@ class Factory implements FactoryContract
      *
      * @return void
      */
-    public function reset($database, $id = null, $pretend = false)
+    public function reset(?string $database, $id = null, bool $pretend = false): void
     {
         if (! is_null($id)) {
-            return $this->executeFor($id, function ($entity) use ($database, $pretend) {
+            $this->executeFor($id, function ($entity) use ($database, $pretend) {
                 $this->runReset($entity, $database, $pretend);
             });
+
+            return;
         }
 
         $this->executeForEach(function ($entity) use ($database, $pretend) {
@@ -120,7 +128,7 @@ class Factory implements FactoryContract
      *
      * @return void
      */
-    public function runInstall(Model $entity, $database)
+    public function runInstall(Model $entity, ?string $database): void
     {
         $database = $this->asConnection($entity, $database);
         $table = $this->resolveMigrationTableName($entity);
@@ -145,7 +153,7 @@ class Factory implements FactoryContract
      *
      * @return void
      */
-    public function runUp(Model $entity, $database, $pretend = false)
+    public function runUp(Model $entity, ?string $database, bool $pretend = false): void
     {
         $database = $this->asConnection($entity, $database);
         $table = $this->resolveMigrationTableName($entity);
@@ -168,7 +176,7 @@ class Factory implements FactoryContract
      *
      * @return void
      */
-    public function runDown(Model $entity, $database, $pretend = false)
+    public function runDown(Model $entity, ?string $database, bool $pretend = false): void
     {
         $database = $this->asConnection($entity, $database);
         $table = $this->resolveMigrationTableName($entity);
@@ -191,7 +199,7 @@ class Factory implements FactoryContract
      *
      * @return void
      */
-    public function runReset(Model $entity, $database, $pretend = false)
+    public function runReset(Model $entity, ?string $database, bool $pretend = false): void
     {
         $database = $this->asConnection($entity, $database);
         $table = $this->resolveMigrationTableName($entity);

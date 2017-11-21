@@ -13,37 +13,40 @@ interface Factory
      *
      * @return void
      */
-    public function install($database);
+    public function install(?string $database): void;
 
     /**
      * Run migrations.
      *
      * @param  string|null  $database
+     * @param  mixed|null  $id
      * @param  bool  $pretend
      *
      * @return void
      */
-    public function run($database, $pretend = false);
+    public function run(?string $database, $id = null, bool $pretend = false): void;
 
     /**
      * Rollback migrations.
      *
      * @param  string|null  $database
+     * @param  mixed|null  $id
      * @param  bool  $pretend
      *
      * @return void
      */
-    public function rollback($database, $pretend = false);
+    public function rollback(?string $database, $id = null, bool $pretend = false): void;
 
     /**
      * Reset migrations.
      *
      * @param  string|null  $database
+     * @param  mixed|null  $id
      * @param  bool  $pretend
      *
      * @return void
      */
-    public function reset($database, $pretend = false);
+    public function reset(?string $database, $id = null, bool $pretend = false): void;
 
     /**
      * Run migration up on a single entity.
@@ -53,7 +56,7 @@ interface Factory
      *
      * @return void
      */
-    public function runInstall(Model $entity, $database);
+    public function runInstall(Model $entity, ?string $database): void;
 
     /**
      * Run migration up on a single entity.
@@ -64,7 +67,7 @@ interface Factory
      *
      * @return void
      */
-    public function runUp(Model $entity, $database, $pretend = false);
+    public function runUp(Model $entity, ?string $database, bool $pretend = false): void;
 
     /**
      * Run migration down on a single entity.
@@ -75,7 +78,7 @@ interface Factory
      *
      * @return void
      */
-    public function runDown(Model $entity, $database, $pretend = false);
+    public function runDown(Model $entity, ?string $database, bool $pretend = false): void;
 
     /**
      * Run migration down on a single entity.
@@ -86,26 +89,28 @@ interface Factory
      *
      * @return void
      */
-    public function runReset(Model $entity, $database, $pretend = false);
+    public function runReset(Model $entity, ?string $database, bool $pretend = false): void;
 
     /**
      * Get migration path.
      *
-     * @return mixed
+     * @param  \Illuminate\Database\Eloquent\Model|null  $entity
+     *
+     * @return string|array|null
      */
-    public function getMigrationPath();
+    public function getMigrationPath(Model $entity = null);
 
     /**
      * Get model name.
      *
-     * @return mixed
+     * @return string
      */
-    public function getModelName();
+    public function getModelName(): string;
 
     /**
      * Get table prefix.
      *
      * @return string
      */
-    public function getTablePrefix();
+    public function getTablePrefix(): string;
 }
