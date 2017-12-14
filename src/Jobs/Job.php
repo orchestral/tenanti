@@ -45,7 +45,7 @@ abstract class Job
     protected function shouldBeFailed()
     {
         if ($this->attempts() > 3 && $this->job) {
-            $this->job->failed();
+            $this->job->fail();
 
             return true;
         }
