@@ -45,7 +45,7 @@ abstract class Job
     protected function shouldBeFailed()
     {
         if ($this->attempts() > 3 && $this->job) {
-            $this->job->fail();
+            $this->fail(null);
 
             return true;
         }
@@ -61,7 +61,7 @@ abstract class Job
     protected function shouldBeDelayed()
     {
         if ($this->job && is_null($this->model)) {
-            $this->job->release(10);
+            $this->release(10);
 
             return true;
         }
@@ -76,7 +76,7 @@ abstract class Job
      */
     protected function resolveMigrator()
     {
-        $driver = Arr::get($this->config, 'driver');
+        $driver = isset($this->config['driver']) ? $this->config['driver'] : null;
 
         return resolve('orchestra.tenanti')->driver($driver);
     }
