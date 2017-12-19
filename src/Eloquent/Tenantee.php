@@ -37,7 +37,7 @@ trait Tenantee
      *
      * @return $this
      */
-    public function setTenantor(Tenantor $tenantor)
+    public function setTenantor(Tenantor $tenantor): self
     {
         $this->tenantor = $tenantor;
         $this->connection = $tenantor->getConnectionName();
