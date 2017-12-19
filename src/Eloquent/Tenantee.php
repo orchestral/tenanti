@@ -9,7 +9,7 @@ trait Tenantee
     /**
      * Construct a new tenant.
      *
-     * @param \Orchestra\Tenanti\Tenantor $tenantor
+     * @param  \Orchestra\Tenanti\Tenantor  $tenantor
      *
      * @return static
      */
@@ -21,8 +21,6 @@ trait Tenantee
     /**
      * Get the tenantor associated with the model.
      *
-     * @throws \InvalidArgumentException
-     *
      * @return \Orchestra\Tenanti\Tenantor|null
      */
     public function getTenantor()
@@ -33,7 +31,7 @@ trait Tenantee
      /**
      * Get the tenantor associated with the model.
      *
-     * @param \Orchestra\Tenanti\Tenantor $tenantor
+     * @param  \Orchestra\Tenanti\Tenantor  $tenantor
      *
      * @return $this
      */
