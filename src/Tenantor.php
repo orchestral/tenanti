@@ -15,7 +15,7 @@ class Tenantor extends Fluent
      *
      * @return static
      */
-    public static function make($name, $key, $connection)
+    public static function make(string $name, $key, string $connection)
     {
         return new static(compact('name', 'key', 'connection'));
     }
@@ -25,7 +25,7 @@ class Tenantor extends Fluent
      *
      * @return string
      */
-    public function getTenantName()
+    public function getTenantName(): string
     {
         return $this->attributes['name'];
     }
@@ -45,7 +45,7 @@ class Tenantor extends Fluent
      *
      * @return string
      */
-    public function getTenantConnectionName()
+    public function getTenantConnectionName(): string
     {
         return $this->attributes['connection'];
     }
