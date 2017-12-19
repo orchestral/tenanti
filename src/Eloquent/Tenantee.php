@@ -7,6 +7,13 @@ use Orchestra\Tenanti\Tenantor;
 trait Tenantee
 {
     /**
+     * The tenantor associated with the model.
+     *
+     * @var \Orchestra\Tenanti\Tenantor
+     */
+    protected $tenantor;
+
+    /**
      * Construct a new tenant.
      *
      * @param  \Orchestra\Tenanti\Tenantor  $tenantor
