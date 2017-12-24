@@ -18,7 +18,7 @@ class Factory implements FactoryContract
      * @param  \Orchestra\Tenanti\TenantiManager  $manager
      * @param  string  $driver
      */
-    public function __construct(Container $app, TenantiManager $manager, $driver)
+    public function __construct(Container $app, TenantiManager $manager, string $driver)
     {
         $this->app = $app;
         $this->manager = $manager;
@@ -55,7 +55,7 @@ class Factory implements FactoryContract
      *
      * @return void
      */
-    public function run($database, $id = null, $pretend = false)
+    public function run($database, $id = null, bool $pretend = false)
     {
         if (! is_null($id)) {
             return $this->executeFor($id, function ($entity) use ($database, $pretend) {
@@ -77,7 +77,7 @@ class Factory implements FactoryContract
      *
      * @return void
      */
-    public function rollback($database, $id = null, $pretend = false)
+    public function rollback($database, $id = null, bool $pretend = false)
     {
         if (! is_null($id)) {
             return $this->executeFor($id, function ($entity) use ($database, $pretend) {
@@ -99,7 +99,7 @@ class Factory implements FactoryContract
      *
      * @return void
      */
-    public function reset($database, $id = null, $pretend = false)
+    public function reset($database, $id = null, bool $pretend = false)
     {
         if (! is_null($id)) {
             return $this->executeFor($id, function ($entity) use ($database, $pretend) {
@@ -191,7 +191,7 @@ class Factory implements FactoryContract
      *
      * @return void
      */
-    public function runReset(Model $entity, $database, $pretend = false)
+    public function runReset(Model $entity, $database, bool $pretend = false)
     {
         $database = $this->asConnection($entity, $database);
         $table = $this->resolveMigrationTableName($entity);

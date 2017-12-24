@@ -19,31 +19,34 @@ interface Factory
      * Run migrations.
      *
      * @param  string|null  $database
+     * @param  mixed|null  $id
      * @param  bool  $pretend
      *
      * @return void
      */
-    public function run($database, $pretend = false);
+    public function run($database, $id = null, bool $pretend = false);
 
     /**
      * Rollback migrations.
      *
      * @param  string|null  $database
+     * @param  mixed|null  $id
      * @param  bool  $pretend
      *
      * @return void
      */
-    public function rollback($database, $pretend = false);
+    public function rollback($database, $id = null, bool $pretend = false);
 
     /**
      * Reset migrations.
      *
      * @param  string|null  $database
+     * @param  mixed|null  $id
      * @param  bool  $pretend
      *
      * @return void
      */
-    public function reset($database, $pretend = false);
+    public function reset($database, $id = null, bool $pretend = false);
 
     /**
      * Run migration up on a single entity.
@@ -86,7 +89,7 @@ interface Factory
      *
      * @return void
      */
-    public function runReset(Model $entity, $database, $pretend = false);
+    public function runReset(Model $entity, $database, bool $pretend = false);
 
     /**
      * Get migration path.

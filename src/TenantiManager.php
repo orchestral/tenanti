@@ -82,7 +82,7 @@ class TenantiManager extends Manager
     /**
      * Setup multiple database connection from template.
      *
-     * @param  string  $using
+     * @param  string|null  $using
      * @param  \Closure  $callback
      * @param  array  $option
      *
@@ -119,14 +119,14 @@ class TenantiManager extends Manager
      *
      * @return array|null
      */
-    protected function setupDriverConfig($driver)
+    protected function setupDriverConfig(string $driver)
     {
         if (isset($this->config[$driver])) {
-            return;
+            return null;
         }
 
         if (is_null($config = Arr::pull($this->config, "drivers.{$driver}"))) {
-            return;
+            return null;
         }
 
         $connection = $this->config['connection'] ?? null;
@@ -146,7 +146,7 @@ class TenantiManager extends Manager
      *
      * @return bool
      */
-    protected function driverExcludedByOptions($driver, array $options)
+    protected function driverExcludedByOptions(string $driver, array $options): bool
     {
         return (! empty($options['only']) && ! in_array($driver, (array) $options['only'])) ||
             (! empty($options['except']) && in_array($driver, (array) $options['except']));
