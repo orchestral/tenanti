@@ -35,7 +35,7 @@ trait Tenantee
         return $this->tenantor;
     }
 
-     /**
+    /**
      * Get the tenantor associated with the model.
      *
      * @param  \Orchestra\Tenanti\Tenantor  $tenantor

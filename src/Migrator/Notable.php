@@ -21,7 +21,7 @@ trait Notable
      *
      * @return $this
      */
-    public function setNotice(Notice $notice)
+    public function setNotice(Notice $notice): self
     {
         $this->notice = $notice;
 
