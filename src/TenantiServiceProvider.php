@@ -39,7 +39,7 @@ class TenantiServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerConfigurationForManager(TenantiManager $manager)
+    protected function registerConfigurationForManager(TenantiManager $manager): void
     {
         $namespace = $this->hasPackageRepository() ? 'orchestra/tenanti::' : 'orchestra.tenanti';
 
@@ -71,7 +71,7 @@ class TenantiServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function bootUsingLaravel($path)
+    protected function bootUsingLaravel(string $path): void
     {
         $this->mergeConfigFrom("{$path}/config/config.php", 'orchestra.tenanti');
 
