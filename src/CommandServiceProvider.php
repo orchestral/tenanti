@@ -46,7 +46,7 @@ class CommandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerQueuedCommand()
+    protected function registerQueuedCommand(): void
     {
         $this->app->singleton('orchestra.commands.tenanti.queue', function (Application $app) {
             return new QueuedCommand($app->make('orchestra.tenanti'));
@@ -58,7 +58,7 @@ class CommandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerInstallCommand()
+    protected function registerInstallCommand(): void
     {
         $this->app->singleton('orchestra.commands.tenanti.install', function (Application $app) {
             return new InstallCommand($app->make('orchestra.tenanti'));
@@ -70,7 +70,7 @@ class CommandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerMakeCommand()
+    protected function registerMakeCommand(): void
     {
         $this->app->singleton('orchestra.tenanti.creator', function (Application $app) {
             return new Creator($app->make('files'));
@@ -93,7 +93,7 @@ class CommandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerMigrateCommand()
+    protected function registerMigrateCommand(): void
     {
         $this->app->singleton('orchestra.commands.tenanti.migrate', function (Application $app) {
             return new MigrateCommand($app->make('orchestra.tenanti'));
@@ -105,7 +105,7 @@ class CommandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerRollbackCommand()
+    protected function registerRollbackCommand(): void
     {
         $this->app->singleton('orchestra.commands.tenanti.rollback', function (Application $app) {
             return new RollbackCommand($app->make('orchestra.tenanti'));
@@ -117,7 +117,7 @@ class CommandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerResetCommand()
+    protected function registerResetCommand(): void
     {
         $this->app->singleton('orchestra.commands.tenanti.reset', function (Application $app) {
             return new ResetCommand($app->make('orchestra.tenanti'));
@@ -129,7 +129,7 @@ class CommandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerRefreshCommand()
+    protected function registerRefreshCommand(): void
     {
         $this->app->singleton('orchestra.commands.tenanti.refresh', function (Application $app) {
             return new RefreshCommand($app->make('orchestra.tenanti'));
@@ -141,7 +141,7 @@ class CommandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerTinkerCommand()
+    protected function registerTinkerCommand(): void
     {
         $this->app->singleton('orchestra.commands.tenanti.tinker', function (Application $app) {
             return new TinkerCommand($app->make('orchestra.tenanti'));
