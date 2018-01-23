@@ -37,6 +37,15 @@
     "extra": {
         "branch-alias": {
             "dev-master": "3.5-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Orchestra\\Tenanti\\TenantiServiceProvider",
+                "Orchestra\\Tenanti\\CommandServiceProvider"
+            ],
+            "aliases": {
+                "Tenanti": "Orchestra\\Support\\Facades\\Tenanti"
+            }
         }
     },
     "config": {
