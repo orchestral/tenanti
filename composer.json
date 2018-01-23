@@ -44,7 +44,7 @@
                 "Orchestra\\Tenanti\\CommandServiceProvider"
             ],
             "aliases": {
-                "Tenati": "Orchestra\\Support\\Facades\\Tenanti"
+                "Tenanti": "Orchestra\\Support\\Facades\\Tenanti"
             }
         }
     },
