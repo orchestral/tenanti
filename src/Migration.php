@@ -13,7 +13,7 @@ class Migration extends BaseMigration
      *
      * @return $this
      */
-    public function setConnection(string $name): self
+    public function setConnection(?string $name): self
     {
         $this->connection = $name;
 
