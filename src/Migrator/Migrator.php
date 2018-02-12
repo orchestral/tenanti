@@ -25,7 +25,7 @@ class Migrator extends BaseMigrator
     /**
      * Set entity for migration.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
+     * @param  \Illuminate\Database\Eloquent\Model|null  $entity
      *
      * @return $this
      */
@@ -39,7 +39,7 @@ class Migrator extends BaseMigrator
     /**
      * Set the default connection name.
      *
-     * @param  string  $name
+     * @param  string|null  $name
      *
      * @return void
      */

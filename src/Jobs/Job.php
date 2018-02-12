@@ -45,7 +45,7 @@ abstract class Job
     protected function shouldBeFailed(): bool
     {
         if ($this->attempts() > 3 && $this->job) {
-            $this->job->failed();
+            $this->fail(null);
 
             return true;
         }
@@ -61,7 +61,7 @@ abstract class Job
     protected function shouldBeDelayed(): bool
     {
         if ($this->job && is_null($this->model)) {
-            $this->job->release(10);
+            $this->release(10);
 
             return true;
         }

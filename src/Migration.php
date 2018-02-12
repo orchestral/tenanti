@@ -9,7 +9,7 @@ class Migration extends BaseMigration
     /**
      * Set connection for the migration.
      *
-     * @param  string  $name
+     * @param  string|null  $name
      *
      * @return $this
      */
