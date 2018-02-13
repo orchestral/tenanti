@@ -3,7 +3,7 @@ Multi-tenant Database Schema Manager for Laravel
 
 Tenanti allow you to manage multi-tenant data schema and migration manager for your Laravel application.
 
-[![Build Status](https://travis-ci.org/orchestral/tenanti.svg?branch=3.6)](https://travis-ci.org/orchestral/tenanti)
+[![Build Status](https://travis-ci.org/orchestral/tenanti.svg?branch=master)](https://travis-ci.org/orchestral/tenanti)
 [![Latest Stable Version](https://poser.pugx.org/orchestra/tenanti/v/stable)](https://packagist.org/packages/orchestra/tenanti)
 [![Total Downloads](https://poser.pugx.org/orchestra/tenanti/downloads)](https://packagist.org/packages/orchestra/tenanti)
 [![Latest Unstable Version](https://poser.pugx.org/orchestra/tenanti/v/unstable)](https://packagist.org/packages/orchestra/tenanti)
@@ -29,6 +29,7 @@ Laravel  | Tenanti
  5.4.x   | 3.4.x
  5.5.x   | 3.5.x
  5.6.x   | 3.6.x@dev
+ 5.7.x   | 3.7.x@dev
 
 ## Installation
 
