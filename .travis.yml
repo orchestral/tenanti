@@ -8,8 +8,11 @@ php:
 
 env:
   global:
-    - setup=basic
     - coverage=no
+  matrix:
+    - setup=basic
+    - setup=lowest
+    - setup=stable
 
 before_script:
   - travis_retry composer self-update
@@ -21,17 +24,13 @@ before_script:
 
 script:
   - if [[ $coverage = 'yes' ]]; then vendor/bin/phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml; fi
-  - if [[ $coverage = 'no' ]]; then vendor/bin/phpunit -c phpunit.xml; fi
+  - if [[ $coverage = 'no' ]]; then vendor/bin/phpunit -c phpunit.xml --testdox --verbose; fi
 
 after_script:
   - if [[ $setup = 'coveralls' ]]; then php vendor/bin/coveralls -v; fi
 
 matrix:
   include:
-    - php: 7.1
-      env: setup=lowest
-    - php: 7.1
-      env: setup=stable
     - php: 7.1
       env: setup=coveralls coverage=yes
   allow_failures:
