@@ -29,7 +29,7 @@ class Migrator extends BaseMigrator
      *
      * @return $this
      */
-    public function setEntity(Model $entity): self
+    public function setEntity(Model $entity)
     {
         $this->entity = $entity;
 
