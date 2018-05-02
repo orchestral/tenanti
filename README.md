@@ -8,6 +8,7 @@ Tenanti allow you to manage multi-tenant data schema and migration manager for y
 [![Total Downloads](https://poser.pugx.org/orchestra/tenanti/downloads)](https://packagist.org/packages/orchestra/tenanti)
 [![Latest Unstable Version](https://poser.pugx.org/orchestra/tenanti/v/unstable)](https://packagist.org/packages/orchestra/tenanti)
 [![License](https://poser.pugx.org/orchestra/tenanti/license)](https://packagist.org/packages/orchestra/tenanti)
+[![Coverage Status](https://coveralls.io/repos/github/orchestral/tenanti/badge.svg?branch=master)](https://coveralls.io/github/orchestral/tenanti?branch=master)
 
 ## Table of Content
 
@@ -28,7 +29,7 @@ Laravel  | Tenanti
  5.3.x   | 3.3.x
  5.4.x   | 3.4.x
  5.5.x   | 3.5.x
- 5.6.x   | 3.6.x@dev
+ 5.6.x   | 3.6.x
  5.7.x   | 3.7.x@dev
 
 ## Installation
