@@ -191,4 +191,17 @@ class Migrator extends BaseMigrator
             call_user_func([$migration, $method], $this->entity->getKey(), $this->entity);
         });
     }
+
+    /**
+     * Write a note to the conosle's output.
+     *
+     * @param  string  $message
+     * @return void
+     */
+    protected function note($message)
+    {
+        if ($this->output) {
+            $this->output->writeln($message);
+        }
+    }
 }

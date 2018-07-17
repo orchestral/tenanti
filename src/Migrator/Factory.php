@@ -157,14 +157,13 @@ class Factory implements FactoryContract
     {
         $database = $this->asConnection($entity, $database);
         $table = $this->resolveMigrationTableName($entity);
-        $migrator = $this->resolveMigrator($table);
+        $migrator = $this->resolveMigratorWithNotes($table);
 
         $migrator->setConnection($database);
         $migrator->setEntity($entity);
+
         $migrator->run((array) $this->getMigrationPath($entity), ['pretend' => (bool) $pretend]);
         $migrator->resetConnection();
-
-        $this->mergeMigratorNotes($migrator);
     }
 
     /**
@@ -180,14 +179,13 @@ class Factory implements FactoryContract
     {
         $database = $this->asConnection($entity, $database);
         $table = $this->resolveMigrationTableName($entity);
-        $migrator = $this->resolveMigrator($table);
+        $migrator = $this->resolveMigratorWithNotes($table);
 
         $migrator->setConnection($database);
         $migrator->setEntity($entity);
+
         $migrator->rollback((array) $this->getMigrationPath($entity), ['pretend' => (bool) $pretend]);
         $migrator->resetConnection();
-
-        $this->mergeMigratorNotes($migrator);
     }
 
     /**
@@ -203,13 +201,11 @@ class Factory implements FactoryContract
     {
         $database = $this->asConnection($entity, $database);
         $table = $this->resolveMigrationTableName($entity);
-        $migrator = $this->resolveMigrator($table);
+        $migrator = $this->resolveMigratorWithNotes($table);
 
         $migrator->setConnection($database);
         $migrator->setEntity($entity);
         $migrator->reset((array) $this->getMigrationPath($entity), $pretend);
         $migrator->resetConnection();
-
-        $this->mergeMigratorNotes($migrator);
     }
 }

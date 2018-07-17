@@ -22,5 +22,5 @@ interface Notice
      *
      * @return void
      */
-    public function mergeFrom(Migrator $migrator): void;
+    public function mergeWith(Migrator $migrator): void;
 }

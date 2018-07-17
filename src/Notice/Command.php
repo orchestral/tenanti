@@ -44,9 +44,9 @@ class Command implements Notice
      *
      * @return void
      */
-    public function mergeFrom(Migrator $migrator): void
+    public function mergeWith(Migrator $migrator): void
     {
-        $this->send($migrator->getNotes());
+        $migrator->setOutput($this->output);
     }
 
     /**
