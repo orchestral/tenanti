@@ -3,6 +3,7 @@
 namespace Orchestra\Tenanti;
 
 use Orchestra\Support\Fluent;
+use Illuminate\Database\Eloquent\Model;
 
 class Tenantor extends Fluent
 {
@@ -12,12 +13,29 @@ class Tenantor extends Fluent
      * @param  string  $name
      * @param  mixed  $key
      * @param  string|null  $connection
+     * @param  \Illuminate\Database\Eloquent\Model|null  $model
      *
      * @return static
      */
-    public static function make(string $name, $key, $connection = null)
+    public static function make(string $name, $key, $connection = null, ?Model $model = null)
     {
-        return new static(compact('name', 'key', 'connection'));
+        if ($key instanceof Model) {
+            $model = $key;
+            $key = $model->getKey();
+            $connection = $connection ?? $model->getConnectionName();
+        }
+
+        return new static(compact('name', 'key', 'connection', 'model'));
+    }
+
+    /**
+     * Get tenant model.
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    public function getTenantModel(): ?Model
+    {
+        return $this->attributes['model'];
     }
 
     /**
