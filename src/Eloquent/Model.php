@@ -22,7 +22,7 @@ abstract class Model extends Eloquent
      *
      * @return $this
      */
-    public function fillFromExistingOrNew(array $attributes = []): self
+    public function fillFromExistingOrNew(array $attributes = [])
     {
         $this->fill($attributes);
 
