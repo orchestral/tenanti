@@ -2,7 +2,7 @@
 
 namespace Orchestra\Tenanti\Eloquent;
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
+use Orchestra\Model\Eloquent;
 
 abstract class Model extends Eloquent
 {
