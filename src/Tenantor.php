@@ -11,20 +11,30 @@ class Tenantor extends Fluent
      * Make a tenantor instance.
      *
      * @param  string  $name
+     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param  string|null  $connection
+     *
+     * @return static
+     */
+    public static function fromEloquent(string $name, Model $model, ?string $connection = null)
+    {
+        return static::make(
+            $name, $model->getKey(), $connection ?? $model->getConnectionName()
+        );
+    }
+
+    /**
+     * Make a tenantor instance.
+     *
+     * @param  string  $name
      * @param  mixed  $key
      * @param  string|null  $connection
      * @param  \Illuminate\Database\Eloquent\Model|null  $model
      *
      * @return static
      */
-    public static function make(string $name, $key, $connection = null, ?Model $model = null)
+    public static function make(string $name, $key, ?string $connection = null, ?Model $model = null)
     {
-        if ($key instanceof Model) {
-            $model = $key;
-            $key = $model->getKey();
-            $connection = $connection ?? $model->getConnectionName();
-        }
-
         return new static(compact('name', 'key', 'connection', 'model'));
     }
 
