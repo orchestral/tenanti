@@ -38,11 +38,11 @@ trait Tenantee
     /**
      * Get the tenantor associated with the model.
      *
-     * @param  \Orchestra\Tenanti\Tenantor  $tenantor
+     * @param  \Orchestra\Tenanti\Tenantor|null  $tenantor
      *
      * @return $this
      */
-    public function setTenantor(Tenantor $tenantor)
+    public function setTenantor(?Tenantor $tenantor)
     {
         $this->tenantor = $tenantor;
         $this->connection = $tenantor->getTenantConnectionName();
