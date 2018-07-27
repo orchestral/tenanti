@@ -3,8 +3,9 @@
 namespace Orchestra\Tenanti\Eloquent;
 
 use Orchestra\Tenanti\Tenantor;
+use Illuminate\Database\Eloquent\Builder as Eloquent;
 
-trait Tenantee
+class Builder extends Eloquent
 {
     /**
      * The tenantor associated with the model.
@@ -14,15 +15,16 @@ trait Tenantee
     protected $tenantor;
 
     /**
-     * Construct a new tenant.
+     * Create a new instance of the model being queried.
      *
-     * @param  \Orchestra\Tenanti\Tenantor  $tenantor
-     *
-     * @return static
+     * @param  array  $attributes
+     * @return \Illuminate\Database\Eloquent\Model
      */
-    public static function tenant(Tenantor $tenantor)
+    public function newModelInstance($attributes = [])
     {
-        return (new static())->setTenantor($tenantor);
+        return tap(parent::newModelInstance($attributes), function ($model) {
+            $model->setTenantor($this->tenantor);
+        });
     }
 
     /**
@@ -30,7 +32,7 @@ trait Tenantee
      *
      * @return \Orchestra\Tenanti\Tenantor|null
      */
-    public function getTenantor()
+    public function getTenantor(): ?Tenantor
     {
         return $this->tenantor;
     }
@@ -45,19 +47,7 @@ trait Tenantee
     public function setTenantor(?Tenantor $tenantor)
     {
         $this->tenantor = $tenantor;
-        $this->connection = $tenantor->getTenantConnectionName();
-
-        $this->setTable($this->getTenantTable());
 
         return $this;
     }
-
-    /**
-     * Get tenant table name.
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @return string
-     */
-    abstract public function getTenantTable(): string;
 }
