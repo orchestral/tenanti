@@ -127,7 +127,9 @@ For each driver, you should also consider adding the migration path into autoloa
 Now that we have setup the configuration, let add an observer to our `User` class:
 
 ```php
-<?php namespace App;
+<?php 
+
+namespace App;
 
 use App\Observers\UserObserver;
 use Orchestra\Tenanti\Tenantor;
@@ -175,7 +177,9 @@ class User extends Authenticatable
 and your `App\Observers\UserObserver` class should consist of the following:
 
 ```php
-<?php namespace App\Observers;
+<?php 
+
+namespace App\Observers;
 
 use Orchestra\Tenanti\Observer;
 
