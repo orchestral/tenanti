@@ -122,21 +122,52 @@ For each driver, you should also consider adding the migration path into autoloa
 }
 ```
 
-### Setup Model Observer
+### Setup Tenantor Model
 
-Now that we have setup the configuration, let add an observer to our `User` class (preferly in `App\Providers\AppServiceProvider`):
+Now that we have setup the configuration, let add an observer to our `User` class:
 
 ```php
-<?php namespace App\Providers;
+<?php namespace App;
 
-use App\User;
 use App\Observers\UserObserver;
+use Orchestra\Tenanti\Tenantor;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class AppServiceProvider extends ServiceProvider
+class User extends Authenticatable
 {
-    public function boot()
+    use Notifiable;
+
+    /**
+     * Convert to tenantor.
+     * 
+     * @return \Orchestra\Tenanti\Tenantor
+     */
+    public function asTenantor(): Tenantor
     {
-        User::observe(new UserObserver);
+        return Tenantor::fromEloquent('user', $this);
+    }
+
+    /**
+     * Make a tenantor.
+     *
+     * @return \Orchestra\Tenanti\Tenantor
+     */
+    public static function makeTenantor($key, $connection = null): Tenantor
+    {
+        return Tenantor::make(
+            'user', $key, $connection ?: (new static())->getConnectionName()
+        );
+    }
+
+    /**
+     * The "booting" method of the model.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::observe(new UserObserver);
     }
 }
 ```
