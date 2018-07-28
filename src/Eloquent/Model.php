@@ -2,7 +2,7 @@
 
 namespace Orchestra\Tenanti\Eloquent;
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
+use Orchestra\Model\Eloquent;
 
 abstract class Model extends Eloquent
 {
@@ -22,7 +22,7 @@ abstract class Model extends Eloquent
      *
      * @return $this
      */
-    public function fillFromExistingOrNew(array $attributes = []): self
+    public function fillFromExistingOrNew(array $attributes = [])
     {
         $this->fill($attributes);
 

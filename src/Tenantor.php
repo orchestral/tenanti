@@ -19,7 +19,7 @@ class Tenantor extends Fluent
     public static function fromEloquent(string $name, Model $model, ?string $connection = null)
     {
         return static::make(
-            $name, $model->getKey(), $connection ?? $model->getConnectionName()
+            $name, $model->getKey(), $connection ?? $model->getConnectionName(), $model
         );
     }
 

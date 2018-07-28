@@ -2,6 +2,16 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/tenanti`.
 
+## 3.6.1
+
+Released: 2018-07-28
+
+### Added
+
+* Added `Orchestra\Tenanti\Eloquent\Model`.
+* Added `Orchestra\Tenanti\Eloquent\Builder`.
+* Added `Orchestra\Tenanti\Tenantor::fromEloquent`.
+
 ## 3.6.0
 
 Released: 2018-05-02
