@@ -134,9 +134,10 @@ namespace App;
 use App\Observers\UserObserver;
 use Orchestra\Tenanti\Tenantor;
 use Illuminate\Notifications\Notifiable;
+use Orchestra\Tenanti\Contracts\TenantProvider;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements TenantProvider
 {
     use Notifiable;
 
