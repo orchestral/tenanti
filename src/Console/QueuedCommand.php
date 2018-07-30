@@ -59,10 +59,10 @@ class QueuedCommand extends BaseCommand
         $parameters = ['driver' => $driver, '--database' => $database, '--force' => true];
 
         $this->tenant->driver($driver)
-            ->executeForEach(function ($entity) use ($kernel, $command, $parameters) {
-                $kernel->queue(
+            ->executeForEach(function ($entity) use ($kernel, $command, $parameters, $queue) {
+                $job = $kernel->queue(
                     $command, array_merge($parameters, ['--id' => $entity->getKey()])
-                )->onQueue($this->option('queue'));
+                )->onQueue($queue);
             });
     }
 
