@@ -2,6 +2,18 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/tenanti`.
 
+## 3.6.2
+
+Released: 2018-07-30
+
+### Added
+
+* Added `Orchestra\Tenanti\Contracts\TenantProvider`.
+
+### Changes
+
+* Allow `Orchestra\Tenanti\Model::tenant` to accept `Orchestra\Tenanti\Contracts\TenantProvider`.
+
 ## 3.6.1
 
 Released: 2018-07-28

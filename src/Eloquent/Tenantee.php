@@ -3,6 +3,7 @@
 namespace Orchestra\Tenanti\Eloquent;
 
 use Orchestra\Tenanti\Tenantor;
+use Orchestra\Tenanti\Contracts\TenantProvider;
 
 trait Tenantee
 {
@@ -16,12 +17,16 @@ trait Tenantee
     /**
      * Construct a new tenant.
      *
-     * @param  \Orchestra\Tenanti\Tenantor  $tenantor
+     * @param  \Orchestra\Tenanti\Tenantor|\Orchestra\Tenanti\Contracts\TenantProvider  $tenantor
      *
      * @return static
      */
-    public static function tenant(Tenantor $tenantor)
+    public static function tenant($tenantor)
     {
+        if ($tenantor instanceof TenantProvider) {
+            $tenantor = $tenantor->asTenantor();
+        }
+
         return (new static())->setTenantor($tenantor);
     }
 
