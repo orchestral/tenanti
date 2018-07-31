@@ -95,6 +95,7 @@ class QueuedCommand extends BaseCommand
             ['database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.'],
             ['queue', null, InputOption::VALUE_OPTIONAL, 'The queue connection to use.', 'default'],
             ['delay', null, InputOption::VALUE_OPTIONAL, 'Number of seconds to delay each job.', 0],
+            ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production.'],
         ];
     }
 }
