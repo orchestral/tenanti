@@ -25,19 +25,19 @@
     },
     "require": {
         "php": ">=7.1",
-        "illuminate/console": "~5.7.0",
-        "illuminate/filesystem": "~5.7.0",
-        "orchestra/model": "~3.7.0",
-        "orchestra/support": "~3.7.0"
+        "illuminate/console": "dev-master",
+        "illuminate/filesystem": "dev-master",
+        "orchestra/model": "~3.8.0",
+        "orchestra/support": "~3.8.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.0",
-        "orchestra/testbench": "~3.7.0",
+        "orchestra/testbench": "~3.8.0",
         "phpunit/phpunit": "^7.2"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.7-dev"
+            "dev-master": "3.8-dev"
         }
     },
     "config": {
