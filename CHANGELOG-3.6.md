@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/tenanti`.
 
+## 3.6.4
+
+Released: 2018-08-07
+
+### Changes
+
+* Import `Illuminate\Database\Schema\Blueprint` and `Illuminate\Support\Facades\Schema` to `blank` stub by default.
+
 ## 3.6.3
 
 Released: 2018-08-01
