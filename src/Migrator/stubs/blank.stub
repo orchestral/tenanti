@@ -1,7 +1,9 @@
 <?php
 
 use Orchestra\Tenanti\Migration;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Schema\Blueprint;
 
 class DummyClass extends Migration
 {
