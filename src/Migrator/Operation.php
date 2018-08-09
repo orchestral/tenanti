@@ -141,7 +141,7 @@ trait Operation
      */
     public function newQuery()
     {
-        return $this->getModel()->newQuery();
+        return $this->getModel()->newQuery()->useWritePdo();
     }
 
     /**
