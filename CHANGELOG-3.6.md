@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/tenanti`.
 
+## 3.6.5
+
+Released: 2018-08-11
+
+### Changes
+
+* Force to use write PDO connection when migrating tenants.
+
 ## 3.6.4
 
 Released: 2018-08-07
