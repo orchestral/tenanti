@@ -36,7 +36,7 @@ class FactoryTest extends TestCase
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('runInstall')->once()->with($entity, 'foo')->andReturnNull();
-        $model->shouldReceive('newQuery->cursor')->once()->andReturn($entities);
+        $model->shouldReceive('newQuery->useWritePdo->cursor')->once()->andReturn($entities);
 
         $this->assertNull($stub->install('foo'));
     }
@@ -60,7 +60,7 @@ class FactoryTest extends TestCase
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('runInstall')->once()->with($entity, 'foo')->andReturnNull();
-        $model->shouldReceive('newQuery->findOrFail')->once()->with(10)
+        $model->shouldReceive('newQuery->useWritePdo->findOrFail')->once()->with(10)
             ->andReturn($entity);
 
         $this->assertNull($stub->install('foo', 10));
@@ -95,7 +95,7 @@ class FactoryTest extends TestCase
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
         $model->shouldReceive('getKey')->andReturn(5)
             ->shouldReceive('toArray')->andReturn([])
-            ->shouldReceive('newQuery->cursor')->once()->andReturn($entities);
+            ->shouldReceive('newQuery->useWritePdo->cursor')->once()->andReturn($entities);
 
         $this->assertNull($stub->run('foo'));
     }
@@ -127,7 +127,7 @@ class FactoryTest extends TestCase
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
         $model->shouldReceive('getKey')->andReturn(5)
             ->shouldReceive('toArray')->andReturn([])
-            ->shouldReceive('newQuery->findOrFail')->once()->with(10)
+            ->shouldReceive('newQuery->useWritePdo->findOrFail')->once()->with(10)
                 ->andReturn($entity);
 
         $this->assertNull($stub->run('foo', 10));
@@ -162,7 +162,7 @@ class FactoryTest extends TestCase
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
         $model->shouldReceive('getKey')->andReturn(5)
             ->shouldReceive('toArray')->andReturn([])
-            ->shouldReceive('newQuery->cursor')->once()->andReturn($entities);
+            ->shouldReceive('newQuery->useWritePdo->cursor')->once()->andReturn($entities);
 
         $this->assertNull($stub->rollback('foo'));
     }
@@ -194,7 +194,7 @@ class FactoryTest extends TestCase
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
         $model->shouldReceive('getKey')->andReturn(5)
             ->shouldReceive('toArray')->andReturn([])
-            ->shouldReceive('newQuery->findOrFail')->once()->with(10)
+            ->shouldReceive('newQuery->useWritePdo->findOrFail')->once()->with(10)
                 ->andReturn($entity);
 
         $this->assertNull($stub->rollback('foo', 10));
@@ -229,7 +229,7 @@ class FactoryTest extends TestCase
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
         $model->shouldReceive('getKey')->andReturn(5)
             ->shouldReceive('toArray')->andReturn([])
-            ->shouldReceive('newQuery->cursor')->once()->andReturn($entities);
+            ->shouldReceive('newQuery->useWritePdo->cursor')->once()->andReturn($entities);
 
         $this->assertNull($stub->reset('foo'));
     }
@@ -261,7 +261,7 @@ class FactoryTest extends TestCase
             ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
         $model->shouldReceive('getKey')->andReturn(5)
             ->shouldReceive('toArray')->andReturn([])
-            ->shouldReceive('newQuery->findOrFail')->once()->with(10)
+            ->shouldReceive('newQuery->useWritePdo->findOrFail')->once()->with(10)
                 ->andReturn($entity);
 
         $this->assertNull($stub->reset('foo', 10));

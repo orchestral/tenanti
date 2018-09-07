@@ -18,7 +18,7 @@ abstract class Observer
      */
     public function getConnectionName()
     {
-        return;
+        return null;
     }
 
     /**
