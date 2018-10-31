@@ -124,8 +124,8 @@ class Factory implements FactoryContract
     {
         $database = $this->asConnection($entity, $database);
         $table = $this->resolveMigrationTableName($entity);
-
-        $repository = $this->resolveMigrator($table)->getRepository();
+        $migrator = $this->resolveMigrator($table);
+        $repository = $migrator->getRepository();
 
         $repository->setSource($database);
 
@@ -134,6 +134,10 @@ class Factory implements FactoryContract
 
             $this->note("<info>Migration table {$table} created successfully.</info>");
         }
+
+        $migrator->setConnection($database);
+        $migrator->setEntity($entity);
+        $migrator->resetConnection();
     }
 
     /**
