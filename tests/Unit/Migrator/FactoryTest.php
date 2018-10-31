@@ -285,6 +285,9 @@ class FactoryTest extends TestCase
         $app['schema']->shouldReceive('hasTable')->once()->with('user_5_migrations')->andReturn(false)
             ->shouldReceive('create')->once()->with('user_5_migrations', m::type('Closure'))->andReturnNull();
 
+        $app['db']->shouldReceive('getDefaultConnection')->once()->andReturnNull()
+            ->shouldReceive('setDefaultConnection')->once()->with('primary');
+
         $model = $this->getMockModel();
 
         $manager->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
@@ -312,7 +315,9 @@ class FactoryTest extends TestCase
             ->shouldReceive('create')->once()->with('migrations', m::type('Closure'))->andReturnNull();
 
         $app['db']->shouldReceive('connection')->with('tenant_foo')->andReturnSelf()
-            ->shouldReceive('getSchemaBuilder')->andReturn($app['schema']);
+            ->shouldReceive('getSchemaBuilder')->andReturn($app['schema'])
+            ->shouldReceive('getDefaultConnection')->once()->andReturnNull()
+            ->shouldReceive('setDefaultConnection')->once()->with('tenant_foo');
 
         $stub = new Factory($app, $manager, $driver);
         $model = $this->getMockModel();
