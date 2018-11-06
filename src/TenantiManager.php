@@ -80,6 +80,16 @@ class TenantiManager extends Manager
     }
 
     /**
+     * Get all configuration.
+     *
+     * @return array
+     */
+    public function config(): array
+    {
+        return $this->config;
+    }
+
+    /**
      * Setup multiple database connection from template.
      *
      * @param  string|null  $using
