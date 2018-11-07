@@ -38,7 +38,7 @@ abstract class BaseCommand extends Command
      *
      * @return void
      */
-    protected function setupMigrationOutput(Factory $migrator)
+    protected function setupMigrationOutput(Factory $migrator): void
     {
         $migrator->setNotice(new Notice($this->output));
     }
@@ -48,7 +48,7 @@ abstract class BaseCommand extends Command
      *
      * @return string
      */
-    protected function getDriver()
+    protected function getDriver(): string
     {
         $driver = $this->argument('driver') ?: $this->getDriverFromConfig();
 
@@ -64,7 +64,7 @@ abstract class BaseCommand extends Command
      *
      * @return string
      */
-    protected function getDriverFromConfig()
+    protected function getDriverFromConfig(): ?string
     {
         $drivers = array_keys($this->tenant->getConfig('drivers'));
 
@@ -72,7 +72,7 @@ abstract class BaseCommand extends Command
             return $drivers[0];
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -80,7 +80,7 @@ abstract class BaseCommand extends Command
      *
      * @return array
      */
-    protected function getArgumentsWithDriver(...$arguments)
+    protected function getArgumentsWithDriver(...$arguments): array
     {
         array_unshift($arguments, 'driver');
 
@@ -118,7 +118,7 @@ abstract class BaseCommand extends Command
      *
      * @return bool
      */
-    protected function validateMissingArguments(array $arguments)
+    protected function validateMissingArguments(array $arguments): bool
     {
         $missingArguments = array_filter($arguments, function ($argument) {
             return empty($this->argument($argument));

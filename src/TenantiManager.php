@@ -53,6 +53,16 @@ class TenantiManager extends Manager
     }
 
     /**
+     * Get Tenantio configuration.
+     *
+     * @return array
+     */
+    public function config(): array
+    {
+        return $this->config;
+    }
+
+    /**
      * Get configuration values.
      *
      * @param  string|null  $group

@@ -30,7 +30,6 @@ class TenantiManagerTest extends TestCase
             'drivers' => [
                 'user' => ['model' => 'User', 'path' => '/var/www/laravel/database/tenant/users'],
             ],
-            'chunk' => 100,
         ];
 
         $expected = [
@@ -40,7 +39,6 @@ class TenantiManagerTest extends TestCase
                 'connection' => null,
                 'model' => 'User',
             ],
-            'chunk' => 100,
             'connection' => null,
         ];
 
@@ -67,7 +65,6 @@ class TenantiManagerTest extends TestCase
 
         $config = [
             'drivers' => [],
-            'chunk' => 100,
         ];
 
         with(new TenantiManager($app))->setConfig($config)->driver('user');
@@ -84,6 +81,31 @@ class TenantiManagerTest extends TestCase
     public function testGetDefaultDriverIsNotImplemented()
     {
         (new TenantiManager(null))->driver();
+    }
+
+    /**
+     * Test Orchestra\Tenanti\TenantiManager::config() method.
+     *
+     * @test
+     */
+    public function testConfigMethod()
+    {
+        $app = new Container();
+
+        $config = [
+            'drivers' => [
+                'user' => ['model' => 'User', 'path' => '/var/www/laravel/database/tenant/users'],
+            ],
+            'connection' => null,
+        ];
+
+        $stub = new TenantiManager($app);
+
+        $this->assertSame([], $stub->config());
+
+        $stub->setConfig($config);
+
+        $this->assertEquals($config, $stub->config());
     }
 
     /**
