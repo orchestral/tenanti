@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/tenanti`.
 
+## 3.5.2
+
+Released: 2018-11-07
+
+### Changes
+
+* Disconnect database after preparing migrations table for each tenant.
+
 ## 3.5.1
 
 Released: 2018-01-08
