@@ -53,6 +53,16 @@ class TenantiManager extends Manager
     }
 
     /**
+     * Get Tenantio configuration.
+     *
+     * @return array
+     */
+    public function config(): array
+    {
+        return $this->config;
+    }
+
+    /**
      * Get configuration values.
      *
      * @param  string|null  $group
@@ -77,16 +87,6 @@ class TenantiManager extends Manager
         $this->config = array_merge($config, ['connection' => $this->getConfig('connection')]);
 
         return $this;
-    }
-
-    /**
-     * Get all configuration.
-     *
-     * @return array
-     */
-    public function config(): array
-    {
-        return $this->config;
     }
 
     /**

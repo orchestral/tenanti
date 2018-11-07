@@ -64,7 +64,7 @@ abstract class BaseCommand extends Command
      *
      * @return string
      */
-    protected function getDriverFromConfig(): string
+    protected function getDriverFromConfig(): ?string
     {
         $drivers = array_keys($this->tenant->getConfig('drivers'));
 
@@ -72,7 +72,7 @@ abstract class BaseCommand extends Command
             return $drivers[0];
         }
 
-        return;
+        return null;
     }
 
     /**
