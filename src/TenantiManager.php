@@ -62,7 +62,6 @@ class TenantiManager extends Manager
         return $this->config;
     }
 
-
     /**
      * Get configuration values.
      *
