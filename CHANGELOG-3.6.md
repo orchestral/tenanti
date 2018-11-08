@@ -2,6 +2,18 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/tenanti`.
 
+## 3.6.6
+
+Released: 2018-11-07
+
+### Added
+
+* Add `Orchestra\Tenanti\TenantiManager::config()` helper method.
+
+### Changes
+
+* Disconnect database after preparing migrations table for each tenant.
+
 ## 3.6.5
 
 Released: 2018-08-11
