@@ -53,7 +53,7 @@ class TenantiManager extends Manager
     }
 
     /**
-     * Get Tenantio configuration.
+     * Get Tenanti configuration.
      *
      * @return array
      */
