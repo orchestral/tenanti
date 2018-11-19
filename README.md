@@ -30,7 +30,7 @@ Laravel  | Tenanti
  5.4.x   | 3.4.x
  5.5.x   | 3.5.x
  5.6.x   | 3.6.x
- 5.7.x   | 3.7.x@dev
+ 5.7.x   | 3.7.x
 
 ## Installation
 
@@ -39,7 +39,7 @@ To install through composer, simply put the following in your `composer.json` fi
 ```json
 {
     "require": {
-        "orchestra/tenanti": "~3.0"
+        "orchestra/tenanti": "^3.0"
     }
 }
 ```
@@ -50,7 +50,7 @@ And then run `composer install` to fetch the package.
 
 You could also simplify the above code by using the following command:
 
-    composer require "orchestra/tenanti=~3.0"
+    composer require "orchestra/tenanti=^3.0"
 
 ## Configuration
 
