@@ -48,6 +48,6 @@ abstract class CommandTest extends TestCase
 
     public function artisan($command, $parameters = [])
     {
-        parent::artisan($command, array_merge($parameters, ['--no-interaction' => true]));
+        return parent::artisan($command, array_merge($parameters, ['--no-interaction' => true]));
     }
 }

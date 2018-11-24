@@ -17,13 +17,9 @@ class MigrateMakeCommandTest extends CommandTest
         $tenanti->shouldReceive('getConfig')
             ->andReturn([]);
 
-        $command = m::mock('\Orchestra\Tenanti\Console\MigrateMakeCommand[call]', [$tenanti, $creator, $composer]);
-        $command->shouldReceive('call');
-
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('missing: "driver, name"');
 
-        $this->app['artisan']->add($command);
         $this->artisan('tenanti:make');
     }
 

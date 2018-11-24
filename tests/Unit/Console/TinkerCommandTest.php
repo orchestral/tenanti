@@ -16,13 +16,9 @@ class TinkerCommandTest extends CommandTest
         $tenanti->shouldReceive('getConfig')
             ->andReturn([]);
 
-        $command = m::mock('\Orchestra\Tenanti\Console\TinkerCommand[call]', [$tenanti]);
-        $command->shouldReceive('call');
-
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('missing: "driver, id"');
 
-        $this->app['artisan']->add($command);
         $this->artisan('tenanti:tinker');
     }
 
@@ -85,10 +81,8 @@ class TinkerCommandTest extends CommandTest
             ->with('tenant')
             ->andReturn($factory);
 
-        $command = m::mock('Orchestra\Tenanti\Console\TinkerCommand[call]', [$tenanti]);
         $this->expectException(ModelNotFoundException::class);
 
-        $this->app['artisan']->add($command);
         $this->artisan('tenanti:tinker', ['driver' => '1']);
     }
 

@@ -11,15 +11,11 @@ class MigrateCommandTest extends CommandTest
     {
         $tenanti = $this->app['orchestra.tenanti'];
 
-        $tenanti->shouldReceive('getConfig')
-            ->andReturn([]);
-
-        $command = m::mock('\Orchestra\Tenanti\Console\MigrateCommand[prepareDatabase]', [$tenanti]);
+        $tenanti->shouldReceive('getConfig')->andReturn([]);
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('missing: "driver"');
 
-        $this->app['artisan']->add($command);
         $this->artisan('tenanti:migrate');
     }
 
@@ -86,12 +82,9 @@ class MigrateCommandTest extends CommandTest
                 ],
             ]);
 
-        $command = m::mock('\Orchestra\Tenanti\Console\MigrateCommand[prepareDatabase]', [$tenanti]);
-
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('missing: "driver"');
 
-        $this->app['artisan']->add($command);
         $this->artisan('tenanti:migrate');
     }
 }
