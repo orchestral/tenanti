@@ -62,7 +62,7 @@ class Migrator extends BaseMigrator
         if (! is_null($this->defaultConnection)) {
             $this->resolver->connection($this->connection)->disconnect();
 
-            $this->resolver->setDefaultConnection($this->defaultConnection);
+            $this->setConnection($this->defaultConnection);
         }
     }
 

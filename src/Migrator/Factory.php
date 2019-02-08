@@ -135,7 +135,7 @@ class Factory implements FactoryContract
         $migrator = $this->resolveMigrator($table);
         $repository = $migrator->getRepository();
 
-        $repository->setSource($database);
+        $migrator->setConnection($database);
 
         if (! $repository->repositoryExists()) {
             $repository->createRepository();
@@ -143,8 +143,6 @@ class Factory implements FactoryContract
             $this->note("<info>Migration table {$table} created successfully.</info>");
         }
 
-        $migrator->setConnection($database);
-        $migrator->setEntity($entity);
         $migrator->resetConnection();
     }
 
