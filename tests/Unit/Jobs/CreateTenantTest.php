@@ -19,7 +19,7 @@ class CreateTenantTest extends TestCase
     /**
      * Setup the test environment.
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->app = new Container();
         $this->app['orchestra.tenanti'] = m::mock('\Orchestra\Tenanti\TenantiManager');
@@ -32,7 +32,7 @@ class CreateTenantTest extends TestCase
     /**
      * Teardown the test environment.
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         unset($this->app);
 

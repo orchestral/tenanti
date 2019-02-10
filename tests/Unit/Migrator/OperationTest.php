@@ -16,7 +16,7 @@ class OperationTest extends TestCase
     /**
      * Teardown the test environment.
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         m::close();
     }
@@ -181,10 +181,11 @@ class OperationTest extends TestCase
      * Eloquent.
      *
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function testResolveModelMethodThrowsException()
     {
+        $this->expectException('InvalidArgumentException');
+
         $this->app = m::mock('\Illuminate\Container\Container[make]');
         $this->driver = 'user';
 

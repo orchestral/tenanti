@@ -12,7 +12,7 @@ class TenantiManagerTest extends TestCase
     /**
      * Teardown the test environment.
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         m::close();
     }
@@ -56,11 +56,12 @@ class TenantiManagerTest extends TestCase
      * when driver is not available.
      *
      * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedMessage Driver [user] not supported.
      */
     public function testDriverMethodGivenDriverNotAvailable()
     {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('Driver [user] not supported');
+
         $app = new Container();
 
         $config = [
@@ -75,11 +76,12 @@ class TenantiManagerTest extends TestCase
      * is not implemented.
      *
      * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedMessage Default driver not implemented.
      */
     public function testGetDefaultDriverIsNotImplemented()
     {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('Default driver not implemented.');
+
         (new TenantiManager(null))->driver();
     }
 
@@ -179,11 +181,12 @@ class TenantiManagerTest extends TestCase
      * given configuration template doesn't exists.
      *
      * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Database connection [foo] is not available.
      */
     public function testConnectionMethodGivenConfigTemplateDoesNotExists()
     {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('Database connection [foo] is not available.');
+
         $app = new Container();
         $app['config'] = $config = m::mock('\Illuminate\Contracts\Config\Repository');
 

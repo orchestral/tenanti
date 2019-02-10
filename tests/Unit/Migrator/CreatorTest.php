@@ -11,7 +11,7 @@ class CreatorTest extends TestCase
     /**
      * Teardown the test environment.
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         m::close();
     }
@@ -28,6 +28,6 @@ class CreatorTest extends TestCase
 
         $stub = new Creator($files);
 
-        $this->assertContains('src/Migrator/stubs', $stub->stubPath());
+        $this->assertStringContainsString('src/Migrator/stubs', $stub->stubPath());
     }
 }
