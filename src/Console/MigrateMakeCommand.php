@@ -69,7 +69,7 @@ class MigrateMakeCommand extends BaseCommand
         $create = $this->input->getOption('create');
         $table = $this->input->getOption('table');
 
-        if (! $table && is_string($create)) {
+        if (! $table && \is_string($create)) {
             $table = $create;
         }
 
@@ -105,9 +105,9 @@ class MigrateMakeCommand extends BaseCommand
             $table = Str::replace($migrator->getTablePrefix()."_{$table}", ['id' => '{$id}']);
         }
 
-        $name = implode('_', [$driver, 'tenant', $name]);
+        $name = \implode('_', [$driver, 'tenant', $name]);
 
-        $file = pathinfo($this->creator->create($name, $path, $table, $create), PATHINFO_FILENAME);
+        $file = \pathinfo($this->creator->create($name, $path, $table, $create), PATHINFO_FILENAME);
 
         $this->line("<info>Created Migration:</info> $file");
     }

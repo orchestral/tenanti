@@ -125,7 +125,7 @@ trait Operation
 
         $database = $this->getConfig('database');
 
-        if (! is_null($database)) {
+        if (! \is_null($database)) {
             $model->setConnection($database);
         }
 
@@ -198,18 +198,18 @@ trait Operation
         $repository = $this->app->make('config');
         $tenants = $this->getConfig('connection');
 
-        if (! is_null($tenants)) {
+        if (! \is_null($tenants)) {
             $database = $tenants['name'];
         }
 
-        if (substr($database, -5) !== '_{id}' && $this->getConfig('shared', true) === false) {
+        if (\substr($database, -5) !== '_{id}' && $this->getConfig('shared', true) === false) {
             $database .= '_{id}';
         }
 
         $connection = $this->bindWithKey($entity, $database);
         $name = "database.connections.{$connection}";
 
-        if (! is_null($tenants) && is_null($repository->get($name))) {
+        if (! \is_null($tenants) && \is_null($repository->get($name))) {
             $config = $this->app->call($tenants['resolver'], [
                 'entity' => $entity,
                 'template' => $tenants['template'],
@@ -245,7 +245,7 @@ trait Operation
      */
     protected function resolveMigrationTableName(Model $entity): string
     {
-        if (! is_null($table = $this->getConfig('migration'))) {
+        if (! \is_null($table = $this->getConfig('migration'))) {
             return $this->bindWithKey($entity, $table);
         }
 
@@ -266,7 +266,7 @@ trait Operation
     public function getMigrationPath(Model $entity = null)
     {
         if ($entity !== null && isset($this->migrationPaths[$entity->getKey()])) {
-            return array_merge([$this->getConfig('path')], $this->migrationPaths[$entity->getKey()]);
+            return \array_merge([$this->getConfig('path')], $this->migrationPaths[$entity->getKey()]);
         }
 
         return $this->getConfig('path');
@@ -291,7 +291,7 @@ trait Operation
     {
         $prefix = $this->getConfig('prefix', $this->driver);
 
-        return implode('_', [$prefix, '{id}']);
+        return \implode('_', [$prefix, '{id}']);
     }
 
     /**
@@ -304,14 +304,14 @@ trait Operation
      */
     protected function bindWithKey(Model $entity, ?string $name): ?string
     {
-        if (is_null($name) || (strpos($name, '{') === false && strpos($name, '}') === false)) {
+        if (\is_null($name) || (\strpos($name, '{') === false && \strpos($name, '}') === false)) {
             return $name;
         }
 
         $id = $entity->getKey();
 
         if (! isset($this->data[$id])) {
-            $data = array_merge(Arr::dot(['entity' => $entity->toArray()]), compact('id'));
+            $data = \array_merge(Arr::dot(['entity' => $entity->toArray()]), \compact('id'));
 
             $this->data[$id] = $data;
         }
@@ -335,7 +335,7 @@ trait Operation
             $this->migrationPaths[$id] = [];
         }
 
-        $this->migrationPaths[$id] = array_merge($this->migrationPaths[$id], (array) $paths);
-        $this->migrationPaths[$id] = array_unique($this->migrationPaths[$id]);
+        $this->migrationPaths[$id] = \array_merge($this->migrationPaths[$id], (array) $paths);
+        $this->migrationPaths[$id] = \array_unique($this->migrationPaths[$id]);
     }
 }

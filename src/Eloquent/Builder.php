@@ -23,7 +23,7 @@ class Builder extends Eloquent
      */
     public function newModelInstance($attributes = [])
     {
-        return tap(parent::newModelInstance($attributes), function ($model) {
+        return \tap(parent::newModelInstance($attributes), function ($model) {
             $model->setTenantor($this->tenantor);
         });
     }

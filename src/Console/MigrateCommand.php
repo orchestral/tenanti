@@ -63,7 +63,7 @@ class MigrateCommand extends BaseCommand
             '--database' => $database,
         ];
 
-        if (! is_null($id)) {
+        if (! \is_null($id)) {
             $parameters['--id'] = $id;
         }
 

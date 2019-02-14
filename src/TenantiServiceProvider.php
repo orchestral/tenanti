@@ -55,7 +55,7 @@ class TenantiServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $path = realpath(__DIR__.'/../resources');
+        $path = \realpath(__DIR__.'/../resources');
 
         $this->addConfigComponent('orchestra/tenanti', 'orchestra/tenanti', "{$path}/config");
 
@@ -76,7 +76,7 @@ class TenantiServiceProvider extends ServiceProvider
         $this->mergeConfigFrom("{$path}/config/config.php", 'orchestra.tenanti');
 
         $this->publishes([
-            "{$path}/config/config.php" => config_path('orchestra/tenanti.php'),
+            "{$path}/config/config.php" => \config_path('orchestra/tenanti.php'),
         ]);
     }
 

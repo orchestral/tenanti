@@ -45,7 +45,7 @@ class Migrator extends BaseMigrator
      */
     public function setConnection($name)
     {
-        if (! is_null($name)) {
+        if (! \is_null($name)) {
             $this->defaultConnection = $this->resolver->getDefaultConnection();
         }
 
@@ -59,7 +59,7 @@ class Migrator extends BaseMigrator
      */
     public function resetConnection(): void
     {
-        if (! is_null($this->defaultConnection)) {
+        if (! \is_null($this->defaultConnection)) {
             $this->resolver->connection($this->connection)->disconnect();
 
             $this->setConnection($this->defaultConnection);
@@ -164,7 +164,7 @@ class Migrator extends BaseMigrator
         $key = $this->entity->getKey();
 
         foreach ($this->getQueries($migration, $method) as $query) {
-            $name = get_class($migration);
+            $name = \get_class($migration);
 
             $this->note("<info>{$name} [{$table}:{$key}]:</info> {$query['query']}");
         }
@@ -188,7 +188,7 @@ class Migrator extends BaseMigrator
         $db = $this->resolveConnection($connection);
 
         return $db->pretend(function () use ($migration, $method) {
-            call_user_func([$migration, $method], $this->entity->getKey(), $this->entity);
+            \call_user_func([$migration, $method], $this->entity->getKey(), $this->entity);
         });
     }
 }

@@ -52,7 +52,7 @@ class QueuedCommand extends BaseCommand
         $queue = $this->option('queue') ?? $this->tenant->config()['queue'] ?? 'default';
         $delay = $this->option('delay');
 
-        if (! in_array($action, $this->actions)) {
+        if (! \in_array($action, $this->actions)) {
             throw new InvalidArgumentException("Action [{$action}] is not available for this command.");
         }
 
@@ -62,7 +62,7 @@ class QueuedCommand extends BaseCommand
         $this->tenant->driver($driver)
             ->executeForEach(function ($entity) use ($kernel, $command, $parameters, $queue, $delay) {
                 $job = $kernel->queue(
-                    $command, array_merge($parameters, ['--id' => $entity->getKey()])
+                    $command, \array_merge($parameters, ['--id' => $entity->getKey()])
                 )->onQueue($queue);
 
                 if ($delay > 0) {
