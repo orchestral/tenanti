@@ -3,7 +3,6 @@
 namespace Orchestra\Tenanti\Migrator;
 
 use Orchestra\Tenanti\Contracts\Notice;
-use Illuminate\Database\Migrations\Migrator as BaseMigrator;
 
 trait Notable
 {
@@ -46,6 +45,7 @@ trait Notable
      * Resolve migrator with notable.
      *
      * @param  string  $table
+     *
      * @return \Orchestra\Tenanti\Migrator\Migrator
      */
     protected function resolveMigratorWithNotes(string $table): Migrator

@@ -60,7 +60,7 @@ abstract class Job
      */
     protected function shouldBeDelayed(): bool
     {
-        if ($this->job && is_null($this->model)) {
+        if ($this->job && \is_null($this->model)) {
             $this->release(10);
 
             return true;
@@ -76,6 +76,6 @@ abstract class Job
      */
     protected function resolveMigrator(): FactoryContract
     {
-        return resolve('orchestra.tenanti')->driver($this->config['driver'] ?? null);
+        return \resolve('orchestra.tenanti')->driver($this->config['driver'] ?? null);
     }
 }

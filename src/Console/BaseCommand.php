@@ -66,9 +66,9 @@ abstract class BaseCommand extends Command
      */
     protected function getDriverFromConfig(): ?string
     {
-        $drivers = array_keys($this->tenant->getConfig('drivers'));
+        $drivers = \array_keys($this->tenant->getConfig('drivers'));
 
-        if (count($drivers) === 1) {
+        if (\count($drivers) === 1) {
             return $drivers[0];
         }
 
@@ -82,7 +82,7 @@ abstract class BaseCommand extends Command
      */
     protected function getArgumentsWithDriver(...$arguments): array
     {
-        array_unshift($arguments, 'driver');
+        \array_unshift($arguments, 'driver');
 
         $resolvedArguments = [];
 
@@ -97,7 +97,7 @@ abstract class BaseCommand extends Command
 
             $resolvedArguments['driver'] = $driver;
 
-            for ($i = 1; $i < count($arguments); $i++) {
+            for ($i = 1; $i < \count($arguments); $i++) {
                 $resolvedArguments[$arguments[$i]] = $this->argument($arguments[$i - 1]);
             }
         } else {
@@ -120,12 +120,12 @@ abstract class BaseCommand extends Command
      */
     protected function validateMissingArguments(array $arguments): bool
     {
-        $missingArguments = array_filter($arguments, function ($argument) {
+        $missingArguments = \array_filter($arguments, function ($argument) {
             return empty($this->argument($argument));
         });
 
-        if (count($missingArguments) > 1) {
-            throw new RuntimeException(sprintf('Not enough arguments (missing: "%s").', implode(', ', $missingArguments)));
+        if (\count($missingArguments) > 1) {
+            throw new RuntimeException(\sprintf('Not enough arguments (missing: "%s").', \implode(', ', $missingArguments)));
         }
 
         return true;

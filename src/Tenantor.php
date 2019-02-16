@@ -35,7 +35,7 @@ class Tenantor extends Fluent
      */
     public static function make(string $name, $key, ?string $connection = null, ?Model $model = null)
     {
-        return new static(compact('name', 'key', 'connection', 'model'));
+        return new static(\compact('name', 'key', 'connection', 'model'));
     }
 
     /**

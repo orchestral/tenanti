@@ -40,7 +40,7 @@ abstract class Model extends Eloquent
      */
     public function newEloquentBuilder($query)
     {
-        return tap(new Builder($query), function ($builder) {
+        return \tap(new Builder($query), function ($builder) {
             $builder->setTenantor($this->tenantor ?? null);
         });
     }
@@ -55,7 +55,7 @@ abstract class Model extends Eloquent
      */
     public function newInstance($attributes = [], $exists = false)
     {
-        return tap(parent::newInstance($attributes, $exists), function ($model) {
+        return \tap(parent::newInstance($attributes, $exists), function ($model) {
             $model->setTenantor($this->tenantor ?? null);
         });
     }
