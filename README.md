@@ -34,7 +34,7 @@ To install through composer, simply put the following in your `composer.json` fi
 ```json
 {
     "require": {
-        "orchestra/tenanti": "^3.0"
+        "orchestra/tenanti": "^3.5"
     }
 }
 ```
@@ -45,7 +45,7 @@ And then run `composer install` to fetch the package.
 
 You could also simplify the above code by using the following command:
 
-    composer require "orchestra/tenanti=^3.0"
+    composer require "orchestra/tenanti=^3.5"
 
 ## Configuration
 
