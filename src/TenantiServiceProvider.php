@@ -6,7 +6,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Orchestra\Support\Providers\ServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
 
-class TenantiServiceProvider extends ServiceProvider
+class TenantiServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * Register the service provider.
