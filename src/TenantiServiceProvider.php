@@ -4,16 +4,10 @@ namespace Orchestra\Tenanti;
 
 use Illuminate\Contracts\Foundation\Application;
 use Orchestra\Support\Providers\ServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
 class TenantiServiceProvider extends ServiceProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
     /**
      * Register the service provider.
      *
