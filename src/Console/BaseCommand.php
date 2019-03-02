@@ -88,7 +88,7 @@ abstract class BaseCommand extends Command
 
         $this->validateMissingArguments($arguments);
 
-        if (empty($this->argument(end($arguments)))) {
+        if (empty($this->argument(\end($arguments)))) {
             $driver = $this->getDriverFromConfig();
 
             if (empty($driver)) {

@@ -28,13 +28,12 @@ class TinkerCommand extends BaseCommand
     public function handle()
     {
         $arguments = $this->getArgumentsWithDriver('id');
-        $driver = $arguments['driver'];
-        $id = $arguments['id'];
 
-        $tenanti = $this->tenant->driver($driver);
-
-        $model = $tenanti->getModel()->findOrFail($id);
-        $tenanti->asDefaultConnection($model, 'tinker');
+        \tap($this->tenant->driver($arguments['driver']), function ($tenanti) use ($arguments) {
+            $tenanti->asDefaultConnection(
+                $tenanti->getModel()->findOrFail($arguments['id']), 'tinker'
+            );
+        });
 
         $this->call('tinker');
     }
