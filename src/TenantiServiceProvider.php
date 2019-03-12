@@ -49,7 +49,7 @@ class TenantiServiceProvider extends ServiceProvider implements DeferrableProvid
      */
     public function boot()
     {
-        $path = \realpath(__DIR__.'/../resources');
+        $path = \realpath(__DIR__.'/../');
 
         $this->addConfigComponent('orchestra/tenanti', 'orchestra/tenanti', "{$path}/config");
 
