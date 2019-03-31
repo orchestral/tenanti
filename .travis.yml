@@ -1,11 +1,9 @@
 language: php
-
-sudo: false
+dist: xenial
 
 php:
   - 7.2
   - 7.3
-  - nightly
 
 env:
   global:

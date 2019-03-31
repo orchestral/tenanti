@@ -27,15 +27,13 @@ class InstallCommand extends BaseCommand
      */
     public function handle()
     {
-        $driver = $this->getDriver();
-        $database = $this->option('database');
-        $id = $this->option('id');
+        \tap($this->tenant->driver($this->getDriver()), function ($migrator) {
+            $this->setupMigrationOutput($migrator);
 
-        $migrator = $this->tenant->driver($driver);
-
-        $this->setupMigrationOutput($migrator);
-
-        $migrator->install($database, $id);
+            $migrator->install(
+                $this->option('database'), $this->option('id')
+            );
+        });
     }
 
     /**
