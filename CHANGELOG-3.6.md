@@ -1,4 +1,4 @@
-# Changelog for 3.6
+# Release Note for 3.6
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/tenanti`.
 
