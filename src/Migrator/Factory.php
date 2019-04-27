@@ -164,7 +164,7 @@ class Factory implements FactoryContract
         $migrator->setConnection($database);
         $migrator->setEntity($entity);
 
-        $migrator->run((array) $this->getMigrationPath($entity), ['pretend' => (bool) $pretend]);
+        $migrator->run($this->getMigrationPaths($entity), ['pretend' => (bool) $pretend]);
         $migrator->resetConnection();
     }
 
@@ -186,7 +186,7 @@ class Factory implements FactoryContract
         $migrator->setConnection($database);
         $migrator->setEntity($entity);
 
-        $migrator->rollback((array) $this->getMigrationPath($entity), ['pretend' => (bool) $pretend]);
+        $migrator->rollback($this->getMigrationPaths($entity), ['pretend' => (bool) $pretend]);
         $migrator->resetConnection();
     }
 
@@ -207,7 +207,7 @@ class Factory implements FactoryContract
 
         $migrator->setConnection($database);
         $migrator->setEntity($entity);
-        $migrator->reset((array) $this->getMigrationPath($entity), $pretend);
+        $migrator->reset($this->getMigrationPaths($entity), $pretend);
         $migrator->resetConnection();
     }
 }

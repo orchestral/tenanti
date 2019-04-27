@@ -257,19 +257,31 @@ trait Operation
     }
 
     /**
+     * Get default migration paths.
+     *
+     * @return array
+     */
+    public function getDefaultMigrationPaths(): array
+    {
+        return Arr::wrap($this->getConfig('paths', function () {
+            return $this->getConfig('path');
+        }));
+    }
+
+    /**
      * Get migration path.
      *
      * @param  \Illuminate\Database\Eloquent\Model|null  $entity
      *
-     * @return string|array|null
+     * @return array|null
      */
-    public function getMigrationPath(Model $entity = null)
+    public function getMigrationPaths(Model $entity = null): ?array
     {
-        if ($entity !== null && isset($this->migrationPaths[$entity->getKey()])) {
-            return \array_merge([$this->getConfig('path')], $this->migrationPaths[$entity->getKey()]);
+        if (! \is_null($entity) && isset($this->migrationPaths[$entity->getKey()])) {
+            return $this->migrationPaths[$entity->getKey()];
         }
 
-        return $this->getConfig('path');
+        return $this->getDefaultMigrationPaths();
     }
 
     /**
@@ -332,10 +344,10 @@ trait Operation
         $id = $entity->getKey();
 
         if (! isset($this->migrationPaths[$id])) {
-            $this->migrationPaths[$id] = [];
+            $this->migrationPaths[$id] = $this->getDefaultMigrationPaths();
         }
 
-        $this->migrationPaths[$id] = \array_merge($this->migrationPaths[$id], (array) $paths);
+        $this->migrationPaths[$id] = \array_merge($this->migrationPaths[$id], Arr::wrap($paths));
         $this->migrationPaths[$id] = \array_unique($this->migrationPaths[$id]);
     }
 }

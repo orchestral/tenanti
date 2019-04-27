@@ -92,8 +92,10 @@ Open `config/orchestra/tenanti.php` and customize the drivers.
 return [
     'drivers' => [
         'user' => [
-            'model'  => App\User::class,
-            'path'   => database_path('tenanti/user'),
+            'model' => App\User::class,
+            'paths' => [
+                database_path('tenanti/user'),
+            ],
             'shared' => true,
         ],
     ],

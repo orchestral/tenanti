@@ -221,12 +221,12 @@ class OperationTest extends TestCase
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\Operation::getMigrationPath()
+     * Test Orchestra\Tenanti\Migrator\Operation::getMigrationPaths()
      * method.
      *
      * @test
      */
-    public function testGetMigrationPathMethod()
+    public function testGetMigrationPathsMethod()
     {
         $this->driver = 'user';
         $path = realpath(__DIR__);
@@ -234,25 +234,29 @@ class OperationTest extends TestCase
 
         $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
 
-        $manager->shouldReceive('getConfig')->with('user.path', null)->andReturn($path);
+        $manager->shouldReceive('getConfig')->with('user.paths', m::type('Closure'))->andReturn([$path]);
 
         $this->manager = $manager;
 
         $model = m::mock('\Illuminate\Database\Eloquent\Model');
         $model->shouldReceive('getKey')->andReturn(5);
         $this->loadMigrationsFrom('customPath', $model);
-        $this->assertEquals([$path, 'customPath'], $this->getMigrationPath($model));
+        $this->assertEquals([$path], $this->getDefaultMigrationPaths());
+        $this->assertEquals([$path, 'customPath'], $this->getMigrationPaths($model));
 
         $model2 = m::mock('\Illuminate\Database\Eloquent\Model');
         $model2->shouldReceive('getKey')->andReturn(6);
         $this->loadMigrationsFrom(['customPath', 'customPath2'], $model2);
-        $this->assertEquals([$path, 'customPath', 'customPath2'], $this->getMigrationPath($model2));
+        $this->assertEquals([$path], $this->getDefaultMigrationPaths());
+        $this->assertEquals([$path, 'customPath', 'customPath2'], $this->getMigrationPaths($model2));
 
         $model3 = m::mock('\Illuminate\Database\Eloquent\Model');
         $model3->shouldReceive('getKey')->andReturn(7);
-        $this->assertEquals($path, $this->getMigrationPath($model3));
+        $this->assertEquals([$path], $this->getDefaultMigrationPaths());
+        $this->assertEquals([$path], $this->getMigrationPaths($model3));
 
-        $this->assertEquals($path, $this->getMigrationPath());
+        $this->assertEquals([$path], $this->getDefaultMigrationPaths());
+        $this->assertEquals([$path], $this->getMigrationPaths());
     }
 
     /**
