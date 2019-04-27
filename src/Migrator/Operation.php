@@ -257,34 +257,6 @@ trait Operation
     }
 
     /**
-     * Get default migration paths.
-     *
-     * @return array
-     */
-    public function getDefaultMigrationPaths(): array
-    {
-        return Arr::wrap($this->getConfig('paths', function () {
-            return $this->getConfig('path');
-        }));
-    }
-
-    /**
-     * Get migration path.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model|null  $entity
-     *
-     * @return array|null
-     */
-    public function getMigrationPaths(Model $entity = null): ?array
-    {
-        if (! \is_null($entity) && isset($this->migrationPaths[$entity->getKey()])) {
-            return $this->migrationPaths[$entity->getKey()];
-        }
-
-        return $this->getDefaultMigrationPaths();
-    }
-
-    /**
      * Get model name.
      *
      * @return string
@@ -329,6 +301,34 @@ trait Operation
         }
 
         return Str::replace($name, $this->data[$id]);
+    }
+
+    /**
+     * Get default migration paths.
+     *
+     * @return array
+     */
+    public function getDefaultMigrationPaths(): array
+    {
+        return Arr::wrap($this->getConfig('paths', function () {
+            return $this->getConfig('path');
+        }));
+    }
+
+    /**
+     * Get migration path.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model|null  $entity
+     *
+     * @return array|null
+     */
+    public function getMigrationPaths(Model $entity = null): ?array
+    {
+        if (! \is_null($entity) && isset($this->migrationPaths[$entity->getKey()])) {
+            return $this->migrationPaths[$entity->getKey()];
+        }
+
+        return $this->getDefaultMigrationPaths();
     }
 
     /**
