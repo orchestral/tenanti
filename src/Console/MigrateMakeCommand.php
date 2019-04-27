@@ -95,7 +95,7 @@ class MigrateMakeCommand extends BaseCommand
     {
         $migrator = $this->tenant->driver($driver);
         $files = $this->creator->getFilesystem();
-        $path = $migrator->getMigrationPath();
+        $path = $migrator->getMigrationPaths();
 
         if (! $files->isDirectory($path)) {
             $files->makeDirectory($path, 0755, true);

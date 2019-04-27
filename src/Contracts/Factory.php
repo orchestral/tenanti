@@ -98,7 +98,7 @@ interface Factory
      *
      * @return string|array|null
      */
-    public function getMigrationPath(Model $entity = null);
+    public function getMigrationPaths(Model $entity = null);
 
     /**
      * Get model name.
