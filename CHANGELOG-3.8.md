@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/tenanti`.
 
+## 3.8.1
+
+Released: 2019-04-28
+
+### Changes
+
+* Allow multiple migration `paths`.
+
 ## 3.8.0
 
 Released: 2019-03-31
