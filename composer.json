@@ -25,19 +25,19 @@
     },
     "require": {
         "php": ">=7.2",
-        "illuminate/console": "~5.9.0",
-        "illuminate/filesystem": "~5.9.0",
-        "orchestra/model": "~3.9.0",
-        "orchestra/support": "~3.9.0"
+        "illuminate/console": "dev-master",
+        "illuminate/filesystem": "dev-master",
+        "orchestra/model": "~3.10.0",
+        "orchestra/support": "~3.10.0"
     },
     "require-dev": {
         "laravel/tinker": "^1.0",
         "mockery/mockery": "^1.2",
-        "orchestra/testbench": "~3.9.0"
+        "orchestra/testbench": "~3.10.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.9-dev"
+            "dev-master": "3.10-dev"
         }
     },
     "config": {
