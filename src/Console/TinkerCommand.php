@@ -29,7 +29,7 @@ class TinkerCommand extends BaseCommand
     {
         $arguments = $this->getArgumentsWithDriver('id');
 
-        \tap($this->tenant->driver($arguments['driver']), function ($tenanti) use ($arguments) {
+        \tap($this->tenant->driver($arguments['driver']), static function ($tenanti) use ($arguments) {
             $tenanti->asDefaultConnection(
                 $tenanti->getModel()->findOrFail($arguments['id']), 'tinker'
             );
