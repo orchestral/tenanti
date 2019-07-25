@@ -27,17 +27,17 @@
         "php": ">=7.2",
         "illuminate/console": "dev-master",
         "illuminate/filesystem": "dev-master",
-        "orchestra/model": "~3.10.0",
-        "orchestra/support": "~3.10.0"
+        "orchestra/model": "^4.0",
+        "orchestra/support": "^4.0"
     },
     "require-dev": {
         "laravel/tinker": "^1.0",
         "mockery/mockery": "^1.2",
-        "orchestra/testbench": "~3.10.0"
+        "orchestra/testbench": "^4.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.10-dev"
+            "dev-master": "4.0-dev"
         }
     },
     "config": {
