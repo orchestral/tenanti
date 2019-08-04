@@ -25,8 +25,8 @@
     },
     "require": {
         "php": ">=7.2",
-        "illuminate/console": "dev-master",
-        "illuminate/filesystem": "dev-master",
+        "illuminate/console": "^6.0",
+        "illuminate/filesystem": "^6.0",
         "orchestra/model": "^4.0",
         "orchestra/support": "^4.0"
     },
