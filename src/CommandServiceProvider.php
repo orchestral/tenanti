@@ -48,7 +48,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerQueuedCommand(): void
     {
-        $this->app->singleton('orchestra.commands.tenanti.queue', function (Application $app) {
+        $this->app->singleton('orchestra.commands.tenanti.queue', static function (Application $app) {
             return new QueuedCommand($app->make('orchestra.tenanti'));
         });
     }
@@ -60,7 +60,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerInstallCommand(): void
     {
-        $this->app->singleton('orchestra.commands.tenanti.install', function (Application $app) {
+        $this->app->singleton('orchestra.commands.tenanti.install', static function (Application $app) {
             return new InstallCommand($app->make('orchestra.tenanti'));
         });
     }
@@ -72,11 +72,11 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerMakeCommand(): void
     {
-        $this->app->singleton('orchestra.tenanti.creator', function (Application $app) {
+        $this->app->singleton('orchestra.tenanti.creator', static function (Application $app) {
             return new Creator($app->make('files'));
         });
 
-        $this->app->singleton('orchestra.commands.tenanti.make', function (Application $app) {
+        $this->app->singleton('orchestra.commands.tenanti.make', static function (Application $app) {
             // Once we have the migration creator registered, we will create the command
             // and inject the creator. The creator is responsible for the actual file
             // creation of the migrations, and may be extended by these developers.
@@ -95,7 +95,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerMigrateCommand(): void
     {
-        $this->app->singleton('orchestra.commands.tenanti.migrate', function (Application $app) {
+        $this->app->singleton('orchestra.commands.tenanti.migrate', static function (Application $app) {
             return new MigrateCommand($app->make('orchestra.tenanti'));
         });
     }
@@ -107,7 +107,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerRollbackCommand(): void
     {
-        $this->app->singleton('orchestra.commands.tenanti.rollback', function (Application $app) {
+        $this->app->singleton('orchestra.commands.tenanti.rollback', static function (Application $app) {
             return new RollbackCommand($app->make('orchestra.tenanti'));
         });
     }
@@ -119,7 +119,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerResetCommand(): void
     {
-        $this->app->singleton('orchestra.commands.tenanti.reset', function (Application $app) {
+        $this->app->singleton('orchestra.commands.tenanti.reset', static function (Application $app) {
             return new ResetCommand($app->make('orchestra.tenanti'));
         });
     }
@@ -131,7 +131,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerRefreshCommand(): void
     {
-        $this->app->singleton('orchestra.commands.tenanti.refresh', function (Application $app) {
+        $this->app->singleton('orchestra.commands.tenanti.refresh', static function (Application $app) {
             return new RefreshCommand($app->make('orchestra.tenanti'));
         });
     }
@@ -143,7 +143,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerTinkerCommand(): void
     {
-        $this->app->singleton('orchestra.commands.tenanti.tinker', function (Application $app) {
+        $this->app->singleton('orchestra.commands.tenanti.tinker', static function (Application $app) {
             return new TinkerCommand($app->make('orchestra.tenanti'));
         });
     }
