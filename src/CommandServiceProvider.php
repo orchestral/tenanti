@@ -6,6 +6,7 @@ use Orchestra\Tenanti\Migrator\Creator;
 use Orchestra\Tenanti\Console\ResetCommand;
 use Orchestra\Tenanti\Console\QueuedCommand;
 use Orchestra\Tenanti\Console\TinkerCommand;
+use Illuminate\Contracts\Container\Container;
 use Orchestra\Tenanti\Console\InstallCommand;
 use Orchestra\Tenanti\Console\MigrateCommand;
 use Orchestra\Tenanti\Console\RefreshCommand;
@@ -48,7 +49,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerQueuedCommand(): void
     {
-        $this->app->singleton('orchestra.commands.tenanti.queue', static function (Application $app) {
+        $this->app->singleton('orchestra.commands.tenanti.queue', static function (Container $app) {
             return new QueuedCommand($app->make('orchestra.tenanti'));
         });
     }
@@ -60,7 +61,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerInstallCommand(): void
     {
-        $this->app->singleton('orchestra.commands.tenanti.install', static function (Application $app) {
+        $this->app->singleton('orchestra.commands.tenanti.install', static function (Container $app) {
             return new InstallCommand($app->make('orchestra.tenanti'));
         });
     }
@@ -72,11 +73,11 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerMakeCommand(): void
     {
-        $this->app->singleton('orchestra.tenanti.creator', static function (Application $app) {
+        $this->app->singleton('orchestra.tenanti.creator', static function (Container $app) {
             return new Creator($app->make('files'));
         });
 
-        $this->app->singleton('orchestra.commands.tenanti.make', static function (Application $app) {
+        $this->app->singleton('orchestra.commands.tenanti.make', static function (Container $app) {
             // Once we have the migration creator registered, we will create the command
             // and inject the creator. The creator is responsible for the actual file
             // creation of the migrations, and may be extended by these developers.
@@ -95,7 +96,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerMigrateCommand(): void
     {
-        $this->app->singleton('orchestra.commands.tenanti.migrate', static function (Application $app) {
+        $this->app->singleton('orchestra.commands.tenanti.migrate', static function (Container $app) {
             return new MigrateCommand($app->make('orchestra.tenanti'));
         });
     }
@@ -107,7 +108,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerRollbackCommand(): void
     {
-        $this->app->singleton('orchestra.commands.tenanti.rollback', static function (Application $app) {
+        $this->app->singleton('orchestra.commands.tenanti.rollback', static function (Container $app) {
             return new RollbackCommand($app->make('orchestra.tenanti'));
         });
     }
@@ -119,7 +120,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerResetCommand(): void
     {
-        $this->app->singleton('orchestra.commands.tenanti.reset', static function (Application $app) {
+        $this->app->singleton('orchestra.commands.tenanti.reset', static function (Container $app) {
             return new ResetCommand($app->make('orchestra.tenanti'));
         });
     }
@@ -131,7 +132,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerRefreshCommand(): void
     {
-        $this->app->singleton('orchestra.commands.tenanti.refresh', static function (Application $app) {
+        $this->app->singleton('orchestra.commands.tenanti.refresh', static function (Container $app) {
             return new RefreshCommand($app->make('orchestra.tenanti'));
         });
     }
@@ -143,7 +144,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerTinkerCommand(): void
     {
-        $this->app->singleton('orchestra.commands.tenanti.tinker', static function (Application $app) {
+        $this->app->singleton('orchestra.commands.tenanti.tinker', static function (Container $app) {
             return new TinkerCommand($app->make('orchestra.tenanti'));
         });
     }

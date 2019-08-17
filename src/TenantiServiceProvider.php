@@ -2,7 +2,7 @@
 
 namespace Orchestra\Tenanti;
 
-use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Container\Container;
 use Orchestra\Support\Providers\ServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
 
@@ -15,7 +15,7 @@ class TenantiServiceProvider extends ServiceProvider implements DeferrableProvid
      */
     public function register()
     {
-        $this->app->singleton('orchestra.tenanti', function (Application $app) {
+        $this->app->singleton('orchestra.tenanti', function (Container $app) {
             $manager = new TenantiManager($app);
 
             $this->registerConfigurationForManager($manager);
