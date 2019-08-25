@@ -25,6 +25,7 @@ class TenantiManagerTest extends TestCase
     public function testDriverMethod()
     {
         $app = new Container();
+        $app->instance('config', m::mock('Illuminate\Contracts\Config\Repository'));
 
         $config = [
             'drivers' => [
@@ -43,7 +44,7 @@ class TenantiManagerTest extends TestCase
         ];
 
         $stub = new TenantiManager($app);
-        $stub->setConfig($config);
+        $stub->setConfiguration($config);
 
         $resolver = $stub->driver('user');
 
@@ -62,13 +63,14 @@ class TenantiManagerTest extends TestCase
         $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('Driver [user] not supported');
 
-        $app = new Container();
+        $container = new Container();
+        $container->instance('config', m::mock('Illuminate\Contracts\Config\Repository'));
 
         $config = [
             'drivers' => [],
         ];
 
-        with(new TenantiManager($app))->setConfig($config)->driver('user');
+        with(new TenantiManager($container))->setConfiguration($config)->driver('user');
     }
 
     /**
@@ -82,7 +84,10 @@ class TenantiManagerTest extends TestCase
         $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('Default driver not implemented.');
 
-        (new TenantiManager(null))->driver();
+        $container = m::mock('Illuminate\Contracts\Container\Container');
+        $container->shouldReceive('make')->once()->with('config')->andReturn(m::mock('Illuminate\Contracts\Config\Repository'));
+
+        (new TenantiManager($container))->driver();
     }
 
     /**
@@ -93,6 +98,7 @@ class TenantiManagerTest extends TestCase
     public function testConfigMethod()
     {
         $app = new Container();
+        $app->instance('config', m::mock('Illuminate\Contracts\Config\Repository'));
 
         $config = [
             'drivers' => [
@@ -103,11 +109,11 @@ class TenantiManagerTest extends TestCase
 
         $stub = new TenantiManager($app);
 
-        $this->assertSame([], $stub->config());
+        $this->assertSame([], $stub->getConfiguration());
 
-        $stub->setConfig($config);
+        $stub->setConfiguration($config);
 
-        $this->assertEquals($config, $stub->config());
+        $this->assertEquals($config, $stub->getConfiguration());
     }
 
     /**

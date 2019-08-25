@@ -29,7 +29,7 @@ class OperationTest extends TestCase
      */
     public function testAsDefaultDatabaseMethod()
     {
-        $this->app = m::mock('\Illuminate\Container\Container[make]');
+        $this->app = m::mock('Illuminate\Container\Container[make]');
         $this->driver = 'user';
 
         $repository = new Repository([
@@ -43,7 +43,9 @@ class OperationTest extends TestCase
             ],
         ]);
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$this->app]);
+        $this->app->shouldReceive('make')->times(3)->with('config')->andReturn($repository);
+
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$this->app]);
 
         $manager->shouldReceive('getConfig')->with('user.connection', null)->andReturn([
                     'template' => $repository->get('database.connections.tenant'),
@@ -58,9 +60,8 @@ class OperationTest extends TestCase
 
         $this->manager = $manager;
 
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
 
-        $this->app->shouldReceive('make')->twice()->with('config')->andReturn($repository);
         $model->shouldReceive('getKey')->twice()->andReturn(5)
             ->shouldReceive('toArray')->once()->andReturn([
                 'id' => 5,
@@ -79,7 +80,7 @@ class OperationTest extends TestCase
      */
     public function testAsConnectionMethod()
     {
-        $this->app = m::mock('\Illuminate\Container\Container[make]');
+        $this->app = m::mock('Illuminate\Container\Container[make]');
         $this->driver = 'user';
 
         $repository = new Repository([
@@ -93,7 +94,9 @@ class OperationTest extends TestCase
             ],
         ]);
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$this->app]);
+        $this->app->shouldReceive('make')->twice()->with('config')->andReturn($repository);
+
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$this->app]);
 
         $manager->shouldReceive('getConfig')->with('user.connection', null)->andReturn([
                 'template' => $repository->get('database.connections.tenant'),
@@ -108,9 +111,8 @@ class OperationTest extends TestCase
 
         $this->manager = $manager;
 
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
 
-        $this->app->shouldReceive('make')->once()->with('config')->andReturn($repository);
         $model->shouldReceive('getKey')->twice()->andReturn(5)
             ->shouldReceive('toArray')->once()->andReturn([
                 'id' => 5,
@@ -128,17 +130,19 @@ class OperationTest extends TestCase
      */
     public function testResolveModelMethod()
     {
-        $this->app = m::mock('\Illuminate\Container\Container[make]');
+        $this->app = m::mock('Illuminate\Container\Container[make]');
         $this->driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$this->app]);
+        $this->app->shouldReceive('make')->once()->with('config')->andReturn(m::mock('Illuminate\Contracts\Config\Repository'));
+
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$this->app]);
 
         $manager->shouldReceive('getConfig')->with('user.model', null)->andReturn('User')
             ->shouldReceive('getConfig')->with('user.database', null)->andReturnNull();
 
         $this->manager = $manager;
 
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
 
         $this->app->shouldReceive('make')->once()->with('User')->andReturn($model);
 
@@ -155,17 +159,20 @@ class OperationTest extends TestCase
      */
     public function testResolveModelMethodWithConnectionName()
     {
-        $this->app = m::mock('\Illuminate\Container\Container[make]');
+        $this->app = m::mock('Illuminate\Container\Container[make]');
         $this->driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$this->app]);
+
+        $this->app->shouldReceive('make')->once()->with('config')->andReturn(m::mock('Illuminate\Contracts\Config\Repository'));
+
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$this->app]);
 
         $manager->shouldReceive('getConfig')->with('user.model', null)->andReturn('User')
             ->shouldReceive('getConfig')->with('user.database', null)->andReturn('primary');
 
         $this->manager = $manager;
 
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
 
         $this->app->shouldReceive('make')->once()->with('User')->andReturn($model);
 
@@ -186,10 +193,12 @@ class OperationTest extends TestCase
     {
         $this->expectException('InvalidArgumentException');
 
-        $this->app = m::mock('\Illuminate\Container\Container[make]');
+        $this->app = m::mock('Illuminate\Container\Container[make]');
         $this->driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$this->app]);
+        $this->app->shouldReceive('make')->once()->with('config')->andReturn(m::mock('Illuminate\Contracts\Config\Repository'));
+
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$this->app]);
 
         $manager->shouldReceive('getConfig')->with('user.model', null)->andReturn('User');
 
@@ -211,7 +220,10 @@ class OperationTest extends TestCase
         $app = new Container();
         $this->driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
+
+        $app->instance('config', m::mock('Illuminate\Contracts\Config\Repository'));
+
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
 
         $manager->shouldReceive('getConfig')->with('user.model', null)->andReturn('User');
 
@@ -232,25 +244,27 @@ class OperationTest extends TestCase
         $path = realpath(__DIR__);
         $app = new Container();
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
+        $app->instance('config', m::mock('Illuminate\Contracts\Config\Repository'));
+
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
 
         $manager->shouldReceive('getConfig')->with('user.paths', m::type('Closure'))->andReturn([$path]);
 
         $this->manager = $manager;
 
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
         $model->shouldReceive('getKey')->andReturn(5);
         $this->loadMigrationsFrom('customPath', $model);
         $this->assertEquals([$path], $this->getDefaultMigrationPaths());
         $this->assertEquals([$path, 'customPath'], $this->getMigrationPaths($model));
 
-        $model2 = m::mock('\Illuminate\Database\Eloquent\Model');
+        $model2 = m::mock('Illuminate\Database\Eloquent\Model');
         $model2->shouldReceive('getKey')->andReturn(6);
         $this->loadMigrationsFrom(['customPath', 'customPath2'], $model2);
         $this->assertEquals([$path], $this->getDefaultMigrationPaths());
         $this->assertEquals([$path, 'customPath', 'customPath2'], $this->getMigrationPaths($model2));
 
-        $model3 = m::mock('\Illuminate\Database\Eloquent\Model');
+        $model3 = m::mock('Illuminate\Database\Eloquent\Model');
         $model3->shouldReceive('getKey')->andReturn(7);
         $this->assertEquals([$path], $this->getDefaultMigrationPaths());
         $this->assertEquals([$path], $this->getMigrationPaths($model3));
@@ -268,7 +282,9 @@ class OperationTest extends TestCase
     public function testGetTablePrefixMethod()
     {
         $app = new Container();
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
+        $app->instance('config', m::mock('Illuminate\Contracts\Config\Repository'));
+
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
 
         $manager->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('user');
 
@@ -287,7 +303,8 @@ class OperationTest extends TestCase
     public function testGetTablePrefixMethodWithDifferentPrefix()
     {
         $app = new Container();
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
+        $app->instance('config', m::mock('Illuminate\Contracts\Config\Repository'));
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
 
         $manager->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('member');
 

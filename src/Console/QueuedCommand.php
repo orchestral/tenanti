@@ -49,7 +49,7 @@ class QueuedCommand extends BaseCommand
         $driver = $this->getDriver();
         $action = $this->argument('action');
         $database = $this->option('database');
-        $queue = $this->option('queue') ?? $this->tenant->config()['queue'] ?? 'default';
+        $queue = $this->option('queue') ?? $this->tenant->getConfiguration()['queue'] ?? 'default';
         $delay = $this->option('delay');
 
         if (! \in_array($action, $this->actions)) {
