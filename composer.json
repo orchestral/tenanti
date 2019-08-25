@@ -27,11 +27,10 @@
         "php": ">=7.2",
         "illuminate/console": "^7.0",
         "illuminate/filesystem": "^7.0",
-        "orchestra/model": "^4.0",
-        "orchestra/support": "^4.0"
+        "orchestra/model": "^5.0",
+        "orchestra/support": "^5.0"
     },
     "require-dev": {
-        "laravel/tinker": "^1.0",
         "mockery/mockery": "^1.2",
         "orchestra/testbench": "^5.0"
     },

@@ -38,7 +38,7 @@ class TenantiServiceProvider extends ServiceProvider implements DeferrableProvid
         $namespace = $this->hasPackageRepository() ? 'orchestra/tenanti::' : 'orchestra.tenanti';
 
         $this->app->booted(static function ($app) use ($manager, $namespace) {
-            $manager->setConfig($app->make('config')->get($namespace));
+            $manager->setConfiguration($app->make('config')->get($namespace));
         });
     }
 

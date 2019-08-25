@@ -15,7 +15,7 @@ class TenantiManager extends Manager
      *
      * @var array
      */
-    protected $config = [];
+    protected $configurations = [];
 
     /**
      * Migration factory resolver.
@@ -39,7 +39,7 @@ class TenantiManager extends Manager
             throw new InvalidArgumentException("Driver [$driver] not supported.");
         }
 
-        return new $this->resolver($this->app, $this, $driver);
+        return new $this->resolver($this->container, $this, $driver);
     }
 
     /**
@@ -57,9 +57,9 @@ class TenantiManager extends Manager
      *
      * @return array
      */
-    public function config(): array
+    public function getConfiguration(): array
     {
-        return $this->config;
+        return $this->configurations;
     }
 
     /**
@@ -72,7 +72,7 @@ class TenantiManager extends Manager
      */
     public function getConfig(?string $group = null, $default = null)
     {
-        return Arr::get($this->config, $group, $default);
+        return Arr::get($this->configurations, $group, $default);
     }
 
     /**
@@ -82,9 +82,9 @@ class TenantiManager extends Manager
      *
      * @return $this
      */
-    public function setConfig(array $config)
+    public function setConfiguration(array $config)
     {
-        $this->config = \array_merge($config, ['connection' => $this->getConfig('connection')]);
+        $this->configurations = \array_merge($config, ['connection' => $this->getConfig('connection')]);
 
         return $this;
     }
@@ -102,19 +102,17 @@ class TenantiManager extends Manager
      */
     public function connection(?string $using, Closure $callback, array $options = []): void
     {
-        $repository = $this->app->make('config');
-
         if (\is_null($using)) {
-            $using = $repository->get('database.default');
+            $using = $this->config->get('database.default');
         }
 
-        $config = $repository->get("database.connections.{$using}", null);
+        $config = $this->config->get("database.connections.{$using}", null);
 
         if (\is_null($config)) {
             throw new InvalidArgumentException("Database connection [{$using}] is not available.");
         }
 
-        Arr::set($this->config, 'connection', [
+        Arr::set($this->configurations, 'connection', [
             'name' => "{$using}_{id}",
             'template' => $config,
             'resolver' => $callback,
@@ -131,21 +129,21 @@ class TenantiManager extends Manager
      */
     protected function setupDriverConfig(string $driver): ?array
     {
-        if (isset($this->config[$driver])) {
+        if (isset($this->configurations[$driver])) {
             return null;
         }
 
-        if (\is_null($config = Arr::pull($this->config, "drivers.{$driver}"))) {
+        if (\is_null($config = Arr::pull($this->configurations, "drivers.{$driver}"))) {
             return null;
         }
 
-        $connection = $this->config['connection'] ?? null;
+        $connection = $this->configurations['connection'] ?? null;
 
         if (! \is_null($connection) && $this->driverExcludedByOptions($driver, $connection['options'])) {
             $connection = null;
         }
 
-        return $this->config[$driver] = \array_merge($config, ['connection' => $connection]);
+        return $this->configurations[$driver] = \array_merge($config, ['connection' => $connection]);
     }
 
     /**
