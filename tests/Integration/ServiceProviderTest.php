@@ -17,6 +17,6 @@ class ServiceProviderTest extends TestCase
     {
         $tenanti = resolve('orchestra.tenanti');
 
-        $this->assertSame('App\User', $tenanti->getConfig('drivers.user.model'));
+        $this->assertSame('App\User', $tenanti->config('drivers.user.model'));
     }
 }

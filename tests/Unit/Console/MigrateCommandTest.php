@@ -11,7 +11,7 @@ class MigrateCommandTest extends CommandTest
     {
         $tenanti = $this->app['orchestra.tenanti'];
 
-        $tenanti->shouldReceive('getConfig')->andReturn([]);
+        $tenanti->shouldReceive('config')->andReturn([]);
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('missing: "driver"');
@@ -54,7 +54,7 @@ class MigrateCommandTest extends CommandTest
     {
         $tenanti = $this->app['orchestra.tenanti'];
 
-        $tenanti->shouldReceive('getConfig')
+        $tenanti->shouldReceive('config')
             ->andReturn([
                 'tenant' => [
                 ],
@@ -74,7 +74,7 @@ class MigrateCommandTest extends CommandTest
     {
         $tenanti = $this->app['orchestra.tenanti'];
 
-        $tenanti->shouldReceive('getConfig')
+        $tenanti->shouldReceive('config')
             ->andReturn([
                 'tenant1' => [
                 ],

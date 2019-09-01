@@ -88,7 +88,7 @@ class FactoryTest extends TestCase
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->andReturnNull();
+        $manager->shouldReceive('config')->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('run')->once()->with(null, ['pretend' => false])->andReturnNull()
@@ -120,7 +120,7 @@ class FactoryTest extends TestCase
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->andReturnNull();
+        $manager->shouldReceive('config')->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('run')->once()->with(null, ['pretend' => false])->andReturnNull()
@@ -155,7 +155,7 @@ class FactoryTest extends TestCase
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->andReturnNull();
+        $manager->shouldReceive('config')->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('rollback')->once()->with(null, ['pretend' => false])->andReturnNull()
@@ -187,7 +187,7 @@ class FactoryTest extends TestCase
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->andReturnNull();
+        $manager->shouldReceive('config')->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('rollback')->once()->with(null, ['pretend' => false])->andReturnNull()
@@ -222,7 +222,7 @@ class FactoryTest extends TestCase
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->andReturnNull();
+        $manager->shouldReceive('config')->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('reset')->once()->with(null, false)->andReturnNull()
@@ -254,7 +254,7 @@ class FactoryTest extends TestCase
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->andReturnNull();
+        $manager->shouldReceive('config')->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('reset')->once()->with(null, false)->andReturnNull()
@@ -290,10 +290,10 @@ class FactoryTest extends TestCase
 
         $model = $this->getMockModel();
 
-        $manager->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.migration', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.shared', true)->andReturn(true)
-            ->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('user');
+        $manager->shouldReceive('config')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.migration', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
+            ->shouldReceive('config')->with('user.prefix', 'user')->andReturn('user');
 
         $this->assertNull($stub->runInstall($model, 'primary'));
     }
@@ -322,10 +322,10 @@ class FactoryTest extends TestCase
         $stub = new Factory($app, $manager, $driver);
         $model = $this->getMockModel();
 
-        $manager->shouldReceive('getConfig')->with('user.path', null)->andReturn('/var/app/migrations')
-            ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.shared', true)->andReturn(true)
-            ->shouldReceive('getConfig')->with('user.migration', null)->andReturn('migrations');
+        $manager->shouldReceive('config')->with('user.path', null)->andReturn('/var/app/migrations')
+            ->shouldReceive('config')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
+            ->shouldReceive('config')->with('user.migration', null)->andReturn('migrations');
 
         $this->assertNull($stub->runInstall($model, 'tenant_{entity.username}'));
     }
@@ -352,10 +352,10 @@ class FactoryTest extends TestCase
 
         $model = $this->getMockModel();
 
-        $manager->shouldReceive('getConfig')->with('user.path', null)->andReturn('/var/app/migrations')
-            ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.shared', true)->andReturn(true)
-            ->shouldReceive('getConfig')->with('user.migration', null)->andReturn('migrations');
+        $manager->shouldReceive('config')->with('user.path', null)->andReturn('/var/app/migrations')
+            ->shouldReceive('config')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
+            ->shouldReceive('config')->with('user.migration', null)->andReturn('migrations');
 
         $this->assertNull($stub->runInstall($model, null));
     }
@@ -380,11 +380,11 @@ class FactoryTest extends TestCase
 
         $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->with('user.paths', m::type('Closure'))->andReturn(['/var/app/migrations'])
-            ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.migration', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.shared', true)->andReturn(true)
-            ->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('user');
+        $manager->shouldReceive('config')->with('user.paths', m::type('Closure'))->andReturn(['/var/app/migrations'])
+            ->shouldReceive('config')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.migration', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
+            ->shouldReceive('config')->with('user.prefix', 'user')->andReturn('user');
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('run')->once()->with(['/var/app/migrations'], ['pretend' => false])->andReturnNull()
@@ -413,11 +413,11 @@ class FactoryTest extends TestCase
 
         $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->with('user.paths', m::type('Closure'))->andReturn(['/var/app/migrations'])
-            ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.migration', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.shared', true)->andReturn(true)
-            ->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('user');
+        $manager->shouldReceive('config')->with('user.paths', m::type('Closure'))->andReturn(['/var/app/migrations'])
+            ->shouldReceive('config')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.migration', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
+            ->shouldReceive('config')->with('user.prefix', 'user')->andReturn('user');
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('rollback')->with(['/var/app/migrations'], ['pretend' => false])->andReturnNull()
@@ -446,11 +446,11 @@ class FactoryTest extends TestCase
 
         $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->with('user.paths', m::type('Closure'))->andReturn(['/var/app/migrations'])
-            ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.migration', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.shared', true)->andReturn(true)
-            ->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('user');
+        $manager->shouldReceive('config')->with('user.paths', m::type('Closure'))->andReturn(['/var/app/migrations'])
+            ->shouldReceive('config')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.migration', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
+            ->shouldReceive('config')->with('user.prefix', 'user')->andReturn('user');
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('reset')->once()->with(['/var/app/migrations'], false)->andReturn(5)

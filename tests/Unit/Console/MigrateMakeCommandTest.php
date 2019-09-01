@@ -14,7 +14,7 @@ class MigrateMakeCommandTest extends CommandTest
         $creator = $this->app['orchestra.tenanti.creator'];
         $composer = m::mock(Composer::class);
 
-        $tenanti->shouldReceive('getConfig')
+        $tenanti->shouldReceive('config')
             ->andReturn([]);
 
         $this->expectException(RuntimeException::class);
@@ -31,7 +31,7 @@ class MigrateMakeCommandTest extends CommandTest
         $composer = m::mock(Composer::class);
         $composer->shouldReceive('dumpAutoloads');
 
-        $tenanti->shouldReceive('getConfig')
+        $tenanti->shouldReceive('config')
             ->andReturn([
                 'tenant' => [
                 ],
@@ -63,7 +63,7 @@ class MigrateMakeCommandTest extends CommandTest
         $composer = m::mock(Composer::class);
         $composer->shouldReceive('dumpAutoloads');
 
-        $tenanti->shouldReceive('getConfig')
+        $tenanti->shouldReceive('config')
             ->andReturn([
                 'tenant1' => [
                 ],
@@ -89,7 +89,7 @@ class MigrateMakeCommandTest extends CommandTest
         $composer = m::mock(Composer::class);
         $composer->shouldReceive('dumpAutoloads');
 
-        $tenanti->shouldReceive('getConfig')
+        $tenanti->shouldReceive('config')
             ->andReturn([
                 'tenant1' => [
                 ],
@@ -118,7 +118,7 @@ class MigrateMakeCommandTest extends CommandTest
         $composer = m::mock(Composer::class);
         $composer->shouldReceive('dumpAutoloads');
 
-        $tenanti->shouldReceive('getConfig')
+        $tenanti->shouldReceive('config')
             ->andReturn([
                 'tenant1' => [
                 ],

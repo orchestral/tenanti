@@ -66,7 +66,7 @@ abstract class BaseCommand extends Command
      */
     protected function getDriverFromConfig(): ?string
     {
-        $drivers = \array_keys($this->tenant->getConfig('drivers'));
+        $drivers = \array_keys($this->tenant->config('drivers'));
 
         if (\count($drivers) === 1) {
             return $drivers[0];

@@ -49,7 +49,7 @@ class TenantiManagerTest extends TestCase
         $resolver = $stub->driver('user');
 
         $this->assertInstanceOf('\Orchestra\Tenanti\Migrator\Factory', $resolver);
-        $this->assertEquals($expected, $stub->getConfig());
+        $this->assertEquals($expected, $stub->config());
     }
 
     /**
@@ -145,7 +145,7 @@ class TenantiManagerTest extends TestCase
         $stub = new TenantiManager($app);
         $stub->connection('tenant', $callback);
 
-        $this->assertEquals(['connection' => $expected], $stub->getConfig());
+        $this->assertEquals(['connection' => $expected], $stub->config());
     }
 
     /**
@@ -179,7 +179,7 @@ class TenantiManagerTest extends TestCase
         $stub = new TenantiManager($app);
         $stub->connection(null, $callback);
 
-        $this->assertEquals(['connection' => $expected], $stub->getConfig());
+        $this->assertEquals(['connection' => $expected], $stub->config());
     }
 
     /**
