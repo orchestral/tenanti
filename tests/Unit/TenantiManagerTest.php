@@ -48,7 +48,7 @@ class TenantiManagerTest extends TestCase
 
         $resolver = $stub->driver('user');
 
-        $this->assertInstanceOf('\Orchestra\Tenanti\Migrator\Factory', $resolver);
+        $this->assertInstanceOf('Orchestra\Tenanti\Migrator\Factory', $resolver);
         $this->assertEquals($expected, $stub->config());
     }
 
@@ -124,7 +124,7 @@ class TenantiManagerTest extends TestCase
     public function testConnectionMethod()
     {
         $app = new Container();
-        $app['config'] = $config = m::mock('\Illuminate\Contracts\Config\Repository');
+        $app['config'] = $config = m::mock('Illuminate\Contracts\Config\Repository');
 
         $config->shouldReceive('get')->once()->with('database.connections.tenant', null)
             ->andReturn([
@@ -157,7 +157,7 @@ class TenantiManagerTest extends TestCase
     public function testConnectionMethodWithDefaultConnection()
     {
         $app = new Container();
-        $app['config'] = $config = m::mock('\Illuminate\Contracts\Config\Repository');
+        $app['config'] = $config = m::mock('Illuminate\Contracts\Config\Repository');
 
         $config->shouldReceive('get')->once()->with('database.default')->andReturn('mysql')
             ->shouldReceive('get')->once()->with('database.connections.mysql', null)
@@ -194,7 +194,7 @@ class TenantiManagerTest extends TestCase
         $this->expectExceptionMessage('Database connection [foo] is not available.');
 
         $app = new Container();
-        $app['config'] = $config = m::mock('\Illuminate\Contracts\Config\Repository');
+        $app['config'] = $config = m::mock('Illuminate\Contracts\Config\Repository');
 
         $config->shouldReceive('get')->once()->with('database.connections.foo', null)->andReturnNull();
 

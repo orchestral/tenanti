@@ -22,7 +22,7 @@ class CreateTenantTest extends TestCase
     protected function setUp(): void
     {
         $this->app = new Container();
-        $this->app['orchestra.tenanti'] = m::mock('\Orchestra\Tenanti\TenantiManager');
+        $this->app['orchestra.tenanti'] = m::mock('Orchestra\Tenanti\TenantiManager');
 
         Facade::clearResolvedInstances();
         Facade::setFacadeApplication($this->app);
@@ -46,9 +46,9 @@ class CreateTenantTest extends TestCase
      */
     public function testHandleMethod()
     {
-        $migrator = m::mock('\Orchestra\Tenanti\Migrator\Factory');
+        $migrator = m::mock('Orchestra\Tenanti\Migrator\Factory');
         $tenanti = $this->app['orchestra.tenanti'];
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
 
         $data = [
             'database' => 'foo',

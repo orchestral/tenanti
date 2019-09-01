@@ -9,7 +9,7 @@ class ServiceProviderTest extends TestCase
     /** @test */
     public function it_registers_required_services()
     {
-        $this->assertInstanceOf('\Orchestra\Tenanti\TenantiManager', resolve('orchestra.tenanti'));
+        $this->assertInstanceOf('Orchestra\Tenanti\TenantiManager', resolve('orchestra.tenanti'));
     }
 
     /** @test */

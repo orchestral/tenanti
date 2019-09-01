@@ -25,10 +25,10 @@ class MigratorTest extends TestCase
      */
     public function testSetEntityMethod()
     {
-        $repository = m::mock('\Illuminate\Database\Migrations\MigrationRepositoryInterface');
-        $resolver = m::mock('\Illuminate\Database\ConnectionResolver');
-        $files = m::mock('\Illuminate\Filesystem\Filesystem');
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $repository = m::mock('Illuminate\Database\Migrations\MigrationRepositoryInterface');
+        $resolver = m::mock('Illuminate\Database\ConnectionResolver');
+        $files = m::mock('Illuminate\Filesystem\Filesystem');
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
 
         $stub = new Migrator($repository, $resolver, $files);
 
@@ -43,17 +43,17 @@ class MigratorTest extends TestCase
      */
     public function testRunUpMethod()
     {
-        $repository = m::mock('\Illuminate\Database\Migrations\MigrationRepositoryInterface');
-        $resolver = m::mock('\Illuminate\Database\ConnectionResolver');
-        $files = m::mock('\Illuminate\Filesystem\Filesystem');
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $repository = m::mock('Illuminate\Database\Migrations\MigrationRepositoryInterface');
+        $resolver = m::mock('Illuminate\Database\ConnectionResolver');
+        $files = m::mock('Illuminate\Filesystem\Filesystem');
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
         $migration = m::mock('FooMigration');
 
         $file = 'foo_migration.php';
         $batch = 5;
         $pretend = false;
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve,note]', [$repository, $resolver, $files])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve,note]', [$repository, $resolver, $files])
                     ->makePartial()
                     ->shouldAllowMockingProtectedMethods();
 
@@ -79,17 +79,17 @@ class MigratorTest extends TestCase
      */
     public function testRunUpMethodWhenPretending()
     {
-        $repository = m::mock('\Illuminate\Database\Migrations\MigrationRepositoryInterface');
-        $resolver = m::mock('\Illuminate\Database\ConnectionResolver');
-        $files = m::mock('\Illuminate\Filesystem\Filesystem');
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $repository = m::mock('Illuminate\Database\Migrations\MigrationRepositoryInterface');
+        $resolver = m::mock('Illuminate\Database\ConnectionResolver');
+        $files = m::mock('Illuminate\Filesystem\Filesystem');
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
         $instance = m::mock('FooMigration');
 
         $file = 'foo_migration.php';
         $batch = 5;
         $pretend = true;
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve,pretendToRun]', [$repository, $resolver, $files])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve,pretendToRun]', [$repository, $resolver, $files])
                     ->makePartial()
                     ->shouldAllowMockingProtectedMethods();
 
@@ -111,17 +111,17 @@ class MigratorTest extends TestCase
      */
     public function testRunDownMethod()
     {
-        $repository = m::mock('\Illuminate\Database\Migrations\MigrationRepositoryInterface');
-        $resolver = m::mock('\Illuminate\Database\ConnectionResolver');
-        $files = m::mock('\Illuminate\Filesystem\Filesystem');
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $repository = m::mock('Illuminate\Database\Migrations\MigrationRepositoryInterface');
+        $resolver = m::mock('Illuminate\Database\ConnectionResolver');
+        $files = m::mock('Illuminate\Filesystem\Filesystem');
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
         $instance = m::mock('FooMigration');
 
         $file = 'foo_migration.php';
         $pretend = false;
         $migration = new Fluent(['migration' => $file]);
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve,note]', [$repository, $resolver, $files])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve,note]', [$repository, $resolver, $files])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
 
@@ -147,17 +147,17 @@ class MigratorTest extends TestCase
      */
     public function testRunDownMethodWhenPretending()
     {
-        $repository = m::mock('\Illuminate\Database\Migrations\MigrationRepositoryInterface');
-        $resolver = m::mock('\Illuminate\Database\ConnectionResolver');
-        $files = m::mock('\Illuminate\Filesystem\Filesystem');
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $repository = m::mock('Illuminate\Database\Migrations\MigrationRepositoryInterface');
+        $resolver = m::mock('Illuminate\Database\ConnectionResolver');
+        $files = m::mock('Illuminate\Filesystem\Filesystem');
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
         $instance = m::mock('FooMigration');
 
         $file = 'foo_migration.php';
         $pretend = true;
         $migration = new Fluent(['migration' => $file]);
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve,pretendToRun]', [$repository, $resolver, $files])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve,pretendToRun]', [$repository, $resolver, $files])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
 
@@ -179,17 +179,17 @@ class MigratorTest extends TestCase
      */
     public function testGetQueriesMethodWhenPretending()
     {
-        $repository = m::mock('\Illuminate\Database\Migrations\MigrationRepositoryInterface');
-        $resolver = m::mock('\Illuminate\Database\ConnectionResolver');
-        $files = m::mock('\Illuminate\Filesystem\Filesystem');
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $repository = m::mock('Illuminate\Database\Migrations\MigrationRepositoryInterface');
+        $resolver = m::mock('Illuminate\Database\ConnectionResolver');
+        $files = m::mock('Illuminate\Filesystem\Filesystem');
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
         $instance = m::mock('FooMigration');
 
         $file = 'foo_migration.php';
         $batch = 5;
         $pretend = true;
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve]', [$repository, $resolver, $files])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve]', [$repository, $resolver, $files])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
 
