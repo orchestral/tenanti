@@ -341,11 +341,10 @@ trait Operation
     {
         $id = $entity->getKey();
 
-        if (! isset($this->migrationPaths[$id])) {
-            $this->migrationPaths[$id] = $this->getDefaultMigrationPaths();
-        }
+        $migrations = \array_merge(
+            ($this->migrationPaths[$id] ?? $this->getDefaultMigrationPaths()), Arr::wrap($paths)
+        );
 
-        $this->migrationPaths[$id] = \array_merge($this->migrationPaths[$id], Arr::wrap($paths));
-        $this->migrationPaths[$id] = \array_unique($this->migrationPaths[$id]);
+        $this->migrationPaths[$id] = \array_unique($migrations);
     }
 }
