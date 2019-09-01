@@ -380,7 +380,7 @@ class FactoryTest extends TestCase
 
         $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('config')->with('user.paths', m::type('Closure'))->andReturn(['/var/app/migrations'])
+        $manager->shouldReceive('config')->with('user.paths', [])->andReturn(['/var/app/migrations'])
             ->shouldReceive('config')->with('user.connection', null)->andReturnNull()
             ->shouldReceive('config')->with('user.migration', null)->andReturnNull()
             ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
@@ -413,7 +413,7 @@ class FactoryTest extends TestCase
 
         $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('config')->with('user.paths', m::type('Closure'))->andReturn(['/var/app/migrations'])
+        $manager->shouldReceive('config')->with('user.paths', [])->andReturn(['/var/app/migrations'])
             ->shouldReceive('config')->with('user.connection', null)->andReturnNull()
             ->shouldReceive('config')->with('user.migration', null)->andReturnNull()
             ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
@@ -446,7 +446,7 @@ class FactoryTest extends TestCase
 
         $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('config')->with('user.paths', m::type('Closure'))->andReturn(['/var/app/migrations'])
+        $manager->shouldReceive('config')->with('user.paths', [])->andReturn(['/var/app/migrations'])
             ->shouldReceive('config')->with('user.connection', null)->andReturnNull()
             ->shouldReceive('config')->with('user.migration', null)->andReturnNull()
             ->shouldReceive('config')->with('user.shared', true)->andReturn(true)

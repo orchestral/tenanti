@@ -248,7 +248,7 @@ class OperationTest extends TestCase
 
         $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
 
-        $manager->shouldReceive('config')->with('user.paths', m::type('Closure'))->andReturn([$path]);
+        $manager->shouldReceive('config')->with('user.paths', [])->andReturn([$path]);
 
         $this->manager = $manager;
 

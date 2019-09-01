@@ -310,9 +310,7 @@ trait Operation
      */
     public function getDefaultMigrationPaths(): array
     {
-        return Arr::wrap($this->config('paths', function () {
-            return $this->config('path');
-        }));
+        return Arr::wrap($this->config('paths', []));
     }
 
     /**
