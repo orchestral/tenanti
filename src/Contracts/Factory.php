@@ -96,9 +96,9 @@ interface Factory
      *
      * @param  \Illuminate\Database\Eloquent\Model|null  $entity
      *
-     * @return string|array|null
+     * @return array|null
      */
-    public function getMigrationPaths(Model $entity = null);
+    public function getMigrationPaths(Model $entity = null): ?array;
 
     /**
      * Get model name.
