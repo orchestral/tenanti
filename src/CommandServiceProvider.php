@@ -11,7 +11,6 @@ use Orchestra\Tenanti\Console\InstallCommand;
 use Orchestra\Tenanti\Console\MigrateCommand;
 use Orchestra\Tenanti\Console\RefreshCommand;
 use Orchestra\Tenanti\Console\RollbackCommand;
-use Illuminate\Contracts\Foundation\Application;
 use Orchestra\Tenanti\Console\MigrateMakeCommand;
 use Orchestra\Support\Providers\CommandServiceProvider as ServiceProvider;
 
