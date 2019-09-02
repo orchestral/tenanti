@@ -87,11 +87,9 @@ trait Operation
      */
     public function executeForEach(Closure $callback): void
     {
-        $query = $this->newQuery();
-
-        foreach ($query->cursor() as $entity) {
-            $callback($entity);
-        }
+        $this->newQuery()->cursor()->each(static function ($user) use ($callback) {
+            $callback($user);
+        });
     }
 
     /**
