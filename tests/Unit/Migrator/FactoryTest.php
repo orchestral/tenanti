@@ -30,9 +30,9 @@ class FactoryTest extends TestCase
         $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
         $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,runInstall]', [$app, $manager, $driver]);
         $model = m::mock('Illuminate\Database\Eloquent\Model');
-        $entities = [
+        $entities = collect([
             $entity = m::mock('Illuminate\Database\Eloquent\Model'),
-        ];
+        ]);
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('runInstall')->once()->with($entity, 'foo')->andReturnNull();
@@ -83,7 +83,7 @@ class FactoryTest extends TestCase
         $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
 
-        $entities = [$entity];
+        $entities = collect([$entity]);
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
@@ -147,7 +147,7 @@ class FactoryTest extends TestCase
         $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
         $model = $entity = m::mock('Illuminate\Database\Eloquent\Model');
 
-        $entities = [$entity];
+        $entities = collect([$entity]);
 
         $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
@@ -214,7 +214,7 @@ class FactoryTest extends TestCase
         $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
         $model = $entity = m::mock('Illuminate\Database\Eloquent\Model');
 
-        $entities = [$entity];
+        $entities = collect([$entity]);
 
         $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
