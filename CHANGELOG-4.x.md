@@ -2,8 +2,9 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/tenanti`.
 
-
 ## 4.0.0
+
+Released: 2019-09-03
 
 ### Changes
 
