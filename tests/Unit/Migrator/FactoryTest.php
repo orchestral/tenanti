@@ -27,12 +27,12 @@ class FactoryTest extends TestCase
         $app = $this->getAppContainer();
         $driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runInstall]', [$app, $manager, $driver]);
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
-        $entities = [
-            $entity = m::mock('\Illuminate\Database\Eloquent\Model'),
-        ];
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,runInstall]', [$app, $manager, $driver]);
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
+        $entities = collect([
+            $entity = m::mock('Illuminate\Database\Eloquent\Model'),
+        ]);
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('runInstall')->once()->with($entity, 'foo')->andReturnNull();
@@ -52,11 +52,11 @@ class FactoryTest extends TestCase
         $db = $app['db'];
         $driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,runInstall]', [$app, $manager, $driver]);
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
-        $entity = m::mock('\Illuminate\Database\Eloquent\Model');
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,runInstall]', [$app, $manager, $driver]);
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
+        $entity = m::mock('Illuminate\Database\Eloquent\Model');
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('runInstall')->once()->with($entity, 'foo')->andReturnNull();
@@ -76,19 +76,19 @@ class FactoryTest extends TestCase
         $app = $this->getAppContainer();
         $driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
-        $migrator = m::mock('\Orchestra\Tenanti\Migrator\Migrator');
-        $model = $entity = m::mock('\Illuminate\Database\Eloquent\Model');
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
+        $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
+        $model = $entity = m::mock('Illuminate\Database\Eloquent\Model');
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
 
-        $entities = [$entity];
+        $entities = collect([$entity]);
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->andReturnNull();
+        $manager->shouldReceive('config')->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('run')->once()->with(null, ['pretend' => false])->andReturnNull()
@@ -110,17 +110,17 @@ class FactoryTest extends TestCase
         $app = $this->getAppContainer();
         $driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
-        $migrator = m::mock('\Orchestra\Tenanti\Migrator\Migrator');
-        $model = $entity = m::mock('\Illuminate\Database\Eloquent\Model');
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
+        $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
+        $model = $entity = m::mock('Illuminate\Database\Eloquent\Model');
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->andReturnNull();
+        $manager->shouldReceive('config')->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('run')->once()->with(null, ['pretend' => false])->andReturnNull()
@@ -143,19 +143,19 @@ class FactoryTest extends TestCase
         $app = $this->getAppContainer();
         $driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
-        $migrator = m::mock('\Orchestra\Tenanti\Migrator\Migrator');
-        $model = $entity = m::mock('\Illuminate\Database\Eloquent\Model');
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
+        $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
+        $model = $entity = m::mock('Illuminate\Database\Eloquent\Model');
 
-        $entities = [$entity];
+        $entities = collect([$entity]);
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->andReturnNull();
+        $manager->shouldReceive('config')->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('rollback')->once()->with(null, ['pretend' => false])->andReturnNull()
@@ -177,17 +177,17 @@ class FactoryTest extends TestCase
         $app = $this->getAppContainer();
         $driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
-        $migrator = m::mock('\Orchestra\Tenanti\Migrator\Migrator');
-        $model = $entity = m::mock('\Illuminate\Database\Eloquent\Model');
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
+        $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
+        $model = $entity = m::mock('Illuminate\Database\Eloquent\Model');
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->andReturnNull();
+        $manager->shouldReceive('config')->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('rollback')->once()->with(null, ['pretend' => false])->andReturnNull()
@@ -210,19 +210,19 @@ class FactoryTest extends TestCase
         $app = $this->getAppContainer();
         $driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
-        $migrator = m::mock('\Orchestra\Tenanti\Migrator\Migrator');
-        $model = $entity = m::mock('\Illuminate\Database\Eloquent\Model');
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
+        $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
+        $model = $entity = m::mock('Illuminate\Database\Eloquent\Model');
 
-        $entities = [$entity];
+        $entities = collect([$entity]);
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->andReturnNull();
+        $manager->shouldReceive('config')->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('reset')->once()->with(null, false)->andReturnNull()
@@ -244,17 +244,17 @@ class FactoryTest extends TestCase
         $app = $this->getAppContainer();
         $driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
-        $migrator = m::mock('\Orchestra\Tenanti\Migrator\Migrator');
-        $model = $entity = m::mock('\Illuminate\Database\Eloquent\Model');
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
+        $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
+        $model = $entity = m::mock('Illuminate\Database\Eloquent\Model');
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->andReturnNull();
+        $manager->shouldReceive('config')->andReturnNull();
         $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('reset')->once()->with(null, false)->andReturnNull()
@@ -278,7 +278,7 @@ class FactoryTest extends TestCase
         $app = $this->getAppContainer();
         $driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
 
         $stub = new Factory($app, $manager, $driver);
 
@@ -290,10 +290,10 @@ class FactoryTest extends TestCase
 
         $model = $this->getMockModel();
 
-        $manager->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.migration', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.shared', true)->andReturn(true)
-            ->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('user');
+        $manager->shouldReceive('config')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.migration', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
+            ->shouldReceive('config')->with('user.prefix', 'user')->andReturn('user');
 
         $this->assertNull($stub->runInstall($model, 'primary'));
     }
@@ -309,7 +309,7 @@ class FactoryTest extends TestCase
         $app = $this->getAppContainer();
         $driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
 
         $app['schema']->shouldReceive('hasTable')->once()->with('migrations')->andReturn(false)
             ->shouldReceive('create')->once()->with('migrations', m::type('Closure'))->andReturnNull();
@@ -322,10 +322,10 @@ class FactoryTest extends TestCase
         $stub = new Factory($app, $manager, $driver);
         $model = $this->getMockModel();
 
-        $manager->shouldReceive('getConfig')->with('user.path', null)->andReturn('/var/app/migrations')
-            ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.shared', true)->andReturn(true)
-            ->shouldReceive('getConfig')->with('user.migration', null)->andReturn('migrations');
+        $manager->shouldReceive('config')->with('user.path', null)->andReturn('/var/app/migrations')
+            ->shouldReceive('config')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
+            ->shouldReceive('config')->with('user.migration', null)->andReturn('migrations');
 
         $this->assertNull($stub->runInstall($model, 'tenant_{entity.username}'));
     }
@@ -341,7 +341,7 @@ class FactoryTest extends TestCase
         $app = $this->getAppContainer();
         $driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
 
         $app['schema']->shouldReceive('hasTable')->once()->with('migrations')->andReturn(false)
             ->shouldReceive('create')->once()->with('migrations', m::type('Closure'))->andReturnNull();
@@ -352,10 +352,10 @@ class FactoryTest extends TestCase
 
         $model = $this->getMockModel();
 
-        $manager->shouldReceive('getConfig')->with('user.path', null)->andReturn('/var/app/migrations')
-            ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.shared', true)->andReturn(true)
-            ->shouldReceive('getConfig')->with('user.migration', null)->andReturn('migrations');
+        $manager->shouldReceive('config')->with('user.path', null)->andReturn('/var/app/migrations')
+            ->shouldReceive('config')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
+            ->shouldReceive('config')->with('user.migration', null)->andReturn('migrations');
 
         $this->assertNull($stub->runInstall($model, null));
     }
@@ -371,20 +371,20 @@ class FactoryTest extends TestCase
         $app = $this->getAppContainer();
         $driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
-        $migrator = m::mock('\Orchestra\Tenanti\Migrator\Migrator');
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
+        $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
         $model = $this->getMockModel();
 
         $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->with('user.paths', m::type('Closure'))->andReturn(['/var/app/migrations'])
-            ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.migration', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.shared', true)->andReturn(true)
-            ->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('user');
+        $manager->shouldReceive('config')->with('user.paths', [])->andReturn(['/var/app/migrations'])
+            ->shouldReceive('config')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.migration', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
+            ->shouldReceive('config')->with('user.prefix', 'user')->andReturn('user');
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('run')->once()->with(['/var/app/migrations'], ['pretend' => false])->andReturnNull()
@@ -404,20 +404,20 @@ class FactoryTest extends TestCase
         $app = $this->getAppContainer();
         $driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
-        $migrator = m::mock('\Orchestra\Tenanti\Migrator\Migrator');
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
+        $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
         $model = $this->getMockModel();
 
         $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->with('user.paths', m::type('Closure'))->andReturn(['/var/app/migrations'])
-            ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.migration', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.shared', true)->andReturn(true)
-            ->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('user');
+        $manager->shouldReceive('config')->with('user.paths', [])->andReturn(['/var/app/migrations'])
+            ->shouldReceive('config')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.migration', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
+            ->shouldReceive('config')->with('user.prefix', 'user')->andReturn('user');
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('rollback')->with(['/var/app/migrations'], ['pretend' => false])->andReturnNull()
@@ -437,20 +437,20 @@ class FactoryTest extends TestCase
         $app = $this->getAppContainer();
         $driver = 'user';
 
-        $manager = m::mock('\Orchestra\Tenanti\TenantiManager', [$app]);
-        $migrator = m::mock('\Orchestra\Tenanti\Migrator\Migrator');
+        $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
+        $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
 
-        $stub = m::mock('\Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
         $model = $this->getMockModel();
 
         $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
-        $manager->shouldReceive('getConfig')->with('user.paths', m::type('Closure'))->andReturn(['/var/app/migrations'])
-            ->shouldReceive('getConfig')->with('user.connection', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.migration', null)->andReturnNull()
-            ->shouldReceive('getConfig')->with('user.shared', true)->andReturn(true)
-            ->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('user');
+        $manager->shouldReceive('config')->with('user.paths', [])->andReturn(['/var/app/migrations'])
+            ->shouldReceive('config')->with('user.connection', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.migration', null)->andReturnNull()
+            ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
+            ->shouldReceive('config')->with('user.prefix', 'user')->andReturn('user');
         $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
             ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('reset')->once()->with(['/var/app/migrations'], false)->andReturn(5)
@@ -464,7 +464,7 @@ class FactoryTest extends TestCase
      */
     protected function getMockModel()
     {
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
 
         $model->shouldReceive('getKey')->andReturn(5)
             ->shouldReceive('getTable')->andReturn('users')
@@ -479,10 +479,10 @@ class FactoryTest extends TestCase
     protected function getAppContainer()
     {
         $app = new Container();
-        $app['config'] = m::mock('\Illuminate\Contracts\Config\Repository');
-        $app['db'] = m::mock('\Illuminate\Database\ConnectionResolver');
-        $app['files'] = m::mock('\Illuminate\Filesystem\Filesystem');
-        $app['schema'] = m::mock('\Illuminate\Database\Schema\Builder');
+        $app['config'] = m::mock('Illuminate\Contracts\Config\Repository');
+        $app['db'] = m::mock('Illuminate\Database\ConnectionResolver');
+        $app['files'] = m::mock('Illuminate\Filesystem\Filesystem');
+        $app['schema'] = m::mock('Illuminate\Database\Schema\Builder');
 
         $app['db']->shouldReceive('connection')->with('primary')->andReturnSelf()
             ->shouldReceive('getSchemaBuilder')->andReturn($app['schema']);

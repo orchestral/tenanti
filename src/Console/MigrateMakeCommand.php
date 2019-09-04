@@ -101,7 +101,7 @@ class MigrateMakeCommand extends BaseCommand
             $files->makeDirectory($path, 0755, true);
         }
 
-        if ($this->tenant->getConfig("{$driver}.shared", true) === true) {
+        if ($this->tenant->config("{$driver}.shared", true) === true) {
             $table = Str::replace($migrator->getTablePrefix()."_{$table}", ['id' => '{$id}']);
         }
 

@@ -13,7 +13,7 @@ class TinkerCommandTest extends CommandTest
     {
         $tenanti = $this->app['orchestra.tenanti'];
 
-        $tenanti->shouldReceive('getConfig')
+        $tenanti->shouldReceive('config')
             ->andReturn([]);
 
         $this->expectException(RuntimeException::class);
@@ -26,7 +26,7 @@ class TinkerCommandTest extends CommandTest
     {
         $tenanti = $this->app['orchestra.tenanti'];
 
-        $tenanti->shouldReceive('getConfig')
+        $tenanti->shouldReceive('config')
             ->andReturn([
                 'tenant' => [
                 ],
@@ -60,7 +60,7 @@ class TinkerCommandTest extends CommandTest
     {
         $tenanti = $this->app['orchestra.tenanti'];
 
-        $tenanti->shouldReceive('getConfig')
+        $tenanti->shouldReceive('config')
             ->andReturn([
                 'tenant' => [
                 ],
@@ -90,7 +90,7 @@ class TinkerCommandTest extends CommandTest
     {
         $tenanti = $this->app['orchestra.tenanti'];
 
-        $tenanti->shouldReceive('getConfig')
+        $tenanti->shouldReceive('config')
             ->andReturn([
                 'tenant1' => [
                 ],
@@ -111,7 +111,7 @@ class TinkerCommandTest extends CommandTest
     {
         $tenanti = $this->app['orchestra.tenanti'];
 
-        $tenanti->shouldReceive('getConfig')
+        $tenanti->shouldReceive('config')
             ->andReturn([
                 'tenant1' => [
                 ],

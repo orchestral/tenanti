@@ -63,19 +63,6 @@ class TenantiManager extends Manager
     }
 
     /**
-     * Get configuration values.
-     *
-     * @param  string|null  $group
-     * @param  mixed  $default
-     *
-     * @return mixed
-     */
-    public function getConfig(?string $group = null, $default = null)
-    {
-        return Arr::get($this->configurations, $group, $default);
-    }
-
-    /**
      * Set configuration.
      *
      * @param  array  $config
@@ -84,9 +71,22 @@ class TenantiManager extends Manager
      */
     public function setConfiguration(array $config)
     {
-        $this->configurations = \array_merge($config, ['connection' => $this->getConfig('connection')]);
+        $this->configurations = \array_merge($config, ['connection' => $this->config('connection')]);
 
         return $this;
+    }
+
+    /**
+     * Get configuration values.
+     *
+     * @param  string|null  $group
+     * @param  mixed  $default
+     *
+     * @return mixed
+     */
+    public function config(?string $group = null, $default = null)
+    {
+        return Arr::get($this->configurations, $group, $default);
     }
 
     /**

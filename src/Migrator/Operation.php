@@ -87,11 +87,9 @@ trait Operation
      */
     public function executeForEach(Closure $callback): void
     {
-        $query = $this->newQuery();
-
-        foreach ($query->cursor() as $entity) {
-            $callback($entity);
-        }
+        $this->newQuery()->cursor()->each(static function ($user) use ($callback) {
+            $callback($user);
+        });
     }
 
     /**
@@ -102,9 +100,9 @@ trait Operation
      *
      * @return mixed
      */
-    protected function getConfig(string $key, $default = null)
+    protected function config(string $key, $default = null)
     {
-        return $this->manager->getConfig("{$this->driver}.{$key}", $default);
+        return $this->manager->config("{$this->driver}.{$key}", $default);
     }
 
     /**
@@ -123,7 +121,7 @@ trait Operation
             throw new InvalidArgumentException("Model [{$name}] should be an instance of Eloquent.");
         }
 
-        $database = $this->getConfig('database');
+        $database = $this->config('database');
 
         if (! \is_null($database)) {
             $model->setConnection($database);
@@ -196,13 +194,13 @@ trait Operation
     public function asConnection(Model $entity, ?string $database): ?string
     {
         $repository = $this->app->make('config');
-        $tenants = $this->getConfig('connection');
+        $tenants = $this->config('connection');
 
         if (! \is_null($tenants)) {
             $database = $tenants['name'];
         }
 
-        if (\substr($database, -5) !== '_{id}' && $this->getConfig('shared', true) === false) {
+        if (\substr($database, -5) !== '_{id}' && $this->config('shared', true) === false) {
             $database .= '_{id}';
         }
 
@@ -245,11 +243,11 @@ trait Operation
      */
     protected function resolveMigrationTableName(Model $entity): string
     {
-        if (! \is_null($table = $this->getConfig('migration'))) {
+        if (! \is_null($table = $this->config('migration'))) {
             return $this->bindWithKey($entity, $table);
         }
 
-        if ($this->getConfig('shared', true) === true) {
+        if ($this->config('shared', true) === true) {
             return $this->bindWithKey($entity, $this->getTablePrefix().'_migrations');
         }
 
@@ -263,7 +261,7 @@ trait Operation
      */
     public function getModelName(): string
     {
-        return $this->getConfig('model');
+        return $this->config('model');
     }
 
     /**
@@ -273,7 +271,7 @@ trait Operation
      */
     public function getTablePrefix(): string
     {
-        $prefix = $this->getConfig('prefix', $this->driver);
+        $prefix = $this->config('prefix', $this->driver);
 
         return \implode('_', [$prefix, '{id}']);
     }
@@ -310,9 +308,7 @@ trait Operation
      */
     public function getDefaultMigrationPaths(): array
     {
-        return Arr::wrap($this->getConfig('paths', function () {
-            return $this->getConfig('path');
-        }));
+        return Arr::wrap($this->config('paths', []));
     }
 
     /**
@@ -343,11 +339,10 @@ trait Operation
     {
         $id = $entity->getKey();
 
-        if (! isset($this->migrationPaths[$id])) {
-            $this->migrationPaths[$id] = $this->getDefaultMigrationPaths();
-        }
+        $migrations = \array_merge(
+            ($this->migrationPaths[$id] ?? $this->getDefaultMigrationPaths()), Arr::wrap($paths)
+        );
 
-        $this->migrationPaths[$id] = \array_merge($this->migrationPaths[$id], Arr::wrap($paths));
-        $this->migrationPaths[$id] = \array_unique($this->migrationPaths[$id]);
+        $this->migrationPaths[$id] = \array_unique($migrations);
     }
 }

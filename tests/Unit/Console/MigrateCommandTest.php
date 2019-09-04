@@ -11,7 +11,7 @@ class MigrateCommandTest extends CommandTest
     {
         $tenanti = $this->app['orchestra.tenanti'];
 
-        $tenanti->shouldReceive('getConfig')->andReturn([]);
+        $tenanti->shouldReceive('config')->andReturn([]);
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('missing: "driver"');
@@ -27,7 +27,7 @@ class MigrateCommandTest extends CommandTest
             ->with('driver')
             ->andReturn($this->getMockDriverFactory());
 
-        $command = m::mock('\Orchestra\Tenanti\Console\MigrateCommand[prepareDatabase]', [$tenanti]);
+        $command = m::mock('Orchestra\Tenanti\Console\MigrateCommand[prepareDatabase]', [$tenanti]);
 
         $this->app['artisan']->add($command);
         $this->artisan('tenanti:migrate', ['driver' => 'driver']);
@@ -41,7 +41,7 @@ class MigrateCommandTest extends CommandTest
             ->with('ghost')
             ->andThrow(RuntimeException::class, 'Driver [ghost] not supported.');
 
-        $command = m::mock('\Orchestra\Tenanti\Console\MigrateCommand[prepareDatabase]', [$tenanti]);
+        $command = m::mock('Orchestra\Tenanti\Console\MigrateCommand[prepareDatabase]', [$tenanti]);
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('[ghost] not supported');
@@ -54,7 +54,7 @@ class MigrateCommandTest extends CommandTest
     {
         $tenanti = $this->app['orchestra.tenanti'];
 
-        $tenanti->shouldReceive('getConfig')
+        $tenanti->shouldReceive('config')
             ->andReturn([
                 'tenant' => [
                 ],
@@ -64,7 +64,7 @@ class MigrateCommandTest extends CommandTest
             ->with('tenant')
             ->andReturn($this->getMockDriverFactory());
 
-        $command = m::mock('\Orchestra\Tenanti\Console\MigrateCommand[prepareDatabase]', [$tenanti]);
+        $command = m::mock('Orchestra\Tenanti\Console\MigrateCommand[prepareDatabase]', [$tenanti]);
 
         $this->app['artisan']->add($command);
         $this->artisan('tenanti:migrate');
@@ -74,7 +74,7 @@ class MigrateCommandTest extends CommandTest
     {
         $tenanti = $this->app['orchestra.tenanti'];
 
-        $tenanti->shouldReceive('getConfig')
+        $tenanti->shouldReceive('config')
             ->andReturn([
                 'tenant1' => [
                 ],

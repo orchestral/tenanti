@@ -47,7 +47,7 @@ class OperationTest extends TestCase
 
         $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$this->app]);
 
-        $manager->shouldReceive('getConfig')->with('user.connection', null)->andReturn([
+        $manager->shouldReceive('config')->with('user.connection', null)->andReturn([
                     'template' => $repository->get('database.connections.tenant'),
                     'resolver' => function (Model $entity, array $template) {
                         return array_merge($template, [
@@ -98,7 +98,7 @@ class OperationTest extends TestCase
 
         $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$this->app]);
 
-        $manager->shouldReceive('getConfig')->with('user.connection', null)->andReturn([
+        $manager->shouldReceive('config')->with('user.connection', null)->andReturn([
                 'template' => $repository->get('database.connections.tenant'),
                 'resolver' => function (Model $entity, array $template) {
                     return array_merge($template, [
@@ -137,8 +137,8 @@ class OperationTest extends TestCase
 
         $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$this->app]);
 
-        $manager->shouldReceive('getConfig')->with('user.model', null)->andReturn('User')
-            ->shouldReceive('getConfig')->with('user.database', null)->andReturnNull();
+        $manager->shouldReceive('config')->with('user.model', null)->andReturn('User')
+            ->shouldReceive('config')->with('user.database', null)->andReturnNull();
 
         $this->manager = $manager;
 
@@ -167,8 +167,8 @@ class OperationTest extends TestCase
 
         $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$this->app]);
 
-        $manager->shouldReceive('getConfig')->with('user.model', null)->andReturn('User')
-            ->shouldReceive('getConfig')->with('user.database', null)->andReturn('primary');
+        $manager->shouldReceive('config')->with('user.model', null)->andReturn('User')
+            ->shouldReceive('config')->with('user.database', null)->andReturn('primary');
 
         $this->manager = $manager;
 
@@ -200,7 +200,7 @@ class OperationTest extends TestCase
 
         $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$this->app]);
 
-        $manager->shouldReceive('getConfig')->with('user.model', null)->andReturn('User');
+        $manager->shouldReceive('config')->with('user.model', null)->andReturn('User');
 
         $this->manager = $manager;
 
@@ -225,7 +225,7 @@ class OperationTest extends TestCase
 
         $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
 
-        $manager->shouldReceive('getConfig')->with('user.model', null)->andReturn('User');
+        $manager->shouldReceive('config')->with('user.model', null)->andReturn('User');
 
         $this->manager = $manager;
 
@@ -248,7 +248,7 @@ class OperationTest extends TestCase
 
         $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
 
-        $manager->shouldReceive('getConfig')->with('user.paths', m::type('Closure'))->andReturn([$path]);
+        $manager->shouldReceive('config')->with('user.paths', [])->andReturn([$path]);
 
         $this->manager = $manager;
 
@@ -286,7 +286,7 @@ class OperationTest extends TestCase
 
         $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
 
-        $manager->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('user');
+        $manager->shouldReceive('config')->with('user.prefix', 'user')->andReturn('user');
 
         $this->driver = 'user';
         $this->manager = $manager;
@@ -306,7 +306,7 @@ class OperationTest extends TestCase
         $app->instance('config', m::mock('Illuminate\Contracts\Config\Repository'));
         $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
 
-        $manager->shouldReceive('getConfig')->with('user.prefix', 'user')->andReturn('member');
+        $manager->shouldReceive('config')->with('user.prefix', 'user')->andReturn('member');
 
         $this->driver = 'user';
         $this->manager = $manager;

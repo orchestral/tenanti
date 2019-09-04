@@ -26,7 +26,7 @@ Laravel  | Tenanti
  5.6.x   | 3.6.x
  5.7.x   | 3.7.x
  5.8.x   | 3.8.x
- 6.x     | 4.x@dev
+ 6.x     | 4.x
 
 ## Installation
 

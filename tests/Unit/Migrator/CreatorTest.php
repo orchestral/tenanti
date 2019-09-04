@@ -24,7 +24,7 @@ class CreatorTest extends TestCase
      */
     public function testGetStubPath()
     {
-        $files = m::mock('\Illuminate\Filesystem\Filesystem');
+        $files = m::mock('Illuminate\Filesystem\Filesystem');
 
         $stub = new Creator($files);
 

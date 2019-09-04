@@ -48,11 +48,11 @@ class ObserverTest extends TestCase
 
         $config = ['database' => null, 'driver' => 'user'];
 
-        $stub = m::mock('\Orchestra\Tenanti\Observer[getDriverName,getCreateTenantJob]')
+        $stub = m::mock('Orchestra\Tenanti\Observer[getDriverName,getCreateTenantJob]')
                     ->shouldAllowMockingProtectedMethods();
 
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
-        $job = m::mock('\Orchestra\Tenanti\Jobs\CreateTenant', [$model, $config]);
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
+        $job = m::mock('Orchestra\Tenanti\Jobs\CreateTenant', [$model, $config]);
 
         $stub->shouldReceive('getDriverName')->once()->andReturn('user')
             ->shouldReceive('getCreateTenantJob')->once()->with($model, $config)->andReturn($job);
@@ -73,11 +73,11 @@ class ObserverTest extends TestCase
 
         $config = ['database' => 'primary', 'driver' => 'user'];
 
-        $stub = m::mock('\Orchestra\Tenanti\Observer[getConnectionName,getDriverName,getDeleteTenantJob]')
+        $stub = m::mock('Orchestra\Tenanti\Observer[getConnectionName,getDriverName,getDeleteTenantJob]')
                     ->shouldAllowMockingProtectedMethods();
 
-        $model = m::mock('\Illuminate\Database\Eloquent\Model');
-        $job = m::mock('\Orchestra\Tenanti\Jobs\DeleteTenant', [$model, $config]);
+        $model = m::mock('Illuminate\Database\Eloquent\Model');
+        $job = m::mock('Orchestra\Tenanti\Jobs\DeleteTenant', [$model, $config]);
 
         $stub->shouldReceive('getDriverName')->once()->andReturn('user')
             ->shouldReceive('getConnectionName')->once()->andReturn('primary')
