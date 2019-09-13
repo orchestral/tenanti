@@ -2,10 +2,10 @@
 
 namespace Orchestra\Tenanti\Tests\Unit;
 
-use Mockery as m;
-use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Facade;
+use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
 class ObserverTest extends TestCase
 {

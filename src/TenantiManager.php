@@ -4,8 +4,8 @@ namespace Orchestra\Tenanti;
 
 use Closure;
 use Illuminate\Support\Arr;
-use InvalidArgumentException;
 use Illuminate\Support\Manager;
+use InvalidArgumentException;
 use Orchestra\Tenanti\Migrator\Factory;
 
 class TenantiManager extends Manager

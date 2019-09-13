@@ -3,12 +3,12 @@
 namespace Orchestra\Tenanti\Console;
 
 use Illuminate\Console\Command;
-use Orchestra\Tenanti\TenantiManager;
 use Orchestra\Tenanti\Contracts\Factory;
 use Orchestra\Tenanti\Notice\Command as Notice;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
+use Orchestra\Tenanti\TenantiManager;
 use Symfony\Component\Console\Exception\RuntimeException;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 abstract class BaseCommand extends Command
 {

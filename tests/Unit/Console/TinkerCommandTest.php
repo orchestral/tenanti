@@ -2,9 +2,9 @@
 
 namespace Orchestra\Tenanti\Tests\Unit\Console;
 
-use Mockery as m;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Mockery as m;
 use Symfony\Component\Console\Exception\RuntimeException;
 
 class TinkerCommandTest extends CommandTest

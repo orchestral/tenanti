@@ -2,8 +2,8 @@
 
 namespace Orchestra\Tenanti\Eloquent;
 
-use Orchestra\Tenanti\Tenantor;
 use Illuminate\Database\Eloquent\Builder as Eloquent;
+use Orchestra\Tenanti\Tenantor;
 
 class Builder extends Eloquent
 {

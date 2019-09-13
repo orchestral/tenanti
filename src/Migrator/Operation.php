@@ -3,11 +3,11 @@
 namespace Orchestra\Tenanti\Migrator;
 
 use Closure;
-use Orchestra\Support\Str;
-use Illuminate\Support\Arr;
-use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\DatabaseMigrationRepository;
+use Illuminate\Support\Arr;
+use InvalidArgumentException;
+use Orchestra\Support\Str;
 
 trait Operation
 {

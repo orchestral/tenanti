@@ -2,12 +2,12 @@
 
 namespace Orchestra\Tenanti\Console;
 
-use Orchestra\Support\Str;
 use Illuminate\Support\Composer;
-use Orchestra\Tenanti\TenantiManager;
+use Orchestra\Support\Str;
 use Orchestra\Tenanti\Migrator\Creator;
-use Symfony\Component\Console\Input\InputOption;
+use Orchestra\Tenanti\TenantiManager;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class MigrateMakeCommand extends BaseCommand
 {

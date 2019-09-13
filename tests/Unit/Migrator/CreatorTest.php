@@ -3,8 +3,8 @@
 namespace Orchestra\Tenanti\Tests\Unit\Migrator;
 
 use Mockery as m;
-use PHPUnit\Framework\TestCase;
 use Orchestra\Tenanti\Migrator\Creator;
+use PHPUnit\Framework\TestCase;
 
 class CreatorTest extends TestCase
 {

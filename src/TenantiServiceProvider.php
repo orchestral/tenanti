@@ -3,8 +3,8 @@
 namespace Orchestra\Tenanti;
 
 use Illuminate\Contracts\Container\Container;
-use Orchestra\Support\Providers\ServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
+use Orchestra\Support\Providers\ServiceProvider;
 
 class TenantiServiceProvider extends ServiceProvider implements DeferrableProvider
 {

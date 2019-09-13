@@ -2,8 +2,8 @@
 
 namespace Orchestra\Tenanti\Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
 use Orchestra\Tenanti\TenantiServiceProvider;
+use PHPUnit\Framework\TestCase;
 
 class TenantiServiceProviderTest extends TestCase
 {

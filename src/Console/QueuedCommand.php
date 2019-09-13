@@ -2,11 +2,11 @@
 
 namespace Orchestra\Tenanti\Console;
 
-use InvalidArgumentException;
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Contracts\Console\Kernel;
-use Symfony\Component\Console\Input\InputOption;
+use InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class QueuedCommand extends BaseCommand
 {

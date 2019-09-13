@@ -2,17 +2,17 @@
 
 namespace Orchestra\Tenanti;
 
-use Orchestra\Tenanti\Migrator\Creator;
-use Orchestra\Tenanti\Console\ResetCommand;
-use Orchestra\Tenanti\Console\QueuedCommand;
-use Orchestra\Tenanti\Console\TinkerCommand;
 use Illuminate\Contracts\Container\Container;
+use Orchestra\Support\Providers\CommandServiceProvider as ServiceProvider;
 use Orchestra\Tenanti\Console\InstallCommand;
 use Orchestra\Tenanti\Console\MigrateCommand;
-use Orchestra\Tenanti\Console\RefreshCommand;
-use Orchestra\Tenanti\Console\RollbackCommand;
 use Orchestra\Tenanti\Console\MigrateMakeCommand;
-use Orchestra\Support\Providers\CommandServiceProvider as ServiceProvider;
+use Orchestra\Tenanti\Console\QueuedCommand;
+use Orchestra\Tenanti\Console\RefreshCommand;
+use Orchestra\Tenanti\Console\ResetCommand;
+use Orchestra\Tenanti\Console\RollbackCommand;
+use Orchestra\Tenanti\Console\TinkerCommand;
+use Orchestra\Tenanti\Migrator\Creator;
 
 class CommandServiceProvider extends ServiceProvider
 {

@@ -2,8 +2,8 @@
 
 namespace Orchestra\Tenanti\Eloquent;
 
-use Orchestra\Tenanti\Tenantor;
 use Orchestra\Tenanti\Contracts\TenantProvider;
+use Orchestra\Tenanti\Tenantor;
 
 trait Tenantee
 {

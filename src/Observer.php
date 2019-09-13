@@ -3,9 +3,9 @@
 namespace Orchestra\Tenanti;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Orchestra\Tenanti\Jobs\CreateTenant;
 use Orchestra\Tenanti\Jobs\DeleteTenant;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 abstract class Observer
 {

@@ -2,9 +2,9 @@
 
 namespace Orchestra\Tenanti\Tests\Unit;
 
+use Illuminate\Database\Eloquent\Model;
 use Orchestra\Tenanti\Tenantor;
 use PHPUnit\Framework\TestCase;
-use Illuminate\Database\Eloquent\Model;
 
 class TenantorTest extends TestCase
 {
