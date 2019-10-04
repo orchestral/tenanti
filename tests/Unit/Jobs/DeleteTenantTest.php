@@ -2,12 +2,12 @@
 
 namespace Orchestra\Tenanti\Tests\Unit\Jobs;
 
-use Mockery as m;
-use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Facade;
+use Mockery as m;
 use Orchestra\Tenanti\Jobs\DeleteTenant;
+use PHPUnit\Framework\TestCase;
 
 class DeleteTenantTest extends TestCase
 {

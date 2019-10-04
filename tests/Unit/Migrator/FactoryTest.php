@@ -2,10 +2,10 @@
 
 namespace Orchestra\Tenanti\Tests\Unit\Migrator;
 
-use Mockery as m;
-use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
+use Mockery as m;
 use Orchestra\Tenanti\Migrator\Factory;
+use PHPUnit\Framework\TestCase;
 
 class FactoryTest extends TestCase
 {

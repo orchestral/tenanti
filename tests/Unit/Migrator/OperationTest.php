@@ -2,12 +2,12 @@
 
 namespace Orchestra\Tenanti\Tests\Unit\Migrator;
 
-use Mockery as m;
-use PHPUnit\Framework\TestCase;
 use Illuminate\Config\Repository;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
+use Mockery as m;
 use Orchestra\Tenanti\Migrator\Operation;
+use PHPUnit\Framework\TestCase;
 
 class OperationTest extends TestCase
 {

@@ -2,10 +2,10 @@
 
 namespace Orchestra\Tenanti\Tests\Unit\Migrator;
 
-use Mockery as m;
 use Illuminate\Support\Fluent;
-use PHPUnit\Framework\TestCase;
+use Mockery as m;
 use Orchestra\Tenanti\Migrator\Migrator;
+use PHPUnit\Framework\TestCase;
 
 class MigratorTest extends TestCase
 {

@@ -2,8 +2,8 @@
 
 namespace Orchestra\Tenanti;
 
-use Orchestra\Support\Fluent;
 use Illuminate\Database\Eloquent\Model;
+use Orchestra\Support\Fluent;
 
 class Tenantor extends Fluent
 {

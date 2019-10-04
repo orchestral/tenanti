@@ -2,9 +2,9 @@
 
 namespace Orchestra\Tenanti\Migrator;
 
-use Orchestra\Tenanti\Migration;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migrator as BaseMigrator;
+use Orchestra\Tenanti\Migration;
 
 class Migrator extends BaseMigrator
 {

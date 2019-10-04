@@ -2,8 +2,8 @@
 
 namespace Orchestra\Tenanti\Tests\Unit\Console;
 
-use Mockery as m;
 use Illuminate\Support\Composer;
+use Mockery as m;
 use Symfony\Component\Console\Exception\RuntimeException;
 
 class MigrateMakeCommandTest extends CommandTest

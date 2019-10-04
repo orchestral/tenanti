@@ -2,10 +2,10 @@
 
 namespace Orchestra\Tenanti\Migrator;
 
-use Orchestra\Tenanti\TenantiManager;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Database\Eloquent\Model;
 use Orchestra\Tenanti\Contracts\Factory as FactoryContract;
+use Orchestra\Tenanti\TenantiManager;
 
 class Factory implements FactoryContract
 {

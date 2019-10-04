@@ -2,8 +2,8 @@
 
 namespace Orchestra\Tenanti\Notice;
 
-use Orchestra\Tenanti\Contracts\Notice;
 use Illuminate\Database\Migrations\Migrator;
+use Orchestra\Tenanti\Contracts\Notice;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class Command implements Notice
