@@ -55,7 +55,7 @@ class MigrateMakeCommand extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      */
     public function handle()
     {
@@ -79,6 +79,8 @@ class MigrateMakeCommand extends BaseCommand
         $this->writeMigration($driver, $name, $table, $create);
 
         $this->composer->dumpAutoloads();
+
+        return 0;
     }
 
     /**

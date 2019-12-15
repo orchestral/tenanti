@@ -23,7 +23,7 @@ class TinkerCommand extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      */
     public function handle()
     {
@@ -36,6 +36,8 @@ class TinkerCommand extends BaseCommand
         });
 
         $this->call('tinker');
+
+        return 0;
     }
 
     /**

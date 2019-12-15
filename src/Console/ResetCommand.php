@@ -30,7 +30,7 @@ class ResetCommand extends BaseCommand
     public function handle()
     {
         if (! $this->confirmToProceed()) {
-            return;
+            return 126;
         }
 
         \tap($this->tenant->driver($this->getDriver()), function ($migrator) {
@@ -40,5 +40,7 @@ class ResetCommand extends BaseCommand
                 $this->option('database'), $this->option('id'), $this->option('pretend', false)
             );
         });
+
+        return 0;
     }
 }

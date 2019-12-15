@@ -25,12 +25,12 @@ class RollbackCommand extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      */
     public function handle()
     {
         if (! $this->confirmToProceed()) {
-            return;
+            return 126;
         }
 
         \tap($this->tenant->driver($this->getDriver()), function ($migrator) {
@@ -40,5 +40,7 @@ class RollbackCommand extends BaseCommand
                 $this->option('database'), $this->option('id'), $this->option('pretend', false)
             );
         });
+
+        return 0;
     }
 }

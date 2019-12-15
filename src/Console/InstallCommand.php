@@ -23,7 +23,7 @@ class InstallCommand extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      */
     public function handle()
     {
@@ -34,6 +34,8 @@ class InstallCommand extends BaseCommand
                 $this->option('database'), $this->option('id')
             );
         });
+
+        return 0;
     }
 
     /**

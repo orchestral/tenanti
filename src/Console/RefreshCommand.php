@@ -30,7 +30,7 @@ class RefreshCommand extends BaseCommand
     public function handle()
     {
         if (! $this->confirmToProceed()) {
-            return;
+            return 126;
         }
 
         $parameters = [
@@ -46,5 +46,7 @@ class RefreshCommand extends BaseCommand
         // the migration commands and just provides a convenient wrapper to execute
         // them in succession. We'll also see if we need to re-seed the database.
         $this->call('tenanti:migrate', $parameters);
+
+        return 0;
     }
 }
