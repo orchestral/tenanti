@@ -89,10 +89,12 @@ class FactoryTest extends TestCase
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
         $manager->shouldReceive('config')->andReturnNull();
-        $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
-            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('run')->once()->with(null, ['pretend' => false])->andReturnNull()
-            ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
+            ->shouldReceive('usingConnection')->once()->with('foo', m::type('Closure'))
+                ->andReturnUsing(function ($d, $c) use ($migrator) {
+                    $c($migrator);
+                });
         $model->shouldReceive('getKey')->andReturn(5)
             ->shouldReceive('toArray')->andReturn([])
             ->shouldReceive('newQuery->useWritePdo->cursor')->once()->andReturn($entities);
@@ -121,10 +123,12 @@ class FactoryTest extends TestCase
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
         $manager->shouldReceive('config')->andReturnNull();
-        $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
-            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('run')->once()->with(null, ['pretend' => false])->andReturnNull()
-            ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
+            ->shouldReceive('usingConnection')->once()->with('foo', m::type('Closure'))
+                ->andReturnUsing(function ($d, $c) use ($migrator) {
+                    $c($migrator);
+                });
         $model->shouldReceive('getKey')->andReturn(5)
             ->shouldReceive('toArray')->andReturn([])
             ->shouldReceive('newQuery->useWritePdo->findOrFail')->once()->with(10)
@@ -156,10 +160,12 @@ class FactoryTest extends TestCase
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
         $manager->shouldReceive('config')->andReturnNull();
-        $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
-            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('rollback')->once()->with(null, ['pretend' => false])->andReturnNull()
-            ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
+            ->shouldReceive('usingConnection')->once()->with('foo', m::type('Closure'))
+                ->andReturnUsing(function ($d, $c) use ($migrator) {
+                    $c($migrator);
+                });
         $model->shouldReceive('getKey')->andReturn(5)
             ->shouldReceive('toArray')->andReturn([])
             ->shouldReceive('newQuery->useWritePdo->cursor')->once()->andReturn($entities);
@@ -188,10 +194,12 @@ class FactoryTest extends TestCase
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
         $manager->shouldReceive('config')->andReturnNull();
-        $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
-            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('rollback')->once()->with(null, ['pretend' => false])->andReturnNull()
-            ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
+            ->shouldReceive('usingConnection')->once()->with('foo', m::type('Closure'))
+                ->andReturnUsing(function ($d, $c) use ($migrator) {
+                    $c($migrator);
+                });
         $model->shouldReceive('getKey')->andReturn(5)
             ->shouldReceive('toArray')->andReturn([])
             ->shouldReceive('newQuery->useWritePdo->findOrFail')->once()->with(10)
@@ -223,10 +231,12 @@ class FactoryTest extends TestCase
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
         $manager->shouldReceive('config')->andReturnNull();
-        $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
-            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('reset')->once()->with(null, false)->andReturnNull()
-            ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
+            ->shouldReceive('usingConnection')->once()->with('foo', m::type('Closure'))
+                ->andReturnUsing(function ($d, $c) use ($migrator) {
+                    $c($migrator);
+                });
         $model->shouldReceive('getKey')->andReturn(5)
             ->shouldReceive('toArray')->andReturn([])
             ->shouldReceive('newQuery->useWritePdo->cursor')->once()->andReturn($entities);
@@ -255,10 +265,12 @@ class FactoryTest extends TestCase
             ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
 
         $manager->shouldReceive('config')->andReturnNull();
-        $migrator->shouldReceive('setConnection')->once()->with('foo')->andReturnNull()
-            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('reset')->once()->with(null, false)->andReturnNull()
-            ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
+            ->shouldReceive('usingConnection')->once()->with('foo', m::type('Closure'))
+                ->andReturnUsing(function ($d, $c) use ($migrator) {
+                    $c($migrator);
+                });
         $model->shouldReceive('getKey')->andReturn(5)
             ->shouldReceive('toArray')->andReturn([])
             ->shouldReceive('newQuery->useWritePdo->findOrFail')->once()->with(10)
@@ -385,10 +397,13 @@ class FactoryTest extends TestCase
             ->shouldReceive('config')->with('user.migration', null)->andReturnNull()
             ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
             ->shouldReceive('config')->with('user.prefix', 'user')->andReturn('user');
-        $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
-            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+
+        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('run')->once()->with(['/var/app/migrations'], ['pretend' => false])->andReturnNull()
-            ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
+            ->shouldReceive('usingConnection')->once()->with('primary', m::type('Closure'))
+                ->andReturnUsing(function ($d, $c) use ($migrator) {
+                    $c($migrator);
+                });
 
         $this->assertNull($stub->runUp($model, 'primary'));
     }
@@ -418,10 +433,13 @@ class FactoryTest extends TestCase
             ->shouldReceive('config')->with('user.migration', null)->andReturnNull()
             ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
             ->shouldReceive('config')->with('user.prefix', 'user')->andReturn('user');
-        $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
-            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+
+        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('rollback')->with(['/var/app/migrations'], ['pretend' => false])->andReturnNull()
-            ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
+            ->shouldReceive('usingConnection')->once()->with('primary', m::type('Closure'))
+                ->andReturnUsing(function ($d, $c) use ($migrator) {
+                    $c($migrator);
+                });
 
         $this->assertNull($stub->runDown($model, 'primary'));
     }
@@ -451,10 +469,12 @@ class FactoryTest extends TestCase
             ->shouldReceive('config')->with('user.migration', null)->andReturnNull()
             ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
             ->shouldReceive('config')->with('user.prefix', 'user')->andReturn('user');
-        $migrator->shouldReceive('setConnection')->once()->with('primary')->andReturnNull()
-            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('reset')->once()->with(['/var/app/migrations'], false)->andReturn(5)
-            ->shouldReceive('resetConnection')->once()->with()->andReturnNull();
+            ->shouldReceive('usingConnection')->once()->with('primary', m::type('Closure'))
+                ->andReturnUsing(function ($d, $c) use ($migrator) {
+                    $c($migrator);
+                });
 
         $this->assertNull($stub->runReset($model, 'primary'));
     }

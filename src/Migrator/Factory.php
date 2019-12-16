@@ -106,20 +106,18 @@ class Factory implements FactoryContract
      */
     public function runInstall(Model $entity, ?string $database): void
     {
-        $database = $this->asConnection($entity, $database);
         $table = $this->resolveMigrationTableName($entity);
-        $migrator = $this->resolveMigrator($table);
-        $repository = $migrator->getRepository();
 
-        $migrator->setConnection($database);
+        $this->resolveMigrator($table)
+            ->usingConnection($this->asConnection($entity, $database), function ($migrator) use ($table) {
+                $repository = $migrator->getRepository();
 
-        if (! $repository->repositoryExists()) {
-            $repository->createRepository();
+                if (! $repository->repositoryExists()) {
+                    $repository->createRepository();
 
-            $this->note("<info>Migration table {$table} created successfully.</info>");
-        }
-
-        $migrator->resetConnection();
+                    $this->note("<info>Migration table {$table} created successfully.</info>");
+                }
+            });
     }
 
     /**
@@ -127,15 +125,12 @@ class Factory implements FactoryContract
      */
     public function runUp(Model $entity, ?string $database, bool $pretend = false): void
     {
-        $database = $this->asConnection($entity, $database);
-        $table = $this->resolveMigrationTableName($entity);
-        $migrator = $this->resolveMigratorWithNotes($table);
+        $this->resolveMigratorWithNotes($this->resolveMigrationTableName($entity))
+            ->usingConnection($this->asConnection($entity, $database), function ($migrator) use ($entity, $pretend) {
+                $migrator->setEntity($entity);
 
-        $migrator->setConnection($database);
-        $migrator->setEntity($entity);
-
-        $migrator->run($this->getMigrationPaths($entity), ['pretend' => (bool) $pretend]);
-        $migrator->resetConnection();
+                $migrator->run($this->getMigrationPaths($entity), ['pretend' => (bool) $pretend]);
+            });
     }
 
     /**
@@ -143,15 +138,12 @@ class Factory implements FactoryContract
      */
     public function runDown(Model $entity, ?string $database, bool $pretend = false): void
     {
-        $database = $this->asConnection($entity, $database);
-        $table = $this->resolveMigrationTableName($entity);
-        $migrator = $this->resolveMigratorWithNotes($table);
+        $this->resolveMigratorWithNotes($this->resolveMigrationTableName($entity))
+            ->usingConnection($this->asConnection($entity, $database), function ($migrator) use ($entity, $pretend) {
+                $migrator->setEntity($entity);
 
-        $migrator->setConnection($database);
-        $migrator->setEntity($entity);
-
-        $migrator->rollback($this->getMigrationPaths($entity), ['pretend' => (bool) $pretend]);
-        $migrator->resetConnection();
+                $migrator->rollback($this->getMigrationPaths($entity), ['pretend' => (bool) $pretend]);
+            });
     }
 
     /**
@@ -159,13 +151,11 @@ class Factory implements FactoryContract
      */
     public function runReset(Model $entity, ?string $database, bool $pretend = false): void
     {
-        $database = $this->asConnection($entity, $database);
-        $table = $this->resolveMigrationTableName($entity);
-        $migrator = $this->resolveMigratorWithNotes($table);
+        $this->resolveMigratorWithNotes($this->resolveMigrationTableName($entity))
+            ->usingConnection($this->asConnection($entity, $database), function ($migrator) use ($entity, $pretend) {
+                $migrator->setEntity($entity);
 
-        $migrator->setConnection($database);
-        $migrator->setEntity($entity);
-        $migrator->reset($this->getMigrationPaths($entity), $pretend);
-        $migrator->resetConnection();
+                $migrator->reset($this->getMigrationPaths($entity), $pretend);
+            });
     }
 }
