@@ -30,8 +30,6 @@ class Builder extends Eloquent
 
     /**
      * Get the tenantor associated with the model.
-     *
-     * @return \Orchestra\Tenanti\Tenantor|null
      */
     public function getTenantor(): ?Tenantor
     {
@@ -40,8 +38,6 @@ class Builder extends Eloquent
 
     /**
      * Get the tenantor associated with the model.
-     *
-     * @param  \Orchestra\Tenanti\Tenantor|null  $tenantor
      *
      * @return $this
      */

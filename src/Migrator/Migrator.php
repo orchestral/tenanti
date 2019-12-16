@@ -54,8 +54,6 @@ class Migrator extends BaseMigrator
 
     /**
      * Reset the default connection name.
-     *
-     * @return void
      */
     public function resetConnection(): void
     {

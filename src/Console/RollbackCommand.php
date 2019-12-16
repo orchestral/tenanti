@@ -33,7 +33,7 @@ class RollbackCommand extends BaseCommand
             return;
         }
 
-        \tap($this->tenant->driver($this->getDriver()), function ($migrator) {
+        \tap($this->tenantDriver(), function ($migrator) {
             $this->setupMigrationOutput($migrator);
 
             $migrator->rollback(

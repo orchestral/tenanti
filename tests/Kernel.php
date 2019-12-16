@@ -24,8 +24,6 @@ class Kernel extends ConsoleKernel
     /**
      * Report the exception to the exception handler.
      *
-     * @param  \Exception $e
-     *
      * @throws \Exception
      *
      * @return void

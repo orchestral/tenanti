@@ -31,8 +31,6 @@ abstract class Observer
     /**
      * Run on created observer.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     *
      * @return bool
      */
     public function created(Model $entity)
@@ -49,8 +47,6 @@ abstract class Observer
 
     /**
      * Run on restored observer.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
      *
      * @return bool
      */
@@ -69,8 +65,6 @@ abstract class Observer
     /**
      * Run on deleted observer.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     *
      * @return bool
      */
     public function deleted(Model $entity)
@@ -88,9 +82,6 @@ abstract class Observer
     /**
      * Resolve create tenant job.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  array  $data
-     *
      * @return \Orchestra\Tenanti\Jobs\CreateTenant
      */
     protected function getCreateTenantJob(Model $entity, array $data)
@@ -101,9 +92,6 @@ abstract class Observer
     /**
      * Resolve restore tenant job.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  array  $data
-     *
      * @return \Orchestra\Tenanti\Jobs\CreateTenant
      */
     protected function getRestoreTenantJob(Model $entity, array $data)
@@ -113,9 +101,6 @@ abstract class Observer
 
     /**
      * Resolve create tenant job.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  array  $data
      *
      * @return \Orchestra\Tenanti\Jobs\DeleteTenant
      */

@@ -16,8 +16,6 @@ trait Notable
     /**
      * Set notice implementation.
      *
-     * @param  \Orchestra\Tenanti\Contracts\Notice  $notice
-     *
      * @return $this
      */
     public function setNotice(Notice $notice)
@@ -31,8 +29,6 @@ trait Notable
      * Raise a note event.
      *
      * @param  string  $message
-     *
-     * @return void
      */
     protected function note(...$message): void
     {
@@ -43,8 +39,6 @@ trait Notable
 
     /**
      * Resolve migrator with notable.
-     *
-     * @param  string  $table
      *
      * @return \Orchestra\Tenanti\Migrator\Migrator
      */
@@ -61,8 +55,6 @@ trait Notable
 
     /**
      * Resolve migrator.
-     *
-     * @param  string  $table
      *
      * @return \Orchestra\Tenanti\Migrator\Migrator
      */

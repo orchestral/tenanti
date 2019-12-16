@@ -10,10 +10,6 @@ class Tenantor extends Fluent
     /**
      * Make a tenantor instance.
      *
-     * @param  string  $name
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @param  string|null  $connection
-     *
      * @return static
      */
     public static function fromEloquent(string $name, Model $model, ?string $connection = null)
@@ -26,10 +22,7 @@ class Tenantor extends Fluent
     /**
      * Make a tenantor instance.
      *
-     * @param  string  $name
      * @param  mixed  $key
-     * @param  string|null  $connection
-     * @param  \Illuminate\Database\Eloquent\Model|null  $model
      *
      * @return static
      */
@@ -40,8 +33,6 @@ class Tenantor extends Fluent
 
     /**
      * Get tenant model.
-     *
-     * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function getTenantModel(): ?Model
     {
@@ -50,8 +41,6 @@ class Tenantor extends Fluent
 
     /**
      * Get tenant name.
-     *
-     * @return string
      */
     public function getTenantName(): string
     {

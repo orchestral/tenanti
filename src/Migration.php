@@ -9,8 +9,6 @@ class Migration extends BaseMigration
     /**
      * Set connection for the migration.
      *
-     * @param  string|null  $name
-     *
      * @return $this
      */
     public function setConnection(?string $name)

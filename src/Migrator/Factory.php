@@ -13,10 +13,6 @@ class Factory implements FactoryContract
 
     /**
      * Construct a new migration manager.
-     *
-     * @param  \Illuminate\Contracts\Container\Container  $app
-     * @param  \Orchestra\Tenanti\TenantiManager  $manager
-     * @param  string  $driver
      */
     public function __construct(Container $app, TenantiManager $manager, string $driver)
     {
@@ -28,10 +24,7 @@ class Factory implements FactoryContract
     /**
      * Install migrations.
      *
-     * @param  string|null  $database
      * @param  mixed|null  $id
-     *
-     * @return void
      */
     public function install(?string $database, $id = null): void
     {
@@ -51,11 +44,7 @@ class Factory implements FactoryContract
     /**
      * Run migrations.
      *
-     * @param  string|null  $database
      * @param  mixed|null  $id
-     * @param  bool  $pretend
-     *
-     * @return void
      */
     public function run(?string $database, $id = null, bool $pretend = false): void
     {
@@ -75,11 +64,7 @@ class Factory implements FactoryContract
     /**
      * Rollback migrations.
      *
-     * @param  string|null  $database
      * @param  mixed|null  $id
-     * @param  bool  $pretend
-     *
-     * @return void
      */
     public function rollback(?string $database, $id = null, bool $pretend = false): void
     {
@@ -99,11 +84,7 @@ class Factory implements FactoryContract
     /**
      * Reset migrations.
      *
-     * @param  string|null  $database
      * @param  mixed|null  $id
-     * @param  bool  $pretend
-     *
-     * @return void
      */
     public function reset(?string $database, $id = null, bool $pretend = false): void
     {
@@ -122,11 +103,6 @@ class Factory implements FactoryContract
 
     /**
      * Run migration up on a single entity.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string|null  $database
-     *
-     * @return void
      */
     public function runInstall(Model $entity, ?string $database): void
     {
@@ -148,12 +124,6 @@ class Factory implements FactoryContract
 
     /**
      * Run migration up on a single entity.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string|null  $database
-     * @param  bool  $pretend
-     *
-     * @return void
      */
     public function runUp(Model $entity, ?string $database, bool $pretend = false): void
     {
@@ -170,12 +140,6 @@ class Factory implements FactoryContract
 
     /**
      * Run migration down on a single entity.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string|null  $database
-     * @param  bool  $pretend
-     *
-     * @return void
      */
     public function runDown(Model $entity, ?string $database, bool $pretend = false): void
     {
@@ -192,12 +156,6 @@ class Factory implements FactoryContract
 
     /**
      * Run migration reset on a single entity.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string|null  $database
-     * @param  bool  $pretend
-     *
-     * @return void
      */
     public function runReset(Model $entity, ?string $database, bool $pretend = false): void
     {

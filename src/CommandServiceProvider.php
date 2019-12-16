@@ -43,32 +43,26 @@ class CommandServiceProvider extends ServiceProvider
 
     /**
      * Register the "queue" migration command.
-     *
-     * @return void
      */
     protected function registerQueuedCommand(): void
     {
         $this->app->singleton('orchestra.commands.tenanti.queue', static function (Container $app) {
-            return new QueuedCommand($app->make('orchestra.tenanti'));
+            return new QueuedCommand();
         });
     }
 
     /**
      * Register the "install" migration command.
-     *
-     * @return void
      */
     protected function registerInstallCommand(): void
     {
         $this->app->singleton('orchestra.commands.tenanti.install', static function (Container $app) {
-            return new InstallCommand($app->make('orchestra.tenanti'));
+            return new InstallCommand();
         });
     }
 
     /**
      * Register the "make" migration command.
-     *
-     * @return void
      */
     protected function registerMakeCommand(): void
     {
@@ -81,70 +75,58 @@ class CommandServiceProvider extends ServiceProvider
             // and inject the creator. The creator is responsible for the actual file
             // creation of the migrations, and may be extended by these developers.
             return new MigrateMakeCommand(
-                $app->make('orchestra.tenanti'),
-                $app->make('orchestra.tenanti.creator'),
-                $app->make('composer')
+                $app->make('orchestra.tenanti.creator')
             );
         });
     }
 
     /**
      * Register the "migrate" migration command.
-     *
-     * @return void
      */
     protected function registerMigrateCommand(): void
     {
         $this->app->singleton('orchestra.commands.tenanti.migrate', static function (Container $app) {
-            return new MigrateCommand($app->make('orchestra.tenanti'));
+            return new MigrateCommand();
         });
     }
 
     /**
      * Register the "rollback" migration command.
-     *
-     * @return void
      */
     protected function registerRollbackCommand(): void
     {
         $this->app->singleton('orchestra.commands.tenanti.rollback', static function (Container $app) {
-            return new RollbackCommand($app->make('orchestra.tenanti'));
+            return new RollbackCommand();
         });
     }
 
     /**
      * Register the "reset" migration command.
-     *
-     * @return void
      */
     protected function registerResetCommand(): void
     {
         $this->app->singleton('orchestra.commands.tenanti.reset', static function (Container $app) {
-            return new ResetCommand($app->make('orchestra.tenanti'));
+            return new ResetCommand();
         });
     }
 
     /**
      * Register the "refresh" migration command.
-     *
-     * @return void
      */
     protected function registerRefreshCommand(): void
     {
         $this->app->singleton('orchestra.commands.tenanti.refresh', static function (Container $app) {
-            return new RefreshCommand($app->make('orchestra.tenanti'));
+            return new RefreshCommand();
         });
     }
 
     /**
      * Register the "tinker" migration command.
-     *
-     * @return void
      */
     protected function registerTinkerCommand(): void
     {
         $this->app->singleton('orchestra.commands.tenanti.tinker', static function (Container $app) {
-            return new TinkerCommand($app->make('orchestra.tenanti'));
+            return new TinkerCommand();
         });
     }
 }

@@ -43,8 +43,6 @@ trait Tenantee
     /**
      * Get the tenantor associated with the model.
      *
-     * @param  \Orchestra\Tenanti\Tenantor|null  $tenantor
-     *
      * @return $this
      */
     public function setTenantor(?Tenantor $tenantor)
@@ -61,8 +59,6 @@ trait Tenantee
      * Get tenant table name.
      *
      * @throws \InvalidArgumentException
-     *
-     * @return string
      */
     abstract public function getTenantTable(): string;
 }

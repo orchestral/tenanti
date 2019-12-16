@@ -18,8 +18,6 @@ abstract class Model extends Eloquent
     /**
      * Create model instance from existing.
      *
-     * @param array $attributes
-     *
      * @return $this
      */
     public function fillFromExistingOrNew(array $attributes = [])

@@ -5,7 +5,6 @@ namespace Orchestra\Tenanti\Console;
 use Illuminate\Support\Composer;
 use Orchestra\Support\Str;
 use Orchestra\Tenanti\Migrator\Creator;
-use Orchestra\Tenanti\TenantiManager;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -33,23 +32,13 @@ class MigrateMakeCommand extends BaseCommand
     protected $creator;
 
     /**
-     * @var \Illuminate\Support\Composer
-     */
-    protected $composer;
-
-    /**
      * Create a make migration command instance.
-     *
-     * @param \Orchestra\Tenanti\TenantiManager  $tenant
-     * @param \Orchestra\Tenanti\Migrator\Creator  $creator
-     * @param \Illuminate\Support\Composer  $composer
      */
-    public function __construct(TenantiManager $tenant, Creator $creator, Composer $composer)
+    public function __construct(Creator $creator)
     {
         $this->creator = $creator;
-        $this->composer = $composer;
 
-        parent::__construct($tenant);
+        parent::__construct();
     }
 
     /**
@@ -57,7 +46,7 @@ class MigrateMakeCommand extends BaseCommand
      *
      * @return void
      */
-    public function handle()
+    public function handle(Composer $composer)
     {
         $arguments = $this->getArgumentsWithDriver('name');
         $driver = $arguments['driver'];
@@ -66,7 +55,7 @@ class MigrateMakeCommand extends BaseCommand
         // It's possible for the developer to specify the tables to modify in this
         // schema operation. The developer may also specify if this table needs
         // to be freshly created so we can create the appropriate migrations.
-        $create = $this->input->getOption('create');
+        $create = $this->input->getOption('create') ?? false;
         $table = $this->input->getOption('table');
 
         if (! $table && \is_string($create)) {
@@ -78,22 +67,19 @@ class MigrateMakeCommand extends BaseCommand
         // make sure that the migrations are registered by the class loaders.
         $this->writeMigration($driver, $name, $table, $create);
 
-        $this->composer->dumpAutoloads();
+        $composer->dumpAutoloads();
     }
 
     /**
      * Write the migration file to disk.
-     *
-     * @param  string  $driver
-     * @param  string  $name
-     * @param  string  $table
-     * @param  bool    $create
-     *
-     * @return string
      */
-    protected function writeMigration($driver, $name, $table, $create)
-    {
-        $migrator = $this->tenant->driver($driver);
+    protected function writeMigration(
+        ?string $driver,
+        string $name,
+        ?string $table,
+        bool $create = false
+    ): string {
+        $migrator = $this->tenantDriver($driver);
         $files = $this->creator->getFilesystem();
         $path = $migrator->getMigrationPaths()[0] ?? null;
 
@@ -101,7 +87,7 @@ class MigrateMakeCommand extends BaseCommand
             $files->makeDirectory($path, 0755, true);
         }
 
-        if ($this->tenant->config("{$driver}.shared", true) === true) {
+        if ($this->tenant()->config("{$driver}.shared", true) === true) {
             $table = Str::replace($migrator->getTablePrefix()."_{$table}", ['id' => '{$id}']);
         }
 
@@ -133,7 +119,7 @@ class MigrateMakeCommand extends BaseCommand
     protected function getOptions()
     {
         return [
-            ['create', null, InputOption::VALUE_OPTIONAL, 'The table to be created.'],
+            ['create', false, InputOption::VALUE_OPTIONAL, 'The table to be created.'],
             ['table', null, InputOption::VALUE_OPTIONAL, 'The table to migrate.'],
         ];
     }

@@ -67,9 +67,6 @@ trait Operation
      * Execute query by id.
      *
      * @param  int|string  $id
-     * @param  \Closure  $callback
-     *
-     * @return void
      */
     public function executeFor($id, Closure $callback): void
     {
@@ -80,10 +77,6 @@ trait Operation
 
     /**
      * Execute query via cursor.
-     *
-     * @param  \Closure  $callback
-     *
-     * @return void
      */
     public function executeForEach(Closure $callback): void
     {
@@ -95,7 +88,6 @@ trait Operation
     /**
      * Get tenant configuration.
      *
-     * @param  string  $key
      * @param  mixed  $default
      *
      * @return mixed
@@ -109,8 +101,6 @@ trait Operation
      * Resolve model.
      *
      * @throws \InvalidArgumentException
-     *
-     * @return \Illuminate\Database\Eloquent\Model
      */
     public function getModel(): Model
     {
@@ -145,8 +135,6 @@ trait Operation
     /**
      * Resolve migrator.
      *
-     * @param  string  $table
-     *
      * @return \Orchestra\Tenanti\Migrator\Migrator
      */
     protected function resolveMigrator(string $table): Migrator
@@ -168,11 +156,6 @@ trait Operation
 
     /**
      * Set tenant as default database connection and get the connection name.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string|null  $database
-     *
-     * @return string|null
      */
     public function asDefaultConnection(Model $entity, ?string $database): ?string
     {
@@ -185,11 +168,6 @@ trait Operation
 
     /**
      * Set tenant database connection.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string|null  $database
-     *
-     * @return string|null
      */
     public function asConnection(Model $entity, ?string $database): ?string
     {
@@ -224,9 +202,6 @@ trait Operation
     /**
      * Resolve tenant database connection.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string  $database
-     *
      * @return \Illuminate\Database\Connection
      */
     public function resolveConnection(Model $entity, string $database)
@@ -236,10 +211,6 @@ trait Operation
 
     /**
      * Get table name.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     *
-     * @return string
      */
     protected function resolveMigrationTableName(Model $entity): string
     {
@@ -256,8 +227,6 @@ trait Operation
 
     /**
      * Get model name.
-     *
-     * @return string
      */
     public function getModelName(): string
     {
@@ -266,8 +235,6 @@ trait Operation
 
     /**
      * Get table prefix.
-     *
-     * @return string
      */
     public function getTablePrefix(): string
     {
@@ -278,11 +245,6 @@ trait Operation
 
     /**
      * Resolve table name.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     * @param  string|null  $name
-     *
-     * @return string|null
      */
     protected function bindWithKey(Model $entity, ?string $name): ?string
     {
@@ -303,8 +265,6 @@ trait Operation
 
     /**
      * Get default migration paths.
-     *
-     * @return array
      */
     public function getDefaultMigrationPaths(): array
     {
@@ -313,10 +273,6 @@ trait Operation
 
     /**
      * Get migration path.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model|null  $entity
-     *
-     * @return array|null
      */
     public function getMigrationPaths(Model $entity = null): ?array
     {
@@ -331,9 +287,6 @@ trait Operation
      * Load migrations from a specific path.
      *
      * @param  string|array  $paths
-     * @param  \Illuminate\Database\Eloquent\Model  $entity
-     *
-     * @return void
      */
     public function loadMigrationsFrom($paths, Model $entity): void
     {

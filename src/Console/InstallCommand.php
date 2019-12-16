@@ -27,7 +27,7 @@ class InstallCommand extends BaseCommand
      */
     public function handle()
     {
-        \tap($this->tenant->driver($this->getDriver()), function ($migrator) {
+        \tap($this->tenantDriver(), function ($migrator) {
             $this->setupMigrationOutput($migrator);
 
             $migrator->install(

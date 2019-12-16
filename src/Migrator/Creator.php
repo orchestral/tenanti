@@ -8,8 +8,6 @@ class Creator extends MigrationCreator
 {
     /**
      * Get the path to the stubs.
-     *
-     * @return string
      */
     public function stubPath(): string
     {

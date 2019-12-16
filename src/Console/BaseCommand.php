@@ -20,23 +20,7 @@ abstract class BaseCommand extends Command
     protected $tenant;
 
     /**
-     * Create a new migration command instance.
-     *
-     * @param  \Orchestra\Tenanti\TenantiManager  $tenant
-     */
-    public function __construct(TenantiManager $tenant)
-    {
-        $this->tenant = $tenant;
-
-        parent::__construct();
-    }
-
-    /**
      * Write migration output.
-     *
-     * @param  \Orchestra\Tenanti\Contracts\Factory  $migrator
-     *
-     * @return void
      */
     protected function setupMigrationOutput(Factory $migrator): void
     {
@@ -45,12 +29,10 @@ abstract class BaseCommand extends Command
 
     /**
      * Get driver argument or first driver in the config.
-     *
-     * @return string
      */
-    protected function getDriver(): string
+    protected function getDriver(TenantiManager $tenant): string
     {
-        $driver = $this->argument('driver') ?: $this->getDriverFromConfig();
+        $driver = $this->argument('driver') ?: $this->getDriverFromConfig($tenant);
 
         if (! empty($driver)) {
             return $driver;
@@ -64,9 +46,9 @@ abstract class BaseCommand extends Command
      *
      * @return string
      */
-    protected function getDriverFromConfig(): ?string
+    protected function getDriverFromConfig(TenantiManager $tenant): ?string
     {
-        $drivers = \array_keys($this->tenant->config('drivers'));
+        $drivers = \array_keys($tenant->config('drivers'));
 
         if (\count($drivers) === 1) {
             return $drivers[0];
@@ -77,8 +59,6 @@ abstract class BaseCommand extends Command
 
     /**
      * Get the required arguments when used with optional driver argument.
-     *
-     * @return array
      */
     protected function getArgumentsWithDriver(...$arguments): array
     {
@@ -89,7 +69,7 @@ abstract class BaseCommand extends Command
         $this->validateMissingArguments($arguments);
 
         if (empty($this->argument(\end($arguments)))) {
-            $driver = $this->getDriverFromConfig();
+            $driver = $this->getDriverFromConfig($this->tenant());
 
             if (empty($driver)) {
                 throw new RuntimeException('Not enough arguments (missing: "driver").');
@@ -112,11 +92,7 @@ abstract class BaseCommand extends Command
     /**
      * Validate missing arguments.
      *
-     * @param  array  $arguments
-     *
      * @throws \Symfony\Component\Console\Exception\RuntimeException
-     *
-     * @return bool
      */
     protected function validateMissingArguments(array $arguments): bool
     {
@@ -129,6 +105,34 @@ abstract class BaseCommand extends Command
         }
 
         return true;
+    }
+
+    /**
+     * Get tenant manager instance.
+     */
+    protected function tenant(): TenantiManager
+    {
+        if (! isset($this->tenant)) {
+            $this->tenant = $this->laravel->make('orchestra.tenanti');
+        }
+
+        return $this->tenant;
+    }
+
+    /**
+     * Get tenant driver.
+     */
+    protected function tenantDriver(?string $name = null): Factory
+    {
+        return $this->tenant()->driver($name ?: $this->tenantDriverName());
+    }
+
+    /**
+     * Get tenant driver name.
+     */
+    protected function tenantDriverName(): string
+    {
+        return $this->getDriver($this->tenant());
     }
 
     /**

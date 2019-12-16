@@ -43,8 +43,7 @@ class MigrateMakeCommandTest extends CommandTest
             ->with('tenant')
             ->andReturn($factory);
 
-        $command = m::mock('Orchestra\Tenanti\Console\MigrateMakeCommand[writeMigration]',
-            [$tenanti, $creator, $composer])
+        $command = m::mock('Orchestra\Tenanti\Console\MigrateMakeCommand[writeMigration]', [$creator])
             ->shouldAllowMockingProtectedMethods();
 
         $command->shouldReceive('writeMigration')
@@ -69,8 +68,7 @@ class MigrateMakeCommandTest extends CommandTest
                 ],
             ]);
 
-        $command = m::mock('Orchestra\Tenanti\Console\MigrateMakeCommand[writeMigration]',
-            [$tenanti, $creator, $composer])
+        $command = m::mock('Orchestra\Tenanti\Console\MigrateMakeCommand[writeMigration]', [$creator])
             ->shouldAllowMockingProtectedMethods();
 
         $command->shouldReceive('writeMigration')
@@ -97,8 +95,7 @@ class MigrateMakeCommandTest extends CommandTest
                 ],
             ]);
 
-        $command = m::mock('Orchestra\Tenanti\Console\MigrateMakeCommand[writeMigration]',
-            [$tenanti, $creator, $composer])
+        $command = m::mock('Orchestra\Tenanti\Console\MigrateMakeCommand[writeMigration]', [$creator])
             ->shouldAllowMockingProtectedMethods();
 
         $this->expectException(RuntimeException::class);
@@ -126,8 +123,7 @@ class MigrateMakeCommandTest extends CommandTest
                 ],
             ]);
 
-        $command = m::mock('Orchestra\Tenanti\Console\MigrateMakeCommand[writeMigration]',
-            [$tenanti, $creator, $composer])
+        $command = m::mock('Orchestra\Tenanti\Console\MigrateMakeCommand[writeMigration]', [$creator])
             ->shouldAllowMockingProtectedMethods();
 
         $command->shouldReceive('writeMigration')

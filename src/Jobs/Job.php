@@ -27,9 +27,6 @@ abstract class Job
 
     /**
      * Construct a new Job.
-     *
-     * @param \Illuminate\Database\Eloquent\Model  $model
-     * @param array  $config
      */
     public function __construct(Model $model, array $config)
     {
@@ -39,8 +36,6 @@ abstract class Job
 
     /**
      * Should the job be failed.
-     *
-     * @return bool
      */
     protected function shouldBeFailed(): bool
     {
@@ -55,8 +50,6 @@ abstract class Job
 
     /**
      * Should the job be delayed.
-     *
-     * @return bool
      */
     protected function shouldBeDelayed(): bool
     {
@@ -71,8 +64,6 @@ abstract class Job
 
     /**
      * Resolve migrator instance.
-     *
-     * @return \Orchestra\Tenanti\Contracts\Factory
      */
     protected function resolveMigrator(): FactoryContract
     {

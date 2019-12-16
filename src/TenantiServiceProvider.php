@@ -30,8 +30,6 @@ class TenantiServiceProvider extends ServiceProvider implements DeferrableProvid
      * Register configuration for manager.
      *
      * @param  \Orchestra\Tenanti\TenantiManager  $manager
-     *
-     * @return void
      */
     protected function registerConfigurationForManager(TenantiManager $manager): void
     {
@@ -60,10 +58,6 @@ class TenantiServiceProvider extends ServiceProvider implements DeferrableProvid
 
     /**
      * Boot using Laravel setup.
-     *
-     * @param  string  $path
-     *
-     * @return void
      */
     protected function bootUsingLaravel(string $path): void
     {

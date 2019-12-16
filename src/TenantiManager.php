@@ -54,8 +54,6 @@ class TenantiManager extends Manager
 
     /**
      * Get Tenanti configuration.
-     *
-     * @return array
      */
     public function getConfiguration(): array
     {
@@ -64,8 +62,6 @@ class TenantiManager extends Manager
 
     /**
      * Set configuration.
-     *
-     * @param  array  $config
      *
      * @return $this
      */
@@ -79,7 +75,6 @@ class TenantiManager extends Manager
     /**
      * Get configuration values.
      *
-     * @param  string|null  $group
      * @param  mixed  $default
      *
      * @return mixed
@@ -92,13 +87,9 @@ class TenantiManager extends Manager
     /**
      * Setup multiple database connection from template.
      *
-     * @param  string|null  $using
-     * @param  \Closure  $callback
      * @param  array  $option
      *
      * @throws \InvalidArgumentException
-     *
-     * @return void
      */
     public function connection(?string $using, Closure $callback, array $options = []): void
     {
@@ -122,10 +113,6 @@ class TenantiManager extends Manager
 
     /**
      * Prepare configuration values.
-     *
-     * @param  string  $driver
-     *
-     * @return array|null
      */
     protected function setupDriverConfig(string $driver): ?array
     {
@@ -148,11 +135,6 @@ class TenantiManager extends Manager
 
     /**
      * Determine if the given options exclude a particular driver.
-     *
-     * @param  string  $driver
-     * @param  array  $options
-     *
-     * @return bool
      */
     protected function driverExcludedByOptions(string $driver, array $options): bool
     {
