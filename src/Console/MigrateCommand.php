@@ -25,12 +25,12 @@ class MigrateCommand extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      */
     public function handle()
     {
         if (! $this->confirmToProceed()) {
-            return;
+            return 126;
         }
 
         $driver = $this->tenantDriverName();
@@ -45,6 +45,8 @@ class MigrateCommand extends BaseCommand
         $this->setupMigrationOutput($migrator);
 
         $migrator->run($database, $id, $pretend);
+
+        return 0;
     }
 
     /**

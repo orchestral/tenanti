@@ -32,7 +32,6 @@
     },
     "require-dev": {
         "laravel/tinker": "^1.0",
-        "mockery/mockery": "^1.2.3",
         "orchestra/testbench": "^5.0"
     },
     "extra": {

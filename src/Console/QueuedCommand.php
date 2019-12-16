@@ -41,7 +41,7 @@ class QueuedCommand extends BaseCommand
     public function handle(Kernel $kernel)
     {
         if (! $this->confirmToProceed()) {
-            return;
+            return 126;
         }
 
         $driver = $this->tenantDriverName();
@@ -67,6 +67,8 @@ class QueuedCommand extends BaseCommand
                     $job->delay($delay);
                 }
             });
+
+        return 0;
     }
 
     /**
