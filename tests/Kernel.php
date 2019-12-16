@@ -2,8 +2,8 @@
 
 namespace Orchestra\Tenanti\Tests;
 
-use Throwable;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Throwable;
 
 class Kernel extends ConsoleKernel
 {

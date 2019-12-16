@@ -40,7 +40,7 @@ class Migrator extends BaseMigrator
      * Execute the given callback using the given connection as the default connection.
      *
      * @param  string|null  $name
-     * @param  callable  $callback
+     *
      * @return mixed
      */
     public function usingConnection($name, callable $callback)
