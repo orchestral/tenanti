@@ -2,7 +2,7 @@
 
 namespace Orchestra\Tenanti\Tests;
 
-use Exception;
+use Throwable;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -24,11 +24,11 @@ class Kernel extends ConsoleKernel
     /**
      * Report the exception to the exception handler.
      *
-     * @throws \Exception
+     * @throws \Throwable
      *
      * @return void
      */
-    protected function reportException(Exception $e)
+    protected function reportException(Throwable $e)
     {
         throw $e;
     }
