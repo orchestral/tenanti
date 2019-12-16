@@ -3,8 +3,7 @@
 namespace Orchestra\Tenanti\Console;
 
 use Illuminate\Support\Composer;
-use Orchestra\Support\Str;
-use Orchestra\Tenanti\Migrator\Creator;
+use Orchestra\Tenanti\Migrator\MigrationWriter;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -23,23 +22,6 @@ class MigrateMakeCommand extends BaseCommand
      * @var string
      */
     protected $description = 'Create a new migration file';
-
-    /**
-     * The migration creator instance.
-     *
-     * @var \Orchestra\Tenanti\Migrator\Creator
-     */
-    protected $creator;
-
-    /**
-     * Create a make migration command instance.
-     */
-    public function __construct(Creator $creator)
-    {
-        $this->creator = $creator;
-
-        parent::__construct();
-    }
 
     /**
      * Execute the console command.
@@ -65,39 +47,16 @@ class MigrateMakeCommand extends BaseCommand
         // Now we are ready to write the migration out to disk. Once we've written
         // the migration out, we will dump-autoload for the entire framework to
         // make sure that the migrations are registered by the class loaders.
-        $this->writeMigration($driver, $name, $table, $create);
+
+        \with($this->laravel->make(MigrationWriter::class), function ($writer) use ($driver, $name, $table, $create) {
+            $file = $writer($driver, $name, $table, $create);
+
+            $this->line("<info>Created Migration:</info> $file");
+        });
 
         $composer->dumpAutoloads();
 
         return 0;
-    }
-
-    /**
-     * Write the migration file to disk.
-     */
-    protected function writeMigration(
-        ?string $driver,
-        string $name,
-        ?string $table,
-        bool $create = false
-    ): string {
-        $migrator = $this->tenantDriver($driver);
-        $files = $this->creator->getFilesystem();
-        $path = $migrator->getMigrationPaths()[0] ?? null;
-
-        if (! $files->isDirectory($path)) {
-            $files->makeDirectory($path, 0755, true);
-        }
-
-        if ($this->tenant()->config("{$driver}.shared", true) === true) {
-            $table = Str::replace($migrator->getTablePrefix()."_{$table}", ['id' => '{$id}']);
-        }
-
-        $name = \implode('_', [$driver, 'tenant', $name]);
-
-        $file = \pathinfo($this->creator->create($name, $path, $table, $create), PATHINFO_FILENAME);
-
-        $this->line("<info>Created Migration:</info> $file");
     }
 
     /**

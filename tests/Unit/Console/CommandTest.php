@@ -7,6 +7,7 @@ use Orchestra\Tenanti\CommandServiceProvider;
 use Orchestra\Tenanti\Contracts\Factory;
 use Orchestra\Tenanti\Contracts\Notice;
 use Orchestra\Tenanti\Migrator\Creator;
+use Orchestra\Tenanti\Migrator\MigrationWriter;
 use Orchestra\Tenanti\TenantiManager;
 use Orchestra\Tenanti\Tests\Kernel;
 use Orchestra\Testbench\TestCase;
@@ -42,8 +43,10 @@ abstract class CommandTest extends TestCase
 
         $app->singleton('Illuminate\Contracts\Console\Kernel', Kernel::class);
 
-        $app['orchestra.tenanti.creator'] = m::mock(Creator::class);
-        $app['orchestra.tenanti'] = m::mock(TenantiManager::class);
+        $app['orchestra.tenanti.creator'] = $app[Creator::class] = $creator = m::mock(Creator::class);
+        $app['orchestra.tenanti'] = $app[TenantiManager::class] = $tenanti = m::mock(TenantiManager::class);
+
+        $app[MigrationWriter::class] = m::mock(MigrationWriter::class, [$tenanti, $creator]);
     }
 
     public function artisan($command, $parameters = [])
