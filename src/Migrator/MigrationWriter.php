@@ -2,21 +2,27 @@
 
 namespace Orchestra\Tenanti\Migrator;
 
+use Illuminate\Database\Migrations\MigrationCreator;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Orchestra\Tenanti\TenantiManager;
 
-class MigrationWriter
+class MigrationWriter extends MigrationCreator
 {
+    /**
+     * Tenant manager.
+     *
+     * @var \Orchestra\Tenanti\TenantiManager
+     */
     protected $tenant;
-    protected $creator;
 
     /**
-     * Construct a new migration writer.
+     * Create a new migration creator instance.
      */
-    public function __construct(TenantiManager $tenant, Creator $creator)
+    public function __construct(Filesystem $files, TenantiManager $tenant)
     {
+        $this->files = $files;
         $this->tenant = $tenant;
-        $this->creator = $creator;
     }
 
     /**
@@ -29,11 +35,10 @@ class MigrationWriter
         bool $create = false
     ): string {
         $migrator = $this->tenant->driver($driver);
-        $files = $this->creator->getFilesystem();
         $path = $migrator->getMigrationPaths()[0] ?? null;
 
-        if (! $files->isDirectory($path)) {
-            $files->makeDirectory($path, 0755, true);
+        if (! $this->files->isDirectory($path)) {
+            $this->files->makeDirectory($path, 0755, true);
         }
 
         if ($this->tenant->config("{$driver}.shared", true) === true) {
@@ -42,6 +47,14 @@ class MigrationWriter
 
         $name = \implode('_', [$driver, 'tenant', $name]);
 
-        return \pathinfo($this->creator->create($name, $path, $table, $create), PATHINFO_FILENAME);
+        return \pathinfo($this->create($name, $path, $table, $create), PATHINFO_FILENAME);
+    }
+
+    /**
+     * Get the path to the stubs.
+     */
+    public function stubPath(): string
+    {
+        return __DIR__.'/stubs';
     }
 }

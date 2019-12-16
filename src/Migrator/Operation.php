@@ -26,7 +26,7 @@ trait Operation
     protected $driver;
 
     /**
-     * Tenant configuration.
+     * Tenant manager.
      *
      * @var \Orchestra\Tenanti\TenantiManager
      */

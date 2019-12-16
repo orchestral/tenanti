@@ -2,6 +2,7 @@
 
 namespace Orchestra\Tenanti\Tests\Unit\Console;
 
+use Illuminate\Filesystem\Filesystem;
 use Mockery as m;
 use Orchestra\Tenanti\CommandServiceProvider;
 use Orchestra\Tenanti\Contracts\Factory;
@@ -46,7 +47,7 @@ abstract class CommandTest extends TestCase
         $app['orchestra.tenanti.creator'] = $app[Creator::class] = $creator = m::mock(Creator::class);
         $app['orchestra.tenanti'] = $app[TenantiManager::class] = $tenanti = m::mock(TenantiManager::class);
 
-        $app[MigrationWriter::class] = m::mock(MigrationWriter::class, [$tenanti, $creator]);
+        $app[MigrationWriter::class] = m::mock(MigrationWriter::class, [new Filesystem(), $tenanti]);
     }
 
     public function artisan($command, $parameters = [])

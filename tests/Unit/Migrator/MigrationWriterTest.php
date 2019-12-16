@@ -3,10 +3,10 @@
 namespace Orchestra\Tenanti\Tests\Unit\Migrator;
 
 use Mockery as m;
-use Orchestra\Tenanti\Migrator\Creator;
+use Orchestra\Tenanti\Migrator\MigrationWriter;
 use PHPUnit\Framework\TestCase;
 
-class CreatorTest extends TestCase
+class MigrationWriterTest extends TestCase
 {
     /**
      * Teardown the test environment.
@@ -17,7 +17,7 @@ class CreatorTest extends TestCase
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\Creator::getStubPath()
+     * Test Orchestra\Tenanti\Migrator\MigrationWriter::getStubPath()
      * method.
      *
      * @test
@@ -25,8 +25,9 @@ class CreatorTest extends TestCase
     public function testGetStubPath()
     {
         $files = m::mock('Illuminate\Filesystem\Filesystem');
+        $tenanti = m::mock('Orchestra\Tenanti\TenantiManager');
 
-        $stub = new Creator($files);
+        $stub = new MigrationWriter($files, $tenanti);
 
         $this->assertStringContainsString('src/Migrator/stubs', $stub->stubPath());
     }

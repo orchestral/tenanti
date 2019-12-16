@@ -66,10 +66,6 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerMakeCommand(): void
     {
-        $this->app->singleton('orchestra.tenanti.creator', static function (Container $app) {
-            return new Creator($app->make('files'));
-        });
-
         $this->app->singleton('orchestra.commands.tenanti.make', static function (Container $app) {
             // Once we have the migration creator registered, we will create the command
             // and inject the creator. The creator is responsible for the actual file
