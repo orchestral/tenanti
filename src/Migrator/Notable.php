@@ -39,8 +39,6 @@ trait Notable
 
     /**
      * Resolve migrator with notable.
-     *
-     * @return \Orchestra\Tenanti\Migrator\Migrator
      */
     protected function resolveMigratorWithNotes(string $table): Migrator
     {
@@ -55,8 +53,6 @@ trait Notable
 
     /**
      * Resolve migrator.
-     *
-     * @return \Orchestra\Tenanti\Migrator\Migrator
      */
     abstract protected function resolveMigrator(string $table): Migrator;
 }

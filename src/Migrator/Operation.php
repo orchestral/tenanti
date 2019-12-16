@@ -134,8 +134,6 @@ trait Operation
 
     /**
      * Resolve migrator.
-     *
-     * @return \Orchestra\Tenanti\Migrator\Migrator
      */
     protected function resolveMigrator(string $table): Migrator
     {

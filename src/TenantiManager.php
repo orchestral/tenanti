@@ -30,8 +30,6 @@ class TenantiManager extends Manager
      * @param  string  $driver
      *
      * @throws \InvalidArgumentException
-     *
-     * @return \Orchestra\Tenanti\Contracts\Factory
      */
     protected function createDriver($driver): Contracts\Factory
     {
@@ -86,8 +84,6 @@ class TenantiManager extends Manager
 
     /**
      * Setup multiple database connection from template.
-     *
-     * @param  array  $option
      *
      * @throws \InvalidArgumentException
      */
