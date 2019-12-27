@@ -57,7 +57,7 @@ class QueuedCommand extends BaseCommand
         $command = "tenanti:{$action}";
         $parameters = ['driver' => $driver, '--database' => $database, '--force' => true];
 
-        $this->tenant()->driver($driver)
+        $this->tenantDriver($driver)
             ->executeForEach(static function ($entity) use ($kernel, $command, $parameters, $queue, $delay) {
                 $job = $kernel->queue(
                     $command, \array_merge($parameters, ['--id' => $entity->getKey()])
