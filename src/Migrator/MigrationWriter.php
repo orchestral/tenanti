@@ -42,7 +42,7 @@ class MigrationWriter extends MigrationCreator
         }
 
         if ($this->tenant->config("{$driver}.shared", true) === true) {
-            $table = Str::replace($migrator->getTablePrefix()."_{$table}", ['id' => '{$id}']);
+            $table = Str::replace($migrator->tablePrefix()."_{$table}", ['id' => '{$id}']);
         }
 
         $name = \implode('_', [$driver, 'tenant', $name]);

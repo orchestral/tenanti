@@ -60,10 +60,10 @@ interface Factory
     /**
      * Get model name.
      */
-    public function getModelName(): string;
+    public function modelName(): string;
 
     /**
      * Get table prefix.
      */
-    public function getTablePrefix(): string;
+    public function tablePrefix(): string;
 }

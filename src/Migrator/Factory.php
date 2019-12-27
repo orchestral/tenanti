@@ -106,10 +106,10 @@ class Factory implements FactoryContract
      */
     public function runInstall(Model $entity, ?string $database): void
     {
-        $table = $this->resolveMigrationTableName($entity);
+        $table = $this->migrationTableName($entity);
 
         $this->migrator($table)
-            ->usingConnection($this->asConnection($entity, $database), function ($migrator) use ($table) {
+            ->usingConnection($this->connectionName($entity, $database), function ($migrator) use ($table) {
                 $repository = $migrator->getRepository();
 
                 if (! $repository->repositoryExists()) {
@@ -125,9 +125,9 @@ class Factory implements FactoryContract
      */
     public function runUp(Model $entity, ?string $database, bool $pretend = false): void
     {
-        $this->migrator($this->resolveMigrationTableName($entity))
+        $this->migrator($this->migrationTableName($entity))
             ->outputUsing($this->notice)
-            ->usingConnection($this->asConnection($entity, $database), function ($migrator) use ($entity, $pretend) {
+            ->usingConnection($this->connectionName($entity, $database), function ($migrator) use ($entity, $pretend) {
                 $migrator->setEntity($entity);
 
                 $migrator->run($this->getMigrationPaths($entity), ['pretend' => (bool) $pretend]);
@@ -139,9 +139,9 @@ class Factory implements FactoryContract
      */
     public function runDown(Model $entity, ?string $database, bool $pretend = false): void
     {
-        $this->migrator($this->resolveMigrationTableName($entity))
+        $this->migrator($this->migrationTableName($entity))
             ->outputUsing($this->notice)
-            ->usingConnection($this->asConnection($entity, $database), function ($migrator) use ($entity, $pretend) {
+            ->usingConnection($this->connectionName($entity, $database), function ($migrator) use ($entity, $pretend) {
                 $migrator->setEntity($entity);
 
                 $migrator->rollback($this->getMigrationPaths($entity), ['pretend' => (bool) $pretend]);
@@ -153,9 +153,9 @@ class Factory implements FactoryContract
      */
     public function runReset(Model $entity, ?string $database, bool $pretend = false): void
     {
-        $this->migrator($this->resolveMigrationTableName($entity))
+        $this->migrator($this->migrationTableName($entity))
             ->outputUsing($this->notice)
-            ->usingConnection($this->asConnection($entity, $database), function ($migrator) use ($entity, $pretend) {
+            ->usingConnection($this->connectionName($entity, $database), function ($migrator) use ($entity, $pretend) {
                 $migrator->setEntity($entity);
 
                 $migrator->reset($this->getMigrationPaths($entity), $pretend);

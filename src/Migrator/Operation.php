@@ -105,9 +105,9 @@ trait Operation
      *
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model
+    public function model(): Model
     {
-        $name = $this->getModelName();
+        $name = $this->modelName();
         $model = $this->app->make($name);
 
         if (! $model instanceof Model) {
@@ -132,7 +132,7 @@ trait Operation
      */
     public function newQuery()
     {
-        return $this->getModel()->newQuery()->useWritePdo();
+        return $this->model()->newQuery()->useWritePdo();
     }
 
     /**
@@ -160,7 +160,7 @@ trait Operation
      */
     public function asDefaultConnection(Model $entity, ?string $database): ?string
     {
-        $connection = $this->asConnection($entity, $database);
+        $connection = $this->connectionName($entity, $database);
 
         $this->app->make('config')->set('database.default', $connection);
 
@@ -170,7 +170,7 @@ trait Operation
     /**
      * Set tenant database connection.
      */
-    public function asConnection(Model $entity, ?string $database): ?string
+    public function connectionName(Model $entity, ?string $database): ?string
     {
         $repository = $this->app->make('config');
         $tenants = $this->config('connection');
@@ -183,7 +183,7 @@ trait Operation
             $database .= '_{id}';
         }
 
-        $connection = $this->bindWithKey($entity, $database);
+        $connection = $this->normalize($entity, $database);
         $name = "database.connections.{$connection}";
 
         if (! \is_null($tenants) && \is_null($repository->get($name))) {
@@ -205,22 +205,22 @@ trait Operation
      *
      * @return \Illuminate\Database\Connection
      */
-    public function resolveConnection(Model $entity, string $database)
+    public function connection(Model $entity, string $database)
     {
-        return $this->app->make('db')->connection($this->asConnection($entity, $database));
+        return $this->app->make('db')->connection($this->connectionName($entity, $database));
     }
 
     /**
      * Get table name.
      */
-    protected function resolveMigrationTableName(Model $entity): string
+    protected function migrationTableName(Model $entity): string
     {
         if (! \is_null($table = $this->config('migration'))) {
-            return $this->bindWithKey($entity, $table);
+            return $this->normalize($entity, $table);
         }
 
         if ($this->config('shared', true) === true) {
-            return $this->bindWithKey($entity, $this->getTablePrefix().'_migrations');
+            return $this->normalize($entity, $this->tablePrefix().'_migrations');
         }
 
         return 'tenant_migrations';
@@ -229,7 +229,7 @@ trait Operation
     /**
      * Get model name.
      */
-    public function getModelName(): string
+    public function modelName(): string
     {
         return $this->config('model');
     }
@@ -237,7 +237,7 @@ trait Operation
     /**
      * Get table prefix.
      */
-    public function getTablePrefix(): string
+    public function tablePrefix(): string
     {
         $prefix = $this->config('prefix', $this->driver);
 
@@ -247,7 +247,7 @@ trait Operation
     /**
      * Resolve table name.
      */
-    protected function bindWithKey(Model $entity, ?string $name): ?string
+    protected function normalize(Model $entity, ?string $name): ?string
     {
         if (\is_null($name) || (\strpos($name, '{') === false && \strpos($name, '}') === false)) {
             return $name;

@@ -73,7 +73,7 @@ class OperationTest extends TestCase
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\Operation::asConnection()
+     * Test Orchestra\Tenanti\Migrator\Operation::connectionName()
      * method.
      *
      * @test
@@ -118,7 +118,7 @@ class OperationTest extends TestCase
                 'id' => 5,
             ]);
 
-        $this->assertEquals('tenant_5', $this->asConnection($model, 'tenant_{id}'));
+        $this->assertEquals('tenant_5', $this->connectionName($model, 'tenant_{id}'));
         $this->assertEquals(['database' => 'tenants_5'], $repository->get('database.connections.tenant_5'));
     }
 
@@ -148,7 +148,7 @@ class OperationTest extends TestCase
 
         $model->shouldReceive('useWritePdo')->once()->andReturnSelf();
 
-        $this->assertEquals($model, $this->getModel());
+        $this->assertEquals($model, $this->model());
     }
 
     /**
@@ -179,7 +179,7 @@ class OperationTest extends TestCase
         $model->shouldReceive('setConnection')->once()->with('primary')->andReturnSelf()
             ->shouldReceive('useWritePdo')->once()->andReturnSelf();
 
-        $this->assertEquals($model, $this->getModel());
+        $this->assertEquals($model, $this->model());
     }
 
     /**
@@ -206,11 +206,11 @@ class OperationTest extends TestCase
 
         $this->app->shouldReceive('make')->once()->with('User')->andReturnNull();
 
-        $this->getModel();
+        $this->model();
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\Operation::getModelName()
+     * Test Orchestra\Tenanti\Migrator\Operation::modelName()
      * method.
      *
      * @test
@@ -229,7 +229,7 @@ class OperationTest extends TestCase
 
         $this->manager = $manager;
 
-        $this->assertEquals('User', $this->getModelName());
+        $this->assertEquals('User', $this->modelName());
     }
 
     /**
@@ -274,7 +274,7 @@ class OperationTest extends TestCase
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\Operation::getTablePrefix()
+     * Test Orchestra\Tenanti\Migrator\Operation::tablePrefix()
      * method.
      *
      * @test
@@ -291,11 +291,11 @@ class OperationTest extends TestCase
         $this->driver = 'user';
         $this->manager = $manager;
 
-        $this->assertEquals('user_{id}', $this->getTablePrefix());
+        $this->assertEquals('user_{id}', $this->tablePrefix());
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\Operation::getTablePrefix()
+     * Test Orchestra\Tenanti\Migrator\Operation::tablePrefix()
      * method.
      *
      * @test
@@ -311,6 +311,6 @@ class OperationTest extends TestCase
         $this->driver = 'user';
         $this->manager = $manager;
 
-        $this->assertEquals('member_{id}', $this->getTablePrefix());
+        $this->assertEquals('member_{id}', $this->tablePrefix());
     }
 }
