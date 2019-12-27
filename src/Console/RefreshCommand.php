@@ -34,7 +34,7 @@ class RefreshCommand extends BaseCommand
         }
 
         $parameters = [
-            'driver' => $this->getDriver(),
+            'driver' => $this->tenantDriverName(),
             '--database' => $this->option('database'),
             '--force' => true,
             '--id' => $this->option('id'),

@@ -66,7 +66,7 @@ abstract class BaseCommand extends Command
      */
     protected function getDriverFromConfig(): ?string
     {
-        $drivers = \array_keys($this->tenant->config('drivers'));
+        $drivers = \array_keys($this->tenant()->config('drivers'));
 
         if (\count($drivers) === 1) {
             return $drivers[0];
@@ -129,6 +129,37 @@ abstract class BaseCommand extends Command
         }
 
         return true;
+    }
+
+    /**
+     * Get tenant manager instance.
+     *
+     * @return \Orchestra\Tenanti\TenantiManager
+     */
+    protected function tenant(): TenantiManager
+    {
+        return $this->tenant;
+    }
+
+    /**
+     * Get tenant driver.
+     *
+     * @param  string|null  $name
+     *
+     * @return \Orchestra\Tenanti\Contracts\Factory
+     */
+    protected function tenantDriver(?string $name = null): Factory
+    {
+        return $this->tenant()->driver($name ?: $this->tenantDriverName());
+    }
+    /**
+     * Get tenant driver name.
+     *
+     * @return string
+     */
+    protected function tenantDriverName(): string
+    {
+        return $this->getDriver();
     }
 
     /**

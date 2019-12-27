@@ -33,7 +33,7 @@ class ResetCommand extends BaseCommand
             return 126;
         }
 
-        \tap($this->tenant->driver($this->getDriver()), function ($migrator) {
+        \tap($this->tenantDriver(), function ($migrator) {
             $this->setupMigrationOutput($migrator);
 
             $migrator->reset(

@@ -46,10 +46,10 @@ class QueuedCommand extends BaseCommand
             return 126;
         }
 
-        $driver = $this->getDriver();
+        $driver = $this->tenantDriverName();
         $action = $this->argument('action');
         $database = $this->option('database');
-        $queue = $this->option('queue') ?? $this->tenant->getConfiguration()['queue'] ?? 'default';
+        $queue = $this->option('queue') ?? $this->tenant()->getConfiguration()['queue'] ?? 'default';
         $delay = $this->option('delay');
 
         if (! \in_array($action, $this->actions)) {
@@ -59,7 +59,7 @@ class QueuedCommand extends BaseCommand
         $command = "tenanti:{$action}";
         $parameters = ['driver' => $driver, '--database' => $database, '--force' => true];
 
-        $this->tenant->driver($driver)
+        $this->tenantDriver($driver)
             ->executeForEach(static function ($entity) use ($kernel, $command, $parameters, $queue, $delay) {
                 $job = $kernel->queue(
                     $command, \array_merge($parameters, ['--id' => $entity->getKey()])
