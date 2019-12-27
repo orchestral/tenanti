@@ -9,7 +9,7 @@ use Orchestra\Tenanti\TenantiManager;
 
 class Factory implements FactoryContract
 {
-    use Notable, Operation;
+    use Operation;
 
     /**
      * Construct a new migration manager.
@@ -108,7 +108,7 @@ class Factory implements FactoryContract
     {
         $table = $this->resolveMigrationTableName($entity);
 
-        $this->resolveMigrator($table)
+        $this->migrator($table)
             ->usingConnection($this->asConnection($entity, $database), function ($migrator) use ($table) {
                 $repository = $migrator->getRepository();
 
@@ -125,7 +125,8 @@ class Factory implements FactoryContract
      */
     public function runUp(Model $entity, ?string $database, bool $pretend = false): void
     {
-        $this->resolveMigratorWithNotes($this->resolveMigrationTableName($entity))
+        $this->migrator($this->resolveMigrationTableName($entity))
+            ->outputUsing($this->notice)
             ->usingConnection($this->asConnection($entity, $database), function ($migrator) use ($entity, $pretend) {
                 $migrator->setEntity($entity);
 
@@ -138,7 +139,8 @@ class Factory implements FactoryContract
      */
     public function runDown(Model $entity, ?string $database, bool $pretend = false): void
     {
-        $this->resolveMigratorWithNotes($this->resolveMigrationTableName($entity))
+        $this->migrator($this->resolveMigrationTableName($entity))
+            ->outputUsing($this->notice)
             ->usingConnection($this->asConnection($entity, $database), function ($migrator) use ($entity, $pretend) {
                 $migrator->setEntity($entity);
 
@@ -151,7 +153,8 @@ class Factory implements FactoryContract
      */
     public function runReset(Model $entity, ?string $database, bool $pretend = false): void
     {
-        $this->resolveMigratorWithNotes($this->resolveMigrationTableName($entity))
+        $this->migrator($this->resolveMigrationTableName($entity))
+            ->outputUsing($this->notice)
             ->usingConnection($this->asConnection($entity, $database), function ($migrator) use ($entity, $pretend) {
                 $migrator->setEntity($entity);
 

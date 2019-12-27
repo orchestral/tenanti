@@ -8,9 +8,12 @@ use Illuminate\Database\Migrations\DatabaseMigrationRepository;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Orchestra\Support\Str;
+use Orchestra\Tenanti\Contracts\Notice;
 
 trait Operation
 {
+    use Notable;
+
     /**
      * Application instance.
      *
@@ -135,7 +138,7 @@ trait Operation
     /**
      * Resolve migrator.
      */
-    protected function resolveMigrator(string $table): Migrator
+    protected function migrator(string $table): Migrator
     {
         $app = $this->app;
 

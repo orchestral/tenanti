@@ -80,16 +80,17 @@ class FactoryTest extends TestCase
         $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
         $model = $entity = m::mock('Illuminate\Database\Eloquent\Model');
 
-        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,migrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
 
         $entities = collect([$entity]);
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
-            ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
+            ->shouldReceive('migrator')->once()->andReturn($migrator);
 
         $manager->shouldReceive('config')->andReturnNull();
-        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+        $migrator->shouldReceive('outputUsing')->once()->andReturnSelf()
+            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('run')->once()->with(null, ['pretend' => false])->andReturnNull()
             ->shouldReceive('usingConnection')->once()->with('foo', m::type('Closure'))
                 ->andReturnUsing(function ($d, $c) use ($migrator) {
@@ -116,14 +117,15 @@ class FactoryTest extends TestCase
         $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
         $model = $entity = m::mock('Illuminate\Database\Eloquent\Model');
 
-        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,migrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
-            ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
+            ->shouldReceive('migrator')->once()->andReturn($migrator);
 
         $manager->shouldReceive('config')->andReturnNull();
-        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+        $migrator->shouldReceive('outputUsing')->once()->andReturnSelf()
+            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('run')->once()->with(null, ['pretend' => false])->andReturnNull()
             ->shouldReceive('usingConnection')->once()->with('foo', m::type('Closure'))
                 ->andReturnUsing(function ($d, $c) use ($migrator) {
@@ -153,14 +155,15 @@ class FactoryTest extends TestCase
 
         $entities = collect([$entity]);
 
-        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,migrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
-            ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
+            ->shouldReceive('migrator')->once()->andReturn($migrator);
 
         $manager->shouldReceive('config')->andReturnNull();
-        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+        $migrator->shouldReceive('outputUsing')->once()->andReturnSelf()
+            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('rollback')->once()->with(null, ['pretend' => false])->andReturnNull()
             ->shouldReceive('usingConnection')->once()->with('foo', m::type('Closure'))
                 ->andReturnUsing(function ($d, $c) use ($migrator) {
@@ -187,14 +190,15 @@ class FactoryTest extends TestCase
         $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
         $model = $entity = m::mock('Illuminate\Database\Eloquent\Model');
 
-        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,migrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
-            ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
+            ->shouldReceive('migrator')->once()->andReturn($migrator);
 
         $manager->shouldReceive('config')->andReturnNull();
-        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+        $migrator->shouldReceive('outputUsing')->once()->andReturnSelf()
+            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('rollback')->once()->with(null, ['pretend' => false])->andReturnNull()
             ->shouldReceive('usingConnection')->once()->with('foo', m::type('Closure'))
                 ->andReturnUsing(function ($d, $c) use ($migrator) {
@@ -224,14 +228,15 @@ class FactoryTest extends TestCase
 
         $entities = collect([$entity]);
 
-        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,migrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
-            ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
+            ->shouldReceive('migrator')->once()->andReturn($migrator);
 
         $manager->shouldReceive('config')->andReturnNull();
-        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+        $migrator->shouldReceive('outputUsing')->once()->andReturnSelf()
+            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('reset')->once()->with(null, false)->andReturnNull()
             ->shouldReceive('usingConnection')->once()->with('foo', m::type('Closure'))
                 ->andReturnUsing(function ($d, $c) use ($migrator) {
@@ -258,14 +263,15 @@ class FactoryTest extends TestCase
         $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
         $model = $entity = m::mock('Illuminate\Database\Eloquent\Model');
 
-        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[getModel,migrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
 
         $stub->shouldReceive('getModel')->once()->andReturn($model)
-            ->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
+            ->shouldReceive('migrator')->once()->andReturn($migrator);
 
         $manager->shouldReceive('config')->andReturnNull();
-        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+        $migrator->shouldReceive('outputUsing')->once()->andReturnSelf()
+            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('reset')->once()->with(null, false)->andReturnNull()
             ->shouldReceive('usingConnection')->once()->with('foo', m::type('Closure'))
                 ->andReturnUsing(function ($d, $c) use ($migrator) {
@@ -386,11 +392,11 @@ class FactoryTest extends TestCase
         $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
         $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
 
-        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[migrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
         $model = $this->getMockModel();
 
-        $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
+        $stub->shouldReceive('migrator')->once()->andReturn($migrator);
 
         $manager->shouldReceive('config')->with('user.paths', [])->andReturn(['/var/app/migrations'])
             ->shouldReceive('config')->with('user.connection', null)->andReturnNull()
@@ -398,7 +404,8 @@ class FactoryTest extends TestCase
             ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
             ->shouldReceive('config')->with('user.prefix', 'user')->andReturn('user');
 
-        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+        $migrator->shouldReceive('outputUsing')->once()->andReturnSelf()
+            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('run')->once()->with(['/var/app/migrations'], ['pretend' => false])->andReturnNull()
             ->shouldReceive('usingConnection')->once()->with('primary', m::type('Closure'))
                 ->andReturnUsing(function ($d, $c) use ($migrator) {
@@ -422,11 +429,11 @@ class FactoryTest extends TestCase
         $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
         $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
 
-        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[migrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
         $model = $this->getMockModel();
 
-        $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
+        $stub->shouldReceive('migrator')->once()->andReturn($migrator);
 
         $manager->shouldReceive('config')->with('user.paths', [])->andReturn(['/var/app/migrations'])
             ->shouldReceive('config')->with('user.connection', null)->andReturnNull()
@@ -434,7 +441,8 @@ class FactoryTest extends TestCase
             ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
             ->shouldReceive('config')->with('user.prefix', 'user')->andReturn('user');
 
-        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+        $migrator->shouldReceive('outputUsing')->once()->andReturnSelf()
+            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('rollback')->with(['/var/app/migrations'], ['pretend' => false])->andReturnNull()
             ->shouldReceive('usingConnection')->once()->with('primary', m::type('Closure'))
                 ->andReturnUsing(function ($d, $c) use ($migrator) {
@@ -458,18 +466,19 @@ class FactoryTest extends TestCase
         $manager = m::mock('Orchestra\Tenanti\TenantiManager', [$app]);
         $migrator = m::mock('Orchestra\Tenanti\Migrator\Migrator');
 
-        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[resolveMigrator]', [$app, $manager, $driver])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Factory[migrator]', [$app, $manager, $driver])
                     ->shouldAllowMockingProtectedMethods();
         $model = $this->getMockModel();
 
-        $stub->shouldReceive('resolveMigrator')->once()->andReturn($migrator);
+        $stub->shouldReceive('migrator')->once()->andReturn($migrator);
 
         $manager->shouldReceive('config')->with('user.paths', [])->andReturn(['/var/app/migrations'])
             ->shouldReceive('config')->with('user.connection', null)->andReturnNull()
             ->shouldReceive('config')->with('user.migration', null)->andReturnNull()
             ->shouldReceive('config')->with('user.shared', true)->andReturn(true)
             ->shouldReceive('config')->with('user.prefix', 'user')->andReturn('user');
-        $migrator->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
+        $migrator->shouldReceive('outputUsing')->once()->andReturnSelf()
+            ->shouldReceive('setEntity')->once()->with($model)->andReturnSelf()
             ->shouldReceive('reset')->once()->with(['/var/app/migrations'], false)->andReturn(5)
             ->shouldReceive('usingConnection')->once()->with('primary', m::type('Closure'))
                 ->andReturnUsing(function ($d, $c) use ($migrator) {

@@ -36,23 +36,4 @@ trait Notable
             $this->notice->add($message);
         }
     }
-
-    /**
-     * Resolve migrator with notable.
-     */
-    protected function resolveMigratorWithNotes(string $table): Migrator
-    {
-        $migrator = $this->resolveMigrator($table);
-
-        if ($this->notice instanceof Notice) {
-            $this->notice->mergeWith($migrator);
-        }
-
-        return $migrator;
-    }
-
-    /**
-     * Resolve migrator.
-     */
-    abstract protected function resolveMigrator(string $table): Migrator;
 }

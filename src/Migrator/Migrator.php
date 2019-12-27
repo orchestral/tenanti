@@ -4,6 +4,7 @@ namespace Orchestra\Tenanti\Migrator;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migrator as BaseMigrator;
+use Orchestra\Tenanti\Contracts\Notice;
 use Orchestra\Tenanti\Migration;
 
 class Migrator extends BaseMigrator
@@ -96,6 +97,21 @@ class Migrator extends BaseMigrator
         }
 
         return $class;
+    }
+
+    /**
+     * Output migration notes using.
+     *
+     * @param  \Orchestra\Tenanti\Contracts\Notice|null  $notice
+     * @return $this
+     */
+    public function outputUsing(?Notice $notice)
+    {
+        if ($notice instanceof Notice) {
+            $notice->mergeWith($migrator);
+        }
+
+        return $this;
     }
 
     /**
