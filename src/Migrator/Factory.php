@@ -29,14 +29,14 @@ class Factory implements FactoryContract
     public function install(?string $database, $id = null): void
     {
         if (! \is_null($id)) {
-            $this->executeFor($id, function ($entity) use ($database) {
+            $this->find($id, function ($entity) use ($database) {
                 $this->runInstall($entity, $database);
             });
 
             return;
         }
 
-        $this->executeForEach(function ($entity) use ($database) {
+        $this->each(function ($entity) use ($database) {
             $this->runInstall($entity, $database);
         });
     }
@@ -49,14 +49,14 @@ class Factory implements FactoryContract
     public function run(?string $database, $id = null, bool $pretend = false): void
     {
         if (! \is_null($id)) {
-            $this->executeFor($id, function ($entity) use ($database, $pretend) {
+            $this->find($id, function ($entity) use ($database, $pretend) {
                 $this->runUp($entity, $database, $pretend);
             });
 
             return;
         }
 
-        $this->executeForEach(function ($entity) use ($database, $pretend) {
+        $this->each(function ($entity) use ($database, $pretend) {
             $this->runUp($entity, $database, $pretend);
         });
     }
@@ -69,14 +69,14 @@ class Factory implements FactoryContract
     public function rollback(?string $database, $id = null, bool $pretend = false): void
     {
         if (! \is_null($id)) {
-            $this->executeFor($id, function ($entity) use ($database, $pretend) {
+            $this->find($id, function ($entity) use ($database, $pretend) {
                 $this->runDown($entity, $database, $pretend);
             });
 
             return;
         }
 
-        $this->executeForEach(function ($entity) use ($database, $pretend) {
+        $this->each(function ($entity) use ($database, $pretend) {
             $this->runDown($entity, $database, $pretend);
         });
     }
@@ -89,14 +89,14 @@ class Factory implements FactoryContract
     public function reset(?string $database, $id = null, bool $pretend = false): void
     {
         if (! \is_null($id)) {
-            $this->executeFor($id, function ($entity) use ($database, $pretend) {
+            $this->find($id, function ($entity) use ($database, $pretend) {
                 $this->runReset($entity, $database, $pretend);
             });
 
             return;
         }
 
-        $this->executeForEach(function ($entity) use ($database, $pretend) {
+        $this->each(function ($entity) use ($database, $pretend) {
             $this->runReset($entity, $database, $pretend);
         });
     }

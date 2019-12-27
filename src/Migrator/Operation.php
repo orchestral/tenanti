@@ -71,7 +71,7 @@ trait Operation
      *
      * @param  int|string  $id
      */
-    public function executeFor($id, Closure $callback): void
+    public function find($id, Closure $callback): void
     {
         $callback(
             $this->newQuery()->findOrFail($id)
@@ -81,7 +81,7 @@ trait Operation
     /**
      * Execute query via cursor.
      */
-    public function executeForEach(Closure $callback): void
+    public function each(Closure $callback): void
     {
         $this->newQuery()->cursor()->each(static function ($user) use ($callback) {
             $callback($user);
