@@ -1,0 +1,15 @@
+preset: package
+
+namespace: Orchestra\Tenanti
+
+console:
+  namespace: Orchestra\Tenanti\Console
+
+model:
+  namespace: Orchestra\Tenanti
+
+provider:
+  namespace: Orchestra\Tenanti
+
+testing:
+  namespace: Orchestra\Tenanti\Tests

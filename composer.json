@@ -32,6 +32,7 @@
     },
     "require-dev": {
         "laravel/tinker": "^2.0",
+        "orchestra/canvas": "^5.0",
         "orchestra/testbench": "^5.0"
     },
     "extra": {
