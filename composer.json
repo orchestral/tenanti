@@ -24,16 +24,16 @@
         ]
     },
     "require": {
-        "php": ">=7.2",
-        "illuminate/console": "^7.0",
-        "illuminate/filesystem": "^7.0",
-        "orchestra/model": "^5.0",
-        "orchestra/support": "^5.0"
+        "php": ">=7.3",
+        "illuminate/console": "^8.0",
+        "illuminate/filesystem": "^8.0",
+        "orchestra/model": "^6.0",
+        "orchestra/support": "^6.0"
     },
     "require-dev": {
         "laravel/tinker": "^2.0",
-        "orchestra/canvas": "^5.0",
-        "orchestra/testbench": "^5.0"
+        "orchestra/canvas": "^6.0",
+        "orchestra/testbench": "^6.0"
     },
     "extra": {
         "branch-alias": {
