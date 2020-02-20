@@ -3,12 +3,12 @@ Multi-tenant Database Schema Manager for Laravel
 
 Tenanti allow you to manage multi-tenant data schema and migration manager for your Laravel application.
 
-[![Build Status](https://travis-ci.org/orchestral/tenanti.svg?branch=master)](https://travis-ci.org/orchestral/tenanti)
+[![Build Status](https://travis-ci.org/orchestral/tenanti.svg?branch=5.x)](https://travis-ci.org/orchestral/tenanti)
 [![Latest Stable Version](https://poser.pugx.org/orchestra/tenanti/v/stable)](https://packagist.org/packages/orchestra/tenanti)
 [![Total Downloads](https://poser.pugx.org/orchestra/tenanti/downloads)](https://packagist.org/packages/orchestra/tenanti)
 [![Latest Unstable Version](https://poser.pugx.org/orchestra/tenanti/v/unstable)](https://packagist.org/packages/orchestra/tenanti)
 [![License](https://poser.pugx.org/orchestra/tenanti/license)](https://packagist.org/packages/orchestra/tenanti)
-[![Coverage Status](https://coveralls.io/repos/github/orchestral/tenanti/badge.svg?branch=master)](https://coveralls.io/github/orchestral/tenanti?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/orchestral/tenanti/badge.svg?branch=5.x)](https://coveralls.io/github/orchestral/tenanti?branch=5.x)
 
 ## Table of Content
 
@@ -27,26 +27,13 @@ Laravel  | Tenanti
  5.7.x   | 3.7.x
  5.8.x   | 3.8.x
  6.x     | 4.x
+ 7.x     | 5.x
 
 ## Installation
 
-To install through composer, simply put the following in your `composer.json` file:
+To install through composer, run the following command from terminal:
 
-```json
-{
-    "require": {
-        "orchestra/tenanti": "^4.0"
-    }
-}
-```
-
-And then run `composer install` to fetch the package.
-
-### Quick Installation
-
-You could also simplify the above code by using the following command:
-
-    composer require "orchestra/tenanti=^4.0"
+    composer require "orchestra/tenanti"
 
 ## Configuration
 
