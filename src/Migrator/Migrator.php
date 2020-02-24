@@ -30,7 +30,7 @@ class Migrator extends BaseMigrator
      *
      * @return $this
      */
-    public function setEntity(Model $entity)
+    public function setEntity(?Model $entity)
     {
         $this->entity = $entity;
 
@@ -41,7 +41,6 @@ class Migrator extends BaseMigrator
      * Execute the given callback using the given connection as the default connection.
      *
      * @param  string|null  $name
-     *
      * @return mixed
      */
     public function usingConnection($name, callable $callback)
@@ -85,7 +84,6 @@ class Migrator extends BaseMigrator
      * Resolve a migration instance from a file.
      *
      * @param  string  $file
-     *
      * @return object
      */
     public function resolve($file)
@@ -102,7 +100,6 @@ class Migrator extends BaseMigrator
     /**
      * Output migration notes using.
      *
-     * @param  \Orchestra\Tenanti\Contracts\Notice|null  $notice
      * @return $this
      */
     public function outputUsing(?Notice $notice)
@@ -118,8 +115,8 @@ class Migrator extends BaseMigrator
      * Run "up" a migration instance.
      *
      * @param  string  $file
-     * @param  int     $batch
-     * @param  bool    $pretend
+     * @param  int  $batch
+     * @param  bool  $pretend
      *
      * @return void
      */
@@ -153,7 +150,7 @@ class Migrator extends BaseMigrator
      *
      * @param  string  $file
      * @param  object  $migration
-     * @param  bool    $pretend
+     * @param  bool  $pretend
      *
      * @return void
      */
