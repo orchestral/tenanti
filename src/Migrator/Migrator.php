@@ -26,8 +26,6 @@ class Migrator extends BaseMigrator
     /**
      * Set entity for migration.
      *
-     * @param  \Illuminate\Database\Eloquent\Model|null  $entity
-     *
      * @return $this
      */
     public function setEntity(?Model $entity)
@@ -41,6 +39,7 @@ class Migrator extends BaseMigrator
      * Execute the given callback using the given connection as the default connection.
      *
      * @param  string|null  $name
+     *
      * @return mixed
      */
     public function usingConnection($name, callable $callback)
@@ -84,6 +83,7 @@ class Migrator extends BaseMigrator
      * Resolve a migration instance from a file.
      *
      * @param  string  $file
+     *
      * @return object
      */
     public function resolve($file)
