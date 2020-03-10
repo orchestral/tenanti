@@ -29,6 +29,8 @@ class MigrationWriterTest extends TestCase
 
         $stub = new MigrationWriter($files, $tenanti);
 
-        $this->assertStringContainsString('src/Migrator/stubs', $stub->stubPath());
+        $path = \realpath(__DIR__.'/../../../');
+
+        $this->assertStringContainsString($path.\DIRECTORY_SEPARATOR.'src'.\DIRECTORY_SEPARATOR.'Migrator/stubs', $stub->stubPath());
     }
 }
