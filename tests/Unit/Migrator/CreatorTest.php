@@ -30,6 +30,6 @@ class CreatorTest extends TestCase
 
         $path = \realpath(__DIR__.'/../../../');
 
-        $this->assertStringContainsString($path.\DIRECTORY_SEPARATOR.'src/Migrator/stubs', $stub->stubPath());
+        $this->assertStringContainsString($path.\DIRECTORY_SEPARATOR.'src'.\DIRECTORY_SEPARATOR.'Migrator/stubs', $stub->stubPath());
     }
 }
