@@ -4,7 +4,7 @@ namespace Orchestra\Tenanti\Migrator;
 
 use Illuminate\Database\Migrations\MigrationCreator;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Str;
+use Orchestra\Support\Str;
 use Orchestra\Tenanti\TenantiManager;
 
 class MigrationWriter extends MigrationCreator
