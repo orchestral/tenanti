@@ -1,4 +1,4 @@
-# Release Note for v4.0
+# Release Note for 4.x
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/tenanti`.
 
@@ -17,7 +17,7 @@ Released: 2019-09-03
 
 ### Changes
 
-* Update support for Laravel Framework 6.0+.
+* Update support for Laravel Framework v6.
 * Improves support for Lumen Framework.
 
 ### Breaking Changes
