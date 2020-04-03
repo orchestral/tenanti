@@ -26,11 +26,9 @@ class Migrator extends BaseMigrator
     /**
      * Set entity for migration.
      *
-     * @param  \Illuminate\Database\Eloquent\Model|null  $entity
-     *
      * @return $this
      */
-    public function setEntity(Model $entity)
+    public function setEntity(?Model $entity)
     {
         $this->entity = $entity;
 
@@ -102,7 +100,6 @@ class Migrator extends BaseMigrator
     /**
      * Output migration notes using.
      *
-     * @param  \Orchestra\Tenanti\Contracts\Notice|null  $notice
      * @return $this
      */
     public function outputUsing(?Notice $notice)
@@ -118,8 +115,8 @@ class Migrator extends BaseMigrator
      * Run "up" a migration instance.
      *
      * @param  string  $file
-     * @param  int     $batch
-     * @param  bool    $pretend
+     * @param  int  $batch
+     * @param  bool  $pretend
      *
      * @return void
      */
@@ -153,7 +150,7 @@ class Migrator extends BaseMigrator
      *
      * @param  string  $file
      * @param  object  $migration
-     * @param  bool    $pretend
+     * @param  bool  $pretend
      *
      * @return void
      */

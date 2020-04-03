@@ -8,7 +8,6 @@ use Illuminate\Database\Migrations\DatabaseMigrationRepository;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Orchestra\Support\Str;
-use Orchestra\Tenanti\Contracts\Notice;
 
 trait Operation
 {

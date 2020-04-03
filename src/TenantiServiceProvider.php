@@ -28,8 +28,6 @@ class TenantiServiceProvider extends ServiceProvider implements DeferrableProvid
 
     /**
      * Register configuration for manager.
-     *
-     * @param  \Orchestra\Tenanti\TenantiManager  $manager
      */
     protected function registerConfigurationForManager(TenantiManager $manager): void
     {
