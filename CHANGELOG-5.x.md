@@ -6,6 +6,10 @@ This changelog references the relevant changes (bug and security fixes) done to 
 
 Released: 2020-04-03
 
+### Changes
+
+* Throw exception when trying to make migration file without `--table` option on shared database configuration.
+
 ### Fixes
 
 * Fixes migration stub files.
