@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/tenanti`.
 
+## 5.0.1
+
+Released: 2020-04-03
+
+### Fixes
+
+* Fixes migration stub files.
+
 ## 5.0.0
 
 Released: 2020-04-03
