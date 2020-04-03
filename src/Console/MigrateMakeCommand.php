@@ -2,8 +2,8 @@
 
 namespace Orchestra\Tenanti\Console;
 
-use InvalidArgumentException;
 use Illuminate\Support\Composer;
+use InvalidArgumentException;
 use Orchestra\Tenanti\Migrator\MigrationWriter;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -41,7 +41,9 @@ class MigrateMakeCommand extends BaseCommand
         $create = $this->input->getOption('create') ?? false;
         $table = $this->input->getOption('table');
 
-        if (! $table && \is_string($create)) {
+        if (\is_bool($create) && empty($table)) {
+            throw new InvalidArgumentException('Please set the table name for this migration using --table option!');
+        } elseif (! $table && \is_string($create)) {
             $table = $create;
         }
 

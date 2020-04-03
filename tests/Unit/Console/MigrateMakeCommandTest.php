@@ -43,11 +43,11 @@ class MigrateMakeCommandTest extends CommandTest
             ->with('tenant')
             ->andReturn($factory);
 
-        $writer->shouldReceive('__invoke')->with('tenant', 'add_migration', null, null)->once()
+        $writer->shouldReceive('__invoke')->with('tenant', 'create_users_table', 'users', false)->once()
             ->andReturn('2014_10_12_000000_create_users_table.php');
 
         $this->app['artisan']->add(new MigrateMakeCommand());
-        $this->artisan('tenanti:make', ['driver' => 'tenant', 'name' => 'add_migration']);
+        $this->artisan('tenanti:make', ['driver' => 'tenant', 'name' => 'create_users_table', '--table' => 'users']);
     }
 
     public function testTinkerWithOneDriverWithTwoArguments()
