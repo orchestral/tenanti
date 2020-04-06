@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/tenanti`.
 
+## 5.0.2
+
+Released: 2020-04-06
+
+### Fixes
+
+* Fixes variable used when merging `$migrator` for command output.
+
 ## 5.0.1
 
 Released: 2020-04-03
