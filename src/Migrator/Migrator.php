@@ -105,7 +105,7 @@ class Migrator extends BaseMigrator
     public function outputUsing(?Notice $notice)
     {
         if ($notice instanceof Notice) {
-            $notice->mergeWith($migrator);
+            $notice->mergeWith($this);
         }
 
         return $this;

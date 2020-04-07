@@ -81,7 +81,7 @@ class MigrateMakeCommand extends BaseCommand
     {
         return [
             ['create', false, InputOption::VALUE_OPTIONAL, 'The table to be created.'],
-            ['table', null, InputOption::VALUE_OPTIONAL, 'The table to migrate.'],
+            ['table', null, InputOption::VALUE_REQUIRED, 'The table to migrate.'],
         ];
     }
 }

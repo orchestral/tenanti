@@ -6,6 +6,7 @@ use Illuminate\Support\Fluent;
 use Mockery as m;
 use Orchestra\Tenanti\Migrator\Migrator;
 use PHPUnit\Framework\TestCase;
+use Orchestra\Tenanti\Notice\Command as NoticeCommand;
 
 class MigratorTest extends TestCase
 {
@@ -17,13 +18,8 @@ class MigratorTest extends TestCase
         m::close();
     }
 
-    /**
-     * Test Orchestra\Tenanti\Migrator\Migrator::setEntity()
-     * method.
-     *
-     * @test
-     */
-    public function testSetEntityMethod()
+    /** @test */
+    public function it_can_set_entity_method()
     {
         $repository = m::mock('Illuminate\Database\Migrations\MigrationRepositoryInterface');
         $resolver = m::mock('Illuminate\Database\ConnectionResolver');
@@ -36,12 +32,22 @@ class MigratorTest extends TestCase
     }
 
     /**
-     * Test Orchestra\Tenanti\Migrator\Migrator::runUp()
-     * method.
-     *
      * @test
      */
-    public function testRunUpMethod()
+    public function it_can_set_notice_resolver_to_migrator()
+    {
+        $output = m::mock('Symfony\Component\Console\Output\OutputInterface');
+        $notice = new NoticeCommand($output);
+
+        $migrator = m::mock(Migrator::class);
+        $migrator->shouldReceive('setOutput')->once()->with($output)->andReturnSelf();
+
+        $notice->mergeWith($migrator);
+        $this->addToAssertionCount(1);
+    }
+
+    /** @test */
+    public function it_can_run_up_migration()
     {
         $repository = m::mock('Illuminate\Database\Migrations\MigrationRepositoryInterface');
         $resolver = m::mock('Illuminate\Database\ConnectionResolver');
@@ -71,13 +77,8 @@ class MigratorTest extends TestCase
         $this->assertNull($stub->runUp($file, $batch, $pretend));
     }
 
-    /**
-     * Test Orchestra\Tenanti\Migrator\Migrator::runUp()
-     * method when pretending.
-     *
-     * @test
-     */
-    public function testRunUpMethodWhenPretending()
+    /** @test */
+    public function it_can_run_up_migration_while_pretending()
     {
         $repository = m::mock('Illuminate\Database\Migrations\MigrationRepositoryInterface');
         $resolver = m::mock('Illuminate\Database\ConnectionResolver');
@@ -103,13 +104,8 @@ class MigratorTest extends TestCase
         $this->assertNull($stub->runUp($file, $batch, $pretend));
     }
 
-    /**
-     * Test Orchestra\Tenanti\Migrator\Migrator::runDown()
-     * method.
-     *
-     * @test
-     */
-    public function testRunDownMethod()
+    /** @test */
+    public function it_can_run_down_migration()
     {
         $repository = m::mock('Illuminate\Database\Migrations\MigrationRepositoryInterface');
         $resolver = m::mock('Illuminate\Database\ConnectionResolver');
@@ -139,13 +135,8 @@ class MigratorTest extends TestCase
         $this->assertNull($stub->runDown($file, $migration, $pretend));
     }
 
-    /**
-     * Test Orchestra\Tenanti\Migrator\Migrator::runDown()
-     * method when pretending.
-     *
-     * @test
-     */
-    public function testRunDownMethodWhenPretending()
+    /** @test */
+    public function it_can_run_down_migration_while_pretending()
     {
         $repository = m::mock('Illuminate\Database\Migrations\MigrationRepositoryInterface');
         $resolver = m::mock('Illuminate\Database\ConnectionResolver');
@@ -171,13 +162,8 @@ class MigratorTest extends TestCase
         $this->assertNull($stub->runDown($file, $migration, $pretend));
     }
 
-    /**
-     * Test Orchestra\Tenanti\Migrator\Migrator::getQueries()
-     * method when pretending.
-     *
-     * @test
-     */
-    public function testGetQueriesMethodWhenPretending()
+    /** @test */
+    public function it_can_get_queries_while_pretending()
     {
         $repository = m::mock('Illuminate\Database\Migrations\MigrationRepositoryInterface');
         $resolver = m::mock('Illuminate\Database\ConnectionResolver');

@@ -4,6 +4,7 @@ namespace Orchestra\Tenanti\Migrator;
 
 use Illuminate\Database\Migrations\MigrationCreator;
 use Illuminate\Filesystem\Filesystem;
+use InvalidArgumentException;
 use Orchestra\Support\Str;
 use Orchestra\Tenanti\TenantiManager;
 
@@ -42,6 +43,10 @@ class MigrationWriter extends MigrationCreator
         }
 
         if ($this->tenant->config("{$driver}.shared", true) === true) {
+            if (empty($table)) {
+                throw new InvalidArgumentException('Require table name for shared database migration!');
+            }
+
             $table = Str::replace($migrator->tablePrefix()."_{$table}", ['id' => '{$id}']);
         }
 

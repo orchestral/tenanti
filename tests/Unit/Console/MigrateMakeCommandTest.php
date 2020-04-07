@@ -43,11 +43,11 @@ class MigrateMakeCommandTest extends CommandTest
             ->with('tenant')
             ->andReturn($factory);
 
-        $writer->shouldReceive('__invoke')->with('tenant', 'add_migration', null, null)->once()
+        $writer->shouldReceive('__invoke')->with('tenant', 'create_users_table', 'users', false)->once()
             ->andReturn('2014_10_12_000000_create_users_table.php');
 
         $this->app['artisan']->add(new MigrateMakeCommand());
-        $this->artisan('tenanti:make', ['driver' => 'tenant', 'name' => 'add_migration']);
+        $this->artisan('tenanti:make', ['driver' => 'tenant', 'name' => 'create_users_table', '--table' => 'users']);
     }
 
     public function testTinkerWithOneDriverWithTwoArguments()
@@ -63,11 +63,11 @@ class MigrateMakeCommandTest extends CommandTest
                 'tenant1' => [],
             ]);
 
-        $writer->shouldReceive('__invoke')->with('tenant1', 'add_migration', null, null)->once()
-            ->andReturn('2014_10_12_000000_create_users_table.php');
+        $writer->shouldReceive('__invoke')->with('tenant1', 'update_users_table', 'users', false)->once()
+            ->andReturn('2014_10_12_000000_update_users_table.php');
 
         $this->app['artisan']->add(new MigrateMakeCommand());
-        $this->artisan('tenanti:make', ['driver' => 'tenant1', 'name' => 'add_migration']);
+        $this->artisan('tenanti:make', ['driver' => 'tenant1', 'name' => 'update_users_table', '--table' => 'users']);
     }
 
     public function testTinkerWithTwoDriversWithOneArgument()
@@ -112,10 +112,10 @@ class MigrateMakeCommandTest extends CommandTest
             ]);
 
 
-        $writer->shouldReceive('__invoke')->with('tenant2', 'add_migration', null, null)->once()
+        $writer->shouldReceive('__invoke')->with('tenant2', 'create_users_table', 'users', true)->once()
             ->andReturn('2014_10_12_000000_create_users_table.php');
 
         $this->app['artisan']->add(new MigrateMakeCommand());
-        $this->artisan('tenanti:make', ['driver' => 'tenant2', 'name' => 'add_migration']);
+        $this->artisan('tenanti:make', ['driver' => 'tenant2', 'name' => 'create_users_table', '--create' => 'users']);
     }
 }
