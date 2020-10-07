@@ -31,7 +31,7 @@ class TinkerCommand extends BaseCommand
 
         \tap($this->tenantDriver($arguments['driver']), static function ($tenanti) use ($arguments) {
             $tenanti->asDefaultConnection(
-                $tenanti->getModel()->findOrFail($arguments['id']), 'tinker'
+                $tenanti->model()->findOrFail($arguments['id']), 'tinker'
             );
         });
 
