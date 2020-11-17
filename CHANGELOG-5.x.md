@@ -41,7 +41,7 @@ Released: 2020-04-03
 
 ### Changes
 
-* Update support for Laravel Framework v5.
+* Update support for Laravel Framework v7.
 * Replace the following on `Orchestra\Tenanti\Migrator\Operation`:
     - `executeFor()` with `find()`.
     - `executeForEach()` with `each()`.
