@@ -39,7 +39,7 @@ class TinkerCommandTest extends CommandTest
 
         $factory = $this->getMockDriverFactory();
 
-        $factory->shouldReceive('getModel')
+        $factory->shouldReceive('model')
             ->andReturn($model);
 
         $factory->shouldReceive('asDefaultConnection')
@@ -74,7 +74,7 @@ class TinkerCommandTest extends CommandTest
 
         $factory = $this->getMockDriverFactory();
 
-        $factory->shouldReceive('getModel')
+        $factory->shouldReceive('model')
             ->andReturn($model);
 
         $tenanti->shouldReceive('driver')
@@ -126,7 +126,7 @@ class TinkerCommandTest extends CommandTest
 
         $factory = $this->getMockDriverFactory();
 
-        $factory->shouldReceive('getModel')
+        $factory->shouldReceive('model')
             ->andReturn($model);
 
         $factory->shouldReceive('asDefaultConnection')

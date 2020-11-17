@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/tenanti`.
 
+## 5.0.3
+
+Released: 2020-11-17
+
+### Fixes 
+
+* Fixes call to undefined method `Orchestra\Tenanti\Migrator\Factory::getModel()`.
+
 ## 5.0.2
 
 Released: 2020-04-06

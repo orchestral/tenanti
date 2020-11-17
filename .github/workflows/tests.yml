@@ -4,38 +4,44 @@ on:
   push:
   pull_request:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * 3'
 
 jobs:
   tests:
     runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
-      fail-fast: false
       matrix:
-        php: [7.4, 7.3, 7.2]
-        os: [ubuntu-latest, windows-latest]
+        os:
+          - "ubuntu-latest"
+          - "windows-latest"
+        php:
+          - "7.3"
+          - "7.4"
+          - "8.0"
+        dependencies:
+          - "locked"
+          - "lowest"
+          - "highest"
+        experimental:
+          - false
 
-    name: PHP${{ matrix.php }} on ${{ matrix.os }}
+    name: PHP${{ matrix.php }} on ${{ matrix.os }} (${{ matrix.dependencies }})
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
 
-      - name: Cache dependencies
-        uses: actions/cache@v1
-        with:
-          path: ~/.composer/cache/files
-          key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
-
       - name: Setup PHP
-        uses: shivammathur/setup-php@v1
+        uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysqli, pdo_mysql, bcmath, soap, intl, gd, exif, iconv, imagick
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql, mysqli, pdo_mysql, bcmath, intl, fileinfo
           coverage: none
 
       - name: Install dependencies
-        run: |
-          composer update --prefer-dist --no-interaction --no-suggest
+        uses: "ramsey/composer-install@v1"
+        with:
+          composer-options: "--prefer-dist --no-cache"
       - name: Execute tests
         run: vendor/bin/phpunit
