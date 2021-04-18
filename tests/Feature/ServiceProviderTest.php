@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Tenanti\Tests\Integration;
+namespace Orchestra\Tenanti\Tests\Feature;
 
 use Orchestra\Tenanti\Tests\TestCase;
 

@@ -5,8 +5,8 @@ namespace Orchestra\Tenanti\Tests\Unit\Migrator;
 use Illuminate\Support\Fluent;
 use Mockery as m;
 use Orchestra\Tenanti\Migrator\Migrator;
-use PHPUnit\Framework\TestCase;
 use Orchestra\Tenanti\Notice\Command as NoticeCommand;
+use PHPUnit\Framework\TestCase;
 
 class MigratorTest extends TestCase
 {
