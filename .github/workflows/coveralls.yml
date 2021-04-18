@@ -1,10 +1,8 @@
-name: tests
+name: coveralls
 
 on:
   push:
   pull_request:
-  schedule:
-    - cron: '0 0 * * 3'
 
 jobs:
   tests:
@@ -14,19 +12,14 @@ jobs:
       matrix:
         os:
           - "ubuntu-latest"
-          - "windows-latest"
         php:
           - "7.3"
-          - "7.4"
-          - "8.0"
         dependencies:
           - "locked"
-          - "highest"
-          - "lowest"
         experimental:
           - false
 
-    name: PHP${{ matrix.php }}-${{ matrix.os }} (${{ matrix.dependencies }})
+    name: PHP${{ matrix.php }} on ${{ matrix.os }} (${{ matrix.dependencies }})
 
     steps:
       - name: Checkout code
@@ -37,13 +30,20 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: dom, curl, libxml, mbstring, zip, pcntl, sqlite3, pdo_sqlite, pdo_mysql, bcmath, intl, gd, exif, iconv, imagick, fileinfo
-          coverage: none
+          coverage: xdebug
 
       - name: Install dependencies
         uses: "ramsey/composer-install@v1"
         with:
           dependency-versions: "${{ matrix.dependencies }}"
-          composer-options: "--prefer-dist --no-cache"
+          composer-options: "--prefer-dist"
 
       - name: Execute tests
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+
+      - name: Upload coverage results to Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          composer global require php-coveralls/php-coveralls
+          php-coveralls --coverage_clover=build/logs/clover.xml -v
