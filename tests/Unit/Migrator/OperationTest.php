@@ -49,8 +49,8 @@ class OperationTest extends TestCase
 
         $manager->shouldReceive('config')->with('user.connection', null)->andReturn([
                     'template' => $repository->get('database.connections.tenant'),
-                    'resolver' => function (Model $entity, array $template) {
-                        return array_merge($template, [
+                    'resolver' => function (Model $entity, array $config) {
+                        return array_merge($config, [
                             'database' => "tenants_{$entity->getKey()}",
                         ]);
                     },
@@ -100,8 +100,8 @@ class OperationTest extends TestCase
 
         $manager->shouldReceive('config')->with('user.connection', null)->andReturn([
                 'template' => $repository->get('database.connections.tenant'),
-                'resolver' => function (Model $entity, array $template) {
-                    return array_merge($template, [
+                'resolver' => function (Model $entity, array $config) {
+                    return array_merge($config, [
                         'database' => "tenants_{$entity->getKey()}",
                     ]);
                 },
