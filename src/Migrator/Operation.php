@@ -188,7 +188,7 @@ trait Operation
         if (! \is_null($tenants) && \is_null($repository->get($name))) {
             $config = $this->app->call($tenants['resolver'], [
                 'entity' => $entity,
-                'template' => $tenants['template'],
+                'config' => $tenants['template'],
                 'connection' => $connection,
                 'migrator' => $this,
             ]);

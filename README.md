@@ -8,15 +8,7 @@ Tenanti allow you to manage multi-tenant data schema and migration manager for y
 [![Total Downloads](https://poser.pugx.org/orchestra/tenanti/downloads)](https://packagist.org/packages/orchestra/tenanti)
 [![Latest Unstable Version](https://poser.pugx.org/orchestra/tenanti/v/unstable)](https://packagist.org/packages/orchestra/tenanti)
 [![License](https://poser.pugx.org/orchestra/tenanti/license)](https://packagist.org/packages/orchestra/tenanti)
-[![Coverage Status](https://coveralls.io/repos/github/orchestral/tenanti/badge.svg?branch=master)](https://coveralls.io/github/orchestral/tenanti?branch=master)
-
-## Table of Content
-
-* [Version Compatibility](#version-compatibility)
-* [Installation](#installation)
-* [Configuration](#configuration)
-* [Usage](#usage)
-* [Changelog](https://github.com/orchestral/tenanti/releases)
+[![Coverage Status](https://coveralls.io/repos/github/orchestral/tenanti/badge.svg?branch=6.x)](https://coveralls.io/github/orchestral/tenanti?branch=6.x)
 
 ## Version Compatibility
 
@@ -28,12 +20,15 @@ Laravel  | Tenanti
  5.8.x   | 3.8.x
  6.x     | 4.x
  7.x     | 5.x
+ 8.x     | 6.x
 
 ## Installation
 
 To install through composer, run the following command from terminal:
 
-    composer require "orchestra/tenanti"
+```bash
+composer require "orchestra/tenanti"
+```
 
 ## Configuration
 
@@ -66,7 +61,9 @@ To make development easier, you could add `Orchestra\Support\Facades\Tenanti` al
 
 To make it easier to configuration your tenant setup, publish the configuration:
 
-    php artisan vendor:publish
+```bash
+php artisan vendor:publish
+```
 
 ## Usage
 

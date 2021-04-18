@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit backupGlobals="false"
-     backupStaticAttributes="false"
-     bootstrap="vendor/autoload.php"
-     colors="true"
-     convertErrorsToExceptions="true"
-     convertNoticesToExceptions="true"
-     convertWarningsToExceptions="true"
-     processIsolation="false"
-     stopOnFailure="false"
-     verbose="true"
->
-
-    <testsuites>
-        <testsuite name="Orchestra\Tenanti Test Suite">
-            <directory suffix="Test.php">./tests/</directory>
-        </testsuite>
-    </testsuites>
-
-    <filter>
-        <whitelist addUncoveredFilesFromWhitelist="false">
-            <directory suffix=".php">src/</directory>
-            <exclude>
-                <directory>src/Console/</directory>
-                <directory>src/Migrator/stubs/</directory>
-                <file>src/Migrator/Notable.php</file>
-                <file>src/Notice/Command.php</file>
-            </exclude>
-        </whitelist>
-    </filter>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         backupGlobals="false"
+         backupStaticAttributes="false"
+         beStrictAboutTestsThatDoNotTestAnything="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         verbose="true">
+  <coverage includeUncoveredFiles="false">
+    <include>
+      <directory suffix=".php">src/</directory>
+    </include>
+    <exclude>
+      <directory>src/Console/</directory>
+      <directory>src/Migrator/stubs/</directory>
+      <file>src/Migrator/Notable.php</file>
+      <file>src/Notice/Command.php</file>
+    </exclude>
+  </coverage>
+  <testsuites>
+    <testsuite name="feature">
+      <directory suffix="Test.php">./tests/Feature/</directory>
+    </testsuite>
+    <testsuite name="unit">
+      <directory suffix="Test.php">./tests/Unit/</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>
