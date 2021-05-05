@@ -25,10 +25,11 @@
     },
     "require": {
         "php": "^7.3 || ^8.0",
-        "illuminate/console": "^8.0",
-        "illuminate/filesystem": "^8.0",
+        "illuminate/console": "^8.40",
+        "illuminate/filesystem": "^8.40",
+        "illuminate/support": "^8.40",
         "orchestra/model": "^6.0",
-        "orchestra/support": "^6.0"
+        "orchestra/support": "^6.1"
     },
     "require-dev": {
         "laravel/tinker": "^2.5",

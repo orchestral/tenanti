@@ -260,7 +260,7 @@ trait Operation
             $this->data[$id] = $data;
         }
 
-        return Str::replace($name, $this->data[$id]);
+        return Str::translate($name, $this->data[$id]);
     }
 
     /**

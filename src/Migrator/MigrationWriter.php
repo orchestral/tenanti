@@ -47,7 +47,7 @@ class MigrationWriter extends MigrationCreator
                 throw new InvalidArgumentException('Require table name for shared database migration!');
             }
 
-            $table = Str::replace($migrator->tablePrefix()."_{$table}", ['id' => '{$id}']);
+            $table = Str::translate($migrator->tablePrefix()."_{$table}", ['id' => '{$id}']);
         }
 
         $name = \implode('_', [$driver, 'tenant', $name]);
