@@ -206,7 +206,9 @@ return [
     'drivers' => [
         'user' => [
             'model'  => App\User::class,
-            'path'   => database_path('tenanti/user'),
+            'paths' => [
+                database_path('tenanti/user'),
+            ],
             'shared' => false,
         ],
     ],
