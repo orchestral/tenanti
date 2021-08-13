@@ -4,6 +4,10 @@ namespace Orchestra\Tenanti\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method \Illuminate\Database\Eloquent\Model model()
+ * @method ?string asDefaultConnection(\Illuminate\Database\Eloquent\Model $entity, ?string $database)
+ */
 interface Factory
 {
     /**
@@ -63,13 +67,6 @@ interface Factory
      * Get model name.
      */
     public function modelName(): string;
-
-    /**
-     * Resolve model.
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function model(): Model;
 
     /**
      * Get table prefix.
