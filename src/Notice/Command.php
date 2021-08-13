@@ -43,10 +43,12 @@ class Command implements Notice
 
     /**
      * Send output of notes.
+     *
+     * @param  string|array  $notes
      */
-    protected function send(array $notes): void
+    protected function send($notes): void
     {
-        foreach ($notes as $note) {
+        foreach ((array) $notes as $note) {
             $this->output->writeln($note);
         }
     }

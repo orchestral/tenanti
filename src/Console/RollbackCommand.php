@@ -37,7 +37,9 @@ class RollbackCommand extends BaseCommand
             $this->setupMigrationOutput($migrator);
 
             $migrator->rollback(
-                $this->option('database'), $this->option('id'), $this->option('pretend', false)
+                $this->option('database'),
+                $this->option('id'),
+                $this->option('pretend') ?? false
             );
         });
 

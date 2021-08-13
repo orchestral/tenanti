@@ -8,8 +8,10 @@ interface Factory
 {
     /**
      * Install migrations.
+     *
+     * @param  mixed|null  $id
      */
-    public function install(?string $database): void;
+    public function install(?string $database, $id = null): void;
 
     /**
      * Run migrations.
@@ -63,7 +65,19 @@ interface Factory
     public function modelName(): string;
 
     /**
+     * Resolve model.
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function model(): Model;
+
+    /**
      * Get table prefix.
      */
     public function tablePrefix(): string;
+
+    /**
+     * Set tenant as default database connection and get the connection name.
+     */
+    public function asDefaultConnection(Model $entity, ?string $database): ?string;
 }

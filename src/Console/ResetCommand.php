@@ -25,7 +25,7 @@ class ResetCommand extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      */
     public function handle()
     {
@@ -37,7 +37,9 @@ class ResetCommand extends BaseCommand
             $this->setupMigrationOutput($migrator);
 
             $migrator->reset(
-                $this->option('database'), $this->option('id'), $this->option('pretend', false)
+                $this->option('database'),
+                $this->option('id'),
+                $this->option('pretend') ?? false
             );
         });
 

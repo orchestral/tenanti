@@ -1,0 +1,17 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method Orchestra\\\\Tenanti\\\\Contracts\\\\Factory\\:\\:setNotice\\(\\)\\.$#"
+			count: 1
+			path: src/Console/BaseCommand.php
+
+		-
+			message: "#^Call to an undefined method Orchestra\\\\Tenanti\\\\Contracts\\\\Factory\\:\\:each\\(\\)\\.$#"
+			count: 1
+			path: src/Console/QueuedCommand.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\ConnectionInterface\\:\\:disconnect\\(\\)\\.$#"
+			count: 1
+			path: src/Migrator/Migrator.php
+

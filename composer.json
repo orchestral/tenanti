@@ -33,6 +33,7 @@
     },
     "require-dev": {
         "laravel/tinker": "^2.5",
+        "nunomaduro/larastan": "^0.7.12",
         "orchestra/canvas": "^6.1",
         "orchestra/testbench": "^6.17"
     },

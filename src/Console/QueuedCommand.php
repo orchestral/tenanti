@@ -36,7 +36,7 @@ class QueuedCommand extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      */
     public function handle(Kernel $kernel)
     {
@@ -48,7 +48,7 @@ class QueuedCommand extends BaseCommand
         $action = $this->argument('action');
         $database = $this->option('database');
         $queue = $this->option('queue') ?? $this->tenant()->getConfiguration()['queue'] ?? 'default';
-        $delay = $this->option('delay');
+        $delay = (int) $this->option('delay');
 
         if (! \in_array($action, $this->actions)) {
             throw new InvalidArgumentException("Action [{$action}] is not available for this command.");

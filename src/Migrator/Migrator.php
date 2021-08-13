@@ -164,7 +164,9 @@ class Migrator extends BaseMigrator
         $instance = $this->resolve($file);
 
         if ($pretend) {
-            return $this->pretendToRun($instance, 'down');
+            $this->pretendToRun($instance, 'down');
+
+            return;
         }
 
         $instance->down($key = $this->entity->getKey(), $this->entity);

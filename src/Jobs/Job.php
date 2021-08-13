@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Queue\InteractsWithQueue;
 use Orchestra\Tenanti\Contracts\Factory as FactoryContract;
 
+/**
+ * @property \Illuminate\Contracts\Queue\Job|null  $job
+ */
 abstract class Job
 {
     use InteractsWithQueue, Queueable;
@@ -14,7 +17,7 @@ abstract class Job
     /**
      * The eloquent model.
      *
-     * @var \Illuminate\Database\Eloquent\Model
+     * @var \Illuminate\Database\Eloquent\Model|null
      */
     public $model;
 
@@ -27,8 +30,10 @@ abstract class Job
 
     /**
      * Construct a new Job.
+     *
+     * @param \Illuminate\Database\Eloquent\Model|null  $model
      */
-    public function __construct(Model $model, array $config)
+    public function __construct($model, array $config)
     {
         $this->model = $model;
         $this->config = $config;
@@ -39,7 +44,7 @@ abstract class Job
      */
     protected function shouldBeFailed(): bool
     {
-        if ($this->attempts() > 3 && $this->job) {
+        if ($this->job && $this->attempts() > 3) {
             $this->fail(null);
 
             return true;

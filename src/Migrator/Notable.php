@@ -33,7 +33,7 @@ trait Notable
     protected function note(...$message): void
     {
         if ($this->notice instanceof Notice) {
-            $this->notice->add($message);
+            $this->notice->add(...$message);
         }
     }
 }

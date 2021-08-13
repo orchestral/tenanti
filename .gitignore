@@ -2,6 +2,9 @@
 /vendor/*
 /composer.lock
 
+# PHPStan
+/phpstan.neon
+
 # PHPUnit
 /coverage/*
 /.phpunit.result.cache
