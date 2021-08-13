@@ -1,0 +1,42 @@
+name: analyse
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      matrix:
+        os:
+          - "ubuntu-latest"
+        php:
+          - "8.0"
+        dependencies:
+          - "locked"
+        experimental:
+          - false
+
+    name: PHP${{ matrix.php }}-${{ matrix.os }} (${{ matrix.dependencies }})
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, sqlite3, pdo_sqlite, bcmath, fileinfo
+          coverage: none
+
+      - name: Install dependencies
+        uses: "ramsey/composer-install@v1"
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
+          composer-options: "--prefer-dist --no-cache"
+
+      - name: Execute Static Code Analysis
+        run: vendor/bin/phpstan analyse
