@@ -121,20 +121,14 @@ class TinkerCommandTest extends CommandTest
 
         $model = m::mock(Model::class);
 
-        $model->shouldReceive('findOrFail')
-            ->with('1');
+        $model->shouldReceive('findOrFail')->with('1');
 
         $factory = $this->getMockDriverFactory();
 
-        $factory->shouldReceive('model')
-            ->andReturn($model);
+        $factory->shouldReceive('model')->andReturn($model)
+            ->shouldReceive('asDefaultConnection')->withAnyArgs();
 
-        $factory->shouldReceive('asDefaultConnection')
-            ->withAnyArgs();
-
-        $tenanti->shouldReceive('driver')
-            ->with('tenant2')
-            ->andReturn($factory);
+        $tenanti->shouldReceive('driver')->with('tenant2')->andReturn($factory);
 
         $command = m::mock('Orchestra\Tenanti\Console\TinkerCommand[call]', [$tenanti]);
         $command->shouldReceive('call');

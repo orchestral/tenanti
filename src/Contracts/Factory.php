@@ -72,9 +72,4 @@ interface Factory
      * Get table prefix.
      */
     public function tablePrefix(): string;
-
-    /**
-     * Set tenant as default database connection and get the connection name.
-     */
-    public function asDefaultConnection(Model $entity, ?string $database): ?string;
 }
