@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/tenanti`.
 
+## 6.3.0
+
+Released: 2021-08-14
+
+### Changes
+
+* Improves Static Code Analysis.
+
 ## 6.2.0
 
 Released: 2021-05-05
