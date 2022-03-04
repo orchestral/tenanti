@@ -1,5 +1,5 @@
 {
-    "name": "orchestra/tenanti",
+    "name": "enriquejlicona/tenanti",
     "description": "Tenant based Database Schema Manager for Laravel",
     "keywords": ["laravel", "orchestral", "orchestra-platform", "multi-tenant", "schema", "migration"],
     "license": "MIT",
