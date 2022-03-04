@@ -27,7 +27,7 @@
         "php": "^7.3 || ^8.0",
         "illuminate/console": "^8.40",
         "illuminate/filesystem": "^8.40",
-        "illuminate/support": "^8.40",
+        "illuminate/support": "^9.0",
         "orchestra/model": "^6.0",
         "orchestra/support": "^6.1"
     },
