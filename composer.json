@@ -25,7 +25,7 @@
     },
     "require": {
         "php": "^7.3 || ^8.0",
-        "illuminate/console": "^8.40",
+        "illuminate/console": "^9.0",
         "illuminate/filesystem": "^9.0",
         "illuminate/support": "^9.0",
         "orchestra/model": "^6.0",
